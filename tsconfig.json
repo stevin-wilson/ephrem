@@ -2,7 +2,11 @@
   "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
     "rootDir": ".",
-    "outDir": "build"
+    "outDir": "build",
+    "lib": ["ES2021"],
+    "target": "es2021",
+    "module": "esnext",
+    "moduleResolution": "nodenext"
   },
   "include": [
     "src/**/*.ts",

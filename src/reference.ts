@@ -14,7 +14,9 @@ export interface Reference {
 
 // - - - - - - - - -
 export const hasValidSyntax = (reference: Reference): boolean => {
-  return !(reference.verseEnd !== undefined && reference.verseStart === undefined);
+  return !(
+    reference.verseEnd !== undefined && reference.verseStart === undefined
+  );
 };
 
 // - - - - - - - - -
@@ -48,7 +50,10 @@ export const isSingleVerse = (reference: Reference): boolean => {
 
   if (isMultiChapter(reference)) {
     output = false;
-  } else if (reference.chapterEnd !== undefined && reference.chapterEnd !== reference.chapterEnd) {
+  } else if (
+    reference.chapterEnd !== undefined &&
+    reference.chapterEnd !== reference.chapterEnd
+  ) {
     output = false;
   } else output = reference.verseStart !== undefined;
 
@@ -57,7 +62,7 @@ export const isSingleVerse = (reference: Reference): boolean => {
 
 // - - - - - - - - -
 export const isSingleChapterMultipleVerses = (
-  reference: Reference,
+  reference: Reference
 ): boolean => {
   let output: boolean;
 
@@ -69,12 +74,14 @@ export const isSingleChapterMultipleVerses = (
 };
 
 // - - - - - - - - -
-const getReferenceGroups = (input: string): string[] => input.split(";").map(
-  group => group.trim()
-)
+const getReferenceGroups = (input: string): string[] =>
+  input.split(';').map(group => group.trim());
 
 // - - - - - - - - -
-const getReferences = (input: string, languages: string[]): Map<string, Reference[]> => {
+const getReferences = (
+  input: string,
+  languages: string[]
+): Map<string, Reference[]> => {
   // From string input, get a map from strings to References,
   // for example, Genesis 1:1 (NIV, KJV); John 3:16-17 (MAL10RO)
   // would generate {

@@ -7,7 +7,7 @@ type ValueOf<T> = T[keyof T];
 class ApiBibleKeyNotSetError extends Error {
   constructor() {
     super(
-      'API Key for ABI.Bible was not set. Use API_BIBLE_API_KEY Environment variable to specify API Key',
+      'API Key for ABI.Bible was not set. Use API_BIBLE_API_KEY Environment variable to specify API Key'
     );
     this.name = 'ApiBibleKeyNotSetError';
     Object.setPrototypeOf(this, ApiBibleKeyNotSetError.prototype);
@@ -114,6 +114,10 @@ type Library = Record<string, Bible>;
 //      },
 // }
 
+/**
+ *
+ * @param language
+ */
 async function getSupportedBibles(language = 'eng'): Promise<Bible[]> {
   if (!apiBibleKeyIsSet()) {
     throw new ApiBibleKeyNotSetError();
@@ -126,6 +130,9 @@ async function getSupportedBibles(language = 'eng'): Promise<Bible[]> {
     headers: {'api-key': process.env.API_BIBLE_API_KEY!},
   };
 
+  /**
+   *
+   */
   async function fetchBibles(): Promise<Bible[]> {
     const response: Response = await fetch(url, options);
     if (!response.ok) {
@@ -142,8 +149,12 @@ async function getSupportedBibles(language = 'eng'): Promise<Bible[]> {
 const bibles = await getSupportedBibles('mal');
 console.log(bibles);
 
+/**
+ *
+ * @param bibleId
+ */
 async function getBooksAndChaptersInBible(
-  bibleId: string,
+  bibleId: string
 ): Promise<BooksOfBible[]> {
   if (!apiBibleKeyIsSet()) {
     throw new ApiBibleKeyNotSetError();
@@ -155,6 +166,9 @@ async function getBooksAndChaptersInBible(
     headers: {'api-key': process.env.API_BIBLE_API_KEY!},
   };
 
+  /**
+   *
+   */
   async function fetchBooksAndChapters(): Promise<Bible[]> {
     const response: Response = await fetch(url, options);
     if (!response.ok) {
@@ -168,6 +182,8 @@ async function getBooksAndChaptersInBible(
   return fetchBooksAndChapters();
 }
 
-async function getVersesInChapter(bibleId: string): Promise<BooksOfBible[]> {
-
-}
+/**
+ *
+ * @param bibleId
+ */
+async function getVersesInChapter(bibleId: string): Promise<BooksOfBible[]> {}
