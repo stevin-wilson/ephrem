@@ -14,6 +14,32 @@ export interface Reference {
   readonly bible: string;
 }
 
+// - - - - - - - - -
+const getPassageID = (reference: Reference): string => {
+  const sections: string[] = [];
+
+  let requiredSection =
+    reference.verseStart !== undefined
+      ? `${reference.book}.${reference.chapterStart}.${reference.verseStart}`
+      : `${reference.book}.${reference.chapterStart}`;
+
+  let optionalSection: string | undefined = undefined;
+
+  if (reference.chapterEnd !== undefined && reference.verseEnd !== undefined) {
+    optionalSection = `${reference.book}.${reference.chapterEnd}.${reference.verseEnd}`;
+  } else if (reference.chapterEnd !== undefined) {
+    optionalSection = `${reference.book}.${reference.chapterEnd}`;
+  } else if (reference.verseEnd !== undefined) {
+    requiredSection += `.${reference.verseEnd}`;
+  }
+
+  sections.push(requiredSection);
+  if (optionalSection) {
+    sections.push(optionalSection);
+  }
+
+  return sections.join('-');
+};
 export const isValidStringOrUndefined = (
   value: string | undefined
 ): boolean => {
@@ -179,19 +205,19 @@ export const simplifyReferenceGroup = (input: string): ReferenceGroup => {
 };
 
 // - - - - - - - - -
-const getReferences = (
-  input: string,
-  languages: string[]
-): Map<string, Reference[]> => {
-  // From string input, get a map from strings to References,
-  // for example, Genesis 1:1 (NIV, KJV); John 3:16-17 (MAL10RO)
-  // would generate {
-  //      Genesis 1:1 (NIV, KJV): [
-  //      {book: GEN, chapterStart: 1, verseStart: 1, bible: NIV},
-  //      {book: GEN, chapterStart: 1, verseStart: 1, bible: KJV},
-  //      ],
-  //      John 3:16-17 (MAL10RO): [
-  //      {book: JHN, chapterStart: 3, verseStart: 16, verseEnd: 17, bible: MAL10RO},
-  //      ],
-  // }
-};
+// const getReferences = (
+//   input: string,
+//   languages: string[]
+// ): Map<string, Reference[]> => {
+//   // From string input, get a map from strings to References,
+//   // for example, Genesis 1:1 (NIV, KJV); John 3:16-17 (MAL10RO)
+//   // would generate {
+//   //      Genesis 1:1 (NIV, KJV): [
+//   //      {book: GEN, chapterStart: 1, verseStart: 1, bible: NIV},
+//   //      {book: GEN, chapterStart: 1, verseStart: 1, bible: KJV},
+//   //      ],
+//   //      John 3:16-17 (MAL10RO): [
+//   //      {book: JHN, chapterStart: 3, verseStart: 16, verseEnd: 17, bible: MAL10RO},
+//   //      ],
+//   // }
+// };

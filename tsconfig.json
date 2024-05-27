@@ -6,7 +6,10 @@
     "lib": ["ES2021"],
     "target": "es2021",
     "module": "nodenext",
-    "moduleResolution": "nodenext"
+    "moduleResolution": "nodenext",
+    "skipLibCheck": true,
+    "sourceMap": false,
+    "inlineSourceMap": true,
   },
   "include": [
     "src/**/*.ts",
