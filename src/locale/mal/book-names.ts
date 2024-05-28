@@ -5,7 +5,7 @@ export interface BookName {
   readonly abbreviations?: string[];
 }
 
-const BookNames = new Map<Books, BookName[]>();
+export const BookNames = new Map<Books, BookName[]>();
 // Add entries to the map for each book
 // Genesis = 'GEN',
 BookNames.set(Books.Genesis, [{name: 'ഉല്പത്തി', abbreviations: ['ഉല്പ']}]);

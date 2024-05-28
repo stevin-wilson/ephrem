@@ -1,24 +1,36 @@
 import { Books } from '../../books.js';
-const BookNames = new Map();
+export const BookNames = new Map();
 // Add entries to the map for each book
 // Genesis = 'GEN',
 BookNames.set(Books.Genesis, [
-    { name: 'Genesis', abbreviations: ['Gen', 'Gn'], orthodox_only: false },
+    {
+        name: 'Genesis',
+        abbreviations: ['Gen', 'Gn'],
+        usage: ['common', 'orthodox'],
+    },
 ]);
 // Exodus = 'EXO',
 BookNames.set(Books.Exodus, [
-    { name: 'Exodus', abbreviations: ['Ex', 'Exod'], orthodox_only: false },
+    {
+        name: 'Exodus',
+        abbreviations: ['Ex', 'Exod'],
+        usage: ['common', 'orthodox'],
+    },
 ]);
 // Leviticus = 'LEV',
 BookNames.set(Books.Leviticus, [
-    { name: 'Leviticus', abbreviations: ['Lev', 'Lv'], orthodox_only: false },
+    {
+        name: 'Leviticus',
+        abbreviations: ['Lev', 'Lv'],
+        usage: ['common', 'orthodox'],
+    },
 ]);
 // Numbers = 'NUM',
 BookNames.set(Books.Numbers, [
     {
         name: 'Numbers',
         abbreviations: ['Num', 'Nm'],
-        orthodox_only: false,
+        usage: ['common', 'orthodox'],
     },
 ]);
 // Deuteronomy = 'DEU',
@@ -26,75 +38,91 @@ BookNames.set(Books.Deuteronomy, [
     {
         name: 'Deuteronomy',
         abbreviations: ['Deut', 'Dt'],
-        orthodox_only: false,
+        usage: ['common', 'orthodox'],
     },
 ]);
 // Joshua = 'JOS',
 BookNames.set(Books.Joshua, [
-    { name: 'Joshua', abbreviations: ['Josh', 'Jo'], orthodox_only: false },
+    {
+        name: 'Joshua',
+        abbreviations: ['Josh', 'Jo'],
+        usage: ['common', 'orthodox'],
+    },
 ]);
 // Judges = 'JDG',
 BookNames.set(Books.Judges, [
-    { name: 'Judges', abbreviations: ['Judg', 'Jgs'], orthodox_only: false },
+    {
+        name: 'Judges',
+        abbreviations: ['Judg', 'Jgs'],
+        usage: ['common', 'orthodox'],
+    },
 ]);
 // Ruth = 'RUT',
 BookNames.set(Books.Ruth, [
-    { name: 'Ruth', abbreviations: ['Ru'], orthodox_only: false },
+    { name: 'Ruth', abbreviations: ['Ru'], usage: ['common', 'orthodox'] },
 ]);
 // Samuel_1 = '1SA',
 BookNames.set(Books.Samuel_1, [
-    { name: '1 Samuel', abbreviations: ['1 Sam', '1 Sm'], orthodox_only: false },
+    {
+        name: '1 Samuel',
+        abbreviations: ['1 Sam', '1 Sm'],
+        usage: ['common', 'orthodox'],
+    },
     {
         name: '1 Kings',
         abbreviations: ['1 Kgs'],
-        orthodox_only: true,
+        usage: ['orthodox'],
     },
-    { name: '1 Kingdoms', orthodox_only: true },
+    { name: '1 Kingdoms', usage: ['orthodox'] },
 ]);
 // Samuel_2 = '2SA',
 BookNames.set(Books.Samuel_2, [
-    { name: '2 Samuel', abbreviations: ['2 Sam', '2 Sm'], orthodox_only: false },
+    {
+        name: '2 Samuel',
+        abbreviations: ['2 Sam', '2 Sm'],
+        usage: ['common', 'orthodox'],
+    },
     {
         name: '2 Kings',
         abbreviations: ['2 Kgs'],
-        orthodox_only: true,
+        usage: ['orthodox'],
     },
-    { name: '2 Kingdoms', orthodox_only: true },
+    { name: '2 Kingdoms', usage: ['orthodox'] },
 ]);
 // Kings_1 = '1KI',
 BookNames.set(Books.Kings_1, [
     {
         name: '1 Kings',
         abbreviations: ['1 Kgs'],
-        orthodox_only: false,
+        usage: ['common'],
     },
     {
         name: '3 Kings',
         abbreviations: ['3 Kgs'],
-        orthodox_only: true,
+        usage: ['orthodox'],
     },
-    { name: '3 Kingdoms', orthodox_only: true },
+    { name: '3 Kingdoms', usage: ['orthodox'] },
 ]);
 // Kings_2 = '2KI',
 BookNames.set(Books.Kings_2, [
     {
         name: '2 Kings',
         abbreviations: ['2 Kgs'],
-        orthodox_only: false,
+        usage: ['common'],
     },
     {
         name: '4 Kings',
         abbreviations: ['4 Kgs'],
-        orthodox_only: true,
+        usage: ['orthodox'],
     },
-    { name: '4 Kingdoms', orthodox_only: true },
+    { name: '4 Kingdoms', usage: ['orthodox'] },
 ]);
 // Chronicles_1 = '1CH',
 BookNames.set(Books.Chronicles_1, [
     {
         name: '1 Chronicles',
         abbreviations: ['1 Chron', '1 Chr'],
-        orthodox_only: false,
+        usage: ['common', 'orthodox'],
     },
 ]);
 // Chronicles_2 = '2CH',
@@ -102,194 +130,226 @@ BookNames.set(Books.Chronicles_2, [
     {
         name: '2 Chronicles',
         abbreviations: ['2 Chron', '2 Chr'],
-        orthodox_only: false,
+        usage: ['common', 'orthodox'],
     },
 ]);
 // Ezra = 'EZR',
 BookNames.set(Books.Ezra, [
-    { name: 'Ezra', abbreviations: ['Ezr'], orthodox_only: false },
+    { name: 'Ezra', abbreviations: ['Ezr'], usage: ['common', 'orthodox'] },
 ]);
 // Nehemiah = 'NEH',
 BookNames.set(Books.Nehemiah, [
-    { name: 'Nehemiah', abbreviations: ['Neh'], orthodox_only: false },
+    { name: 'Nehemiah', abbreviations: ['Neh'], usage: ['common', 'orthodox'] },
 ]);
 // Esther_Hebrew = 'EST',
 BookNames.set(Books.Esther_Hebrew, [
-    { name: 'Esther', abbreviations: ['Est'], orthodox_only: false },
+    { name: 'Esther', abbreviations: ['Est'], usage: ['common', 'orthodox'] },
 ]);
 // Job = 'JOB',
 BookNames.set(Books.Job, [
-    { name: 'Job', abbreviations: ['Jb'], orthodox_only: false },
+    { name: 'Job', abbreviations: ['Jb'], usage: ['common', 'orthodox'] },
 ]);
 // Psalms = 'PSA',
 BookNames.set(Books.Psalms, [
-    { name: 'Psalms', abbreviations: ['Ps', 'Pss'], orthodox_only: false },
+    { name: 'Psalms', abbreviations: ['Ps', 'Pss'], usage: ['common', 'orthodox'] },
 ]);
 // Proverbs = 'PRO',
 BookNames.set(Books.Proverbs, [
-    { name: 'Proverbs', abbreviations: ['Prov', 'Prv'], orthodox_only: false },
+    {
+        name: 'Proverbs',
+        abbreviations: ['Prov', 'Prv'],
+        usage: ['common', 'orthodox'],
+    },
 ]);
 // Ecclesiastes = 'ECC',
 BookNames.set(Books.Ecclesiastes, [
     {
         name: 'Ecclesiastes',
         abbreviations: ['Eccles', 'Eccl'],
-        orthodox_only: false,
+        usage: ['common', 'orthodox'],
     },
-    { name: 'Qoholeth', abbreviations: ['Qoh'], orthodox_only: false },
+    { name: 'Qoholeth', abbreviations: ['Qoh'], usage: ['common', 'orthodox'] },
 ]);
 // Song_of_Songs = 'SNG',
 BookNames.set(Books.Song_of_Songs, [
     {
         name: 'Song of Solomon',
         abbreviations: ['Song of Sol', 'Sg'],
-        orthodox_only: false,
+        usage: ['common', 'orthodox'],
     },
-    { name: 'Song of Songs', orthodox_only: false },
+    { name: 'Song of Songs', usage: ['common', 'orthodox'] },
     {
         name: 'Canticle of Canticles',
         abbreviations: ['Canticles', 'Cant'],
-        orthodox_only: false,
+        usage: ['common', 'orthodox'],
     },
 ]);
 // Isaiah = 'ISA',
 BookNames.set(Books.Isaiah, [
-    { name: 'Isaiah', abbreviations: ['Isa', 'Is'], orthodox_only: false },
+    { name: 'Isaiah', abbreviations: ['Isa', 'Is'], usage: ['common', 'orthodox'] },
 ]);
 // Jeremiah = 'JER',
 BookNames.set(Books.Jeremiah, [
-    { name: 'Jeremiah', abbreviations: ['Jer'], orthodox_only: false },
+    { name: 'Jeremiah', abbreviations: ['Jer'], usage: ['common', 'orthodox'] },
 ]);
 // Lamentations = 'LAM',
 BookNames.set(Books.Lamentations, [
-    { name: 'Lamentations', abbreviations: ['Lam'], orthodox_only: false },
+    { name: 'Lamentations', abbreviations: ['Lam'], usage: ['common', 'orthodox'] },
 ]);
 // Ezekiel = 'EZK',
 BookNames.set(Books.Ezekiel, [
-    { name: 'Ezekiel', abbreviations: ['Ezek', 'Ez'], orthodox_only: false },
+    {
+        name: 'Ezekiel',
+        abbreviations: ['Ezek', 'Ez'],
+        usage: ['common', 'orthodox'],
+    },
 ]);
 // Daniel_Hebrew = 'DAN',
 BookNames.set(Books.Daniel_Hebrew, [
-    { name: 'Daniel', abbreviations: ['Dan', 'Dn'], orthodox_only: false },
+    { name: 'Daniel', abbreviations: ['Dan', 'Dn'], usage: ['common', 'orthodox'] },
 ]);
 // Hosea = 'HOS',
 BookNames.set(Books.Hosea, [
-    { name: 'Hosea', abbreviations: ['Hos'], orthodox_only: false },
+    { name: 'Hosea', abbreviations: ['Hos'], usage: ['common', 'orthodox'] },
 ]);
 // Joel = 'JOL',
 BookNames.set(Books.Joel, [
-    { name: 'Joel', abbreviations: ['Jl'], orthodox_only: false },
+    { name: 'Joel', abbreviations: ['Jl'], usage: ['common', 'orthodox'] },
 ]);
 // Amos = 'AMO',
 BookNames.set(Books.Amos, [
-    { name: 'Amos', abbreviations: ['Am'], orthodox_only: false },
+    { name: 'Amos', abbreviations: ['Am'], usage: ['common', 'orthodox'] },
 ]);
 // Obadiah = 'OBA',
 BookNames.set(Books.Obadiah, [
-    { name: 'Obadiah', abbreviations: ['Obad', 'Ob'], orthodox_only: false },
+    {
+        name: 'Obadiah',
+        abbreviations: ['Obad', 'Ob'],
+        usage: ['common', 'orthodox'],
+    },
 ]);
 // Jonah = 'JON',
 BookNames.set(Books.Jonah, [
-    { name: 'Jonah', abbreviations: ['Jon'], orthodox_only: false },
+    { name: 'Jonah', abbreviations: ['Jon'], usage: ['common', 'orthodox'] },
 ]);
 // Micah = 'MIC',
 BookNames.set(Books.Micah, [
-    { name: 'Micah', abbreviations: ['Mic', 'Mi'], orthodox_only: false },
+    { name: 'Micah', abbreviations: ['Mic', 'Mi'], usage: ['common', 'orthodox'] },
 ]);
 // Nahum = 'NAM',
 BookNames.set(Books.Nahum, [
-    { name: 'Nahum', abbreviations: ['Nah', 'Na'], orthodox_only: false },
+    { name: 'Nahum', abbreviations: ['Nah', 'Na'], usage: ['common', 'orthodox'] },
 ]);
 // Habakkuk = 'HAB',
 BookNames.set(Books.Habakkuk, [
-    { name: 'Habakkuk', abbreviations: ['Hab', 'Hb'], orthodox_only: false },
+    {
+        name: 'Habakkuk',
+        abbreviations: ['Hab', 'Hb'],
+        usage: ['common', 'orthodox'],
+    },
 ]);
 // Zephaniah = 'ZEP',
 BookNames.set(Books.Zephaniah, [
     {
         name: 'Zephaniah',
         abbreviations: ['Zeph', 'Zep'],
-        orthodox_only: false,
+        usage: ['common', 'orthodox'],
     },
 ]);
 // Haggai = 'HAG',
 BookNames.set(Books.Haggai, [
-    { name: 'Haggai', abbreviations: ['Hag', 'Hg'], orthodox_only: false },
+    { name: 'Haggai', abbreviations: ['Hag', 'Hg'], usage: ['common', 'orthodox'] },
 ]);
 // Zechariah = 'ZEC',
 BookNames.set(Books.Zechariah, [
     {
         name: 'Zechariah',
         abbreviations: ['Zech', 'Zec'],
-        orthodox_only: false,
+        usage: ['common', 'orthodox'],
     },
 ]);
 // Malachi = 'MAL',
 BookNames.set(Books.Malachi, [
-    { name: 'Malachi', abbreviations: ['Mal'], orthodox_only: false },
+    { name: 'Malachi', abbreviations: ['Mal'], usage: ['common', 'orthodox'] },
 ]);
 // Matthew = 'MAT',
 BookNames.set(Books.Matthew, [
-    { name: 'Matthew', abbreviations: ['Matt', 'Mt'], orthodox_only: false },
+    {
+        name: 'Matthew',
+        abbreviations: ['Matt', 'Mt'],
+        usage: ['common', 'orthodox'],
+    },
 ]);
 // Mark = 'MRK',
 BookNames.set(Books.Mark, [
     {
         name: 'Mark',
         abbreviations: ['Mk'],
-        orthodox_only: false,
+        usage: ['common', 'orthodox'],
     },
 ]);
 // Luke = 'LUK',
 BookNames.set(Books.Luke, [
-    { name: 'Luke', abbreviations: ['Lk'], orthodox_only: false },
+    { name: 'Luke', abbreviations: ['Lk'], usage: ['common', 'orthodox'] },
 ]);
 // John = 'JHN',
 BookNames.set(Books.John, [
-    { name: 'John', abbreviations: ['Jn'], orthodox_only: false },
+    { name: 'John', abbreviations: ['Jn'], usage: ['common', 'orthodox'] },
 ]);
 // Acts = 'ACT',
 BookNames.set(Books.Acts, [
-    { name: 'Acts of the Apostles', abbreviations: ['Acts'], orthodox_only: false },
+    {
+        name: 'Acts of the Apostles',
+        abbreviations: ['Acts'],
+        usage: ['common', 'orthodox'],
+    },
 ]);
 // Romans = 'ROM',
 BookNames.set(Books.Romans, [
-    { name: 'Romans', abbreviations: ['Rom'], orthodox_only: false },
+    { name: 'Romans', abbreviations: ['Rom'], usage: ['common', 'orthodox'] },
 ]);
 // Corinthians_1 = '1CO',
 BookNames.set(Books.Corinthians_1, [
-    { name: '1 Corinthians', abbreviations: ['1 Cor'], orthodox_only: false },
+    {
+        name: '1 Corinthians',
+        abbreviations: ['1 Cor'],
+        usage: ['common', 'orthodox'],
+    },
 ]);
 // Corinthians_2 = '2CO',
 BookNames.set(Books.Corinthians_2, [
-    { name: '2 Corinthians', abbreviations: ['2 Cor'], orthodox_only: false },
+    {
+        name: '2 Corinthians',
+        abbreviations: ['2 Cor'],
+        usage: ['common', 'orthodox'],
+    },
 ]);
 // Galatians = 'GAL',
 BookNames.set(Books.Galatians, [
-    { name: 'Galatians', abbreviations: ['Gal'], orthodox_only: false },
+    { name: 'Galatians', abbreviations: ['Gal'], usage: ['common', 'orthodox'] },
 ]);
 // Ephesians = 'EPH',
 BookNames.set(Books.Ephesians, [
-    { name: 'Ephesians', abbreviations: ['Eph'], orthodox_only: false },
+    { name: 'Ephesians', abbreviations: ['Eph'], usage: ['common', 'orthodox'] },
 ]);
 // Philippians = 'PHP',
 BookNames.set(Books.Philippians, [
     {
         name: 'Philippians',
         abbreviations: ['Phil'],
-        orthodox_only: false,
+        usage: ['common', 'orthodox'],
     },
 ]);
 // Colossians = 'COL',
 BookNames.set(Books.Colossians, [
-    { name: 'Colossians', abbreviations: ['Col'], orthodox_only: false },
+    { name: 'Colossians', abbreviations: ['Col'], usage: ['common', 'orthodox'] },
 ]);
 // Thessalonians_1 = '1TH',
 BookNames.set(Books.Thessalonians_1, [
     {
         name: '1 Thessalonians',
         abbreviations: ['1 Thess', '1 Thes'],
-        orthodox_only: false,
+        usage: ['common', 'orthodox'],
     },
 ]);
 // Thessalonians_2 = '2TH',
@@ -297,77 +357,105 @@ BookNames.set(Books.Thessalonians_2, [
     {
         name: '2 Thessalonians',
         abbreviations: ['2 Thess', '2 Thes'],
-        orthodox_only: false,
+        usage: ['common', 'orthodox'],
     },
 ]);
 // Timothy_1 = '1TI',
 BookNames.set(Books.Timothy_1, [
-    { name: '1 Timothy', abbreviations: ['1 Tim', '1 Tm'], orthodox_only: false },
+    {
+        name: '1 Timothy',
+        abbreviations: ['1 Tim', '1 Tm'],
+        usage: ['common', 'orthodox'],
+    },
 ]);
 // Timothy_2 = '2TI',
 BookNames.set(Books.Timothy_2, [
-    { name: '2 Timothy', abbreviations: ['2 Tim', '2 Tm'], orthodox_only: false },
+    {
+        name: '2 Timothy',
+        abbreviations: ['2 Tim', '2 Tm'],
+        usage: ['common', 'orthodox'],
+    },
 ]);
 // Titus = 'TIT',
 BookNames.set(Books.Titus, [
-    { name: 'Titus', abbreviations: ['Ti'], orthodox_only: false },
+    { name: 'Titus', abbreviations: ['Ti'], usage: ['common', 'orthodox'] },
 ]);
 // Philemon = 'PHM',
 BookNames.set(Books.Philemon, [
-    { name: 'Philemon', abbreviations: ['Philem', 'Phlm'], orthodox_only: false },
+    {
+        name: 'Philemon',
+        abbreviations: ['Philem', 'Phlm'],
+        usage: ['common', 'orthodox'],
+    },
 ]);
 // Hebrews = 'HEB',
 BookNames.set(Books.Hebrews, [
-    { name: 'Hebrews', abbreviations: ['Heb'], orthodox_only: false },
+    { name: 'Hebrews', abbreviations: ['Heb'], usage: ['common', 'orthodox'] },
 ]);
 // James = 'JAS',
 BookNames.set(Books.James, [
-    { name: 'James', abbreviations: ['Jas'], orthodox_only: false },
+    { name: 'James', abbreviations: ['Jas'], usage: ['common', 'orthodox'] },
 ]);
 // Peter_1 = '1PE',
 BookNames.set(Books.Peter_1, [
-    { name: '1 Peter', abbreviations: ['1 Pet', '1 Pt'], orthodox_only: false },
+    {
+        name: '1 Peter',
+        abbreviations: ['1 Pet', '1 Pt'],
+        usage: ['common', 'orthodox'],
+    },
 ]);
 // Peter_2 = '2PE',
 BookNames.set(Books.Peter_2, [
-    { name: '2 Peter', abbreviations: ['2 Pet', '2 Pt'], orthodox_only: false },
+    {
+        name: '2 Peter',
+        abbreviations: ['2 Pet', '2 Pt'],
+        usage: ['common', 'orthodox'],
+    },
 ]);
 // John_1 = '1JN',
 BookNames.set(Books.John_1, [
-    { name: '1 John', abbreviations: ['1 Jn'], orthodox_only: false },
+    { name: '1 John', abbreviations: ['1 Jn'], usage: ['common', 'orthodox'] },
 ]);
 // John_2 = '2JN',
 BookNames.set(Books.John_2, [
-    { name: '2 John', abbreviations: ['2 Jn'], orthodox_only: false },
+    { name: '2 John', abbreviations: ['2 Jn'], usage: ['common', 'orthodox'] },
 ]);
 // John_3 = '3JN',
 BookNames.set(Books.John_3, [
-    { name: '3 John', abbreviations: ['3 Jn'], orthodox_only: false },
+    { name: '3 John', abbreviations: ['3 Jn'], usage: ['common', 'orthodox'] },
 ]);
 // Jude = 'JUD',
-BookNames.set(Books.Jude, [{ name: 'Jude', orthodox_only: false }]);
+BookNames.set(Books.Jude, [{ name: 'Jude', usage: ['common', 'orthodox'] }]);
 // Revelation = 'REV',
 BookNames.set(Books.Revelation, [
-    { name: 'Revelation', abbreviations: ['Rev', 'Rv'], orthodox_only: false },
-    { name: 'Apocalypse', abbreviations: ['Apoc'], orthodox_only: false },
+    {
+        name: 'Revelation',
+        abbreviations: ['Rev', 'Rv'],
+        usage: ['common', 'orthodox'],
+    },
+    { name: 'Apocalypse', abbreviations: ['Apoc'], usage: ['common', 'orthodox'] },
 ]);
 // Tobit = 'TOB',
 BookNames.set(Books.Tobit, [
-    { name: 'Tobit', abbreviations: ['Tob', 'Tb'], orthodox_only: false },
+    { name: 'Tobit', abbreviations: ['Tob', 'Tb'], usage: ['common', 'orthodox'] },
 ]);
 // Judith = 'JDT',
 BookNames.set(Books.Judith, [
-    { name: 'Judith', abbreviations: ['Jth', 'Jdt'], orthodox_only: false },
+    {
+        name: 'Judith',
+        abbreviations: ['Jth', 'Jdt'],
+        usage: ['common', 'orthodox'],
+    },
 ]);
 // Esther_Greek = 'ESG',
 BookNames.set(Books.Esther_Greek, [
     {
         name: 'Additions to Esther',
-        orthodox_only: false,
+        usage: ['common', 'orthodox'],
     },
     {
         name: 'Rest of Esther',
-        orthodox_only: false,
+        usage: ['common', 'orthodox'],
     },
 ]);
 // Wisdom_of_Solomon = 'WIS',
@@ -375,42 +463,46 @@ BookNames.set(Books.Wisdom_of_Solomon, [
     {
         name: 'Wisdom of Solomon',
         abbreviations: ['Wisd. of Sol', 'Ws'],
-        orthodox_only: false,
+        usage: ['common', 'orthodox'],
     },
 ]);
 // Sirach = 'SIR',
 BookNames.set(Books.Sirach, [
-    { name: 'Sirach', abbreviations: ['Sir'], orthodox_only: false },
-    { name: 'Ecclesiasticus', abbreviations: ['Ecclus'], orthodox_only: false },
+    { name: 'Sirach', abbreviations: ['Sir'], usage: ['common', 'orthodox'] },
+    {
+        name: 'Ecclesiasticus',
+        abbreviations: ['Ecclus'],
+        usage: ['common', 'orthodox'],
+    },
 ]);
 // Baruch = 'BAR',
 BookNames.set(Books.Baruch, [
-    { name: 'Baruch', abbreviations: ['Bar'], orthodox_only: false },
+    { name: 'Baruch', abbreviations: ['Bar'], usage: ['common', 'orthodox'] },
 ]);
 // Letter_of_Jeremiah = 'LJE',
 BookNames.set(Books.Letter_of_Jeremiah, [
-    { name: 'Letter of Jeremiah', orthodox_only: false },
+    { name: 'Letter of Jeremiah', usage: ['common', 'orthodox'] },
 ]);
 // Song_of_the_3_Young_Men = 'S3Y',
 BookNames.set(Books.Song_of_the_3_Young_Men, [
-    { name: 'Song of the 3 Young Men', orthodox_only: false },
+    { name: 'Song of the 3 Young Men', usage: ['common', 'orthodox'] },
     {
         name: 'Song of the Three Holy Children',
         abbreviations: ['Song of Three Children'],
-        orthodox_only: false,
+        usage: ['common', 'orthodox'],
     },
-    { name: 'Prayer of Azariah', orthodox_only: false },
+    { name: 'Prayer of Azariah', usage: ['common', 'orthodox'] },
 ]);
 // Susanna = 'SUS',
 BookNames.set(Books.Susanna, [
-    { name: 'Susanna', abbreviations: ['Sus'], orthodox_only: false },
+    { name: 'Susanna', abbreviations: ['Sus'], usage: ['common', 'orthodox'] },
 ]);
 // Bel_and_the_Dragon = 'BEL',
 BookNames.set(Books.Bel_and_the_Dragon, [
     {
         name: 'Bel and the Dragon',
         abbreviations: ['Bel and Dragon'],
-        orthodox_only: false,
+        usage: ['common', 'orthodox'],
     },
 ]);
 // Maccabees_1 = '1MA',
@@ -418,7 +510,7 @@ BookNames.set(Books.Maccabees_1, [
     {
         name: '1 Maccabees',
         abbreviations: ['1 Macc', '1 Mc'],
-        orthodox_only: false,
+        usage: ['common', 'orthodox'],
     },
 ]);
 // Maccabees_2 = '2MA',
@@ -426,7 +518,7 @@ BookNames.set(Books.Maccabees_2, [
     {
         name: '2 Maccabees',
         abbreviations: ['2 Macc', '2 Mc'],
-        orthodox_only: false,
+        usage: ['common', 'orthodox'],
     },
 ]);
 // Maccabees_3 = '3MA',
@@ -434,7 +526,7 @@ BookNames.set(Books.Maccabees_3, [
     {
         name: '3 Maccabees',
         abbreviations: ['3 Macc', '3 Mc'],
-        orthodox_only: false,
+        usage: ['common', 'orthodox'],
     },
 ]);
 // Maccabees_4 = '4MA',
@@ -442,36 +534,41 @@ BookNames.set(Books.Maccabees_4, [
     {
         name: '4 Maccabees',
         abbreviations: ['4 Macc', '4 Mc'],
-        orthodox_only: false,
+        usage: ['common', 'orthodox'],
     },
 ]);
 // Esdras_1_Greek = '1ES',
 BookNames.set(Books.Esdras_1_Greek, [
-    { name: '1 Esdras', abbreviations: ['1 Esd'], orthodox_only: false },
+    { name: '1 Esdras', abbreviations: ['1 Esd'], usage: ['common', 'orthodox'] },
 ]);
 // Esdras_2_Latin = '2ES',
 BookNames.set(Books.Esdras_2_Latin, [
-    { name: '2 Esdras', abbreviations: ['2 Esd'], orthodox_only: false },
+    { name: '2 Esdras', abbreviations: ['2 Esd'], usage: ['common', 'orthodox'] },
 ]);
 // Prayer_of_Manasseh = 'MAN',
 BookNames.set(Books.Prayer_of_Manasseh, [
     {
         name: 'Prayer of Manasseh',
         abbreviations: ['Pr. of Man'],
-        orthodox_only: false,
+        usage: ['common', 'orthodox'],
     },
     {
         name: 'Prayer of Manasses',
-        orthodox_only: false,
+        usage: ['common', 'orthodox'],
     },
 ]);
 // identify if a bible uses 1,2,3,4 Kings instead of 1,2 Samuel and 1,2 Kings
-const hasOrthodoxNames = (bookNames) => {
+const getBibleType = (bookNames) => {
     // Define the target strings to search for
     const targets = ['3 Kings', '4 Kings', '3 Kingdoms', '4 Kingdoms'];
     // Check if any of the target strings are in the list
-    return targets.some(target => bookNames.includes(target));
+    if (targets.some(target => bookNames.includes(target))) {
+        return 'orthodox';
+    }
+    else {
+        return 'common';
+    }
 };
 // define function to parse reference groups
 // define function to parse references
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYm9vay1uYW1lcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3NyYy9sb2NhbGUvZW5nL2Jvb2stbmFtZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxFQUFDLEtBQUssRUFBQyxNQUFNLGdCQUFnQixDQUFDO0FBWXJDLE1BQU0sU0FBUyxHQUFHLElBQUksR0FBRyxFQUFxQixDQUFDO0FBQy9DLHVDQUF1QztBQUN2QyxtQkFBbUI7QUFDbkIsU0FBUyxDQUFDLEdBQUcsQ0FBQyxLQUFLLENBQUMsT0FBTyxFQUFFO0lBQzNCLEVBQUMsSUFBSSxFQUFFLFNBQVMsRUFBRSxhQUFhLEVBQUUsQ0FBQyxLQUFLLEVBQUUsSUFBSSxDQUFDLEVBQUUsYUFBYSxFQUFFLEtBQUssRUFBQztDQUN0RSxDQUFDLENBQUM7QUFFSCxrQkFBa0I7QUFDbEIsU0FBUyxDQUFDLEdBQUcsQ0FBQyxLQUFLLENBQUMsTUFBTSxFQUFFO0lBQzFCLEVBQUMsSUFBSSxFQUFFLFFBQVEsRUFBRSxhQUFhLEVBQUUsQ0FBQyxJQUFJLEVBQUUsTUFBTSxDQUFDLEVBQUUsYUFBYSxFQUFFLEtBQUssRUFBQztDQUN0RSxDQUFDLENBQUM7QUFFSCxxQkFBcUI7QUFDckIsU0FBUyxDQUFDLEdBQUcsQ0FBQyxLQUFLLENBQUMsU0FBUyxFQUFFO0lBQzdCLEVBQUMsSUFBSSxFQUFFLFdBQVcsRUFBRSxhQUFhLEVBQUUsQ0FBQyxLQUFLLEVBQUUsSUFBSSxDQUFDLEVBQUUsYUFBYSxFQUFFLEtBQUssRUFBQztDQUN4RSxDQUFDLENBQUM7QUFFSCxtQkFBbUI7QUFDbkIsU0FBUyxDQUFDLEdBQUcsQ0FBQyxLQUFLLENBQUMsT0FBTyxFQUFFO0lBQzNCO1FBQ0UsSUFBSSxFQUFFLFNBQVM7UUFDZixhQUFhLEVBQUUsQ0FBQyxLQUFLLEVBQUUsSUFBSSxDQUFDO1FBQzVCLGFBQWEsRUFBRSxLQUFLO0tBQ3JCO0NBQ0YsQ0FBQyxDQUFDO0FBRUgsdUJBQXVC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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYm9vay1uYW1lcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3NyYy9sb2NhbGUvZW5nL2Jvb2stbmFtZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxFQUFDLEtBQUssRUFBQyxNQUFNLGdCQUFnQixDQUFDO0FBY3JDLE1BQU0sQ0FBQyxNQUFNLFNBQVMsR0FBRyxJQUFJLEdBQUcsRUFBcUIsQ0FBQztBQUN0RCx1Q0FBdUM7QUFDdkMsbUJBQW1CO0FBQ25CLFNBQVMsQ0FBQyxHQUFHLENBQUMsS0FBSyxDQUFDLE9BQU8sRUFBRTtJQUMzQjtRQUNFLElBQUksRUFBRSxTQUFTO1FBQ2YsYUFBYSxFQUFFLENBQUMsS0FBSyxFQUFFLElBQUksQ0FBQztRQUM1QixLQUFLLEVBQUUsQ0FBQyxRQUFRLEVBQUUsVUFBVSxDQUFDO0tBQzlCO0NBQ0YsQ0FBQyxDQUFDO0FBRUgsa0JBQWtCO0FBQ2xCLFNBQVMsQ0FBQyxHQUFHLENBQUMsS0FBSyxDQUFDLE1BQU0sRUFBRTtJQUMxQjtRQUNFLElBQUksRUFBRSxRQUFRO1FBQ2QsYUFBYSxFQUFFLENBQUMsSUFBSSxFQUFFLE1BQU0sQ0FBQztRQUM3QixLQUFLLEVBQUUsQ0FBQyxRQUFRLEVBQUUsVUFBVSxDQUFDO0tBQzlCO0NBQ0YsQ0FBQyxDQUFDO0FBRUgscUJBQXFCO0FBQ3JCLFNBQVMsQ0FBQyxHQUFHLENBQUMsS0FBSyxDQUFDLFNBQVMsRUFBRTtJQUM3QjtRQUNFLElBQUksRUFBRSxXQUFXO1FBQ2pCLGFBQWEsRUFBRSxDQUFDLEtBQUssRUFBRSxJQUFJLENBQUM7UUFDNUIsS0FBSyxFQUFFLENBQUMsUUFBUSxFQUFFLFVBQVUsQ0FBQztLQUM5QjtDQUNGLENBQUMsQ0FBQztBQUVILG1CQUFtQjtBQUNuQixTQUFTLENBQUMsR0FBRyxDQUFDLEtBQUssQ0FBQyxPQUFPLEVBQUU7SUFDM0I7UUFDRSxJQUFJLEVBQUUsU0FBUztRQUNmLGFBQWEsRUFBRSxDQUFD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

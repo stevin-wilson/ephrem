@@ -1,16 +1,17 @@
 import {expect, test} from 'vitest';
+
 import {
-  getReferenceGroups,
   hasValidSyntax,
   isMultiChapter,
   isSingleChapterMultipleVerses,
   isSingleVerse,
   isValidStringOrUndefined,
   Reference,
-  ReferenceGroup,
-  simplifyReferenceGroup,
 } from '../src/reference.js';
 import {Books} from '../src/books.js';
+import {simplifyReferenceGroup} from '../src/locale/eng/parse-references.js';
+import {getReferenceGroups} from '../src/locale/parse-references.js';
+import {ReferenceGroup} from '../src/locale/common.js';
 
 // - - - - - - - - -
 // Test get Reference Groups

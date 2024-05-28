@@ -38,7 +38,7 @@ const getPassageID = (reference: Reference): string => {
     sections.push(optionalSection);
   }
 
-  return sections.join('-');
+  return sections.join('-').replace(/\s+/g, '');
 };
 export const isValidStringOrUndefined = (
   value: string | undefined
@@ -149,75 +149,3 @@ export const isSingleChapterMultipleVerses = (
 
   return output;
 };
-
-// - - - - - - - - -
-export const getReferenceGroups = (input: string): string[] =>
-  input
-    .split(';')
-    .map(group => group.trim())
-    .filter(group => group !== '');
-
-// - - - - - - - - -
-export interface ReferenceGroup {
-  readonly bookName: string;
-  readonly chapterStart: string;
-  readonly chapterEnd?: string;
-  readonly verseStart?: string;
-  readonly verseEnd?: string;
-  readonly bibles?: string[];
-}
-
-// - - - - - - - - -
-export const simplifyReferenceGroup = (input: string): ReferenceGroup => {
-  // From string input representing reference group, get a referenceGroup object,
-  // for example, when Genesis 1:1 (NIV, KJV) is input,
-  // return {bookName: Genesis, chapterStart: '1', verseStart: '1', bibles: [NIV, KJV]}
-  // for example, when Genesis 1-2 is input,
-  // return {bookName: Genesis, chapterStart: '1', chapterEnd: '2'}
-  // for example, when Genesis 1-2 (NIV, KJV) is input,
-  // return {bookName: Genesis, chapterStart: '1', chapterEnd: '2', bibles: [NIV, KJV]}
-  // when യോഹന്നാൻ 3:16-17 (MAL10RO) is input,
-  // return {bookName: യോഹന്നാൻ, chapterStart: '3', verseStart: '16', verseEnd: '17', bibles: [MAL10RO]}
-  const regex =
-    /^(.+?)\s+(\d+(?:-\d+)?)(?::(\d+(?:-\d+)?))?\s*(?:\(([^)]+)\))?$/;
-  const match = input.match(regex);
-
-  if (!match) {
-    throw new Error('Input string is not in the correct format');
-  }
-
-  const [_, bookName, chapterPart, versePart, biblesPart] = match;
-
-  const [chapterStart, chapterEnd] = chapterPart.split('-');
-  const [verseStart, verseEnd] = (versePart || '').split('-');
-  const bibles = biblesPart
-    ? biblesPart.split(',').map(bible => bible.trim())
-    : undefined;
-
-  return {
-    bookName: bookName,
-    chapterStart: chapterStart,
-    chapterEnd: chapterEnd ? chapterEnd : undefined,
-    verseStart: verseStart ? verseStart : undefined,
-    verseEnd: verseEnd ? verseEnd : undefined,
-    bibles,
-  };
-};
-
-// - - - - - - - - -
-// const getReferences = (
-//   input: string,
-//   languages: string[]
-// ): Map<string, Reference[]> => {
-//   // From string input, get a map from strings to References,
-//   // for example, Genesis 1:1 (NIV, KJV); John 3:16-17 (MAL10RO)
-//   // would generate {
-//   //      Genesis 1:1 (NIV, KJV): [
-//   //      {book: GEN, chapterStart: 1, verseStart: 1, bible: NIV},
-//   //      {book: GEN, chapterStart: 1, verseStart: 1, bible: KJV},
-//   //      ],
-//   //      John 3:16-17 (MAL10RO): [
-//   //      {book: JHN, chapterStart: 3, verseStart: 16, verseEnd: 17, bible: MAL10RO},
-//   //      ],
-//   // }
-// };

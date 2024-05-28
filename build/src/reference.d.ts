@@ -14,14 +14,4 @@ export declare const isMultiChapter: (reference: Reference) => boolean;
 export declare const isSingleChapter: (reference: Reference) => boolean;
 export declare const isSingleVerse: (reference: Reference) => boolean;
 export declare const isSingleChapterMultipleVerses: (reference: Reference) => boolean;
-export declare const getReferenceGroups: (input: string) => string[];
-export interface ReferenceGroup {
-    readonly bookName: string;
-    readonly chapterStart: string;
-    readonly chapterEnd?: string;
-    readonly verseStart?: string;
-    readonly verseEnd?: string;
-    readonly bibles?: string[];
-}
-export declare const simplifyReferenceGroup: (input: string) => ReferenceGroup;
 export {};

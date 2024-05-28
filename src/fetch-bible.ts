@@ -2,7 +2,7 @@ import 'dotenv/config';
 import {HTTPError} from './utils.js';
 import axios, {AxiosRequestConfig} from 'axios';
 
-interface Language {
+export interface Language {
   id: string;
   name: string;
   nameLocal: string;
@@ -14,7 +14,7 @@ interface LanguageResponse extends Language {
   [key: string]: unknown;
 }
 
-interface VerseResponse {
+export interface VerseResponse {
   id: string;
 
   [key: string]: unknown;
@@ -22,21 +22,23 @@ interface VerseResponse {
 
 interface ChapterResponse {
   id: string;
-
+  number: string;
   [key: string]: unknown;
 }
 
-interface BookResponse {
+export interface BookResponse {
+  id: string;
   chapters: ChapterResponse[];
 
   [key: string]: unknown;
 }
 
-interface BibleResponse {
+export interface BibleResponse {
   id: string;
   dblId: string;
   name: string;
   nameLocal: string;
+  abbreviation: string;
   language: LanguageResponse;
 
   [key: string]: unknown;
@@ -85,7 +87,7 @@ async function fetchFromAPI(
  * @param language ISO code of language
  * @param options
  */
-async function getAvailableBibles(
+export async function fetchBibles(
   language: string,
   config?: AxiosRequestConfig
 ): Promise<BibleResponse[]> {
@@ -104,7 +106,7 @@ async function getAvailableBibles(
  // eslint-disable-next-line jsdoc/require-param-description
  * @param config
  */
-async function getBookAndChapters(
+export async function fetchBooksAndChapters(
   bibleID: string,
   config?: AxiosRequestConfig
 ): Promise<BookResponse[]> {
@@ -116,7 +118,7 @@ async function getBookAndChapters(
 //   JSON.stringify(await getBookAndChapters('805e795e07fb9422-01'), null, 2)
 // );
 
-async function getVerses(
+export async function fetchVerses(
   chapterID: string,
   bibleID: string,
   config?: AxiosRequestConfig
@@ -159,7 +161,7 @@ const getPassageURL = (
 ): string =>
   `https://api.scripture.api.bible/v1/bibles/${bibleID}/passages/${passageID}?content-type=${contentType}&include-notes=${includeNotes}&include-titles=${includeTitles}&include-chapter-numbers=${includeChapterNumbers}&include-verse-numbers=${includeVerseNumbers}&include-verse-spans=${includeVerseSpans}&use-org-id=false`;
 
-async function getPassage(
+export async function fetchPassage(
   passageID: string,
   bibleID: string,
   contentType: 'html' | 'json' | 'text' = 'html',
@@ -197,45 +199,11 @@ async function getPassage(
 
 console.log(
   JSON.stringify(
-    await getPassage('GEN.1.1-GEN.2', '805e795e07fb9422-01'),
+    await fetchPassage('GEN.1.1-GEN.2', '805e795e07fb9422-01'),
     null,
     2
   )
 );
-
-// - - - - - - - - - -
-type Verse = string; // GEN.1.1
-
-// - - - - - - - - - -
-interface Chapter {
-  verses: Verse[];
-  cachedOn: Date;
-}
-
-type Chapters = Map<string, Chapter>;
-
-// - - - - - - - - - -
-interface Book {
-  chapters: Chapters;
-  cachedOn: Date;
-}
-
-type Books = Map<string, Book>;
-
-// - - - - - - - - - -
-interface Bible {
-  id: string;
-  dblId: string;
-  name: string;
-  nameLocal: string;
-  language: Language;
-  books: Books;
-  cachedOn: Date;
-}
-
-type abbreviation = string;
-
-type BibleLibrary = Map<abbreviation, Bible>;
 
 // - - - - - - - - - -
 // * Build Library
