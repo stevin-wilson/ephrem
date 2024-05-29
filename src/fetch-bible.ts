@@ -20,7 +20,7 @@ export interface VerseResponse {
   [key: string]: unknown;
 }
 
-interface ChapterResponse {
+export interface ChapterResponse {
   id: string;
   number: string;
   [key: string]: unknown;
