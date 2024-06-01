@@ -1,37 +1,38 @@
 import 'dotenv/config';
 import { AxiosRequestConfig } from 'axios';
+export type ScriptDirection = 'RTL' | 'LTR';
 export interface Language {
-    id: string;
-    name: string;
-    nameLocal: string;
-    script: string;
-    scriptDirection: 'RTL' | 'LTR';
+    readonly id: string;
+    readonly name: string;
+    readonly nameLocal: string;
+    readonly script: string;
+    readonly scriptDirection: ScriptDirection;
 }
 interface LanguageResponse extends Language {
-    [key: string]: unknown;
+    readonly [key: string]: unknown;
 }
 export interface VerseResponse {
-    id: string;
-    [key: string]: unknown;
+    readonly id: string;
+    readonly [key: string]: unknown;
 }
-interface ChapterResponse {
-    id: string;
-    number: string;
-    [key: string]: unknown;
+export interface ChapterResponse {
+    readonly id: string;
+    readonly number: string;
+    readonly [key: string]: unknown;
 }
 export interface BookResponse {
-    id: string;
-    chapters: ChapterResponse[];
-    [key: string]: unknown;
+    readonly id: string;
+    readonly chapters: ChapterResponse[];
+    readonly [key: string]: unknown;
 }
 export interface BibleResponse {
-    id: string;
-    dblId: string;
-    name: string;
-    nameLocal: string;
-    abbreviation: string;
-    language: LanguageResponse;
-    [key: string]: unknown;
+    readonly id: string;
+    readonly dblId: string;
+    readonly name: string;
+    readonly nameLocal: string;
+    readonly abbreviation: string;
+    readonly language: LanguageResponse;
+    readonly [key: string]: unknown;
 }
 /**
  *
@@ -50,20 +51,20 @@ export declare function fetchBibles(language: string, config?: AxiosRequestConfi
 export declare function fetchBooksAndChapters(bibleID: string, config?: AxiosRequestConfig): Promise<BookResponse[]>;
 export declare function fetchVerses(chapterID: string, bibleID: string, config?: AxiosRequestConfig): Promise<VerseResponse[]>;
 interface PassageResponse {
-    id: string;
-    reference: string;
-    content: string;
-    copyright: string;
-    [key: string]: unknown;
+    readonly id: string;
+    readonly reference: string;
+    readonly content: string;
+    readonly copyright: string;
+    readonly [key: string]: unknown;
 }
 interface FumsResponse {
-    fums: string;
-    [key: string]: unknown;
+    readonly fums: string;
+    readonly [key: string]: unknown;
 }
 interface PassageAndFumsResponse {
-    data: PassageResponse;
-    meta: FumsResponse;
-    [key: string]: unknown;
+    readonly data: PassageResponse;
+    readonly meta: FumsResponse;
+    readonly [key: string]: unknown;
 }
 export declare function fetchPassage(passageID: string, bibleID: string, contentType?: 'html' | 'json' | 'text', includeNotes?: boolean, includeTitles?: boolean, includeChapterNumbers?: boolean, includeVerseNumbers?: boolean, includeVerseSpans?: boolean, config?: AxiosRequestConfig): Promise<PassageAndFumsResponse>;
 export {};

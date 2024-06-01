@@ -2,46 +2,48 @@ import 'dotenv/config';
 import {HTTPError} from './utils.js';
 import axios, {AxiosRequestConfig} from 'axios';
 
+export type ScriptDirection = 'RTL' | 'LTR';
+
 export interface Language {
-  id: string;
-  name: string;
-  nameLocal: string;
-  script: string;
-  scriptDirection: 'RTL' | 'LTR';
+  readonly id: string;
+  readonly name: string;
+  readonly nameLocal: string;
+  readonly script: string;
+  readonly scriptDirection: ScriptDirection;
 }
 
 interface LanguageResponse extends Language {
-  [key: string]: unknown;
+  readonly [key: string]: unknown;
 }
 
 export interface VerseResponse {
-  id: string;
+  readonly id: string;
 
-  [key: string]: unknown;
+  readonly [key: string]: unknown;
 }
 
 export interface ChapterResponse {
-  id: string;
-  number: string;
-  [key: string]: unknown;
+  readonly id: string;
+  readonly number: string;
+  readonly [key: string]: unknown;
 }
 
 export interface BookResponse {
-  id: string;
-  chapters: ChapterResponse[];
+  readonly id: string;
+  readonly chapters: ChapterResponse[];
 
-  [key: string]: unknown;
+  readonly [key: string]: unknown;
 }
 
 export interface BibleResponse {
-  id: string;
-  dblId: string;
-  name: string;
-  nameLocal: string;
-  abbreviation: string;
-  language: LanguageResponse;
+  readonly id: string;
+  readonly dblId: string;
+  readonly name: string;
+  readonly nameLocal: string;
+  readonly abbreviation: string;
+  readonly language: LanguageResponse;
 
-  [key: string]: unknown;
+  readonly [key: string]: unknown;
 }
 
 // - - - - - - - - - -
@@ -128,36 +130,36 @@ export async function fetchVerses(
 }
 
 interface PassageResponse {
-  id: string;
-  reference: string;
-  content: string;
-  copyright: string;
+  readonly id: string;
+  readonly reference: string;
+  readonly content: string;
+  readonly copyright: string;
 
-  [key: string]: unknown;
+  readonly [key: string]: unknown;
 }
 
 interface FumsResponse {
-  fums: string;
+  readonly fums: string;
 
-  [key: string]: unknown;
+  readonly [key: string]: unknown;
 }
 
 interface PassageAndFumsResponse {
-  data: PassageResponse;
-  meta: FumsResponse;
+  readonly data: PassageResponse;
+  readonly meta: FumsResponse;
 
-  [key: string]: unknown;
+  readonly [key: string]: unknown;
 }
 
 const getPassageURL = (
   passageID: string,
   bibleID: string,
   contentType: 'html' | 'json' | 'text' = 'html',
-  includeNotes: boolean = false,
-  includeTitles: boolean = false,
-  includeChapterNumbers: boolean = false,
-  includeVerseNumbers: boolean = false,
-  includeVerseSpans: boolean = false
+  includeNotes = false,
+  includeTitles = false,
+  includeChapterNumbers = false,
+  includeVerseNumbers = false,
+  includeVerseSpans = false
 ): string =>
   `https://api.scripture.api.bible/v1/bibles/${bibleID}/passages/${passageID}?content-type=${contentType}&include-notes=${includeNotes}&include-titles=${includeTitles}&include-chapter-numbers=${includeChapterNumbers}&include-verse-numbers=${includeVerseNumbers}&include-verse-spans=${includeVerseSpans}&use-org-id=false`;
 
@@ -165,11 +167,11 @@ export async function fetchPassage(
   passageID: string,
   bibleID: string,
   contentType: 'html' | 'json' | 'text' = 'html',
-  includeNotes: boolean = false,
-  includeTitles: boolean = false,
-  includeChapterNumbers: boolean = false,
-  includeVerseNumbers: boolean = false,
-  includeVerseSpans: boolean = false,
+  includeNotes = false,
+  includeTitles = false,
+  includeChapterNumbers = false,
+  includeVerseNumbers = false,
+  includeVerseSpans = false,
   config?: AxiosRequestConfig
 ): Promise<PassageAndFumsResponse> {
   const configToUse = config !== undefined ? config : defaultConfig;
@@ -197,13 +199,13 @@ export async function fetchPassage(
   }
 }
 
-console.log(
-  JSON.stringify(
-    await fetchPassage('GEN.1.1-GEN.2', '805e795e07fb9422-01'),
-    null,
-    2
-  )
-);
+// console.log(
+//   JSON.stringify(
+//     await fetchPassage('GEN.1.1-GEN.2', '805e795e07fb9422-01'),
+//     null,
+//     2
+//   )
+// );
 
 // - - - - - - - - - -
 // * Build Library
