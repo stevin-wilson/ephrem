@@ -2,6 +2,7 @@ import {STATUS_CODES} from 'http';
 import path from 'path';
 import {homedir} from 'os';
 import fs from 'fs-extra';
+import {CachedOn, JSONFile} from './types.js';
 
 /**
  * Checks if the specified environment variable is set.
@@ -26,10 +27,6 @@ export const expandHomeDir = (filePath: string): string => {
     return path.join(homedir(), filePath.slice(1));
   }
   return filePath;
-};
-
-export type JSONFile = {
-  [key: string]: unknown;
 };
 
 export async function readJsonFile(filePath: string): Promise<JSONFile> {
@@ -87,3 +84,25 @@ export const sortObject = (obj: any): any => {
   }
   return obj;
 };
+
+export const cleanUpOldRecords = <K, V extends CachedOn>(
+  map: Map<K, V>,
+  max_age_days = 14
+): Map<K, V> => {
+  const thresholdDate = new Date();
+  thresholdDate.setDate(thresholdDate.getDate() - max_age_days);
+
+  const cleanedMap = new Map<K, V>();
+
+  map.forEach((value, key) => {
+    if (value.cachedOn > thresholdDate) {
+      cleanedMap.set(key, value);
+    }
+  });
+
+  return cleanedMap;
+};
+
+export const defaultCacheDir: string = expandHomeDir(
+  process.env.CACHE_PATH || '~/ephrem/cache'
+);

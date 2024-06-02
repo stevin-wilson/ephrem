@@ -1,18 +1,6 @@
-import {Books} from './books.js';
-
-type ValueOf<T> = T[keyof T];
+import {Reference} from './types.js';
 
 const punctuationRegex = /[!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]/;
-
-// - - - - - - - - -
-export interface Reference {
-  readonly book: ValueOf<Books>;
-  readonly chapterStart: string;
-  readonly chapterEnd?: string;
-  readonly verseStart?: string;
-  readonly verseEnd?: string;
-  readonly bible: string;
-}
 
 // - - - - - - - - -
 const getPassageID = (reference: Reference): string => {
