@@ -5,8 +5,11 @@
     "outDir": "build",
     "lib": ["ES2021"],
     "target": "es2021",
-    "module": "esnext",
-    "moduleResolution": "nodenext"
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "skipLibCheck": true,
+    "sourceMap": false,
+    "inlineSourceMap": true,
   },
   "include": [
     "src/**/*.ts",

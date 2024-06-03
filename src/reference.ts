@@ -1,19 +1,73 @@
-import {Books} from './books.js';
+import {Reference} from './types.js';
 
-type ValueOf<T> = T[keyof T];
+const punctuationRegex = /[!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]/;
 
 // - - - - - - - - -
-export interface Reference {
-  readonly book: ValueOf<Books>;
-  readonly chapterStart: string;
-  readonly chapterEnd?: string;
-  readonly verseStart?: string;
-  readonly verseEnd?: string;
-  readonly bible: string;
-}
+const getPassageID = (reference: Reference): string => {
+  const sections: string[] = [];
+
+  let requiredSection =
+    reference.verseStart !== undefined
+      ? `${reference.book}.${reference.chapterStart}.${reference.verseStart}`
+      : `${reference.book}.${reference.chapterStart}`;
+
+  let optionalSection: string | undefined = undefined;
+
+  if (reference.chapterEnd !== undefined && reference.verseEnd !== undefined) {
+    optionalSection = `${reference.book}.${reference.chapterEnd}.${reference.verseEnd}`;
+  } else if (reference.chapterEnd !== undefined) {
+    optionalSection = `${reference.book}.${reference.chapterEnd}`;
+  } else if (reference.verseEnd !== undefined) {
+    requiredSection += `.${reference.verseEnd}`;
+  }
+
+  sections.push(requiredSection);
+  if (optionalSection) {
+    sections.push(optionalSection);
+  }
+
+  return sections.join('-').replace(/\s+/g, '');
+};
+export const isValidStringOrUndefined = (
+  value: string | undefined
+): boolean => {
+  if (value === undefined) {
+    return true;
+  } else if (punctuationRegex.test(value)) {
+    // Test if the string contains any punctuation characters
+    return false;
+  } else {
+    // Check if the value is not a number or is a non-negative integer
+    const parsedNumber = Number(value);
+    return (
+      isNaN(parsedNumber) ||
+      (Number.isInteger(parsedNumber) && parsedNumber > 0)
+    );
+  }
+};
 
 // - - - - - - - - -
 export const hasValidSyntax = (reference: Reference): boolean => {
+  for (const attribute of [
+    reference.chapterStart,
+    reference.chapterEnd,
+    reference.verseStart,
+    reference.verseEnd,
+  ]) {
+    if (!isValidStringOrUndefined(attribute)) {
+      return false;
+    }
+  }
+
+  if (
+    reference.chapterEnd !== undefined &&
+    reference.chapterEnd !== reference.chapterStart &&
+    reference.verseStart !== undefined &&
+    reference.verseEnd === undefined
+  ) {
+    return false;
+  }
+
   return !(
     reference.verseEnd !== undefined && reference.verseStart === undefined
   );
@@ -46,18 +100,29 @@ export const isSingleChapter = (reference: Reference): boolean => {
 
 // - - - - - - - - -
 export const isSingleVerse = (reference: Reference): boolean => {
-  let output: boolean;
-
   if (isMultiChapter(reference)) {
-    output = false;
-  } else if (
-    reference.chapterEnd !== undefined &&
-    reference.chapterEnd !== reference.chapterEnd
-  ) {
-    output = false;
-  } else output = reference.verseStart !== undefined;
+    return false;
+  }
 
-  return output;
+  if (
+    reference.chapterEnd !== undefined &&
+    reference.chapterEnd !== reference.chapterStart
+  ) {
+    return false;
+  }
+
+  if (reference.verseStart === undefined) {
+    return false;
+  }
+
+  if (
+    reference.verseEnd !== undefined &&
+    reference.verseEnd !== reference.verseStart
+  ) {
+    return false;
+  }
+
+  return true;
 };
 
 // - - - - - - - - -
@@ -71,26 +136,4 @@ export const isSingleChapterMultipleVerses = (
   } else output = !isSingleVerse(reference);
 
   return output;
-};
-
-// - - - - - - - - -
-const getReferenceGroups = (input: string): string[] =>
-  input.split(';').map(group => group.trim());
-
-// - - - - - - - - -
-const getReferences = (
-  input: string,
-  languages: string[]
-): Map<string, Reference[]> => {
-  // From string input, get a map from strings to References,
-  // for example, Genesis 1:1 (NIV, KJV); John 3:16-17 (MAL10RO)
-  // would generate {
-  //      Genesis 1:1 (NIV, KJV): [
-  //      {book: GEN, chapterStart: 1, verseStart: 1, bible: NIV},
-  //      {book: GEN, chapterStart: 1, verseStart: 1, bible: KJV},
-  //      ],
-  //      John 3:16-17 (MAL10RO): [
-  //      {book: JHN, chapterStart: 3, verseStart: 16, verseEnd: 17, bible: MAL10RO},
-  //      ],
-  // }
 };
