@@ -1,4 +1,0 @@
-export const defaultsEng = {
-    bible: 'KJV',
-};
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmlibGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi9zcmMvbG9jYWxlL2VuZy9iaWJsZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUFNLENBQUMsTUFBTSxXQUFXLEdBQUc7SUFDekIsS0FBSyxFQUFFLEtBQUs7Q0FDYixDQUFDIn0=

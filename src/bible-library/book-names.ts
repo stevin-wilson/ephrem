@@ -9,8 +9,8 @@ import {
 } from '../types.js';
 import fs from 'fs-extra';
 import {AxiosRequestConfig} from 'axios';
-import {fetchBooksAndChapters} from '../../build/src/fetch-bible.js';
 import {Books} from '../books.js';
+import {fetchBooksAndChapters} from './api-bible.js';
 
 // - - - - - - - - - -
 //  BookNames -> Book
@@ -118,11 +118,15 @@ const getBookNames = (bookResponses: BookResponse[]): BookNameMoreDetails[] => {
 
 // - - - - - - - - - -
 const updateBookNames = async (
+  languages: string[],
   bookNames: BookNames,
   bibles: Bibles,
   config: AxiosRequestConfig = {}
 ): Promise<void> => {
   for (const bible of bibles.values()) {
+    if (!languages.includes(bible.language.id)) {
+      continue;
+    }
     const bibleID = bible.id;
     const scriptDirection = bible.language.scriptDirection;
     const booksAndChaptersResponses: BookResponse[] =
