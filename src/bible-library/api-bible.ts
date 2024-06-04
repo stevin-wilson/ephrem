@@ -26,12 +26,15 @@ const defaultConfig = {
 // - - - - - - - - - -
 const fetchFromAPI = async (
   url: string,
-  config?: AxiosRequestConfig
+  config: AxiosRequestConfig = {}
 ): Promise<unknown> => {
-  const configToUse = config !== undefined ? config : defaultConfig;
+  const finalConfig = {
+    ...defaultConfig,
+    ...config,
+  };
 
   try {
-    const response = await axios.get(url, configToUse);
+    const response = await axios.get(url, finalConfig);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     return response.data.data;
   } catch (error) {
@@ -44,7 +47,7 @@ const fetchFromAPI = async (
 // - - - - - - - - - -
 export const fetchBibles = async (
   language: string,
-  config?: AxiosRequestConfig
+  config: AxiosRequestConfig = {}
 ): Promise<BibleResponse[]> => {
   const url = getAvailableBiblesURL(language);
   return (await fetchFromAPI(url, config)) as BibleResponse[];
@@ -52,7 +55,7 @@ export const fetchBibles = async (
 // - - - - - - - - - -
 export const fetchBooksAndChapters = async (
   bibleID: string,
-  config?: AxiosRequestConfig
+  config: AxiosRequestConfig = {}
 ): Promise<BookResponse[]> => {
   const url = getAvailableBooksAndChaptersURL(bibleID);
   return (await fetchFromAPI(url, config)) as BookResponse[];
@@ -61,7 +64,7 @@ export const fetchBooksAndChapters = async (
 export const fetchVerses = async (
   chapterID: string,
   bibleID: string,
-  config?: AxiosRequestConfig
+  config: AxiosRequestConfig = {}
 ): Promise<VerseResponse[]> => {
   const url = getVersesURL(chapterID, bibleID);
   return (await fetchFromAPI(url, config)) as VerseResponse[];

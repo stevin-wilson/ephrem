@@ -1,25 +1,24 @@
-// - - - - - - - - - -
-// Bibles -> Books
+import {AxiosRequestConfig} from 'axios';
+import {cleanUpOldRecords, defaultCacheDir, writeJsonFile} from '../utils.js';
 import {
   BibleAbbreviation,
   BibleAndBook,
+  BiblesToBooks,
   BookID,
-  defaultCacheDir,
-  cleanUpOldRecords,
-  writeJsonFile,
-} from '../utils.js';
-import fs from 'fs-extra';
-import {
   BookResponse,
+  BooksInBible,
+  BooksToChapters,
+  ChapterID,
   ChapterResponse,
-  fetchBooksAndChapters,
-} from './api-bible.js';
-import {AxiosRequestConfig} from 'axios';
-import {bibles} from './bibles.js';
+  ChaptersInBook,
+} from '../types.js';
+import fs from 'fs-extra';
 
 // - - - - - - - - - -
-
-const biblesToBooksCache = `${defaultCacheDir}/bibles-to-books.json`;
+//  Bible Abbreviation -> Book Names
+const getBiblesToBooksCachePath = (cacheDir: string = defaultCacheDir) => {
+  return `${cacheDir}/bibles-to-books.json`;
+};
 
 // serialize the BooksToChapters map to JSON
 const serializeBiblesToBooks = (biblesToBooks: BiblesToBooks): string => {
@@ -33,11 +32,14 @@ const serializeBiblesToBooks = (biblesToBooks: BiblesToBooks): string => {
   return JSON.stringify(obj, null, 2);
 };
 
-const saveBiblesToBooks = async (
+export const saveBiblesToBooks = async (
   biblesToBooks: BiblesToBooks,
-  filePath: string = biblesToBooksCache
+  cacheDir: string = defaultCacheDir
 ) => {
-  await writeJsonFile(filePath, serializeBiblesToBooks(biblesToBooks));
+  await writeJsonFile(
+    getBiblesToBooksCachePath(cacheDir),
+    serializeBiblesToBooks(biblesToBooks)
+  );
 };
 
 // deserialize JSON back to a BooksToChapters map
@@ -57,12 +59,15 @@ const deserializeBiblesToBooks = (jsonData: string): BiblesToBooks => {
   return map;
 };
 
-const loadBiblesToBooks = async (
-  filePath: string = biblesToBooksCache,
+export const loadBiblesToBooks = async (
+  cacheDir: string = defaultCacheDir,
   max_age_days = 14
 ): Promise<BiblesToBooks> => {
   try {
-    const jsonData = await fs.readFile(filePath, 'utf-8');
+    const jsonData = await fs.readFile(
+      getBiblesToBooksCachePath(cacheDir),
+      'utf-8'
+    );
     return cleanUpOldRecords(deserializeBiblesToBooks(jsonData), max_age_days);
   } catch (error) {
     // Type assertion to access error.code
@@ -75,9 +80,6 @@ const loadBiblesToBooks = async (
   }
 };
 
-export const biblesToBooks: BiblesToBooks = await loadBiblesToBooks();
-
-// - - - - - - - - - -
 // - - - - - - - - - -
 // Bibles and Books -> Chapter
 
@@ -86,7 +88,9 @@ export const getBibleAndBookString = (
   bookID: string
 ) => `${bibleAbbreviation}@${bookID}`;
 
-const booksToChaptersCache = `${defaultCacheDir}/books-to-chapters.json`;
+const getBooksToChaptersCachePath = (cacheDir: string = defaultCacheDir) => {
+  return `${cacheDir}/books-to-chapters.json`;
+};
 
 // serialize the BooksToChapters map to JSON
 const serializeBooksToChapters = (booksToChapters: BooksToChapters): string => {
@@ -100,11 +104,14 @@ const serializeBooksToChapters = (booksToChapters: BooksToChapters): string => {
   return JSON.stringify(obj, null, 2);
 };
 
-const saveBooksToChapters = async (
+export const saveBooksToChapters = async (
   booksToChapters: BooksToChapters,
-  filePath: string = booksToChaptersCache
+  cacheDir: string = defaultCacheDir
 ) => {
-  await writeJsonFile(filePath, serializeBooksToChapters(booksToChapters));
+  await writeJsonFile(
+    getBooksToChaptersCachePath(cacheDir),
+    serializeBooksToChapters(booksToChapters)
+  );
 };
 
 // deserialize JSON back to a BooksToChapters map
@@ -124,12 +131,15 @@ const deserializeBooksToChapters = (jsonData: string): BooksToChapters => {
   return map;
 };
 
-const loadBooksToChapters = async (
-  filePath: string = booksToChaptersCache,
+export const loadBooksToChapters = async (
+  cacheDir: string = defaultCacheDir,
   max_age_days = 14
 ): Promise<BooksToChapters> => {
   try {
-    const jsonData = await fs.readFile(filePath, 'utf-8');
+    const jsonData = await fs.readFile(
+      getBooksToChaptersCachePath(cacheDir),
+      'utf-8'
+    );
     return cleanUpOldRecords(
       deserializeBooksToChapters(jsonData),
       max_age_days
@@ -145,9 +155,8 @@ const loadBooksToChapters = async (
   }
 };
 
-export const booksToChapters: BooksToChapters = await loadBooksToChapters();
 // - - - - - - - - - -
-const getBookIDs = (bookResponses: BookResponse[]): BooksInBible => {
+export const getBookIDs = (bookResponses: BookResponse[]): BooksInBible => {
   const books: BookID[] = [];
 
   for (const bookResponse of bookResponses) {
@@ -158,7 +167,9 @@ const getBookIDs = (bookResponses: BookResponse[]): BooksInBible => {
 };
 
 // - - - - - - - - - -
-const getChapterIDs = (chapterResponses: ChapterResponse[]): ChaptersInBook => {
+export const getChapterIDs = (
+  chapterResponses: ChapterResponse[]
+): ChaptersInBook => {
   const chapters: ChapterID[] = [];
 
   for (const chapterResponse of chapterResponses) {
@@ -171,35 +182,3 @@ const getChapterIDs = (chapterResponses: ChapterResponse[]): ChaptersInBook => {
 
   return {chapters, cachedOn: new Date()};
 };
-
-// - - - - - - - - - -
-async function updateBooksAndChapters(
-  bibleAbbreviations: string[],
-  config?: AxiosRequestConfig
-): Promise<void> {
-  for (const bibleAbbreviation of bibleAbbreviations) {
-    const bibleID = bibles.get(bibleAbbreviation)?.id;
-    if (!bibleID) {
-      console.log(bibles.keys());
-      throw Error;
-    }
-
-    const booksAndChaptersResponses: BookResponse[] =
-      await fetchBooksAndChapters(bibleID, config);
-
-    const booksInBible: BooksInBible = getBookIDs(booksAndChaptersResponses);
-
-    biblesToBooks.set(bibleAbbreviation, booksInBible);
-
-    for (const bookResponse of booksAndChaptersResponses) {
-      const bookID = bookResponse.id;
-      const chaptersInBook: ChaptersInBook = getChapterIDs(
-        bookResponse.chapters
-      );
-      booksToChapters.set(
-        getBibleAndBookString(bibleAbbreviation, bookID),
-        chaptersInBook
-      );
-    }
-  }
-}

@@ -30,7 +30,7 @@ const serializeBibles = (bibles: Bibles): string => {
 };
 
 // - - - - - - - - - -
-const saveBibles = async (
+export const saveBibles = async (
   bibles: Bibles,
   cacheDir: string = defaultCacheDir
 ) => {
@@ -60,7 +60,7 @@ const deserializeBibles = (jsonData: string): Bibles => {
 };
 
 // - - - - - - - - - -
-const loadBibles = async (
+export const loadBibles = async (
   cacheDir: string = defaultCacheDir,
   max_age_days = 14
 ): Promise<Bibles> => {
@@ -79,7 +79,7 @@ const loadBibles = async (
 };
 
 // - - - - - - - - - -
-const updateBibles = async (
+export const updateBibles = async (
   languages: string[],
   bibles: Bibles,
   config: AxiosRequestConfig = {}

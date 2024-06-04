@@ -1,17 +1,16 @@
 import {expect, test} from 'vitest';
 
 import {
+  getReferenceGroups,
   hasValidSyntax,
   isMultiChapter,
   isSingleChapterMultipleVerses,
   isSingleVerse,
   isValidStringOrUndefined,
-  Reference,
+  simplifyReferenceGroup,
 } from '../src/reference.js';
-import {Books} from '../src/books.js';
-import {simplifyReferenceGroup} from '../src/locale/eng/parse-references.js';
-import {getReferenceGroups} from '../src/locale/parse-references.js';
-import {ReferenceGroup} from '../src/locale/common.js';
+import {books} from '../src/books.js';
+import {Reference, ReferenceGroup} from '../src/types.js';
 
 // - - - - - - - - -
 // Test get Reference Groups
@@ -116,7 +115,7 @@ test('value is a character', () => {
 
 test('chapterStart <= 0', () => {
   const reference: Reference = {
-    book: Books.John,
+    book: 'JHN',
     chapterStart: '-1',
     verseStart: '1',
     bible: 'KJV',
@@ -127,7 +126,7 @@ test('chapterStart <= 0', () => {
 
 test('chapterStart is float', () => {
   const reference: Reference = {
-    book: Books.John,
+    book: 'JHN',
     chapterStart: '15.5',
     verseStart: '16',
     bible: 'KJV',
@@ -138,7 +137,7 @@ test('chapterStart is float', () => {
 
 test('chapterEnd <= 0', () => {
   const reference: Reference = {
-    book: Books.John,
+    book: 'JHN',
     chapterStart: '3',
     chapterEnd: '-1',
     verseStart: '16',
@@ -150,7 +149,7 @@ test('chapterEnd <= 0', () => {
 
 test('chapterEnd is float', () => {
   const reference: Reference = {
-    book: Books.John,
+    book: 'JHN',
     chapterStart: '3',
     chapterEnd: '156.1',
     verseStart: '16',
@@ -162,7 +161,7 @@ test('chapterEnd is float', () => {
 
 test('only verseEnd is specified ', () => {
   const reference: Reference = {
-    book: Books.John,
+    book: 'JHN',
     chapterStart: '3',
     verseStart: undefined,
     verseEnd: '16',
@@ -174,7 +173,7 @@ test('only verseEnd is specified ', () => {
 
 test('verseStart <= 0', () => {
   const reference: Reference = {
-    book: Books.John,
+    book: 'JHN',
     chapterStart: '3',
     verseStart: '0',
     bible: 'KJV',
@@ -185,7 +184,7 @@ test('verseStart <= 0', () => {
 
 test('verseStart is float', () => {
   const reference: Reference = {
-    book: Books.John,
+    book: 'JHN',
     chapterStart: '3',
     verseStart: '177.2',
     bible: 'KJV',
@@ -196,7 +195,7 @@ test('verseStart is float', () => {
 
 test('verseEnd <= 0', () => {
   const reference: Reference = {
-    book: Books.John,
+    book: 'JHN',
     chapterStart: '3',
     verseStart: '1',
     verseEnd: '0',
@@ -208,7 +207,7 @@ test('verseEnd <= 0', () => {
 
 test('verseEnd is float', () => {
   const reference: Reference = {
-    book: Books.John,
+    book: 'JHN',
     chapterStart: '3',
     verseStart: '1',
     verseEnd: '-177',
@@ -220,7 +219,7 @@ test('verseEnd is float', () => {
 
 test('verseStart specified and multi chapter', () => {
   const reference: Reference = {
-    book: Books.John,
+    book: 'JHN',
     chapterStart: '3',
     chapterEnd: '4',
     verseStart: '2',
@@ -232,7 +231,7 @@ test('verseStart specified and multi chapter', () => {
 
 test('multi chapter', () => {
   const reference: Reference = {
-    book: Books.John,
+    book: 'JHN',
     chapterStart: '3',
     chapterEnd: '4',
     verseStart: '16',
@@ -247,7 +246,7 @@ test('multi chapter', () => {
 // test single verse
 test('reference is single verse', () => {
   const reference: Reference = {
-    book: Books.John,
+    book: 'JHN',
     chapterStart: '3',
     verseStart: '16',
     bible: 'KJV',
@@ -263,7 +262,7 @@ test('reference is single verse', () => {
 // test single chapter multiple verses
 test('reference contains multiple verses', () => {
   const reference: Reference = {
-    book: Books.John,
+    book: 'JHN',
     chapterStart: '3',
     verseStart: '16',
     verseEnd: '18',
@@ -280,7 +279,7 @@ test('reference contains multiple verses', () => {
 // test multiple chapters
 test('reference contains multiple chapters', () => {
   const reference: Reference = {
-    book: Books.John,
+    book: 'JHN',
     chapterStart: '3',
     chapterEnd: '4',
     verseStart: '16',
@@ -296,7 +295,7 @@ test('reference contains multiple chapters', () => {
 
 test('reference contains multiple chapters in full', () => {
   const reference: Reference = {
-    book: Books.John,
+    book: 'JHN',
     chapterStart: '3',
     chapterEnd: '4',
     bible: 'KJV',

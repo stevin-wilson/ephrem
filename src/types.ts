@@ -1,11 +1,11 @@
 // - - - - - - - - - -
-import {Books} from './books.js';
+import {books} from './books.js';
 
 export type ValueOf<T> = T[keyof T];
 
 // - - - - - - - - -
 export interface Reference {
-  readonly book: ValueOf<Books>;
+  readonly book: keyof typeof books;
   readonly chapterStart: string;
   readonly chapterEnd?: string;
   readonly verseStart?: string;
@@ -124,7 +124,7 @@ export type Bibles = Map<BibleAbbreviation, Bible>;
 
 // - - - - - - - - - -
 export interface BookNameDetails {
-  id: Books;
+  id: keyof typeof books;
   isAbbreviation: boolean;
   cachedOn: Date;
 }
@@ -234,3 +234,11 @@ export interface ReferenceGroup {
 }
 
 // - - - - - - - - - -
+export interface Cache {
+  bibles: Bibles;
+  bookNames: BookNames;
+  biblesToBooks: BiblesToBooks;
+  booksToChapters: BooksToChapters;
+  chaptersToVerses: ChaptersToVerses;
+  passages: Passages;
+}

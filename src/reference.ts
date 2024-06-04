@@ -1,4 +1,4 @@
-import {Reference} from './types.js';
+import {Reference, ReferenceGroup} from './types.js';
 
 const punctuationRegex = /[!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]/;
 
@@ -134,6 +134,65 @@ export const isSingleChapterMultipleVerses = (
   if (!isSingleChapter(reference)) {
     output = false;
   } else output = !isSingleVerse(reference);
+
+  return output;
+};
+
+// - - - - - - - - -
+export const simplifyReferenceGroup = (input: string): ReferenceGroup => {
+  // From string input representing reference group, get a referenceGroup object,
+  // for example, when Genesis 1:1 (NIV, KJV) is input,
+  // return {bookName: Genesis, chapterStart: '1', verseStart: '1', bibles: [NIV, KJV]}
+  // for example, when Genesis 1-2 is input,
+  // return {bookName: Genesis, chapterStart: '1', chapterEnd: '2'}
+  // for example, when Genesis 1-2 (NIV, KJV) is input,
+  // return {bookName: Genesis, chapterStart: '1', chapterEnd: '2', bibles: [NIV, KJV]}
+  // when യോഹന്നാൻ 3:16-17 (MAL10RO) is input,
+  // return {bookName: യോഹന്നാൻ, chapterStart: '3', verseStart: '16', verseEnd: '17', bibles: [MAL10RO]}
+  const regex =
+    /^(.+?)\s+(\d+(?:-\d+)?)(?::(\d+(?:-\d+)?))?\s*(?:\(([^)]+)\))?$/;
+  const match = input.match(regex);
+
+  if (!match) {
+    throw new Error('Input string is not in the correct format');
+  }
+
+  const [_, bookName, chapterPart, versePart, biblesPart] = match;
+
+  const [chapterStart, chapterEnd] = chapterPart.split('-');
+  const [verseStart, verseEnd] = (versePart || '').split('-');
+  const bibles = biblesPart
+    ? biblesPart.split(',').map(bible => bible.trim())
+    : undefined;
+
+  return {
+    bookName: bookName,
+    chapterStart: chapterStart,
+    chapterEnd: chapterEnd ? chapterEnd : undefined,
+    verseStart: verseStart ? verseStart : undefined,
+    verseEnd: verseEnd ? verseEnd : undefined,
+    bibles,
+  };
+};
+
+// - - - - - - - - -
+export const getReferenceGroups = (
+  input: string,
+  groupSeparator = ';'
+): Map<string, ReferenceGroup> => {
+  const referenceGrpsStrings = input
+    .split(groupSeparator)
+    .map(group => group.trim())
+    .filter(group => group !== '');
+
+  const output: Map<string, ReferenceGroup> = new Map();
+
+  for (const referenceGrpsString of referenceGrpsStrings) {
+    output.set(
+      referenceGrpsString,
+      simplifyReferenceGroup(referenceGrpsString)
+    );
+  }
 
   return output;
 };

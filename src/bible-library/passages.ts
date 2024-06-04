@@ -1,25 +1,52 @@
 // - - - - - - - - - -
 
-const getStringForPassageQuery = (passageQuery: PassageQuery): string => {
+import {
+  cleanUpOldRecords,
+  defaultCacheDir,
+  sortObject,
+  writeJsonFile,
+} from '../utils.js';
+import {
+  Bibles,
+  Fums,
+  Passage,
+  PassageOptions,
+  PassageQuery,
+  PassageQueryString,
+  Passages,
+  PassageText,
+} from '../types.js';
+import fs from 'fs-extra';
+import {AxiosRequestConfig} from 'axios';
+import {fetchPassage} from './api-bible.js';
+
+export const getStringForPassageQuery = (
+  passageQuery: PassageQuery
+): string => {
   const sortedPassageQuery = sortObject(passageQuery);
   return JSON.stringify(sortedPassageQuery);
 };
 
-const passagesCache = `${cacheDir}/passages.json`;
+const getPassagesCachePath = (cacheDir: string = defaultCacheDir) => {
+  return `${cacheDir}/passages.json`;
+};
 
 const serializePassages = (map: Passages): string => {
   const arr = Array.from(map.entries()).map(([key, value]) => ({
-    passageQuery: key,
+    passageQuery: JSON.parse(key),
     passage: value,
   }));
   return JSON.stringify(arr, null, 2);
 };
 
-const savePassages = async (
+export const savePassages = async (
   passages: Passages,
-  filePath: string = passagesCache
+  cacheDir: string = defaultCacheDir
 ) => {
-  await writeJsonFile(filePath, serializePassages(passages));
+  await writeJsonFile(
+    getPassagesCachePath(cacheDir),
+    serializePassages(passages)
+  );
 };
 
 // - - - - - - - - - -
@@ -28,7 +55,7 @@ const deserializePassages = (json: string): Passages => {
   const map: Passages = new Map();
 
   arr.forEach((item: any) => {
-    const key: PassageQueryString = item.passageQuery;
+    const key: PassageQueryString = getStringForPassageQuery(item.passageQuery);
     const value: Passage = {
       text: item.passage.text,
       fums: item.passage.fums,
@@ -41,12 +68,12 @@ const deserializePassages = (json: string): Passages => {
 };
 
 // - - - - - - - - - -
-const loadPassages = async (
-  filePath: string = passagesCache,
+export const loadPassages = async (
+  cacheDir: string = defaultCacheDir,
   max_age_days = 14
 ): Promise<Passages> => {
   try {
-    const jsonData = await fs.readFile(filePath, 'utf-8');
+    const jsonData = await fs.readFile(getPassagesCachePath(cacheDir), 'utf-8');
     return cleanUpOldRecords(deserializePassages(jsonData), max_age_days);
   } catch (error) {
     // Type assertion to access error.code
@@ -60,29 +87,18 @@ const loadPassages = async (
 };
 
 // - - - - - - - - - -
-const passages: Passages = await loadPassages();
-
-// - - - - - - - - - -
-const updatePassage = async (
+export const updatePassage = async (
   passageID: string,
   bibleAbbreviation: string,
-  contentType: 'html' | 'json' | 'text' = 'html',
-  includeNotes = false,
-  includeTitles = false,
-  includeChapterNumbers = false,
-  includeVerseNumbers = false,
-  includeVerseSpans = false,
-  config?: AxiosRequestConfig
+  passages: Passages,
+  bibles: Bibles,
+  passageOptions: PassageOptions = {},
+  config: AxiosRequestConfig = {}
 ): Promise<void> => {
   const passageQuery: PassageQuery = {
     passageID,
     bibleAbbreviation,
-    contentType,
-    includeNotes,
-    includeTitles,
-    includeChapterNumbers,
-    includeVerseNumbers,
-    includeVerseSpans,
+    ...passageOptions,
   };
 
   const passageQueryString = getStringForPassageQuery(passageQuery);
@@ -99,12 +115,7 @@ const updatePassage = async (
   const passageAndFums = await fetchPassage(
     passageID,
     bibleID,
-    contentType,
-    includeNotes,
-    includeTitles,
-    includeChapterNumbers,
-    includeVerseNumbers,
-    includeVerseSpans,
+    passageOptions,
     config
   );
 
