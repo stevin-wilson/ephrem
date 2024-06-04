@@ -1,29 +1,34 @@
 // - - - - - - - - - -
 // Bibles and Chapter -> Verses
+
+import {cleanUpOldRecords, defaultCacheDir, writeJsonFile} from '../utils.js';
 import {
   BibleAndBook,
-  defaultCacheDir,
-  cleanUpOldRecords,
-  writeJsonFile,
-} from '../utils.js';
-import fs from 'fs-extra';
-import {fetchVerses, VerseResponse} from './api-bible.js';
-import {AxiosRequestConfig} from 'axios';
-import {bibles} from './bibles.js';
-import {
-  biblesToBooks,
+  BibleAndChapter,
+  Bibles,
+  BiblesToBooks,
   BooksInBible,
-  booksToChapters,
+  BooksToChapters,
   ChaptersInBook,
-  getBibleAndBookString,
-} from './books-chapters.js';
+  ChaptersToVerses,
+  ChapterToFetchVerses,
+  VerseID,
+  VerseResponse,
+  VersesInChapter,
+} from '../types.js';
+import fs from 'fs-extra';
+import {AxiosRequestConfig} from 'axios';
+import {getBibleAndBookString} from './books-chapters.js';
+import {fetchVerses} from './api-bible.js';
 
-const getBibleAndChapterString = (
+export const getBibleAndChapterString = (
   bibleAbbreviation: string,
   chapterID: string
 ) => `${bibleAbbreviation}@${chapterID}`;
 
-const chaptersToVersesCache = `${defaultCacheDir}/chapters-to-verses.json`;
+const getChaptersToVersesCachePath = (cacheDir: string = defaultCacheDir) => {
+  return `${cacheDir}/chapters-to-verses.json`;
+};
 
 // serialize the ChaptersToVerses map to JSON
 const serializeChaptersToVerses = (
@@ -39,11 +44,14 @@ const serializeChaptersToVerses = (
   return JSON.stringify(obj, null, 2);
 };
 
-const saveChaptersToVerses = async (
+export const saveChaptersToVerses = async (
   chaptersToVerses: ChaptersToVerses,
-  filePath: string = chaptersToVersesCache
+  cacheDir: string = defaultCacheDir
 ) => {
-  await writeJsonFile(filePath, serializeChaptersToVerses(chaptersToVerses));
+  await writeJsonFile(
+    getChaptersToVersesCachePath(cacheDir),
+    serializeChaptersToVerses(chaptersToVerses)
+  );
 };
 
 // deserialize JSON back to a ChaptersToVerses map
@@ -63,12 +71,15 @@ const deserializeChaptersToVerses = (jsonData: string): ChaptersToVerses => {
   return map;
 };
 
-const loadChaptersToVerses = async (
-  filePath: string = chaptersToVersesCache,
+export const loadChaptersToVerses = async (
+  cacheDir: string = defaultCacheDir,
   max_age_days = 14
 ): Promise<ChaptersToVerses> => {
   try {
-    const jsonData = await fs.readFile(filePath, 'utf-8');
+    const jsonData = await fs.readFile(
+      getChaptersToVersesCachePath(cacheDir),
+      'utf-8'
+    );
     return cleanUpOldRecords(
       deserializeChaptersToVerses(jsonData),
       max_age_days
@@ -84,8 +95,6 @@ const loadChaptersToVerses = async (
   }
 };
 
-const chaptersToVerses: ChaptersToVerses = await loadChaptersToVerses();
-
 // - - - - - - - - - -
 const getVerseIDs = (verseResponses: VerseResponse[]): VersesInChapter => {
   const versesIDs: VerseID[] = [];
@@ -99,10 +108,14 @@ const getVerseIDs = (verseResponses: VerseResponse[]): VersesInChapter => {
 
 // - - - - - - - - - -
 
-async function updateVerses(
+export const updateVerses = async (
   chaptersToFetchVerses: ChapterToFetchVerses[],
-  config?: AxiosRequestConfig
-): Promise<void> {
+  chaptersToVerses: ChaptersToVerses,
+  bibles: Bibles,
+  biblesToBooks: BiblesToBooks,
+  booksToChapters: BooksToChapters,
+  config: AxiosRequestConfig = {}
+): Promise<void> => {
   for (const chapterToFetchVerses of chaptersToFetchVerses) {
     const bibleAbbreviation = chapterToFetchVerses.bibleAbbreviation;
 
@@ -111,7 +124,6 @@ async function updateVerses(
       chapterToFetchVerses.chapterID
     );
 
-    console.log([...chaptersToVerses]);
     if (chaptersToVerses.get(bibleAndChapter)?.verses) {
       continue;
     }
@@ -122,7 +134,6 @@ async function updateVerses(
     }
 
     if (!biblesToBooks.has(bibleAbbreviation)) {
-      console.log(biblesToBooks.keys());
       throw Error;
     }
 
@@ -130,12 +141,10 @@ async function updateVerses(
       biblesToBooks.get(bibleAbbreviation);
 
     if (booksInBible === undefined) {
-      console.log(biblesToBooks.keys());
       throw Error;
     }
 
     if (!booksInBible.books.includes(chapterToFetchVerses.bookID)) {
-      console.log(biblesToBooks.keys());
       throw Error;
     }
 
@@ -148,15 +157,10 @@ async function updateVerses(
       booksToChapters.get(bibleAndBook);
 
     if (chaptersInBook === undefined) {
-      console.log(`bibleAndBook: ${JSON.stringify(bibleAndBook)}`);
-      console.log(`chaptersInBook: ${chaptersInBook}`);
-      console.log(typeof booksToChapters);
-      console.log(booksToChapters.entries());
       throw Error;
     }
 
     if (!chaptersInBook.chapters.includes(chapterToFetchVerses.chapterID)) {
-      console.log(chaptersInBook.chapters);
       throw Error;
     }
 
@@ -164,8 +168,6 @@ async function updateVerses(
       await fetchVerses(chapterToFetchVerses.chapterID, bibleID, config)
     );
 
-    console.log(`versesInChapter: ${versesInChapter}`);
     chaptersToVerses.set(bibleAndChapter, versesInChapter);
   }
-  console.log([...chaptersToVerses]);
-}
+};

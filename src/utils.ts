@@ -106,3 +106,5 @@ export const cleanUpOldRecords = <K, V extends CachedOn>(
 export const defaultCacheDir: string = expandHomeDir(
   process.env.CACHE_PATH || '~/ephrem/cache'
 );
+
+export const removePeriod = (input: string): string => input.replace(/\./g, '');
