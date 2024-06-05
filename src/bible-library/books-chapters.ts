@@ -3,8 +3,12 @@ import {cleanUpOldRecords, defaultCacheDir, writeJsonFile} from '../utils.js';
 import {
   BibleAbbreviation,
   BibleAndBook,
+  Bibles,
   BiblesToBooks,
   BookID,
+  BookName,
+  BookNameDetailsWithDirection,
+  BookNames,
   BookResponse,
   BooksInBible,
   BooksToChapters,
@@ -13,6 +17,9 @@ import {
   ChaptersInBook,
 } from '../types.js';
 import fs from 'fs-extra';
+import {updateBibles} from './bibles.js';
+import {fetchBooksAndChapters} from './api-bible.js';
+import {getBookNames} from './book-names.js';
 
 // - - - - - - - - - -
 //  Bible Abbreviation -> Book Names

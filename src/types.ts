@@ -14,6 +14,12 @@ export interface Reference {
 }
 
 // - - - - - - - - - -
+export interface Validation {
+  passed: boolean;
+  error?: string;
+}
+
+// - - - - - - - - - -
 export interface CachedOn {
   cachedOn: Date;
 }
@@ -139,6 +145,7 @@ export interface BookNameMoreDetails extends BookNameDetails {
 
 // - - - - - - - - - -
 export interface BookNameDetailsWithDirection extends BookNameDetails {
+  language: string;
   scriptDirection: ScriptDirection;
 }
 

@@ -8,6 +8,10 @@ export interface Reference {
     readonly verseEnd?: string;
     readonly bible: string;
 }
+export interface Validation {
+    passed: boolean;
+    error?: string;
+}
 export interface CachedOn {
     cachedOn: Date;
 }
@@ -89,6 +93,7 @@ export interface BookNameMoreDetails extends BookNameDetails {
     name: BookName;
 }
 export interface BookNameDetailsWithDirection extends BookNameDetails {
+    language: string;
     scriptDirection: ScriptDirection;
 }
 export type BookNames = Map<BookName, BookNameDetailsWithDirection>;

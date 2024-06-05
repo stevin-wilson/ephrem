@@ -39,6 +39,7 @@ const serializeBookNames = (bookNames: BookNames): string => {
     name: bookName,
     id: book.id,
     isAbbreviation: book.isAbbreviation,
+    language: book.language,
     scriptDirection: book.scriptDirection,
     cachedOn: book.cachedOn.toISOString(),
   }));
@@ -65,6 +66,7 @@ const deserializeBookNames = (jsonData: string): BookNames => {
     const value: BookNameDetailsWithDirection = {
       id: item.id,
       isAbbreviation: item.isAbbreviation,
+      language: item.language,
       scriptDirection: item.scriptDirection,
       cachedOn: new Date(item.cachedOn),
     };
@@ -141,61 +143,4 @@ export const getBookNames = (
   }
   console.log(bookNames);
   return bookNames;
-};
-
-export const updateBiblesBooksAndChapters = async (
-  languages: string[],
-  bookNames: BookNames,
-  biblesToBooks: BiblesToBooks,
-  booksToChapters: BooksToChapters,
-  bibles: Bibles,
-  updateBiblesFromAPI = false,
-  config: AxiosRequestConfig = {}
-): Promise<void> => {
-  if (updateBiblesFromAPI) {
-    await updateBibles(languages, bibles, config);
-  }
-
-  for (const [bibleAbbreviation, bible] of bibles.entries()) {
-    if (!languages.includes(bible.language.id)) {
-      continue;
-    }
-
-    if (biblesToBooks.get(bibleAbbreviation) !== undefined) {
-      continue;
-    }
-
-    const bibleID = bible.id;
-    const scriptDirection = bible.language.scriptDirection;
-
-    const booksAndChaptersResponses: BookResponse[] =
-      await fetchBooksAndChapters(bibleID, config);
-
-    const booksInBible: BooksInBible = getBookIDs(booksAndChaptersResponses);
-    biblesToBooks.set(bibleAbbreviation, booksInBible);
-
-    const bookNameDetailsArr = getBookNames(booksAndChaptersResponses);
-    console.log(bookNameDetailsArr);
-    for (const bookNameDetails of bookNameDetailsArr) {
-      const bookName: BookName = bookNameDetails.name;
-      const bookNameDetailsWithDirection: BookNameDetailsWithDirection = {
-        id: bookNameDetails.id,
-        isAbbreviation: bookNameDetails.isAbbreviation,
-        scriptDirection: scriptDirection,
-        cachedOn: bookNameDetails.cachedOn,
-      };
-      bookNames.set(bookName, bookNameDetailsWithDirection);
-    }
-
-    for (const bookResponse of booksAndChaptersResponses) {
-      const bookID = bookResponse.id;
-      const chaptersInBook: ChaptersInBook = getChapterIDs(
-        bookResponse.chapters
-      );
-      booksToChapters.set(
-        getBibleAndBookString(bibleAbbreviation, bookID),
-        chaptersInBook
-      );
-    }
-  }
 };
