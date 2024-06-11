@@ -73,17 +73,19 @@ const deserializeChaptersToVerses = (jsonData: string): ChaptersToVerses => {
 
 export const loadChaptersToVerses = async (
   cacheDir: string = defaultCacheDir,
-  max_age_days = 14
+  maxAgeDays?: number
 ): Promise<ChaptersToVerses> => {
   try {
     const jsonData = await fs.readFile(
       getChaptersToVersesCachePath(cacheDir),
       'utf-8'
     );
-    return cleanUpOldRecords(
-      deserializeChaptersToVerses(jsonData),
-      max_age_days
-    );
+    const chaptersToVerses = deserializeChaptersToVerses(jsonData);
+    if (typeof maxAgeDays === 'number' && maxAgeDays >= 0) {
+      return cleanUpOldRecords(chaptersToVerses, maxAgeDays);
+    } else {
+      return chaptersToVerses;
+    }
   } catch (error) {
     // Type assertion to access error.code
     if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
@@ -98,12 +100,13 @@ export const loadChaptersToVerses = async (
 // - - - - - - - - - -
 const getVerseIDs = (verseResponses: VerseResponse[]): VersesInChapter => {
   const versesIDs: VerseID[] = [];
+  const currentDateTime = new Date();
 
   for (const verseResponse of verseResponses) {
     versesIDs.push(verseResponse.id);
   }
 
-  return {verses: versesIDs, cachedOn: new Date()};
+  return {verses: versesIDs, cachedOn: currentDateTime};
 };
 
 // - - - - - - - - - -

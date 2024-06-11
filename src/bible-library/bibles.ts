@@ -62,11 +62,16 @@ const deserializeBibles = (jsonData: string): Bibles => {
 // - - - - - - - - - -
 export const loadBibles = async (
   cacheDir: string = defaultCacheDir,
-  max_age_days = 14
+  maxAgeDays?: number
 ): Promise<Bibles> => {
   try {
     const jsonData = await fs.readFile(getBiblesCachePath(cacheDir), 'utf-8');
-    return cleanUpOldRecords(deserializeBibles(jsonData), max_age_days);
+    const bibles = deserializeBibles(jsonData);
+    if (typeof maxAgeDays === 'number' && maxAgeDays >= 0) {
+      return cleanUpOldRecords(bibles, maxAgeDays);
+    } else {
+      return bibles;
+    }
   } catch (error) {
     // Type assertion to access error.code
     if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
@@ -85,6 +90,7 @@ export const updateBibles = async (
   config: AxiosRequestConfig = {}
 ): Promise<void> => {
   for (const language of languages) {
+    const currentDateTime = new Date();
     const bibleResponses: BibleResponse[] = await fetchBibles(language, config);
 
     for (const bibleResponse of bibleResponses) {
@@ -94,31 +100,9 @@ export const updateBibles = async (
         name: bibleResponse.name,
         nameLocal: bibleResponse.nameLocal,
         language: bibleResponse.language,
-        cachedOn: new Date(),
+        cachedOn: currentDateTime,
       };
       bibles.set(bibleResponse.abbreviation, bibleObj);
     }
   }
-};
-
-// - - - - - - - - - -
-const isSupportedBible = async (
-  bibleAbbreviation: string,
-  languages: string[],
-  bibles: Bibles,
-  config: AxiosRequestConfig = {}
-): Promise<boolean> => {
-  if (!bibles.has(bibleAbbreviation)) {
-    await updateBibles(languages, bibles, config);
-  }
-
-  for (const [bibleAbbreviationSupported, bibleDetails] of bibles) {
-    if (
-      bibleAbbreviation === bibleAbbreviationSupported &&
-      languages.includes(bibleDetails.language.id)
-    ) {
-      return true;
-    }
-  }
-  return false;
 };

@@ -132,7 +132,6 @@ export type Bibles = Map<BibleAbbreviation, Bible>;
 export interface BookNameDetails {
   id: keyof typeof books;
   isAbbreviation: boolean;
-  cachedOn: Date;
 }
 
 // - - - - - - - - - -
@@ -150,7 +149,12 @@ export interface BookNameDetailsWithDirection extends BookNameDetails {
 }
 
 // - - - - - - - - - -
-export type BookNames = Map<BookName, BookNameDetailsWithDirection>;
+export interface BookNameReference extends BookNameDetailsWithDirection {
+  bibles: BibleAbbreviation[];
+}
+
+// - - - - - - - - - -
+export type BookNames = Map<BookName, BookNameReference[]>;
 
 // - - - - - - - - - -
 export interface BooksInBible {

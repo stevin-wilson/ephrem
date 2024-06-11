@@ -1,14 +1,9 @@
-import {AxiosRequestConfig} from 'axios';
 import {cleanUpOldRecords, defaultCacheDir, writeJsonFile} from '../utils.js';
 import {
   BibleAbbreviation,
   BibleAndBook,
-  Bibles,
   BiblesToBooks,
   BookID,
-  BookName,
-  BookNameDetailsWithDirection,
-  BookNames,
   BookResponse,
   BooksInBible,
   BooksToChapters,
@@ -17,9 +12,6 @@ import {
   ChaptersInBook,
 } from '../types.js';
 import fs from 'fs-extra';
-import {updateBibles} from './bibles.js';
-import {fetchBooksAndChapters} from './api-bible.js';
-import {getBookNames} from './book-names.js';
 
 // - - - - - - - - - -
 //  Bible Abbreviation -> Book Names
@@ -68,14 +60,14 @@ const deserializeBiblesToBooks = (jsonData: string): BiblesToBooks => {
 
 export const loadBiblesToBooks = async (
   cacheDir: string = defaultCacheDir,
-  max_age_days = 14
+  maxAgeDays = 14
 ): Promise<BiblesToBooks> => {
   try {
     const jsonData = await fs.readFile(
       getBiblesToBooksCachePath(cacheDir),
       'utf-8'
     );
-    return cleanUpOldRecords(deserializeBiblesToBooks(jsonData), max_age_days);
+    return cleanUpOldRecords(deserializeBiblesToBooks(jsonData), maxAgeDays);
   } catch (error) {
     // Type assertion to access error.code
     if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
@@ -140,17 +132,19 @@ const deserializeBooksToChapters = (jsonData: string): BooksToChapters => {
 
 export const loadBooksToChapters = async (
   cacheDir: string = defaultCacheDir,
-  max_age_days = 14
+  maxAgeDays?: number
 ): Promise<BooksToChapters> => {
   try {
     const jsonData = await fs.readFile(
       getBooksToChaptersCachePath(cacheDir),
       'utf-8'
     );
-    return cleanUpOldRecords(
-      deserializeBooksToChapters(jsonData),
-      max_age_days
-    );
+    const booksToChapters = deserializeBooksToChapters(jsonData);
+    if (typeof maxAgeDays === 'number' && maxAgeDays >= 0) {
+      return cleanUpOldRecords(booksToChapters, maxAgeDays);
+    } else {
+      return booksToChapters;
+    }
   } catch (error) {
     // Type assertion to access error.code
     if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
@@ -165,12 +159,13 @@ export const loadBooksToChapters = async (
 // - - - - - - - - - -
 export const getBookIDs = (bookResponses: BookResponse[]): BooksInBible => {
   const books: BookID[] = [];
+  const currentDateTime = new Date();
 
   for (const bookResponse of bookResponses) {
     books.push(bookResponse.id);
   }
 
-  return {books, cachedOn: new Date()};
+  return {books, cachedOn: currentDateTime};
 };
 
 // - - - - - - - - - -
@@ -178,6 +173,7 @@ export const getChapterIDs = (
   chapterResponses: ChapterResponse[]
 ): ChaptersInBook => {
   const chapters: ChapterID[] = [];
+  const currentDateTime = new Date();
 
   for (const chapterResponse of chapterResponses) {
     if (chapterResponse.number === 'intro') {
@@ -187,5 +183,5 @@ export const getChapterIDs = (
     chapters.push(chapterResponse.id);
   }
 
-  return {chapters, cachedOn: new Date()};
+  return {chapters, cachedOn: currentDateTime};
 };
