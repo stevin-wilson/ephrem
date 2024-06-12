@@ -6,10 +6,12 @@ import {
   BookID,
   BookResponse,
   BooksInBible,
+  BooksInBibleWithoutTimestamp,
   BooksToChapters,
   ChapterID,
   ChapterResponse,
   ChaptersInBook,
+  ChaptersInBookWithoutTimestamp,
 } from '../types.js';
 import fs from 'fs-extra';
 
@@ -157,23 +159,23 @@ export const loadBooksToChapters = async (
 };
 
 // - - - - - - - - - -
-export const getBookIDs = (bookResponses: BookResponse[]): BooksInBible => {
+export const getBookIDs = (
+  bookResponses: BookResponse[]
+): BooksInBibleWithoutTimestamp => {
   const books: BookID[] = [];
-  const currentDateTime = new Date();
 
   for (const bookResponse of bookResponses) {
     books.push(bookResponse.id);
   }
 
-  return {books, cachedOn: currentDateTime};
+  return {books};
 };
 
 // - - - - - - - - - -
 export const getChapterIDs = (
   chapterResponses: ChapterResponse[]
-): ChaptersInBook => {
+): ChaptersInBookWithoutTimestamp => {
   const chapters: ChapterID[] = [];
-  const currentDateTime = new Date();
 
   for (const chapterResponse of chapterResponses) {
     if (chapterResponse.number === 'intro') {
@@ -183,5 +185,5 @@ export const getChapterIDs = (
     chapters.push(chapterResponse.id);
   }
 
-  return {chapters, cachedOn: currentDateTime};
+  return {chapters};
 };

@@ -7,7 +7,7 @@ import {
   writeJsonFile,
 } from '../utils.js';
 import {
-  Bibles,
+  Cache,
   Fums,
   Passage,
   PassageOptions,
@@ -95,8 +95,7 @@ export const loadPassages = async (
 export const updatePassage = async (
   passageID: string,
   bibleAbbreviation: string,
-  passages: Passages,
-  bibles: Bibles,
+  cache: Cache,
   passageOptions: PassageOptions = {},
   config: AxiosRequestConfig = {}
 ): Promise<void> => {
@@ -108,11 +107,11 @@ export const updatePassage = async (
 
   const passageQueryString = getStringForPassageQuery(passageQuery);
 
-  if (passages.get(passageQueryString)?.text) {
+  if (cache.passages.get(passageQueryString)?.text) {
     return;
   }
 
-  const bibleID = bibles.get(passageQuery.bibleAbbreviation)?.id;
+  const bibleID = cache.bibles.get(passageQuery.bibleAbbreviation)?.id;
   if (!bibleID) {
     throw Error;
   }
@@ -132,5 +131,5 @@ export const updatePassage = async (
   const fums: Fums = passageAndFums.meta.fums;
   const cachedOn: Date = new Date();
   const passageText: Passage = {text: passage, fums: fums, cachedOn: cachedOn};
-  passages.set(passageQueryString, passageText);
+  cache.passages.set(passageQueryString, passageText);
 };

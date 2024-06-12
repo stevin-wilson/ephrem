@@ -87,10 +87,13 @@ export const loadBibles = async (
 export const updateBibles = async (
   languages: string[],
   bibles: Bibles,
-  config: AxiosRequestConfig = {}
+  config: AxiosRequestConfig = {},
+  timestamp?: Date
 ): Promise<void> => {
+  if (timestamp === undefined) {
+    timestamp = new Date();
+  }
   for (const language of languages) {
-    const currentDateTime = new Date();
     const bibleResponses: BibleResponse[] = await fetchBibles(language, config);
 
     for (const bibleResponse of bibleResponses) {
@@ -100,7 +103,7 @@ export const updateBibles = async (
         name: bibleResponse.name,
         nameLocal: bibleResponse.nameLocal,
         language: bibleResponse.language,
-        cachedOn: currentDateTime,
+        cachedOn: timestamp,
       };
       bibles.set(bibleResponse.abbreviation, bibleObj);
     }

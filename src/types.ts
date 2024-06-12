@@ -129,36 +129,47 @@ export interface Bible {
 export type Bibles = Map<BibleAbbreviation, Bible>;
 
 // - - - - - - - - - -
-export interface BookNameDetails {
-  id: keyof typeof books;
-  isAbbreviation: boolean;
+export interface BookIdAndAbbreviation {
+  readonly id: keyof typeof books;
+  readonly isAbbreviation: boolean;
 }
 
 // - - - - - - - - - -
 export type BookName = string;
 
 // - - - - - - - - - -
-export interface BookNameMoreDetails extends BookNameDetails {
-  name: BookName;
+export interface BookNameDetails extends BookIdAndAbbreviation {
+  readonly name: BookName;
 }
 
 // - - - - - - - - - -
-export interface BookNameDetailsWithDirection extends BookNameDetails {
-  language: string;
-  scriptDirection: ScriptDirection;
+export interface BookIdWithLanguage extends BookIdAndAbbreviation {
+  readonly language: string;
+  readonly scriptDirection: ScriptDirection;
 }
 
 // - - - - - - - - - -
-export interface BookNameReference extends BookNameDetailsWithDirection {
-  bibles: BibleAbbreviation[];
+export interface BookNameReference extends BookIdWithLanguage {
+  readonly bibles: BibleAbbreviation[];
+  readonly cachedOn: Date;
+}
+
+// - - - - - - - - - -
+export interface BookNameReferenceCached {
+  readonly name: BookName;
+  readonly bookReferences: BookNameReference[];
 }
 
 // - - - - - - - - - -
 export type BookNames = Map<BookName, BookNameReference[]>;
 
 // - - - - - - - - - -
-export interface BooksInBible {
+export interface BooksInBibleWithoutTimestamp {
   readonly books: BookID[];
+}
+
+// - - - - - - - - - -
+export interface BooksInBible extends BooksInBibleWithoutTimestamp {
   readonly cachedOn: Date;
 }
 
@@ -166,9 +177,14 @@ export interface BooksInBible {
 export type BiblesToBooks = Map<BibleAbbreviation, BooksInBible>;
 // - - - - - - - - - -
 export type ChapterID = string; // GEN.1
+
 // - - - - - - - - - -
-export interface ChaptersInBook {
+export interface ChaptersInBookWithoutTimestamp {
   readonly chapters: ChapterID[];
+}
+
+// - - - - - - - - - -
+export interface ChaptersInBook extends ChaptersInBookWithoutTimestamp {
   readonly cachedOn: Date;
 }
 
@@ -216,9 +232,14 @@ export type Passages = Map<PassageQueryString, Passage>;
 
 // - - - - - - - - - -
 export type VerseID = string; // GEN.1.1
+
 // - - - - - - - - - -
-export interface VersesInChapter {
+export interface VersesInChapterWithoutTimestamp {
   readonly verses: VerseID[];
+}
+
+// - - - - - - - - - -
+export interface VersesInChapter extends VersesInChapterWithoutTimestamp {
   readonly cachedOn: Date;
 }
 

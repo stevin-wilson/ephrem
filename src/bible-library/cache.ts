@@ -1,9 +1,8 @@
 // - - - - - - - - - -
 import {
+  BibleAbbreviation,
   Bibles,
   BiblesToBooks,
-  BookName,
-  BookNameDetailsWithDirection,
   BookNames,
   BookResponse,
   BooksInBible,
@@ -21,7 +20,7 @@ import {
 } from '../types.js';
 import {AxiosRequestConfig} from 'axios';
 import {loadBibles, saveBibles, updateBibles} from './bibles.js';
-import {getBookNames, loadBookNames, saveBookNames} from './book-names.js';
+import {loadBookNames, saveBookNames} from './book-names.js';
 import {
   getBibleAndBookString,
   getBookIDs,
@@ -317,8 +316,7 @@ const versesInCorrectOrder = (
 const getPassage = async (
   passageID: string,
   bibleAbbreviation: string,
-  passages: Passages,
-  bibles: Bibles,
+  cache: Cache,
   passageOptions: PassageOptions = {},
   config?: AxiosRequestConfig
 ): Promise<Passage> => {
@@ -330,18 +328,17 @@ const getPassage = async (
 
   const passageQueryString = getStringForPassageQuery(passageQuery);
 
-  if (passages.get(passageQueryString) === undefined) {
+  if (cache.passages.get(passageQueryString) === undefined) {
     await updatePassage(
       passageID,
       bibleAbbreviation,
-      passages,
-      bibles,
+      cache,
       passageOptions,
       config
     );
   }
 
-  const passage = passages.get(passageQueryString);
+  const passage = cache.passages.get(passageQueryString);
   if (passage === undefined) {
     throw Error;
   }
@@ -350,143 +347,77 @@ const getPassage = async (
 };
 
 // - - - - - - - - - -
-export const prepareCacheForReferenceSearch = async (
-  languages: string[],
-  bookNames: BookNames,
+export const updateBooks = (
+  bookResponses: BookResponse[],
+  bibleAbbreviation: BibleAbbreviation,
   biblesToBooks: BiblesToBooks,
+  timestamp?: Date
+): void => {
+  if (timestamp === undefined) {
+    timestamp = new Date();
+  }
+  const booksInBible: BooksInBible = {
+    ...getBookIDs(bookResponses),
+    cachedOn: timestamp,
+  };
+  biblesToBooks.set(bibleAbbreviation, booksInBible);
+};
+
+// - - - - - - - - - -
+export const updateChapters = (
+  booksAndChaptersResponses: BookResponse[],
+  bibleAbbreviation: BibleAbbreviation,
   booksToChapters: BooksToChapters,
-  bibles: Bibles,
-  updateBiblesFromAPI = false,
-  skipIfLastUpdateLessThanNDays = 14,
-  config: AxiosRequestConfig = {}
-): Promise<void> => {
-  const languagesToUpdate: string[] = [];
-  const latestUpdate: Map<(typeof languages)[number], Date> = new Map();
-  languages.forEach(language =>
-    latestUpdate.set(language, new Date(2000, 0, 0, 0, 0, 0, 0))
-  );
-
-  for (const bookNameDetails of bookNames.values()) {
-    if (!languages.includes(bookNameDetails.language)) {
-      continue;
-    }
-
-    if (
-      bookNameDetails.cachedOn > latestUpdate.get(bookNameDetails.language)!
-    ) {
-      latestUpdate.set(bookNameDetails.language, bookNameDetails.cachedOn);
-    }
+  timestamp?: Date
+): void => {
+  if (timestamp === undefined) {
+    timestamp = new Date();
   }
-
-  const thresholdDate = new Date();
-  thresholdDate.setDate(
-    thresholdDate.getDate() - skipIfLastUpdateLessThanNDays
-  );
-
-  for (const [language, languageLatestUpdate] of latestUpdate) {
-    if (languageLatestUpdate < thresholdDate) {
-      languagesToUpdate.push(language);
-    }
-  }
-
-  if (updateBiblesFromAPI || languagesToUpdate.length !== 0) {
-    await updateBibles(languagesToUpdate, bibles, config);
-    for (const [bibleAbbreviation, bible] of bibles.entries()) {
-      if (!languagesToUpdate.includes(bible.language.id)) {
-        continue;
-      }
-
-      if (biblesToBooks.get(bibleAbbreviation) !== undefined) {
-        continue;
-      }
-
-      const bibleID = bible.id;
-      const language = bible.language.id;
-      const scriptDirection = bible.language.scriptDirection;
-
-      const booksAndChaptersResponses: BookResponse[] =
-        await fetchBooksAndChapters(bibleID, config);
-
-      const booksInBible: BooksInBible = getBookIDs(booksAndChaptersResponses);
-      biblesToBooks.set(bibleAbbreviation, booksInBible);
-
-      const bookNameDetailsArr = getBookNames(booksAndChaptersResponses);
-      console.log(bookNameDetailsArr);
-      for (const bookNameDetails of bookNameDetailsArr) {
-        const bookName: BookName = bookNameDetails.name;
-        const bookNameDetailsWithDirection: BookNameDetailsWithDirection = {
-          id: bookNameDetails.id,
-          isAbbreviation: bookNameDetails.isAbbreviation,
-          language: language,
-          scriptDirection: scriptDirection,
-          cachedOn: bookNameDetails.cachedOn,
-        };
-        bookNames.set(bookName, bookNameDetailsWithDirection);
-      }
-
-      for (const bookResponse of booksAndChaptersResponses) {
-        const bookID = bookResponse.id;
-        const chaptersInBook: ChaptersInBook = getChapterIDs(
-          bookResponse.chapters
-        );
-        booksToChapters.set(
-          getBibleAndBookString(bibleAbbreviation, bookID),
-          chaptersInBook
-        );
-      }
-    }
+  for (const bookResponse of booksAndChaptersResponses) {
+    const bookID = bookResponse.id;
+    const chaptersInBook: ChaptersInBook = {
+      ...getChapterIDs(bookResponse.chapters),
+      cachedOn: timestamp,
+    };
+    booksToChapters.set(
+      getBibleAndBookString(bibleAbbreviation, bookID),
+      chaptersInBook
+    );
   }
 };
 
 // - - - - - - - - - -
 export const updateBooksAndChapters = async (
   bibleAbbreviations: string[],
-  bookNames: BookNames,
-  biblesToBooks: BiblesToBooks,
-  booksToChapters: BooksToChapters,
-  bibles: Bibles,
-  config: AxiosRequestConfig = {}
+  cache: Cache,
+  config: AxiosRequestConfig = {},
+  timestamp?: Date
 ): Promise<void> => {
+  if (timestamp === undefined) {
+    timestamp = new Date();
+  }
   for (const bibleAbbreviation of bibleAbbreviations) {
-    const bible = bibles.get(bibleAbbreviation);
+    const bible = cache.bibles.get(bibleAbbreviation);
     if (bible === undefined) {
       throw Error;
     }
 
-    const bibleID = bible.id;
-    const language = bible.language.id;
-    const scriptDirection = bible.language.scriptDirection;
-
     const booksAndChaptersResponses: BookResponse[] =
-      await fetchBooksAndChapters(bibleID, config);
+      await fetchBooksAndChapters(bible.id, config);
 
-    const booksInBible: BooksInBible = getBookIDs(booksAndChaptersResponses);
-    biblesToBooks.set(bibleAbbreviation, booksInBible);
+    updateBooks(
+      booksAndChaptersResponses,
+      bibleAbbreviation,
+      cache.biblesToBooks,
+      timestamp
+    );
 
-    const bookNameDetailsArr = getBookNames(booksAndChaptersResponses);
-    console.log(bookNameDetailsArr);
-    for (const bookNameDetails of bookNameDetailsArr) {
-      const bookName: BookName = bookNameDetails.name;
-      const bookNameDetailsWithDirection: BookNameDetailsWithDirection = {
-        id: bookNameDetails.id,
-        isAbbreviation: bookNameDetails.isAbbreviation,
-        language: language,
-        scriptDirection: scriptDirection,
-        cachedOn: bookNameDetails.cachedOn,
-      };
-      bookNames.set(bookName, bookNameDetailsWithDirection);
-    }
-
-    for (const bookResponse of booksAndChaptersResponses) {
-      const bookID = bookResponse.id;
-      const chaptersInBook: ChaptersInBook = getChapterIDs(
-        bookResponse.chapters
-      );
-      booksToChapters.set(
-        getBibleAndBookString(bibleAbbreviation, bookID),
-        chaptersInBook
-      );
-    }
+    updateChapters(
+      booksAndChaptersResponses,
+      bibleAbbreviation,
+      cache.booksToChapters,
+      timestamp
+    );
   }
 };
 
@@ -506,14 +437,7 @@ const prepareCacheForValidation = async (
   });
 
   if (missingBibles.length !== 0) {
-    await updateBooksAndChapters(
-      missingBibles,
-      cache.bookNames,
-      cache.biblesToBooks,
-      cache.booksToChapters,
-      cache.bibles,
-      config
-    );
+    await updateBooksAndChapters(missingBibles, cache, config);
   }
 
   const chaptersToFetchVerses: ChapterToFetchVerses[] = [];
@@ -544,12 +468,5 @@ const prepareCacheForValidation = async (
     }
   }
 
-  updateVerses(
-    chaptersToFetchVerses,
-    cache.chaptersToVerses,
-    cache.bibles,
-    cache.biblesToBooks,
-    cache.booksToChapters,
-    config
-  );
+  await updateVerses(chaptersToFetchVerses, cache, config);
 };
