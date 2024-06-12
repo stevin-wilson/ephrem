@@ -9,12 +9,14 @@ import {
   BiblesToBooks,
   BooksInBible,
   BooksToChapters,
+  Cache,
   ChaptersInBook,
   ChaptersToVerses,
   ChapterToFetchVerses,
   VerseID,
   VerseResponse,
   VersesInChapter,
+  VersesInChapterWithoutTimestamp,
 } from '../types.js';
 import fs from 'fs-extra';
 import {AxiosRequestConfig} from 'axios';
@@ -73,17 +75,19 @@ const deserializeChaptersToVerses = (jsonData: string): ChaptersToVerses => {
 
 export const loadChaptersToVerses = async (
   cacheDir: string = defaultCacheDir,
-  max_age_days = 14
+  maxAgeDays?: number
 ): Promise<ChaptersToVerses> => {
   try {
     const jsonData = await fs.readFile(
       getChaptersToVersesCachePath(cacheDir),
       'utf-8'
     );
-    return cleanUpOldRecords(
-      deserializeChaptersToVerses(jsonData),
-      max_age_days
-    );
+    const chaptersToVerses = deserializeChaptersToVerses(jsonData);
+    if (typeof maxAgeDays === 'number' && maxAgeDays >= 0) {
+      return cleanUpOldRecords(chaptersToVerses, maxAgeDays);
+    } else {
+      return chaptersToVerses;
+    }
   } catch (error) {
     // Type assertion to access error.code
     if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
@@ -96,26 +100,29 @@ export const loadChaptersToVerses = async (
 };
 
 // - - - - - - - - - -
-const getVerseIDs = (verseResponses: VerseResponse[]): VersesInChapter => {
+const getVerseIDs = (
+  verseResponses: VerseResponse[]
+): VersesInChapterWithoutTimestamp => {
   const versesIDs: VerseID[] = [];
 
   for (const verseResponse of verseResponses) {
     versesIDs.push(verseResponse.id);
   }
 
-  return {verses: versesIDs, cachedOn: new Date()};
+  return {verses: versesIDs};
 };
 
 // - - - - - - - - - -
 
 export const updateVerses = async (
   chaptersToFetchVerses: ChapterToFetchVerses[],
-  chaptersToVerses: ChaptersToVerses,
-  bibles: Bibles,
-  biblesToBooks: BiblesToBooks,
-  booksToChapters: BooksToChapters,
-  config: AxiosRequestConfig = {}
+  cache: Cache,
+  config: AxiosRequestConfig = {},
+  timestamp?: Date
 ): Promise<void> => {
+  if (timestamp === undefined) {
+    timestamp = new Date();
+  }
   for (const chapterToFetchVerses of chaptersToFetchVerses) {
     const bibleAbbreviation = chapterToFetchVerses.bibleAbbreviation;
 
@@ -124,21 +131,21 @@ export const updateVerses = async (
       chapterToFetchVerses.chapterID
     );
 
-    if (chaptersToVerses.get(bibleAndChapter)?.verses) {
+    if (cache.chaptersToVerses.get(bibleAndChapter)?.verses) {
       continue;
     }
 
-    const bibleID = bibles.get(bibleAbbreviation)?.id;
+    const bibleID = cache.bibles.get(bibleAbbreviation)?.id;
     if (!bibleID) {
       throw Error;
     }
 
-    if (!biblesToBooks.has(bibleAbbreviation)) {
+    if (!cache.biblesToBooks.has(bibleAbbreviation)) {
       throw Error;
     }
 
     const booksInBible: BooksInBible | undefined =
-      biblesToBooks.get(bibleAbbreviation);
+      cache.biblesToBooks.get(bibleAbbreviation);
 
     if (booksInBible === undefined) {
       throw Error;
@@ -154,7 +161,7 @@ export const updateVerses = async (
     );
 
     const chaptersInBook: ChaptersInBook | undefined =
-      booksToChapters.get(bibleAndBook);
+      cache.booksToChapters.get(bibleAndBook);
 
     if (chaptersInBook === undefined) {
       throw Error;
@@ -164,10 +171,17 @@ export const updateVerses = async (
       throw Error;
     }
 
-    const versesInChapter: VersesInChapter = getVerseIDs(
-      await fetchVerses(chapterToFetchVerses.chapterID, bibleID, config)
+    const verseResponse = await fetchVerses(
+      chapterToFetchVerses.chapterID,
+      bibleID,
+      config
     );
 
-    chaptersToVerses.set(bibleAndChapter, versesInChapter);
+    const versesInChapter: VersesInChapter = {
+      ...getVerseIDs(verseResponse),
+      cachedOn: timestamp,
+    };
+
+    cache.chaptersToVerses.set(bibleAndChapter, versesInChapter);
   }
 };

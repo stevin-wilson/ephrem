@@ -1,31 +1,22 @@
+import {defaultCacheDir, removePeriod, writeJsonFile} from '../utils.js';
 import {
-  cleanUpOldRecords,
-  defaultCacheDir,
-  removePeriod,
-  writeJsonFile,
-} from '../utils.js';
-import {
+  BibleAbbreviation,
   Bibles,
-  BiblesToBooks,
+  BookIdWithLanguage,
   BookName,
-  BookNameDetailsWithDirection,
-  BookNameMoreDetails,
+  BookNameDetails,
+  BookNameReference,
+  BookNameReferenceCached,
   BookNames,
   BookResponse,
-  BooksInBible,
-  BooksToChapters,
-  ChaptersInBook,
+  Cache,
 } from '../types.js';
 import fs from 'fs-extra';
+import {books} from '../books.js';
 import {AxiosRequestConfig} from 'axios';
 import {fetchBooksAndChapters} from './api-bible.js';
 import {updateBibles} from './bibles.js';
-import {
-  getBibleAndBookString,
-  getBookIDs,
-  getChapterIDs,
-} from './books-chapters.js';
-import {books} from '../books.js';
+import {updateBooks, updateChapters} from './cache.js';
 
 // - - - - - - - - - -
 //  BookNames -> Book
@@ -33,18 +24,17 @@ const getBookNamesCachePath = (cacheDir: string = defaultCacheDir) => {
   return `${cacheDir}/book-names.json`;
 };
 
+// - - - - - - - - - -
 // serialize the BookNames map to JSON
 const serializeBookNames = (bookNames: BookNames): string => {
-  const obj = Array.from(bookNames.entries()).map(([bookName, book]) => ({
-    name: bookName,
-    id: book.id,
-    isAbbreviation: book.isAbbreviation,
-    scriptDirection: book.scriptDirection,
-    cachedOn: book.cachedOn.toISOString(),
+  const obj = Array.from(bookNames.entries()).map(([name, bookReferences]) => ({
+    name: name,
+    bookReferences: bookReferences,
   }));
   return JSON.stringify(obj, null, 2);
 };
 
+// - - - - - - - - - -
 export const saveBookNames = async (
   bookNames: BookNames,
   cacheDir: string = defaultCacheDir
@@ -55,35 +45,56 @@ export const saveBookNames = async (
   );
 };
 
+// - - - - - - - - - -
 // deserialize JSON back to a ChaptersToVerses map
 const deserializeBookNames = (jsonData: string): BookNames => {
   const arr = JSON.parse(jsonData);
   const map: BookNames = new Map();
 
-  arr.forEach((item: any) => {
+  arr.forEach((item: BookNameReferenceCached) => {
     const key: BookName = item.name;
-    const value: BookNameDetailsWithDirection = {
-      id: item.id,
-      isAbbreviation: item.isAbbreviation,
-      scriptDirection: item.scriptDirection,
-      cachedOn: new Date(item.cachedOn),
-    };
+    const value: BookNameReference[] = item.bookReferences;
     map.set(key, value);
   });
 
   return map;
 };
 
+const cleanUpBookNames = (
+  bookNames: BookNames,
+  maxAgeDays: number
+): BookNames => {
+  const thresholdDate = new Date();
+  thresholdDate.setDate(thresholdDate.getDate() - maxAgeDays);
+
+  const output: BookNames = new Map();
+  for (const [bookName, bookNameReferences] of bookNames) {
+    const filteredBookNameReferences = bookNameReferences.filter(
+      bookNameReference => bookNameReference.cachedOn > thresholdDate
+    );
+
+    output.set(bookName, filteredBookNameReferences);
+  }
+
+  return output;
+};
+
 export const loadBookNames = async (
   cacheDir: string = defaultCacheDir,
-  max_age_days = 14
+  maxAgeDays?: number
 ): Promise<BookNames> => {
   try {
     const jsonData = await fs.readFile(
       getBookNamesCachePath(cacheDir),
       'utf-8'
     );
-    return cleanUpOldRecords(deserializeBookNames(jsonData), max_age_days);
+    const bookNames = deserializeBookNames(jsonData);
+
+    if (typeof maxAgeDays === 'number' && maxAgeDays >= 0) {
+      return cleanUpBookNames(bookNames, maxAgeDays);
+    } else {
+      return bookNames;
+    }
   } catch (error) {
     // Type assertion to access error.code
     if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
@@ -98,10 +109,9 @@ export const loadBookNames = async (
 // - - - - - - - - - -
 export const getBookNames = (
   bookResponses: BookResponse[]
-): BookNameMoreDetails[] => {
-  const bookNames: BookNameMoreDetails[] = [];
+): BookNameDetails[] => {
+  const bookNames: BookNameDetails[] = [];
   const allowedBooks = Object.keys(books) as (keyof typeof books)[];
-  const datetime = new Date();
 
   for (const bookResponse of bookResponses) {
     const bookID = bookResponse.id as keyof typeof books;
@@ -110,25 +120,22 @@ export const getBookNames = (
       continue;
     }
 
-    const newNames: BookNameMoreDetails[] = [
+    const newNames: BookNameDetails[] = [
       {
         name: removePeriod(bookResponse.name).toLowerCase(),
         isAbbreviation: false,
         id: bookID,
-        cachedOn: datetime,
       },
       {
         name: removePeriod(bookResponse.nameLong).toLowerCase(),
         isAbbreviation: false,
         id: bookID,
-        cachedOn: datetime,
       },
-      // {
-      //   name: bookResponse.abbreviation,
-      //   isAbbreviation: true,
-      //   id: bookID,
-      //   cachedOn: datetime,
-      // },
+      {
+        name: bookResponse.abbreviation,
+        isAbbreviation: true,
+        id: bookID,
+      },
     ];
 
     for (let i = 0; i < newNames.length; i++) {
@@ -143,59 +150,143 @@ export const getBookNames = (
   return bookNames;
 };
 
-export const updateBiblesBooksAndChapters = async (
-  languages: string[],
-  bookNames: BookNames,
-  biblesToBooks: BiblesToBooks,
-  booksToChapters: BooksToChapters,
-  bibles: Bibles,
-  updateBiblesFromAPI = false,
-  config: AxiosRequestConfig = {}
-): Promise<void> => {
-  if (updateBiblesFromAPI) {
-    await updateBibles(languages, bibles, config);
+const bookNameDetailsMatchReference = (
+  bookNameDetails: BookIdWithLanguage,
+  bookNameReference: BookNameReference
+): boolean => {
+  let output = true;
+
+  if (bookNameDetails.id !== bookNameReference.id) {
+    output = false;
   }
 
-  for (const [bibleAbbreviation, bible] of bibles.entries()) {
+  if (bookNameDetails.language !== bookNameReference.language) {
+    output = false;
+  }
+
+  if (bookNameDetails.scriptDirection !== bookNameReference.scriptDirection) {
+    output = false;
+  }
+
+  if (bookNameDetails.isAbbreviation !== bookNameReference.isAbbreviation) {
+    output = false;
+  }
+
+  return output;
+};
+
+const updateBookNames = (
+  bookResponses: BookResponse[],
+  bibleAbbreviation: BibleAbbreviation,
+  bookNames: BookNames,
+  bibles: Bibles,
+  timestamp?: Date
+): void => {
+  if (timestamp === undefined) {
+    timestamp = new Date();
+  }
+
+  const bible = bibles.get(bibleAbbreviation);
+  if (bible === undefined) {
+    throw Error;
+  }
+
+  const bibleID = bible.id;
+  const language = bible.language.id;
+  const scriptDirection = bible.language.scriptDirection;
+
+  const bookNamesFromBible = getBookNames(bookResponses);
+  for (const bookNameDetails of bookNamesFromBible) {
+    const bookReferences = bookNames.get(bookNameDetails.name);
+    if (bookReferences === undefined) {
+      bookNames.set(bookNameDetails.name, [
+        {
+          id: bookNameDetails.id,
+          isAbbreviation: bookNameDetails.isAbbreviation,
+          language: language,
+          scriptDirection: scriptDirection,
+          bibles: [bibleID],
+          cachedOn: timestamp,
+        },
+      ]);
+      continue;
+    }
+
+    const thisBookReference: BookIdWithLanguage = {
+      id: bookNameDetails.id,
+      language: language,
+      scriptDirection: scriptDirection,
+      isAbbreviation: bookNameDetails.isAbbreviation,
+    };
+
+    let addedToBookNames = false;
+    for (const bookReference of bookReferences) {
+      if (bookReference.bibles.includes(bibleID)) {
+        addedToBookNames = true;
+        break;
+      }
+
+      if (bookNameDetailsMatchReference(thisBookReference, bookReference)) {
+        bookReference.bibles.push(bibleID);
+        addedToBookNames = true;
+        break;
+      }
+    }
+
+    if (!addedToBookNames) {
+      bookReferences.push({
+        ...thisBookReference,
+        bibles: [bibleID],
+        cachedOn: timestamp,
+      });
+    }
+
+    bookNames.set(bookNameDetails.name, bookReferences);
+  }
+};
+
+// - - - - - - - - - -
+export const prepareCacheForReferenceParse = async (
+  languages: string[],
+  cache: Cache,
+  config: AxiosRequestConfig = {}
+): Promise<void> => {
+  const timestamp = new Date();
+
+  // update Bibles
+  await updateBibles(languages, cache.bibles, config, timestamp);
+
+  for (const [bibleAbbreviation, bible] of cache.bibles.entries()) {
     if (!languages.includes(bible.language.id)) {
       continue;
     }
 
-    if (biblesToBooks.get(bibleAbbreviation) !== undefined) {
-      continue;
-    }
-
-    const bibleID = bible.id;
-    const scriptDirection = bible.language.scriptDirection;
-
+    // update Books in each Bible
     const booksAndChaptersResponses: BookResponse[] =
-      await fetchBooksAndChapters(bibleID, config);
+      await fetchBooksAndChapters(bible.id, config);
 
-    const booksInBible: BooksInBible = getBookIDs(booksAndChaptersResponses);
-    biblesToBooks.set(bibleAbbreviation, booksInBible);
+    updateBooks(
+      booksAndChaptersResponses,
+      bibleAbbreviation,
+      cache.biblesToBooks,
+      timestamp
+    );
 
-    const bookNameDetailsArr = getBookNames(booksAndChaptersResponses);
-    console.log(bookNameDetailsArr);
-    for (const bookNameDetails of bookNameDetailsArr) {
-      const bookName: BookName = bookNameDetails.name;
-      const bookNameDetailsWithDirection: BookNameDetailsWithDirection = {
-        id: bookNameDetails.id,
-        isAbbreviation: bookNameDetails.isAbbreviation,
-        scriptDirection: scriptDirection,
-        cachedOn: bookNameDetails.cachedOn,
-      };
-      bookNames.set(bookName, bookNameDetailsWithDirection);
-    }
+    // update Chapters in each Book
+    updateChapters(
+      booksAndChaptersResponses,
+      bibleAbbreviation,
+      cache.booksToChapters,
+      timestamp
+    );
 
-    for (const bookResponse of booksAndChaptersResponses) {
-      const bookID = bookResponse.id;
-      const chaptersInBook: ChaptersInBook = getChapterIDs(
-        bookResponse.chapters
-      );
-      booksToChapters.set(
-        getBibleAndBookString(bibleAbbreviation, bookID),
-        chaptersInBook
-      );
-    }
+    // update BookNames -> Book Code Map
+    updateBookNames(
+      booksAndChaptersResponses,
+      bibleAbbreviation,
+      cache.bookNames,
+      cache.bibles,
+      timestamp
+    );
   }
 };

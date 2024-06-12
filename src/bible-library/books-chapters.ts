@@ -1,4 +1,3 @@
-import {AxiosRequestConfig} from 'axios';
 import {cleanUpOldRecords, defaultCacheDir, writeJsonFile} from '../utils.js';
 import {
   BibleAbbreviation,
@@ -7,10 +6,12 @@ import {
   BookID,
   BookResponse,
   BooksInBible,
+  BooksInBibleWithoutTimestamp,
   BooksToChapters,
   ChapterID,
   ChapterResponse,
   ChaptersInBook,
+  ChaptersInBookWithoutTimestamp,
 } from '../types.js';
 import fs from 'fs-extra';
 
@@ -61,14 +62,14 @@ const deserializeBiblesToBooks = (jsonData: string): BiblesToBooks => {
 
 export const loadBiblesToBooks = async (
   cacheDir: string = defaultCacheDir,
-  max_age_days = 14
+  maxAgeDays = 14
 ): Promise<BiblesToBooks> => {
   try {
     const jsonData = await fs.readFile(
       getBiblesToBooksCachePath(cacheDir),
       'utf-8'
     );
-    return cleanUpOldRecords(deserializeBiblesToBooks(jsonData), max_age_days);
+    return cleanUpOldRecords(deserializeBiblesToBooks(jsonData), maxAgeDays);
   } catch (error) {
     // Type assertion to access error.code
     if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
@@ -133,17 +134,19 @@ const deserializeBooksToChapters = (jsonData: string): BooksToChapters => {
 
 export const loadBooksToChapters = async (
   cacheDir: string = defaultCacheDir,
-  max_age_days = 14
+  maxAgeDays?: number
 ): Promise<BooksToChapters> => {
   try {
     const jsonData = await fs.readFile(
       getBooksToChaptersCachePath(cacheDir),
       'utf-8'
     );
-    return cleanUpOldRecords(
-      deserializeBooksToChapters(jsonData),
-      max_age_days
-    );
+    const booksToChapters = deserializeBooksToChapters(jsonData);
+    if (typeof maxAgeDays === 'number' && maxAgeDays >= 0) {
+      return cleanUpOldRecords(booksToChapters, maxAgeDays);
+    } else {
+      return booksToChapters;
+    }
   } catch (error) {
     // Type assertion to access error.code
     if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
@@ -156,20 +159,22 @@ export const loadBooksToChapters = async (
 };
 
 // - - - - - - - - - -
-export const getBookIDs = (bookResponses: BookResponse[]): BooksInBible => {
+export const getBookIDs = (
+  bookResponses: BookResponse[]
+): BooksInBibleWithoutTimestamp => {
   const books: BookID[] = [];
 
   for (const bookResponse of bookResponses) {
     books.push(bookResponse.id);
   }
 
-  return {books, cachedOn: new Date()};
+  return {books};
 };
 
 // - - - - - - - - - -
 export const getChapterIDs = (
   chapterResponses: ChapterResponse[]
-): ChaptersInBook => {
+): ChaptersInBookWithoutTimestamp => {
   const chapters: ChapterID[] = [];
 
   for (const chapterResponse of chapterResponses) {
@@ -180,5 +185,5 @@ export const getChapterIDs = (
     chapters.push(chapterResponse.id);
   }
 
-  return {chapters, cachedOn: new Date()};
+  return {chapters};
 };

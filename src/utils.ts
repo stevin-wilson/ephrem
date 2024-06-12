@@ -29,6 +29,10 @@ export const expandHomeDir = (filePath: string): string => {
   return filePath;
 };
 
+/**
+ *
+ * @param filePath
+ */
 export async function readJsonFile(filePath: string): Promise<JSONFile> {
   try {
     const data = await fs.readFile(filePath, 'utf-8');
@@ -40,10 +44,18 @@ export async function readJsonFile(filePath: string): Promise<JSONFile> {
 }
 
 // from https://www.bennadel.com/blog/3115-maintaining-javascript-date-values-during-deserialization-with-a-json-reviver.htm
+/**
+ *
+ * @param value
+ */
 function isString(value: any) {
   return {}.toString.call(value) === '[object String]';
 }
 
+/**
+ *
+ * @param value
+ */
 function isSerializedDate(value: any) {
   // Dates are serialized in TZ format, example: '1981-12-20T04:00:14.000Z'.
   const datePattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/;
@@ -51,6 +63,11 @@ function isSerializedDate(value: any) {
   return isString(value) && datePattern.test(value);
 }
 
+/**
+ *
+ * @param key
+ * @param value
+ */
 function dateReviver(key: string, value: any): any {
   if (isSerializedDate(value)) {
     return new Date(value);
@@ -59,6 +76,11 @@ function dateReviver(key: string, value: any): any {
   return value;
 }
 
+/**
+ *
+ * @param filePath
+ * @param jsonData
+ */
 export async function writeJsonFile(
   filePath: string,
   jsonData: string
@@ -87,10 +109,10 @@ export const sortObject = (obj: any): any => {
 
 export const cleanUpOldRecords = <K, V extends CachedOn>(
   map: Map<K, V>,
-  max_age_days = 14
+  maxAgeDays = 14
 ): Map<K, V> => {
   const thresholdDate = new Date();
-  thresholdDate.setDate(thresholdDate.getDate() - max_age_days);
+  thresholdDate.setDate(thresholdDate.getDate() - maxAgeDays);
 
   const cleanedMap = new Map<K, V>();
 

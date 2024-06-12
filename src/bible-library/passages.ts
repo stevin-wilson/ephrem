@@ -7,7 +7,7 @@ import {
   writeJsonFile,
 } from '../utils.js';
 import {
-  Bibles,
+  Cache,
   Fums,
   Passage,
   PassageOptions,
@@ -70,11 +70,16 @@ const deserializePassages = (json: string): Passages => {
 // - - - - - - - - - -
 export const loadPassages = async (
   cacheDir: string = defaultCacheDir,
-  max_age_days = 14
+  maxAgeDays?: number
 ): Promise<Passages> => {
   try {
     const jsonData = await fs.readFile(getPassagesCachePath(cacheDir), 'utf-8');
-    return cleanUpOldRecords(deserializePassages(jsonData), max_age_days);
+    const passages = deserializePassages(jsonData);
+    if (typeof maxAgeDays === 'number' && maxAgeDays >= 0) {
+      return cleanUpOldRecords(passages, maxAgeDays);
+    } else {
+      return passages;
+    }
   } catch (error) {
     // Type assertion to access error.code
     if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
@@ -90,8 +95,7 @@ export const loadPassages = async (
 export const updatePassage = async (
   passageID: string,
   bibleAbbreviation: string,
-  passages: Passages,
-  bibles: Bibles,
+  cache: Cache,
   passageOptions: PassageOptions = {},
   config: AxiosRequestConfig = {}
 ): Promise<void> => {
@@ -103,11 +107,11 @@ export const updatePassage = async (
 
   const passageQueryString = getStringForPassageQuery(passageQuery);
 
-  if (passages.get(passageQueryString)?.text) {
+  if (cache.passages.get(passageQueryString)?.text) {
     return;
   }
 
-  const bibleID = bibles.get(passageQuery.bibleAbbreviation)?.id;
+  const bibleID = cache.bibles.get(passageQuery.bibleAbbreviation)?.id;
   if (!bibleID) {
     throw Error;
   }
@@ -127,5 +131,5 @@ export const updatePassage = async (
   const fums: Fums = passageAndFums.meta.fums;
   const cachedOn: Date = new Date();
   const passageText: Passage = {text: passage, fums: fums, cachedOn: cachedOn};
-  passages.set(passageQueryString, passageText);
+  cache.passages.set(passageQueryString, passageText);
 };

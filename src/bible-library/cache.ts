@@ -1,10 +1,14 @@
 // - - - - - - - - - -
 import {
+  BibleAbbreviation,
   Bibles,
   BiblesToBooks,
   BookNames,
+  BookResponse,
+  BooksInBible,
   BooksToChapters,
   Cache,
+  ChaptersInBook,
   ChaptersToVerses,
   ChapterToFetchVerses,
   Passage,
@@ -16,19 +20,17 @@ import {
 } from '../types.js';
 import {AxiosRequestConfig} from 'axios';
 import {loadBibles, saveBibles, updateBibles} from './bibles.js';
-import {
-  loadBookNames,
-  saveBookNames,
-  updateBiblesBooksAndChapters,
-} from './book-names.js';
+import {loadBookNames, saveBookNames} from './book-names.js';
 import {
   getBibleAndBookString,
+  getBookIDs,
+  getChapterIDs,
   loadBiblesToBooks,
   loadBooksToChapters,
   saveBiblesToBooks,
   saveBooksToChapters,
 } from './books-chapters.js';
-import {defaultCacheDir} from '../utils.js';
+import {cleanUpOldRecords, defaultCacheDir} from '../utils.js';
 import {
   getBibleAndChapterString,
   loadChaptersToVerses,
@@ -41,14 +43,15 @@ import {
   savePassages,
   updatePassage,
 } from './passages.js';
+import {fetchBooksAndChapters} from './api-bible.js';
 
 // - - - - - - - - - -
 export const loadCache = async (
   cacheDir: string = defaultCacheDir,
-  maxAgeDays = 14
+  maxAgeDays?: number
 ): Promise<Cache> => {
   const bibles: Bibles = await loadBibles(cacheDir, maxAgeDays);
-  const bookNames: BookNames = await loadBookNames(cacheDir, maxAgeDays);
+  const bookNames: BookNames = await loadBookNames(cacheDir);
   const biblesToBooks: BiblesToBooks = await loadBiblesToBooks(
     cacheDir,
     maxAgeDays
@@ -130,10 +133,64 @@ export const saveCache = async (
 // - - - - - - - - - -
 const clearCache = (cache: Cache): void => {
   cache.bibles.clear();
+  cache.bookNames.clear();
   cache.biblesToBooks.clear();
   cache.booksToChapters.clear();
   cache.chaptersToVerses.clear();
   cache.passages.clear();
+};
+
+// - - - - - - - - - -
+const removeCachedBookNames = (cache: Cache) => {
+  cache.bookNames.clear();
+};
+
+// - - - - - - - - - -
+const removeCachedRecords = (
+  type: 'passages' | 'bibles',
+  cache: Cache,
+  maxAgeDays = 14
+) => {
+  if (maxAgeDays < 0) {
+    return;
+  }
+
+  if (type === 'passages') {
+    cache.passages = cleanUpOldRecords(cache.passages, maxAgeDays);
+  } else {
+    cache.chaptersToVerses = cleanUpOldRecords(
+      cache.chaptersToVerses,
+      maxAgeDays
+    );
+    cache.booksToChapters = cleanUpOldRecords(
+      cache.booksToChapters,
+      maxAgeDays
+    );
+    cache.biblesToBooks = cleanUpOldRecords(cache.biblesToBooks, maxAgeDays);
+    cache.bibles = cleanUpOldRecords(cache.bibles, maxAgeDays);
+  }
+};
+
+// - - - - - - - - - -
+const isSupportedBible = async (
+  bibleAbbreviation: string,
+  languages: string[],
+  bibles: Bibles,
+  config: AxiosRequestConfig = {}
+): Promise<boolean> => {
+  if (!bibles.has(bibleAbbreviation)) {
+    await updateBibles(languages, bibles, config);
+  }
+
+  for (const [bibleAbbreviationSupported, bibleDetails] of bibles) {
+    if (
+      bibleAbbreviation === bibleAbbreviationSupported &&
+      languages.includes(bibleDetails.language.id)
+    ) {
+      return true;
+    }
+  }
+  return false;
 };
 
 // - - - - - - - - - -
@@ -259,8 +316,7 @@ const versesInCorrectOrder = (
 const getPassage = async (
   passageID: string,
   bibleAbbreviation: string,
-  passages: Passages,
-  bibles: Bibles,
+  cache: Cache,
   passageOptions: PassageOptions = {},
   config?: AxiosRequestConfig
 ): Promise<Passage> => {
@@ -272,18 +328,17 @@ const getPassage = async (
 
   const passageQueryString = getStringForPassageQuery(passageQuery);
 
-  if (passages.get(passageQueryString) === undefined) {
+  if (cache.passages.get(passageQueryString) === undefined) {
     await updatePassage(
       passageID,
       bibleAbbreviation,
-      passages,
-      bibles,
+      cache,
       passageOptions,
       config
     );
   }
 
-  const passage = passages.get(passageQueryString);
+  const passage = cache.passages.get(passageQueryString);
   if (passage === undefined) {
     throw Error;
   }
@@ -292,21 +347,83 @@ const getPassage = async (
 };
 
 // - - - - - - - - - -
-const cache = await loadCache();
-await updateBiblesBooksAndChapters(
-  ['eng', 'mal'],
-  cache.bookNames,
-  cache.biblesToBooks,
-  cache.booksToChapters,
-  cache.bibles
-);
-console.log({...cache.bookNames.entries()});
-await saveCache(cache);
+export const updateBooks = (
+  bookResponses: BookResponse[],
+  bibleAbbreviation: BibleAbbreviation,
+  biblesToBooks: BiblesToBooks,
+  timestamp?: Date
+): void => {
+  if (timestamp === undefined) {
+    timestamp = new Date();
+  }
+  const booksInBible: BooksInBible = {
+    ...getBookIDs(bookResponses),
+    cachedOn: timestamp,
+  };
+  biblesToBooks.set(bibleAbbreviation, booksInBible);
+};
 
 // - - - - - - - - - -
-const prepareCache = async (
+export const updateChapters = (
+  booksAndChaptersResponses: BookResponse[],
+  bibleAbbreviation: BibleAbbreviation,
+  booksToChapters: BooksToChapters,
+  timestamp?: Date
+): void => {
+  if (timestamp === undefined) {
+    timestamp = new Date();
+  }
+  for (const bookResponse of booksAndChaptersResponses) {
+    const bookID = bookResponse.id;
+    const chaptersInBook: ChaptersInBook = {
+      ...getChapterIDs(bookResponse.chapters),
+      cachedOn: timestamp,
+    };
+    booksToChapters.set(
+      getBibleAndBookString(bibleAbbreviation, bookID),
+      chaptersInBook
+    );
+  }
+};
+
+// - - - - - - - - - -
+export const updateBooksAndChapters = async (
+  bibleAbbreviations: string[],
+  cache: Cache,
+  config: AxiosRequestConfig = {},
+  timestamp?: Date
+): Promise<void> => {
+  if (timestamp === undefined) {
+    timestamp = new Date();
+  }
+  for (const bibleAbbreviation of bibleAbbreviations) {
+    const bible = cache.bibles.get(bibleAbbreviation);
+    if (bible === undefined) {
+      throw Error;
+    }
+
+    const booksAndChaptersResponses: BookResponse[] =
+      await fetchBooksAndChapters(bible.id, config);
+
+    updateBooks(
+      booksAndChaptersResponses,
+      bibleAbbreviation,
+      cache.biblesToBooks,
+      timestamp
+    );
+
+    updateChapters(
+      booksAndChaptersResponses,
+      bibleAbbreviation,
+      cache.booksToChapters,
+      timestamp
+    );
+  }
+};
+
+// - - - - - - - - - -
+const prepareCacheForValidation = async (
   references: Reference[],
-  languages: string[],
   cache: Cache,
   config: AxiosRequestConfig = {}
 ) => {
@@ -320,15 +437,7 @@ const prepareCache = async (
   });
 
   if (missingBibles.length !== 0) {
-    await updateBiblesBooksAndChapters(
-      languages,
-      cache.bookNames,
-      cache.biblesToBooks,
-      cache.booksToChapters,
-      cache.bibles,
-      true,
-      config
-    );
+    await updateBooksAndChapters(missingBibles, cache, config);
   }
 
   const chaptersToFetchVerses: ChapterToFetchVerses[] = [];
@@ -359,12 +468,5 @@ const prepareCache = async (
     }
   }
 
-  updateVerses(
-    chaptersToFetchVerses,
-    cache.chaptersToVerses,
-    cache.bibles,
-    cache.biblesToBooks,
-    cache.booksToChapters,
-    config
-  );
+  await updateVerses(chaptersToFetchVerses, cache, config);
 };
