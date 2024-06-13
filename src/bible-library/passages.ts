@@ -1,82 +1,72 @@
 // - - - - - - - - - -
 
-import {
-  cleanUpOldRecords,
-  defaultCacheDir,
-  sortObject,
-  writeJsonFile,
-} from '../utils.js';
+import {defaultCacheDir, writeJsonFile} from '../utils.js';
 import {
   Cache,
-  Fums,
   Passage,
   PassageOptions,
   PassageQuery,
-  PassageQueryString,
   Passages,
-  PassageText,
 } from '../types.js';
 import fs from 'fs-extra';
 import {AxiosRequestConfig} from 'axios';
 import {fetchPassage} from './api-bible.js';
 
-export const getStringForPassageQuery = (
-  passageQuery: PassageQuery
-): string => {
-  const sortedPassageQuery = sortObject(passageQuery);
-  return JSON.stringify(sortedPassageQuery);
-};
-
 const getPassagesCachePath = (cacheDir: string = defaultCacheDir) => {
   return `${cacheDir}/passages.json`;
 };
 
-const serializePassages = (map: Passages): string => {
-  const arr = Array.from(map.entries()).map(([key, value]) => ({
-    passageQuery: JSON.parse(key),
-    passage: value,
-  }));
-  return JSON.stringify(arr, null, 2);
-};
-
+// - - - - - - - - - -
+// serialize Passages to JSON
 export const savePassages = async (
   passages: Passages,
   cacheDir: string = defaultCacheDir
 ) => {
   await writeJsonFile(
     getPassagesCachePath(cacheDir),
-    serializePassages(passages)
+    JSON.stringify(passages, null, 2)
   );
 };
 
 // - - - - - - - - - -
-const deserializePassages = (json: string): Passages => {
-  const arr = JSON.parse(json);
-  const map: Passages = new Map();
+// deserialize JSON back to a Passages
+const cleanPassagesCache = (
+  passages: Passages,
+  maxAgeDays = 14,
+  currentTimestamp?: Date
+): Passages => {
+  let thresholdDate = currentTimestamp;
+  if (thresholdDate === undefined) {
+    thresholdDate = new Date();
+  }
+  thresholdDate.setDate(thresholdDate.getDate() - maxAgeDays);
 
-  arr.forEach((item: any) => {
-    const key: PassageQueryString = getStringForPassageQuery(item.passageQuery);
-    const value: Passage = {
-      text: item.passage.text,
-      fums: item.passage.fums,
-      cachedOn: new Date(item.passage.cachedOn),
-    };
-    map.set(key, value);
-  });
+  const cleanedPassages: Passages = {};
 
-  return map;
+  for (const [passageAndBible, Passages] of Object.entries(passages)) {
+    const filteredPassages = Passages.filter(
+      passage => passage.cachedOn > thresholdDate
+    );
+    if (filteredPassages.length === 0) {
+      continue;
+    }
+
+    cleanedPassages[passageAndBible] = filteredPassages;
+  }
+  return cleanedPassages;
 };
 
-// - - - - - - - - - -
 export const loadPassages = async (
   cacheDir: string = defaultCacheDir,
-  maxAgeDays?: number
+  maxAgeDays?: number,
+  currentTimestamp?: Date
 ): Promise<Passages> => {
   try {
     const jsonData = await fs.readFile(getPassagesCachePath(cacheDir), 'utf-8');
-    const passages = deserializePassages(jsonData);
+    const passages = JSON.parse(jsonData) as Passages;
+
     if (typeof maxAgeDays === 'number' && maxAgeDays >= 0) {
-      return cleanUpOldRecords(passages, maxAgeDays);
+      return cleanPassagesCache(passages, maxAgeDays, currentTimestamp);
     } else {
       return passages;
     }
@@ -87,33 +77,41 @@ export const loadPassages = async (
     } else {
       console.error('Error reading or parsing JSON file:', error);
     }
-    return new Map() as Passages;
+    return {} as Passages;
   }
 };
 
 // - - - - - - - - - -
-export const updatePassage = async (
+const getPassageAndBible = (passageID: string, bibleAbbreviation: string) =>
+  `${passageID}@${bibleAbbreviation}`;
+
+// - - - - - - - - - -
+export const passageQueriesAreEqual = (
+  query1: PassageQuery,
+  query2: PassageQuery
+): boolean => {
+  return (
+    query1.passageID === query2.passageID &&
+    query1.bibleID === query2.bibleID &&
+    query1.contentType === query2.contentType &&
+    query1.includeNotes === query2.includeNotes &&
+    query1.includeTitles === query2.includeTitles &&
+    query1.includeChapterNumbers === query2.includeChapterNumbers &&
+    query1.includeVerseNumbers === query2.includeVerseNumbers &&
+    query1.includeVerseSpans === query2.includeVerseSpans
+  );
+};
+
+// - - - - - - - - - -
+const getPassage = async (
   passageID: string,
-  bibleAbbreviation: string,
-  cache: Cache,
+  bibleID: string,
   passageOptions: PassageOptions = {},
-  config: AxiosRequestConfig = {}
-): Promise<void> => {
-  const passageQuery: PassageQuery = {
-    passageID,
-    bibleAbbreviation,
-    ...passageOptions,
-  };
-
-  const passageQueryString = getStringForPassageQuery(passageQuery);
-
-  if (cache.passages.get(passageQueryString)?.text) {
-    return;
-  }
-
-  const bibleID = cache.bibles.get(passageQuery.bibleAbbreviation)?.id;
-  if (!bibleID) {
-    throw Error;
+  config: AxiosRequestConfig = {},
+  timestamp?: Date
+): Promise<Passage> => {
+  if (timestamp === undefined) {
+    timestamp = new Date();
   }
 
   const passageAndFums = await fetchPassage(
@@ -123,13 +121,78 @@ export const updatePassage = async (
     config
   );
 
-  const passage: PassageText = {
+  const passageQuery: PassageQuery = {
+    passageID,
+    bibleID,
+    ...passageOptions,
+  };
+
+  return {
+    query: passageQuery,
     reference: passageAndFums.data.reference,
     content: passageAndFums.data.content,
     copyright: passageAndFums.data.copyright,
+    fums: passageAndFums.meta.fums,
+    cachedOn: timestamp,
   };
-  const fums: Fums = passageAndFums.meta.fums;
-  const cachedOn: Date = new Date();
-  const passageText: Passage = {text: passage, fums: fums, cachedOn: cachedOn};
-  cache.passages.set(passageQueryString, passageText);
+};
+
+// - - - - - - - - - -
+export const updatePassage = async (
+  passageID: string,
+  bibleAbbreviation: string,
+  cache: Cache,
+  passageOptions: PassageOptions = {},
+  config: AxiosRequestConfig = {},
+  timestamp?: Date
+): Promise<void> => {
+  const bibleID = cache.bibles[bibleAbbreviation]?.id;
+  if (!bibleID) {
+    throw Error;
+  }
+
+  const passageAndBible = getPassageAndBible(passageID, bibleAbbreviation);
+  const passageQuery: PassageQuery = {
+    passageID,
+    bibleID,
+    ...passageOptions,
+  };
+
+  const passages: Passage[] | undefined = cache.passages[passageAndBible];
+
+  if (passages === undefined || passages.length === 0) {
+    const newPassage: Passage = await getPassage(
+      passageID,
+      bibleID,
+      passageOptions,
+      config,
+      timestamp
+    );
+
+    cache.passages[passageAndBible] = [newPassage];
+  } else {
+    let addedToPassages = false;
+
+    for (const passage of passages) {
+      if (passageQueriesAreEqual(passage.query, passageQuery)) {
+        addedToPassages = true;
+        break;
+      }
+    }
+
+    if (!addedToPassages) {
+      const newPassage: Passage = await getPassage(
+        passageID,
+        bibleID,
+        passageOptions,
+        config,
+        timestamp
+      );
+
+      passages.push(newPassage);
+
+      cache.passages[passageAndBible] = passages;
+    }
+  }
+  cache.updatedSinceLoad = true;
 };

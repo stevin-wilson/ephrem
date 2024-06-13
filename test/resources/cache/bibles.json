@@ -1,0 +1,176 @@
+{
+  "OMCV": {
+    "id": "de295e9ba65f6d0f-01",
+    "language": "mal",
+    "scriptDirection": "LTR",
+    "cachedOn": "2024-06-13T06:52:08.604Z"
+  },
+  "IRVMAL": {
+    "id": "3ea0147e32eebe47-01",
+    "language": "mal",
+    "scriptDirection": "LTR",
+    "cachedOn": "2024-06-13T06:52:08.604Z"
+  },
+  "MAL10RO": {
+    "id": "805e795e07fb9422-01",
+    "language": "mal",
+    "scriptDirection": "LTR",
+    "cachedOn": "2024-06-13T06:52:08.604Z"
+  },
+  "ASVBT": {
+    "id": "685d1470fe4d5c3b-01",
+    "language": "eng",
+    "scriptDirection": "LTR",
+    "cachedOn": "2024-06-13T07:16:04.581Z"
+  },
+  "BSB": {
+    "id": "bba9f40183526463-01",
+    "language": "eng",
+    "scriptDirection": "LTR",
+    "cachedOn": "2024-06-13T07:16:04.581Z"
+  },
+  "engLXXup": {
+    "id": "6bab4d6c61b31b80-01",
+    "language": "eng",
+    "scriptDirection": "LTR",
+    "cachedOn": "2024-06-13T07:16:04.581Z"
+  },
+  "engbrent": {
+    "id": "65bfdebd704a8324-01",
+    "language": "eng",
+    "scriptDirection": "LTR",
+    "cachedOn": "2024-06-13T07:16:04.581Z"
+  },
+  "engKJVCPB": {
+    "id": "55212e3cf5d04d49-01",
+    "language": "eng",
+    "scriptDirection": "LTR",
+    "cachedOn": "2024-06-13T07:16:04.581Z"
+  },
+  "engDRA": {
+    "id": "179568874c45066f-01",
+    "language": "eng",
+    "scriptDirection": "LTR",
+    "cachedOn": "2024-06-13T07:16:04.581Z"
+  },
+  "engEMTV": {
+    "id": "55ec700d9e0d77ea-01",
+    "language": "eng",
+    "scriptDirection": "LTR",
+    "cachedOn": "2024-06-13T07:16:04.581Z"
+  },
+  "FBV": {
+    "id": "65eec8e0b60e656b-01",
+    "language": "eng",
+    "scriptDirection": "LTR",
+    "cachedOn": "2024-06-13T07:16:04.581Z"
+  },
+  "enggnv": {
+    "id": "c315fa9f71d4af3a-01",
+    "language": "eng",
+    "scriptDirection": "LTR",
+    "cachedOn": "2024-06-13T07:16:04.581Z"
+  },
+  "engojps": {
+    "id": "bf8f1c7f3f9045a5-01",
+    "language": "eng",
+    "scriptDirection": "LTR",
+    "cachedOn": "2024-06-13T07:16:04.581Z"
+  },
+  "engKJV": {
+    "id": "de4e12af7f28f599-01",
+    "language": "eng",
+    "scriptDirection": "LTR",
+    "cachedOn": "2024-06-13T07:16:04.581Z"
+  },
+  "LSV": {
+    "id": "01b29f4b342acc35-01",
+    "language": "eng",
+    "scriptDirection": "LTR",
+    "cachedOn": "2024-06-13T07:16:04.581Z"
+  },
+  "engRV": {
+    "id": "40072c4a5aba4022-01",
+    "language": "eng",
+    "scriptDirection": "LTR",
+    "cachedOn": "2024-06-13T07:16:04.581Z"
+  },
+  "engOKE": {
+    "id": "ec290b5045ff54a5-01",
+    "language": "eng",
+    "scriptDirection": "LTR",
+    "cachedOn": "2024-06-13T07:16:04.581Z"
+  },
+  "engF35": {
+    "id": "2f0fd81d7b85b923-01",
+    "language": "eng",
+    "scriptDirection": "LTR",
+    "cachedOn": "2024-06-13T07:16:04.581Z"
+  },
+  "ASV": {
+    "id": "06125adad2d5898a-01",
+    "language": "eng",
+    "scriptDirection": "LTR",
+    "cachedOn": "2024-06-13T07:16:04.581Z"
+  },
+  "TOJB2011": {
+    "id": "c89622d31b60c444-02",
+    "language": "eng",
+    "scriptDirection": "LTR",
+    "cachedOn": "2024-06-13T07:16:04.581Z"
+  },
+  "TCENT": {
+    "id": "32339cf2f720ff8e-01",
+    "language": "eng",
+    "scriptDirection": "LTR",
+    "cachedOn": "2024-06-13T07:16:04.581Z"
+  },
+  "T4T": {
+    "id": "66c22495370cdfc0-01",
+    "language": "eng",
+    "scriptDirection": "LTR",
+    "cachedOn": "2024-06-13T07:16:04.581Z"
+  },
+  "WEB": {
+    "id": "9879dbb7cfe39e4d-04",
+    "language": "eng",
+    "scriptDirection": "LTR",
+    "cachedOn": "2024-06-13T07:16:04.581Z"
+  },
+  "WEBBE": {
+    "id": "7142879509583d59-04",
+    "language": "eng",
+    "scriptDirection": "LTR",
+    "cachedOn": "2024-06-13T07:16:04.581Z"
+  },
+  "engWEBU": {
+    "id": "72f4e6dc683324df-03",
+    "language": "eng",
+    "scriptDirection": "LTR",
+    "cachedOn": "2024-06-13T07:16:04.581Z"
+  },
+  "engWEBUS": {
+    "id": "32664dc3288a28df-02",
+    "language": "eng",
+    "scriptDirection": "LTR",
+    "cachedOn": "2024-06-13T07:16:04.581Z"
+  },
+  "WMB": {
+    "id": "f72b840c855f362c-04",
+    "language": "eng",
+    "scriptDirection": "LTR",
+    "cachedOn": "2024-06-13T07:16:04.581Z"
+  },
+  "WMBBE": {
+    "id": "04da588535d2f823-04",
+    "language": "eng",
+    "scriptDirection": "LTR",
+    "cachedOn": "2024-06-13T07:16:04.581Z"
+  },
+  "ONAV": {
+    "id": "b17e246951402e50-01",
+    "language": "arb",
+    "scriptDirection": "RTL",
+    "cachedOn": "2024-06-13T07:24:18.181Z"
+  }
+}

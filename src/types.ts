@@ -14,12 +14,6 @@ export interface Reference {
 }
 
 // - - - - - - - - - -
-export interface Validation {
-  passed: boolean;
-  error?: string;
-}
-
-// - - - - - - - - - -
 export interface CachedOn {
   cachedOn: Date;
 }
@@ -31,10 +25,7 @@ export type JSONFile = {
 
 // - - - - - - - - - -
 export type BibleAbbreviation = string; // NIV
-// - - - - - - - - - -
-export type BookID = string; // GEN
-// - - - - - - - - - -
-export type BibleAndBook = string;
+
 // - - - - - - - - - -
 export type ScriptDirection = 'RTL' | 'LTR';
 
@@ -53,27 +44,11 @@ export interface LanguageResponse extends Language {
 }
 
 // - - - - - - - - - -
-export interface VerseResponse {
-  readonly id: string;
-
-  readonly [key: string]: unknown;
-}
-
-// - - - - - - - - - -
-export interface ChapterResponse {
-  readonly id: string;
-  readonly number: string;
-
-  readonly [key: string]: unknown;
-}
-
-// - - - - - - - - - -
 export interface BookResponse {
   readonly id: string;
   readonly abbreviation: string;
   readonly name: string;
   readonly nameLong: string;
-  readonly chapters: ChapterResponse[];
 
   readonly [key: string]: unknown;
 }
@@ -81,9 +56,6 @@ export interface BookResponse {
 // - - - - - - - - - -
 export interface BibleResponse {
   readonly id: string;
-  readonly dblId: string;
-  readonly name: string;
-  readonly nameLocal: string;
   readonly abbreviation: string;
   readonly language: LanguageResponse;
 
@@ -115,18 +87,21 @@ export interface PassageAndFumsResponse {
   readonly [key: string]: unknown;
 }
 
-// - - - - - - - - - -
-export interface Bible {
-  readonly id: string;
-  readonly dblId: string;
-  readonly name: string;
-  readonly nameLocal: string;
-  readonly language: Language;
+interface Cached {
   readonly cachedOn: Date;
 }
 
 // - - - - - - - - - -
-export type Bibles = Map<BibleAbbreviation, Bible>;
+export interface Bible extends Cached {
+  readonly id: string;
+  readonly language: string;
+  readonly scriptDirection: ScriptDirection;
+}
+
+// - - - - - - - - - -
+export type Bibles = {
+  [BibleAbbreviation: string]: Bible;
+};
 
 // - - - - - - - - - -
 export interface BookIdAndAbbreviation {
@@ -155,41 +130,9 @@ export interface BookNameReference extends BookIdWithLanguage {
 }
 
 // - - - - - - - - - -
-export interface BookNameReferenceCached {
-  readonly name: BookName;
-  readonly bookReferences: BookNameReference[];
-}
-
-// - - - - - - - - - -
-export type BookNames = Map<BookName, BookNameReference[]>;
-
-// - - - - - - - - - -
-export interface BooksInBibleWithoutTimestamp {
-  readonly books: BookID[];
-}
-
-// - - - - - - - - - -
-export interface BooksInBible extends BooksInBibleWithoutTimestamp {
-  readonly cachedOn: Date;
-}
-
-// - - - - - - - - - -
-export type BiblesToBooks = Map<BibleAbbreviation, BooksInBible>;
-// - - - - - - - - - -
-export type ChapterID = string; // GEN.1
-
-// - - - - - - - - - -
-export interface ChaptersInBookWithoutTimestamp {
-  readonly chapters: ChapterID[];
-}
-
-// - - - - - - - - - -
-export interface ChaptersInBook extends ChaptersInBookWithoutTimestamp {
-  readonly cachedOn: Date;
-}
-
-// - - - - - - - - - -
-export type BooksToChapters = Map<BibleAndBook, ChaptersInBook>;
+export type BookNames = {
+  [BookName: string]: BookNameReference[];
+};
 
 // - - - - - - - - - -
 export interface PassageOptions {
@@ -204,56 +147,23 @@ export interface PassageOptions {
 // - - - - - - - - - -
 export interface PassageQuery extends PassageOptions {
   readonly passageID: string;
-  readonly bibleAbbreviation: string;
+  readonly bibleID: string;
 }
-
-// - - - - - - - - - -
-export type PassageQueryString = string;
-
-// - - - - - - - - - -
-export interface PassageText {
-  readonly reference: string;
-  readonly content: string;
-  readonly copyright: string;
-}
-
-// - - - - - - - - - -
-export type Fums = string;
 
 // - - - - - - - - - -
 export interface Passage {
-  readonly text: PassageText;
-  readonly fums: Fums;
+  readonly query: PassageQuery;
+  readonly reference: string;
+  readonly content: string;
+  readonly copyright: string;
+  readonly fums: string;
   readonly cachedOn: Date;
 }
 
 // - - - - - - - - - -
-export type Passages = Map<PassageQueryString, Passage>;
-
-// - - - - - - - - - -
-export type VerseID = string; // GEN.1.1
-
-// - - - - - - - - - -
-export interface VersesInChapterWithoutTimestamp {
-  readonly verses: VerseID[];
-}
-
-// - - - - - - - - - -
-export interface VersesInChapter extends VersesInChapterWithoutTimestamp {
-  readonly cachedOn: Date;
-}
-
-// - - - - - - - - - -
-export type BibleAndChapter = string;
-// - - - - - - - - - -
-export type ChaptersToVerses = Map<BibleAndChapter, VersesInChapter>;
-
-// - - - - - - - - - -
-export interface ChapterToFetchVerses {
-  bibleAbbreviation: string;
-  bookID: string;
-  chapterID: string;
-}
+export type Passages = {
+  [passageAndBible: string]: Passage[];
+};
 
 // - - - - - - - - -
 export interface ReferenceGroup {
@@ -269,8 +179,6 @@ export interface ReferenceGroup {
 export interface Cache {
   bibles: Bibles;
   bookNames: BookNames;
-  biblesToBooks: BiblesToBooks;
-  booksToChapters: BooksToChapters;
-  chaptersToVerses: ChaptersToVerses;
   passages: Passages;
+  updatedSinceLoad: boolean;
 }

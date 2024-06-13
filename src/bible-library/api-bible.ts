@@ -6,43 +6,58 @@ import {
   BookResponse,
   PassageAndFumsResponse,
   PassageOptions,
-  VerseResponse,
 } from '../types.js';
 
 // - - - - - - - - - -
 const getAvailableBiblesURL = (language: string): string =>
   `https://api.scripture.api.bible/v1/bibles?language=${language}`;
 // - - - - - - - - - -
-const getAvailableBooksAndChaptersURL = (bibleID: string): string =>
-  `https://api.scripture.api.bible/v1/bibles/${bibleID}/books?include-chapters=true`;
-// - - - - - - - - - -
-const getVersesURL = (chapterID: string, bibleID: string): string =>
-  `https://api.scripture.api.bible/v1/bibles/${bibleID}/chapters/${chapterID}/verses`;
+const getAvailableBooksURL = (bibleID: string): string =>
+  `https://api.scripture.api.bible/v1/bibles/${bibleID}/books?include-chapters=false`;
+
 // - - - - - - - - - -
 const defaultConfig = {
   method: 'GET',
   headers: {'api-key': process.env.API_BIBLE_API_KEY!},
 } as const;
 // - - - - - - - - - -
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+// - - - - - - - - - -
 const fetchFromAPI = async (
   url: string,
-  config: AxiosRequestConfig = {}
+  config: AxiosRequestConfig = {},
+  retries = 3,
+  backoff = 300, // initial backoff time in milliseconds
+  delayBetweenCalls: number | undefined = 1000 // delay between consecutive API calls in milliseconds
 ): Promise<unknown> => {
   const finalConfig = {
     ...defaultConfig,
     ...config,
   };
 
-  try {
-    const response = await axios.get(url, finalConfig);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    return response.data.data;
-  } catch (error) {
-    if (axios.isAxiosError(error) && error.response) {
-      throw new HTTPError(error.response.status, error.response.statusText);
-    }
-    throw error;
+  // Wait for delay before making the API call
+  if (delayBetweenCalls !== undefined) {
+    await sleep(delayBetweenCalls);
   }
+
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      const response = await axios.get(url, finalConfig);
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      return response.data.data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        // If it's a 503 error, we retry
+        if (error.response.status === 503 && attempt < retries) {
+          await sleep(backoff * Math.pow(2, attempt)); // exponential backoff
+          continue;
+        }
+        throw new HTTPError(error.response.status, error.response.statusText);
+      }
+      throw error;
+    }
+  }
+  throw new Error('Max retries reached');
 };
 // - - - - - - - - - -
 export const fetchBibles = async (
@@ -53,22 +68,14 @@ export const fetchBibles = async (
   return (await fetchFromAPI(url, config)) as BibleResponse[];
 };
 // - - - - - - - - - -
-export const fetchBooksAndChapters = async (
+export const fetchBooks = async (
   bibleID: string,
   config: AxiosRequestConfig = {}
 ): Promise<BookResponse[]> => {
-  const url = getAvailableBooksAndChaptersURL(bibleID);
+  const url = getAvailableBooksURL(bibleID);
   return (await fetchFromAPI(url, config)) as BookResponse[];
 };
-// - - - - - - - - - -
-export const fetchVerses = async (
-  chapterID: string,
-  bibleID: string,
-  config: AxiosRequestConfig = {}
-): Promise<VerseResponse[]> => {
-  const url = getVersesURL(chapterID, bibleID);
-  return (await fetchFromAPI(url, config)) as VerseResponse[];
-};
+
 // - - - - - - - - - -
 const getPassageURL = (
   passageID: string,

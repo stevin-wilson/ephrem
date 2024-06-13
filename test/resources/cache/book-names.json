@@ -1,0 +1,6092 @@
+{
+  "ഉൽപ്പത്തി": [
+    {
+      "id": "GEN",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "പുറപ്പാട്": [
+    {
+      "id": "EXO",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ലേവ്യ": [
+    {
+      "id": "LEV",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "സംഖ്യ": [
+    {
+      "id": "NUM",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ആവർത്തനം": [
+    {
+      "id": "DEU",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "യോശുവ": [
+    {
+      "id": "JOS",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "IRVMAL",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ന്യായാധിപന്മാർ": [
+    {
+      "id": "JDG",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "രൂത്ത്": [
+    {
+      "id": "RUT",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "IRVMAL",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "1 ശമുവേൽ": [
+    {
+      "id": "1SA",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "2 ശമുവേൽ": [
+    {
+      "id": "2SA",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "1 രാജാക്കന്മാർ": [
+    {
+      "id": "1KI",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "2 രാജാക്കന്മാർ": [
+    {
+      "id": "2KI",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "1 ദിനവൃത്താന്തം": [
+    {
+      "id": "1CH",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "2 ദിനവൃത്താന്തം": [
+    {
+      "id": "2CH",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "എസ്രാ": [
+    {
+      "id": "EZR",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "IRVMAL",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "നെഹെമ്യാവ്": [
+    {
+      "id": "NEH",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "എസ്ഥേർ": [
+    {
+      "id": "EST",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ഇയ്യോബ്": [
+    {
+      "id": "JOB",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "സങ്കീർത്തനങ്ങൾ": [
+    {
+      "id": "PSA",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "സദൃശവാക്യങ്ങൾ": [
+    {
+      "id": "PRO",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "സഭാപ്രസംഗി": [
+    {
+      "id": "ECC",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ഉത്തമഗീതം": [
+    {
+      "id": "SNG",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "യെശയ്യാവ്": [
+    {
+      "id": "ISA",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "യിരെമ്യാവ്": [
+    {
+      "id": "JER",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "വിലാപങ്ങൾ": [
+    {
+      "id": "LAM",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "യെഹെസ്കേൽ": [
+    {
+      "id": "EZK",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ദാനീയേൽ": [
+    {
+      "id": "DAN",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ഹോശേയ": [
+    {
+      "id": "HOS",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "യോവേൽ": [
+    {
+      "id": "JOL",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ആമോസ്": [
+    {
+      "id": "AMO",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ഓബദ്യാവു": [
+    {
+      "id": "OBA",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "യോനാ": [
+    {
+      "id": "JON",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "IRVMAL",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "മീഖാ": [
+    {
+      "id": "MIC",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "IRVMAL",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "നഹൂം": [
+    {
+      "id": "NAM",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "IRVMAL",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ഹബക്കൂക്ക്": [
+    {
+      "id": "HAB",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "സെഫന്യാവ്": [
+    {
+      "id": "ZEP",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ഹഗ്ഗായി": [
+    {
+      "id": "HAG",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "സെഖര്യാവ്": [
+    {
+      "id": "ZEC",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "മലാഖി": [
+    {
+      "id": "MAL",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "മത്തായി": [
+    {
+      "id": "MAT",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "മർക്കോസ്": [
+    {
+      "id": "MRK",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ലൂക്കോസ്": [
+    {
+      "id": "LUK",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "യോഹന്നാൻ": [
+    {
+      "id": "JHN",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "അപ്പൊപ്രവൃത്തികൾ": [
+    {
+      "id": "ACT",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "റോമർ": [
+    {
+      "id": "ROM",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "1 കൊരിന്ത്യർ": [
+    {
+      "id": "1CO",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "2 കൊരിന്ത്യർ": [
+    {
+      "id": "2CO",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ഗലാത്യർ": [
+    {
+      "id": "GAL",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "എഫേസ്യർ": [
+    {
+      "id": "EPH",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ഫിലിപ്പിയർ": [
+    {
+      "id": "PHP",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "കൊലോസ്യർ": [
+    {
+      "id": "COL",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "1 തെസ്സലോനിക്യർ": [
+    {
+      "id": "1TH",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "2 തെസ്സലോനിക്യർ": [
+    {
+      "id": "2TH",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "1 തിമോത്തിയോസ്": [
+    {
+      "id": "1TI",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "2 തിമോത്തിയോസ്": [
+    {
+      "id": "2TI",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "തീത്തോസ്": [
+    {
+      "id": "TIT",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ഫിലേമോൻ": [
+    {
+      "id": "PHM",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "എബ്രായർ": [
+    {
+      "id": "HEB",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "യാക്കോബ്": [
+    {
+      "id": "JAS",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "1 പത്രോസ്": [
+    {
+      "id": "1PE",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "2 പത്രോസ്": [
+    {
+      "id": "2PE",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "1 യോഹന്നാൻ": [
+    {
+      "id": "1JN",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "2 യോഹന്നാൻ": [
+    {
+      "id": "2JN",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "3 യോഹന്നാൻ": [
+    {
+      "id": "3JN",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "യൂദാ": [
+    {
+      "id": "JUD",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV",
+        "IRVMAL",
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "വെളിപ്പാട്": [
+    {
+      "id": "REV",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OMCV"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ഉല്പ": [
+    {
+      "id": "GEN",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "പുറ": [
+    {
+      "id": "EXO",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ആവർ": [
+    {
+      "id": "DEU",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ന്യായാ": [
+    {
+      "id": "JDG",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "1 ശമു": [
+    {
+      "id": "1SA",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "2 ശമു": [
+    {
+      "id": "2SA",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "1 രാജാ": [
+    {
+      "id": "1KI",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "2 രാജാ": [
+    {
+      "id": "2KI",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "1 ദിന": [
+    {
+      "id": "1CH",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "2 ദിന": [
+    {
+      "id": "2CH",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "നെഹെ": [
+    {
+      "id": "NEH",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "എസ്ഥേ": [
+    {
+      "id": "EST",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ഇയ്യോ": [
+    {
+      "id": "JOB",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "സങ്കീ": [
+    {
+      "id": "PSA",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "സദൃ": [
+    {
+      "id": "PRO",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "സഭാ": [
+    {
+      "id": "ECC",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ഉത്ത": [
+    {
+      "id": "SNG",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "യെശ": [
+    {
+      "id": "ISA",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "യിരെ": [
+    {
+      "id": "JER",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "വിലാ": [
+    {
+      "id": "LAM",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "യെഹെ": [
+    {
+      "id": "EZK",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ദാനീ": [
+    {
+      "id": "DAN",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ഹോശേ": [
+    {
+      "id": "HOS",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "യോവേ": [
+    {
+      "id": "JOL",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ആമോ": [
+    {
+      "id": "AMO",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ഓബ": [
+    {
+      "id": "OBA",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ഹബ": [
+    {
+      "id": "HAB",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "സെഫ": [
+    {
+      "id": "ZEP",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ഹഗ്ഗാ": [
+    {
+      "id": "HAG",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "സെഖ": [
+    {
+      "id": "ZEC",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "മലാ": [
+    {
+      "id": "MAL",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "മത്താ": [
+    {
+      "id": "MAT",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "മർക്കൊ": [
+    {
+      "id": "MRK",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ലൂക്കൊ": [
+    {
+      "id": "LUK",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "യോഹ": [
+    {
+      "id": "JHN",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "പ്രവൃത്തികൾ": [
+    {
+      "id": "ACT",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "റോമ": [
+    {
+      "id": "ROM",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "1 കൊരി": [
+    {
+      "id": "1CO",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "2 കൊരി": [
+    {
+      "id": "2CO",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ഗലാ": [
+    {
+      "id": "GAL",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "എഫെ": [
+    {
+      "id": "EPH",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ഫിലി": [
+    {
+      "id": "PHP",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "കൊലൊ": [
+    {
+      "id": "COL",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "1 തെസ്സ": [
+    {
+      "id": "1TH",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "2 തെസ്സ": [
+    {
+      "id": "2TH",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "1 തിമൊ": [
+    {
+      "id": "1TI",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "2 തിമൊ": [
+    {
+      "id": "2TI",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "തീത്തൊ": [
+    {
+      "id": "TIT",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ഫിലേ": [
+    {
+      "id": "PHM",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "എബ്രാ": [
+    {
+      "id": "HEB",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "യാക്കോ": [
+    {
+      "id": "JAS",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "1 പത്രൊ": [
+    {
+      "id": "1PE",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "2 പത്രൊ": [
+    {
+      "id": "2PE",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "1 യോഹ": [
+    {
+      "id": "1JN",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "2 യോഹ": [
+    {
+      "id": "2JN",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "3 യോഹ": [
+    {
+      "id": "3JN",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "വെളി": [
+    {
+      "id": "REV",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "IRVMAL"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ഉല്പത്തി": [
+    {
+      "id": "GEN",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "പുറപ്പാടു": [
+    {
+      "id": "EXO",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ലേവ്യപുസ്തകം": [
+    {
+      "id": "LEV",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "സംഖ്യാപുസ്തകം": [
+    {
+      "id": "NUM",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ആവർത്തനപുസ്തകം": [
+    {
+      "id": "DEU",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "1 ശമൂവേൽ": [
+    {
+      "id": "1SA",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "2 ശമൂവേൽ": [
+    {
+      "id": "2SA",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "നെഹെമ്യാവു": [
+    {
+      "id": "NEH",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "യെശയ്യാവു": [
+    {
+      "id": "ISA",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "യിരെമ്യാവു": [
+    {
+      "id": "JER",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ഹബക്കൂൿ": [
+    {
+      "id": "HAB",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "സെഫന്യാവു": [
+    {
+      "id": "ZEP",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "സെഖര്യാവു": [
+    {
+      "id": "ZEC",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "മർക്കൊസ്": [
+    {
+      "id": "MRK",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "ലൂക്കൊസ്": [
+    {
+      "id": "LUK",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "അപ്പൊ പ്രവൃത്തികൾ": [
+    {
+      "id": "ACT",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "എഫെസ്യർ": [
+    {
+      "id": "EPH",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "കൊലൊസ്സ്യർ": [
+    {
+      "id": "COL",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "1 തെസ്സലൊനീക്യർ": [
+    {
+      "id": "1TH",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "2 തെസ്സലൊനീക്യർ": [
+    {
+      "id": "2TH",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "1 തിമൊഥെയൊസ്": [
+    {
+      "id": "1TI",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "2 തിമൊഥെയൊസ്": [
+    {
+      "id": "2TI",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "തീത്തൊസ്": [
+    {
+      "id": "TIT",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "1 പത്രൊസ്": [
+    {
+      "id": "1PE",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "2 പത്രൊസ്": [
+    {
+      "id": "2PE",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "വെളിപ്പാടു": [
+    {
+      "id": "REV",
+      "isAbbreviation": false,
+      "language": "mal",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "MAL10RO"
+      ],
+      "cachedOn": "2024-06-13T06:52:08.604Z"
+    }
+  ],
+  "matthew": [
+    {
+      "id": "MAT",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "ASVBT",
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "engEMTV",
+        "FBV",
+        "enggnv",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "engF35",
+        "ASV",
+        "TCENT",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "mark": [
+    {
+      "id": "MRK",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "ASVBT",
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "engEMTV",
+        "FBV",
+        "enggnv",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "engF35",
+        "ASV",
+        "TCENT",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "acts": [
+    {
+      "id": "ACT",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "ASVBT",
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "engEMTV",
+        "FBV",
+        "enggnv",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "engF35",
+        "ASV",
+        "TCENT",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "romans": [
+    {
+      "id": "ROM",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "ASVBT",
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "engEMTV",
+        "FBV",
+        "enggnv",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "TOJB2011",
+        "TCENT",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "1 corinthians": [
+    {
+      "id": "1CO",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "ASVBT",
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engKJV",
+        "engRV",
+        "engF35",
+        "ASV",
+        "TOJB2011",
+        "TCENT",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "galatians": [
+    {
+      "id": "GAL",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "ASVBT",
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "engEMTV",
+        "FBV",
+        "enggnv",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "engF35",
+        "ASV",
+        "TOJB2011",
+        "TCENT",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "ephesians": [
+    {
+      "id": "EPH",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "ASVBT",
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "engEMTV",
+        "FBV",
+        "enggnv",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "engF35",
+        "ASV",
+        "TOJB2011",
+        "TCENT",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "philippians": [
+    {
+      "id": "PHP",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "ASVBT",
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "engEMTV",
+        "FBV",
+        "enggnv",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "engF35",
+        "ASV",
+        "TOJB2011",
+        "TCENT",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "colossians": [
+    {
+      "id": "COL",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "ASVBT",
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "engEMTV",
+        "FBV",
+        "enggnv",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "TOJB2011",
+        "TCENT",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "1 thessalonians": [
+    {
+      "id": "1TH",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "ASVBT",
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "engEMTV",
+        "FBV",
+        "enggnv",
+        "engKJV",
+        "engRV",
+        "ASV",
+        "TOJB2011",
+        "TCENT",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "2 thessalonians": [
+    {
+      "id": "2TH",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "ASVBT",
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "engEMTV",
+        "FBV",
+        "enggnv",
+        "engKJV",
+        "engRV",
+        "ASV",
+        "TOJB2011",
+        "TCENT",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "1 timothy": [
+    {
+      "id": "1TI",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "ASVBT",
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "engEMTV",
+        "FBV",
+        "enggnv",
+        "engKJV",
+        "engRV",
+        "ASV",
+        "TCENT",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "2 timothy": [
+    {
+      "id": "2TI",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "ASVBT",
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "engEMTV",
+        "FBV",
+        "enggnv",
+        "engKJV",
+        "engRV",
+        "ASV",
+        "TCENT",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "titus": [
+    {
+      "id": "TIT",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "ASVBT",
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "engEMTV",
+        "FBV",
+        "enggnv",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "TCENT",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "philemon": [
+    {
+      "id": "PHM",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "ASVBT",
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "engEMTV",
+        "FBV",
+        "enggnv",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "TOJB2011",
+        "TCENT",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "hebrews": [
+    {
+      "id": "HEB",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "ASVBT",
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "engEMTV",
+        "FBV",
+        "enggnv",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "TOJB2011",
+        "TCENT",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "james": [
+    {
+      "id": "JAS",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "ASVBT",
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "engEMTV",
+        "FBV",
+        "enggnv",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "TCENT",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "1 peter": [
+    {
+      "id": "1PE",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "ASVBT",
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "engEMTV",
+        "FBV",
+        "enggnv",
+        "engKJV",
+        "engRV",
+        "ASV",
+        "TCENT",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "1 john": [
+    {
+      "id": "1JN",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "ASVBT",
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "engEMTV",
+        "FBV",
+        "enggnv",
+        "engKJV",
+        "engRV",
+        "ASV",
+        "TCENT",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "2 john": [
+    {
+      "id": "2JN",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "ASVBT",
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "engEMTV",
+        "FBV",
+        "enggnv",
+        "engKJV",
+        "engRV",
+        "ASV",
+        "TCENT",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "3 john": [
+    {
+      "id": "3JN",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "ASVBT",
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "engEMTV",
+        "FBV",
+        "enggnv",
+        "engKJV",
+        "engRV",
+        "ASV",
+        "TCENT",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "jude": [
+    {
+      "id": "JUD",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "ASVBT",
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "engEMTV",
+        "FBV",
+        "enggnv",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "TCENT",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "genesis": [
+    {
+      "id": "GEN",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engLXXup",
+        "engbrent",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "engOKE",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "exodus": [
+    {
+      "id": "EXO",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engLXXup",
+        "engbrent",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "engOKE",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "leviticus": [
+    {
+      "id": "LEV",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engLXXup",
+        "engbrent",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "engOKE",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "numbers": [
+    {
+      "id": "NUM",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engLXXup",
+        "engbrent",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "engOKE",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "deuteronomy": [
+    {
+      "id": "DEU",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engLXXup",
+        "engbrent",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "engOKE",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "joshua": [
+    {
+      "id": "JOS",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engLXXup",
+        "engbrent",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "judges": [
+    {
+      "id": "JDG",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engLXXup",
+        "engbrent",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "ruth": [
+    {
+      "id": "RUT",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engLXXup",
+        "engbrent",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "TOJB2011",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "1 samuel": [
+    {
+      "id": "1SA",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "engRV",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "2 samuel": [
+    {
+      "id": "2SA",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "engRV",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "1 kings": [
+    {
+      "id": "1KI",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "engRV",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "2 kings": [
+    {
+      "id": "2KI",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "engRV",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "1 chronicles": [
+    {
+      "id": "1CH",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "engRV",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "2 chronicles": [
+    {
+      "id": "2CH",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "engRV",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "ezra": [
+    {
+      "id": "EZR",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engbrent",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "TOJB2011",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "nehemiah": [
+    {
+      "id": "NEH",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "esther": [
+    {
+      "id": "EST",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "TOJB2011",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "job": [
+    {
+      "id": "JOB",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engLXXup",
+        "engbrent",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "psalms": [
+    {
+      "id": "PSA",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engLXXup",
+        "engbrent",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "proverbs": [
+    {
+      "id": "PRO",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engLXXup",
+        "engbrent",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "ecclesiastes": [
+    {
+      "id": "ECC",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engLXXup",
+        "engbrent",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "song": [
+    {
+      "id": "SNG",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "isaiah": [
+    {
+      "id": "ISA",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engLXXup",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "jeremiah": [
+    {
+      "id": "JER",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engLXXup",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "lamentations": [
+    {
+      "id": "LAM",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engLXXup",
+        "engbrent",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "ezekiel": [
+    {
+      "id": "EZK",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engLXXup",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "daniel": [
+    {
+      "id": "DAN",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "TOJB2011",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "hosea": [
+    {
+      "id": "HOS",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engLXXup",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "joel": [
+    {
+      "id": "JOL",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engLXXup",
+        "engbrent",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "amos": [
+    {
+      "id": "AMO",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engLXXup",
+        "engbrent",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "TOJB2011",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "obadiah": [
+    {
+      "id": "OBA",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engLXXup",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "jonah": [
+    {
+      "id": "JON",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engLXXup",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "micah": [
+    {
+      "id": "MIC",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engLXXup",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "nahum": [
+    {
+      "id": "NAM",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engLXXup",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "habakkuk": [
+    {
+      "id": "HAB",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engLXXup",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "zephaniah": [
+    {
+      "id": "ZEP",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engLXXup",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "haggai": [
+    {
+      "id": "HAG",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engLXXup",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "zechariah": [
+    {
+      "id": "ZEC",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engLXXup",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "malachi": [
+    {
+      "id": "MAL",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engLXXup",
+        "engKJVCPB",
+        "engDRA",
+        "FBV",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "TOJB2011",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "luke": [
+    {
+      "id": "LUK",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "engEMTV",
+        "FBV",
+        "enggnv",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "engF35",
+        "ASV",
+        "TCENT",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "john": [
+    {
+      "id": "JHN",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "engEMTV",
+        "FBV",
+        "enggnv",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "engF35",
+        "ASV",
+        "TCENT",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "2 corinthians": [
+    {
+      "id": "2CO",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "engEMTV",
+        "FBV",
+        "enggnv",
+        "engKJV",
+        "engRV",
+        "engF35",
+        "ASV",
+        "TOJB2011",
+        "TCENT",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "2 peter": [
+    {
+      "id": "2PE",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "engEMTV",
+        "FBV",
+        "enggnv",
+        "engKJV",
+        "engRV",
+        "ASV",
+        "TCENT",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "revelation": [
+    {
+      "id": "REV",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "BSB",
+        "engKJVCPB",
+        "engDRA",
+        "engEMTV",
+        "FBV",
+        "enggnv",
+        "engKJV",
+        "LSV",
+        "engRV",
+        "ASV",
+        "TCENT",
+        "T4T",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "kings i": [
+    {
+      "id": "1SA",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engLXXup",
+        "engbrent"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "kings ii": [
+    {
+      "id": "2SA",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engLXXup",
+        "engbrent"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "kings iii": [
+    {
+      "id": "1KI",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engLXXup",
+        "engbrent"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "kings iv": [
+    {
+      "id": "2KI",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engLXXup",
+        "engbrent"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "chronicles i": [
+    {
+      "id": "1CH",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engLXXup",
+        "engbrent"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "chronicles ii": [
+    {
+      "id": "2CH",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engLXXup",
+        "engbrent"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "ezra and nehemiah": [
+    {
+      "id": "EZR",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engLXXup"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "esdras i": [
+    {
+      "id": "1ES",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engLXXup"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "tobit": [
+    {
+      "id": "TOB",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engLXXup",
+        "engbrent",
+        "engKJVCPB",
+        "engDRA",
+        "engKJV",
+        "engRV",
+        "engWEBU"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "judith": [
+    {
+      "id": "JDT",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engLXXup",
+        "engbrent",
+        "engKJVCPB",
+        "engDRA",
+        "engKJV",
+        "engRV",
+        "engWEBU"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "esther (greek)": [
+    {
+      "id": "ESG",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engLXXup",
+        "engbrent",
+        "engKJV",
+        "engRV",
+        "engWEBU"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "wisdom": [
+    {
+      "id": "WIS",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engLXXup",
+        "engbrent",
+        "engKJV",
+        "engRV",
+        "engWEBU"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "song of solomon": [
+    {
+      "id": "SNG",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engLXXup",
+        "engKJVCPB",
+        "engDRA",
+        "enggnv",
+        "engojps",
+        "engKJV",
+        "ASV",
+        "WEB",
+        "WEBBE",
+        "engWEBU",
+        "engWEBUS",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "sirach": [
+    {
+      "id": "SIR",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engLXXup",
+        "engbrent",
+        "engDRA",
+        "engRV",
+        "engWEBU"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "baruch": [
+    {
+      "id": "BAR",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engLXXup",
+        "engbrent",
+        "engKJVCPB",
+        "engDRA",
+        "engKJV",
+        "engRV",
+        "engWEBU"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "epistle of jeremiah": [
+    {
+      "id": "LJE",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engLXXup"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "daniel (greek)": [
+    {
+      "id": "DAG",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engLXXup",
+        "engWEBU"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "the song of solomon": [
+    {
+      "id": "SNG",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engbrent"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "esaias": [
+    {
+      "id": "ISA",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engbrent"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "jeremias": [
+    {
+      "id": "JER",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engbrent"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "jezekiel": [
+    {
+      "id": "EZK",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engbrent"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "osee": [
+    {
+      "id": "HOS",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engbrent"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "obdias": [
+    {
+      "id": "OBA",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engbrent"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "jonas": [
+    {
+      "id": "JON",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engbrent"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "michæas": [
+    {
+      "id": "MIC",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engbrent"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "naum": [
+    {
+      "id": "NAM",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engbrent"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "ambacum": [
+    {
+      "id": "HAB",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engbrent"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "sophonias": [
+    {
+      "id": "ZEP",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engbrent"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "aggæus": [
+    {
+      "id": "HAG",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engbrent"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "zacharias": [
+    {
+      "id": "ZEC",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engbrent"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "malachias": [
+    {
+      "id": "MAL",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engbrent"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "epistle of jeremy": [
+    {
+      "id": "LJE",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engbrent"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "susanna": [
+    {
+      "id": "SUS",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engbrent",
+        "engKJVCPB",
+        "engKJV",
+        "engRV"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "bel and the dragon": [
+    {
+      "id": "BEL",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engbrent",
+        "engKJVCPB",
+        "engKJV",
+        "engRV"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "i maccabees": [
+    {
+      "id": "1MA",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engbrent"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "ii maccabees": [
+    {
+      "id": "2MA",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engbrent"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "i esdras": [
+    {
+      "id": "1ES",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engbrent"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "prayer of manasses": [
+    {
+      "id": "MAN",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engbrent",
+        "engKJVCPB",
+        "engRV"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "iii maccabees": [
+    {
+      "id": "3MA",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engbrent"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "iv maccabees": [
+    {
+      "id": "4MA",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engbrent"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "1 esdras": [
+    {
+      "id": "1ES",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engKJVCPB",
+        "engKJV",
+        "engRV"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "2 esdras": [
+    {
+      "id": "2ES",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engKJVCPB",
+        "engKJV",
+        "engRV"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "the rest of esther": [
+    {
+      "id": "ESG",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engKJVCPB"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "wisdom of solomon": [
+    {
+      "id": "WIS",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engKJVCPB",
+        "engDRA"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "ecclesiasticus": [
+    {
+      "id": "SIR",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engKJVCPB",
+        "engKJV"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "song of the three holy children": [
+    {
+      "id": "S3Y",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engKJVCPB"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "1 maccabees": [
+    {
+      "id": "1MA",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engKJVCPB",
+        "engDRA",
+        "engKJV",
+        "engRV",
+        "engWEBU"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "2 maccabees": [
+    {
+      "id": "2MA",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engKJVCPB",
+        "engDRA",
+        "engKJV",
+        "engRV",
+        "engWEBU"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "corinthians": [
+    {
+      "id": "1CO",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engEMTV"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "song of songs": [
+    {
+      "id": "SNG",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "FBV",
+        "LSV",
+        "engRV",
+        "T4T"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "song of the three": [
+    {
+      "id": "S3Y",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engKJV"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "manasseh": [
+    {
+      "id": "MAN",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engKJV"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "first samuel": [
+    {
+      "id": "1SA",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "LSV"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "second samuel": [
+    {
+      "id": "2SA",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "LSV"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "first kings": [
+    {
+      "id": "1KI",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "LSV"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "second kings": [
+    {
+      "id": "2KI",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "LSV"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "first chronicles": [
+    {
+      "id": "1CH",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "LSV"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "second chronicles": [
+    {
+      "id": "2CH",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "LSV"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "first corinthians": [
+    {
+      "id": "1CO",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "LSV"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "second corinthians": [
+    {
+      "id": "2CO",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "LSV"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "first thessalonians": [
+    {
+      "id": "1TH",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "LSV"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "second thessalonians": [
+    {
+      "id": "2TH",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "LSV"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "first timothy": [
+    {
+      "id": "1TI",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "LSV"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "second timothy": [
+    {
+      "id": "2TI",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "LSV"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "first peter": [
+    {
+      "id": "1PE",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "LSV"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "second peter": [
+    {
+      "id": "2PE",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "LSV"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "first john": [
+    {
+      "id": "1JN",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "LSV"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "second john": [
+    {
+      "id": "2JN",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "LSV"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "third john": [
+    {
+      "id": "3JN",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "LSV"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "song of the 3 holy children": [
+    {
+      "id": "S3Y",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "engRV"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "bereshis": [
+    {
+      "id": "GEN",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "shemot": [
+    {
+      "id": "EXO",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "vayikra": [
+    {
+      "id": "LEV",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "bamidbar": [
+    {
+      "id": "NUM",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "devarim": [
+    {
+      "id": "DEU",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "yehoshua": [
+    {
+      "id": "JOS",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "shofetim": [
+    {
+      "id": "JDG",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "shmuel alef": [
+    {
+      "id": "1SA",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "shmuel bais": [
+    {
+      "id": "2SA",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "melachim alef": [
+    {
+      "id": "1KI",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "melachim bais": [
+    {
+      "id": "2KI",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "yeshayah": [
+    {
+      "id": "ISA",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "yirmeyah": [
+    {
+      "id": "JER",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "yechezkel": [
+    {
+      "id": "EZK",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "hoshea": [
+    {
+      "id": "HOS",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "yoel": [
+    {
+      "id": "JOL",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "ovadyah": [
+    {
+      "id": "OBA",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "yonah": [
+    {
+      "id": "JON",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "michoh": [
+    {
+      "id": "MIC",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "nachum": [
+    {
+      "id": "NAM",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "chabakuk": [
+    {
+      "id": "HAB",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "tzefanyah": [
+    {
+      "id": "ZEP",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "chaggai": [
+    {
+      "id": "HAG",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "zecharyah": [
+    {
+      "id": "ZEC",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "tehillim": [
+    {
+      "id": "PSA",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "mishle": [
+    {
+      "id": "PRO",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "iyov": [
+    {
+      "id": "JOB",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "shir hashirim": [
+    {
+      "id": "SNG",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "ekhah": [
+    {
+      "id": "LAM",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "kohelet": [
+    {
+      "id": "ECC",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "nechemyah": [
+    {
+      "id": "NEH",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "divrey hayamim alef": [
+    {
+      "id": "1CH",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "divrey hayamim bais": [
+    {
+      "id": "2CH",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "mattityahu": [
+    {
+      "id": "MAT",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "markos": [
+    {
+      "id": "MRK",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "lukas": [
+    {
+      "id": "LUK",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "yochanan": [
+    {
+      "id": "JHN",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "gevurot meyruach hakodesh": [
+    {
+      "id": "ACT",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "1 timotiyos": [
+    {
+      "id": "1TI",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "2 timotiyos": [
+    {
+      "id": "2TI",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "titos": [
+    {
+      "id": "TIT",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "ya'akov": [
+    {
+      "id": "JAS",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "1 kefa": [
+    {
+      "id": "1PE",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "2 kefa": [
+    {
+      "id": "2PE",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "1 yochanan": [
+    {
+      "id": "1JN",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "2 yochanan": [
+    {
+      "id": "2JN",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "3 yochanan": [
+    {
+      "id": "3JN",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011",
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "yehuda": [
+    {
+      "id": "JUD",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "hisgalus": [
+    {
+      "id": "REV",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "TOJB2011"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "jacob": [
+    {
+      "id": "JAS",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "judah": [
+    {
+      "id": "JUD",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "WMB",
+        "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "التكوين": [
+    {
+      "id": "GEN",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "الخروج": [
+    {
+      "id": "EXO",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "اللاويين": [
+    {
+      "id": "LEV",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "العدد": [
+    {
+      "id": "NUM",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "التثنية": [
+    {
+      "id": "DEU",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "يشوع": [
+    {
+      "id": "JOS",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "القضاة": [
+    {
+      "id": "JDG",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "راعوث": [
+    {
+      "id": "RUT",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "صموئيل الأول": [
+    {
+      "id": "1SA",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "صموئيل الثاني": [
+    {
+      "id": "2SA",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "ملوك الأول": [
+    {
+      "id": "1KI",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "ملوك الثاني": [
+    {
+      "id": "2KI",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "أخبار الأيام الأول": [
+    {
+      "id": "1CH",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "أخبار الأيام الثاني": [
+    {
+      "id": "2CH",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "عزرا": [
+    {
+      "id": "EZR",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "نحميا": [
+    {
+      "id": "NEH",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "أستير": [
+    {
+      "id": "EST",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "أيوب": [
+    {
+      "id": "JOB",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "مزمور": [
+    {
+      "id": "PSA",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "الأمثال": [
+    {
+      "id": "PRO",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "الجامعة": [
+    {
+      "id": "ECC",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "نشيد الأنشاد": [
+    {
+      "id": "SNG",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "إشعياء": [
+    {
+      "id": "ISA",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "إرميا": [
+    {
+      "id": "JER",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "مراثي إرميا": [
+    {
+      "id": "LAM",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "حزقيال": [
+    {
+      "id": "EZK",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "دانيال": [
+    {
+      "id": "DAN",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "هوشع": [
+    {
+      "id": "HOS",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "يوئيل": [
+    {
+      "id": "JOL",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "عاموس": [
+    {
+      "id": "AMO",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "عوبديا": [
+    {
+      "id": "OBA",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "يونان": [
+    {
+      "id": "JON",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "ميخا": [
+    {
+      "id": "MIC",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "ناحوم": [
+    {
+      "id": "NAM",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "حبقوق": [
+    {
+      "id": "HAB",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "صفنيا": [
+    {
+      "id": "ZEP",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "حجي": [
+    {
+      "id": "HAG",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "زكريا": [
+    {
+      "id": "ZEC",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "ملاخي": [
+    {
+      "id": "MAL",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "إنجيل متى": [
+    {
+      "id": "MAT",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "إنجيل مرقس": [
+    {
+      "id": "MRK",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "إنجيل لوقا": [
+    {
+      "id": "LUK",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "إنجيل يوحنا": [
+    {
+      "id": "JHN",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "أعمال": [
+    {
+      "id": "ACT",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "روما": [
+    {
+      "id": "ROM",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "كورنثوس الأولى": [
+    {
+      "id": "1CO",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "كورنثوس الثانية": [
+    {
+      "id": "2CO",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "غلاطية": [
+    {
+      "id": "GAL",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "أفسس": [
+    {
+      "id": "EPH",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "فيلبي": [
+    {
+      "id": "PHP",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "كولوسي": [
+    {
+      "id": "COL",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "تسالونيكي الأولى": [
+    {
+      "id": "1TH",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "تسالونيكي الثانية": [
+    {
+      "id": "2TH",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "تيموثاوس الأولى": [
+    {
+      "id": "1TI",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "تيموثاوس الثانية": [
+    {
+      "id": "2TI",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "تيطس": [
+    {
+      "id": "TIT",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "فليمون": [
+    {
+      "id": "PHM",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "العبرانيين": [
+    {
+      "id": "HEB",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "يعقوب": [
+    {
+      "id": "JAS",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "بطرس الأولى": [
+    {
+      "id": "1PE",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "بطرس الثانية": [
+    {
+      "id": "2PE",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "يوحنا الأولى": [
+    {
+      "id": "1JN",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "يوحنا الثانية": [
+    {
+      "id": "2JN",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "يوحنا الثالثة": [
+    {
+      "id": "3JN",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "يهوذا": [
+    {
+      "id": "JUD",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ],
+  "رؤيا يوحنا": [
+    {
+      "id": "REV",
+      "isAbbreviation": false,
+      "language": "arb",
+      "scriptDirection": "RTL",
+      "bibles": [
+        "ONAV"
+      ],
+      "cachedOn": "2024-06-13T07:24:18.181Z"
+    }
+  ]
+}

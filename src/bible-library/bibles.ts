@@ -1,9 +1,9 @@
 // - - - - - - - - - -
 import {AxiosRequestConfig} from 'axios';
 import {fetchBibles} from './api-bible.js';
-import {defaultCacheDir, cleanUpOldRecords, writeJsonFile} from '../utils.js';
+import {defaultCacheDir, writeJsonFile} from '../utils.js';
 import fs from 'fs-extra';
-import {Bible, BibleAbbreviation, BibleResponse, Bibles} from '../types.js';
+import {BibleResponse, Bibles, Cache} from '../types.js';
 
 // - - - - - - - - - -
 //  Abbreviation -> Bible
@@ -14,61 +14,52 @@ const getBiblesCachePath = (cacheDir: string = defaultCacheDir) => {
 
 // - - - - - - - - - -
 // serialize the BooksToChapters map to JSON
-const serializeBibles = (bibles: Bibles): string => {
-  const obj = Array.from(bibles.entries()).map(
-    ([bibleAbbreviation, value]) => ({
-      bibleAbbreviation: bibleAbbreviation,
-      id: value.id,
-      dblId: value.dblId,
-      name: value.name,
-      nameLocal: value.nameLocal,
-      language: value.language,
-      cachedOn: value.cachedOn.toISOString(),
-    })
-  );
-  return JSON.stringify(obj, null, 2);
-};
-
-// - - - - - - - - - -
 export const saveBibles = async (
   bibles: Bibles,
   cacheDir: string = defaultCacheDir
 ) => {
-  await writeJsonFile(getBiblesCachePath(cacheDir), serializeBibles(bibles));
+  await writeJsonFile(
+    getBiblesCachePath(cacheDir),
+    JSON.stringify(bibles, null, 2)
+  );
 };
 
 // - - - - - - - - - -
 // deserialize JSON back to a BooksToChapters map
-const deserializeBibles = (jsonData: string): Bibles => {
-  const arr = JSON.parse(jsonData);
-  const map: Bibles = new Map();
+const cleanBiblesCache = (
+  bibles: Bibles,
+  maxAgeDays = 14,
+  currentTimestamp?: Date
+): Bibles => {
+  let thresholdDate = currentTimestamp;
+  if (thresholdDate === undefined) {
+    thresholdDate = new Date();
+  }
+  thresholdDate.setDate(thresholdDate.getDate() - maxAgeDays);
 
-  arr.forEach((item: any) => {
-    const key: BibleAbbreviation = item.bibleAbbreviation;
-    const value: Bible = {
-      id: item.id,
-      dblId: item.dblId,
-      name: item.name,
-      nameLocal: item.nameLocal,
-      language: item.language,
-      cachedOn: new Date(item.cachedOn),
-    };
-    map.set(key, value);
-  });
+  const cleanedBibles: Bibles = {};
 
-  return map;
+  for (const abbreviation of Object.keys(bibles)) {
+    const bible = bibles[abbreviation];
+    if (bible.cachedOn > thresholdDate) {
+      cleanedBibles[abbreviation] = bible;
+    }
+  }
+
+  return cleanedBibles;
 };
 
 // - - - - - - - - - -
 export const loadBibles = async (
   cacheDir: string = defaultCacheDir,
-  maxAgeDays?: number
+  maxAgeDays?: number,
+  currentTimestamp?: Date
 ): Promise<Bibles> => {
   try {
     const jsonData = await fs.readFile(getBiblesCachePath(cacheDir), 'utf-8');
-    const bibles = deserializeBibles(jsonData);
+    const bibles = JSON.parse(jsonData) as Bibles;
     if (typeof maxAgeDays === 'number' && maxAgeDays >= 0) {
-      return cleanUpOldRecords(bibles, maxAgeDays);
+      return cleanBiblesCache(bibles, maxAgeDays, currentTimestamp);
     } else {
       return bibles;
     }
@@ -79,14 +70,15 @@ export const loadBibles = async (
     } else {
       console.error('Error reading or parsing JSON file:', error);
     }
-    return new Map() as Bibles;
+    return {} as Bibles;
   }
 };
 
 // - - - - - - - - - -
 export const updateBibles = async (
   languages: string[],
-  bibles: Bibles,
+  cache: Cache,
+  biblesToExclude: string[] = [],
   config: AxiosRequestConfig = {},
   timestamp?: Date
 ): Promise<void> => {
@@ -97,15 +89,17 @@ export const updateBibles = async (
     const bibleResponses: BibleResponse[] = await fetchBibles(language, config);
 
     for (const bibleResponse of bibleResponses) {
-      const bibleObj: Bible = {
+      if (biblesToExclude.includes(bibleResponse.abbreviation)) {
+        continue;
+      }
+
+      cache.bibles[bibleResponse.abbreviation] = {
         id: bibleResponse.id,
-        dblId: bibleResponse.dblId,
-        name: bibleResponse.name,
-        nameLocal: bibleResponse.nameLocal,
-        language: bibleResponse.language,
+        language: bibleResponse.language.id,
+        scriptDirection: bibleResponse.language.scriptDirection,
         cachedOn: timestamp,
       };
-      bibles.set(bibleResponse.abbreviation, bibleObj);
     }
   }
+  cache.updatedSinceLoad = true;
 };
