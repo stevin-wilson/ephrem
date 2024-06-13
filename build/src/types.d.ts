@@ -70,6 +70,9 @@ export interface BookIdAndAbbreviation {
     readonly id: keyof typeof books;
     readonly isAbbreviation: boolean;
 }
+export type VoteTally = {
+    [bookID: string]: number;
+};
 export type BookName = string;
 export interface BookNameDetails extends BookIdAndAbbreviation {
     readonly name: BookName;

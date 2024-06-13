@@ -1,2 +1,42 @@
-export {};
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaWRlbnRpZnktYm9vay5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9pZGVudGlmeS1ib29rLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiIifQ==
+import { loadCache } from './bible-library/cache.js';
+const getKeyOfMaxValue = (voteTally) => {
+    let maxKey;
+    let maxValue = -Infinity;
+    // Iterate over each key-value pair in the voteTally object
+    Object.entries(voteTally).forEach(([key, value]) => {
+        if (value > maxValue) {
+            maxValue = value;
+            maxKey = key;
+        }
+    });
+    return maxKey;
+};
+const getBookID = (bookName, bibleAbbreviation, languages, cache) => {
+    const bookReferences = cache.bookNames[bookName];
+    if (bookReferences === undefined || bookReferences.length === 0) {
+        return undefined;
+    }
+    for (const bookReference of bookReferences) {
+        if (bookReference.bibles.includes(bibleAbbreviation)) {
+            return bookReference.id;
+        }
+    }
+    const voteTally = {};
+    for (const bookReference of bookReferences) {
+        if (!languages.includes(bookReference.language)) {
+            continue;
+        }
+        const bookID = bookReference.id;
+        if (voteTally[bookID] === undefined) {
+            voteTally[bookID] = 0;
+        }
+        voteTally[bookID] += bookReference.bibles.length;
+    }
+    return getKeyOfMaxValue(voteTally);
+};
+// - - - - - -
+const cache = await loadCache();
+console.log(getBookID('genesis', 'KJV', ['eng', 'mal'], cache));
+console.log(getBookID('ഉൽപ്പത്തി', 'KJV', ['eng', 'mal'], cache));
+console.log(getBookID('bereshis', 'KJV', ['eng', 'mal'], cache));
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaWRlbnRpZnktYm9vay5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9pZGVudGlmeS1ib29rLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBLE9BQU8sRUFBQyxTQUFTLEVBQUMsTUFBTSwwQkFBMEIsQ0FBQztBQUVuRCxNQUFNLGdCQUFnQixHQUFHLENBQUMsU0FBb0IsRUFBc0IsRUFBRTtJQUNwRSxJQUFJLE1BQTBCLENBQUM7SUFDL0IsSUFBSSxRQUFRLEdBQUcsQ0FBQyxRQUFRLENBQUM7SUFFekIsMkRBQTJEO0lBQzNELE1BQU0sQ0FBQyxPQUFPLENBQUMsU0FBUyxDQUFDLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQyxHQUFHLEVBQUUsS0FBSyxDQUFDLEVBQUUsRUFBRTtRQUNqRCxJQUFJLEtBQUssR0FBRyxRQUFRLEVBQUUsQ0FBQztZQUNyQixRQUFRLEdBQUcsS0FBSyxDQUFDO1lBQ2pCLE1BQU0sR0FBRyxHQUFHLENBQUM7UUFDZixDQUFDO0lBQ0gsQ0FBQyxDQUFDLENBQUM7SUFFSCxPQUFPLE1BQU0sQ0FBQztBQUNoQixDQUFDLENBQUM7QUFFRixNQUFNLFNBQVMsR0FBRyxDQUNoQixRQUFnQixFQUNoQixpQkFBeUIsRUFDekIsU0FBbUIsRUFDbkIsS0FBWSxFQUNRLEVBQUU7SUFDdEIsTUFBTSxjQUFjLEdBQUcsS0FBSyxDQUFDLFNBQVMsQ0FBQyxRQUFRLENBQUMsQ0FBQztJQUNqRCxJQUFJLGNBQWMsS0FBSyxTQUFTLElBQUksY0FBYyxDQUFDLE1BQU0sS0FBSyxDQUFDLEVBQUUsQ0FBQztRQUNoRSxPQUFPLFNBQVMsQ0FBQztJQUNuQixDQUFDO0lBRUQsS0FBSyxNQUFNLGFBQWEsSUFBSSxjQUFjLEVBQUUsQ0FBQztRQUMzQyxJQUFJLGFBQWEsQ0FBQyxNQUFNLENBQUMsUUFBUSxDQUFDLGlCQUFpQixDQUFDLEVBQUUsQ0FBQztZQUNyRCxPQUFPLGFBQWEsQ0FBQyxFQUFFLENBQUM7UUFDMUIsQ0FBQztJQUNILENBQUM7SUFFRCxNQUFNLFNBQVMsR0FBYyxFQUFFLENBQUM7SUFDaEMsS0FBSyxNQUFNLGFBQWEsSUFBSSxjQUFjLEVBQUUsQ0FBQztRQUMzQyxJQUFJLENBQUMsU0FBUyxDQUFDLFFBQVEsQ0FBQyxhQUFhLENBQUMsUUFBUSxDQUFDLEVBQUUsQ0FBQztZQUNoRCxTQUFTO1FBQ1gsQ0FBQztRQUNELE1BQU0sTUFBTSxHQUFHLGFBQWEsQ0FBQyxFQUFFLENBQUM7UUFDaEMsSUFBSSxTQUFTLENBQUMsTUFBTSxDQUFDLEtBQUssU0FBUyxFQUFFLENBQUM7WUFDcEMsU0FBUyxDQUFDLE1BQU0sQ0FBQyxHQUFHLENBQUMsQ0FBQztRQUN4QixDQUFDO1FBQ0QsU0FBUyxDQUFDLE1BQU0sQ0FBQyxJQUFJLGFBQWEsQ0FBQyxNQUFNLENBQUMsTUFBTSxDQUFDO0lBQ25ELENBQUM7SUFFRCxPQUFPLGdCQUFnQixDQUFDLFNBQVMsQ0FBQyxDQUFDO0FBQ3JDLENBQUMsQ0FBQztBQUVGLGNBQWM7QUFDZCxNQUFNLEtBQUssR0FBRyxNQUFNLFNBQVMsRUFBRSxDQUFDO0FBQ2hDLE9BQU8sQ0FBQyxHQUFHLENBQUMsU0FBUyxDQUFDLFNBQVMsRUFBRSxLQUFLLEVBQUUsQ0FBQyxLQUFLLEVBQUUsS0FBSyxDQUFDLEVBQUUsS0FBSyxDQUFDLENBQUMsQ0FBQztBQUNoRSxPQUFPLENBQUMsR0FBRyxDQUFDLFNBQVMsQ0FBQyxXQUFXLEVBQUUsS0FBSyxFQUFFLENBQUMsS0FBSyxFQUFFLEtBQUssQ0FBQyxFQUFFLEtBQUssQ0FBQyxDQUFDLENBQUM7QUFDbEUsT0FBTyxDQUFDLEdBQUcsQ0FBQyxTQUFTLENBQUMsVUFBVSxFQUFFLEtBQUssRUFBRSxDQUFDLEtBQUssRUFBRSxLQUFLLENBQUMsRUFBRSxLQUFLLENBQUMsQ0FBQyxDQUFDIn0=

@@ -126,7 +126,7 @@ export const updateCache = async (
 };
 
 // - - - - - - - - - -
-const cache = await loadCache();
-await updateCache(['arb'], cache);
-await saveCache(cache);
-console.log(JSON.stringify(cache, null, 2));
+// const cache = await loadCache();
+// await updateCache(['arb'], cache);
+// await saveCache(cache);
+// console.log(JSON.stringify(cache, null, 2));

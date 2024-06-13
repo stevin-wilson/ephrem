@@ -110,6 +110,11 @@ export interface BookIdAndAbbreviation {
 }
 
 // - - - - - - - - - -
+export type VoteTally = {
+  [bookID: string]: number;
+};
+
+// - - - - - - - - - -
 export type BookName = string;
 
 // - - - - - - - - - -
