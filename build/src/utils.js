@@ -1,80 +1,74 @@
-import { STATUS_CODES } from 'http';
 import path from 'path';
 import { homedir } from 'os';
 import fs from 'fs-extra';
 /**
- * Checks if the specified environment variable is set.
- * @param variable - The name of the environment variable to check.
- * @returns - True if the environment variable is set, otherwise false.
+ * Checks if an environment variable is set.
+ * @param variable - The name of the environment variable.
+ * @returns - Returns true if the environment variable is set, otherwise false.
  */
 export const envVariableIsSet = (variable) => !!process.env[variable];
-export class HTTPError extends Error {
-    constructor(code, message) {
-        super(message ?? STATUS_CODES[code]);
-        this.name = STATUS_CODES[code] ?? String(code);
-        this.statusCode = code;
-    }
-}
+/**
+ * Expands the home directory path if it starts with a tilde (~).
+ * @param filePath - The file path to expand.
+ * @returns - The expanded file path.
+ */
 export const expandHomeDir = (filePath) => {
-    if (filePath.startsWith('~')) {
-        return path.join(homedir(), filePath.slice(1));
-    }
-    return filePath;
+    return filePath.startsWith('~')
+        ? path.join(homedir(), filePath.slice(1)) // Slice to remove `~` present at the start
+        : filePath;
 };
 /**
- *
- * @param filePath
+ * Determine if a value is a string.
+ * from https://www.bennadel.com/blog/3115-maintaining-javascript-date-values-during-deserialization-with-a-json-reviver.htm
+ * @param value - The value to check.
+ * @returns - Returns true if the value is a string, false otherwise.
  */
-export async function readJsonFile(filePath) {
-    try {
-        const data = await fs.readFile(filePath, 'utf-8');
-        return JSON.parse(data, dateReviver);
-    }
-    catch (error) {
-        console.error('Error reading or parsing JSON file:', error);
-        throw error;
-    }
-}
-// from https://www.bennadel.com/blog/3115-maintaining-javascript-date-values-during-deserialization-with-a-json-reviver.htm
-/**
- *
- * @param value
- */
-function isString(value) {
+const isString = (value) => {
     return {}.toString.call(value) === '[object String]';
-}
+};
 /**
+ * Checks if a given value is a serialized date.
  *
- * @param value
+ * Dates are serialized in TZ format, example: '1981-12-20T04:00:14.000Z'.
+ * @param value - The value to be checked.
+ * @returns - Return `true` if the value is a serialized date, otherwise `false`.
  */
-function isSerializedDate(value) {
+const isSerializedDate = (value) => {
     // Dates are serialized in TZ format, example: '1981-12-20T04:00:14.000Z'.
     const datePattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/;
     return isString(value) && datePattern.test(value);
-}
+};
 /**
- *
- * @param key
- * @param value
+ * Function to revive serialized dates.
+ * @param propName - The key of the property being processed.
+ * @param potentialDateStr - The value of the property being processed.
+ * @returns - The revived property value.
  */
-function dateReviver(key, value) {
-    if (isSerializedDate(value)) {
-        return new Date(value);
+export const dateReviver = (propName, potentialDateStr) => {
+    if (isSerializedDate(potentialDateStr)) {
+        return new Date(potentialDateStr);
     }
-    return value;
-}
+    return potentialDateStr;
+};
 /**
- *
- * @param filePath
- * @param jsonData
+ * Writes JSON data to a file asynchronously.
+ * @param filePath - The path to the file where the JSON data should be written.
+ * @param jsonData - The JSON data to be written to the file.
+ * @returns - A promise that resolves when the JSON data has been written successfully.
+ * @throws {Error} - If an error occurs while creating the directory or writing the file.
  */
-export async function writeJsonFile(filePath, jsonData) {
+export const writeJsonFile = async (filePath, jsonData) => {
     // Ensure the directory exists
     const dir = path.dirname(filePath);
     await fs.mkdir(dir, { recursive: true });
     // Write the JSON data to the file
     await fs.writeFile(filePath, jsonData, 'utf-8');
-}
+};
+/**
+ * Recursively sorts the given object alphabetically by its keys, including nested objects and arrays.
+ * @param obj - The object to be sorted.
+ * @returns - The sorted object.
+ */
 export const sortObject = (obj) => {
     if (Array.isArray(obj)) {
         return obj.map(sortObject);
@@ -89,17 +83,25 @@ export const sortObject = (obj) => {
     }
     return obj;
 };
-export const cleanUpOldRecords = (map, maxAgeDays = 14) => {
-    const thresholdDate = new Date();
-    thresholdDate.setDate(thresholdDate.getDate() - maxAgeDays);
-    const cleanedMap = new Map();
-    map.forEach((value, key) => {
-        if (value.cachedOn > thresholdDate) {
-            cleanedMap.set(key, value);
-        }
-    });
-    return cleanedMap;
-};
+/**
+ * The default cache directory for storing data.
+ */
 export const defaultCacheDir = expandHomeDir(process.env.CACHE_PATH || '~/ephrem/cache');
+/**
+ * Removes periods from a given string.
+ * @param input - The input string from which periods should be removed.
+ * @returns - The input string without periods.
+ */
 export const removePeriod = (input) => input.replace(/\./g, '');
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidXRpbHMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvdXRpbHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxFQUFDLFlBQVksRUFBQyxNQUFNLE1BQU0sQ0FBQztBQUNsQyxPQUFPLElBQUksTUFBTSxNQUFNLENBQUM7QUFDeEIsT0FBTyxFQUFDLE9BQU8sRUFBQyxNQUFNLElBQUksQ0FBQztBQUMzQixPQUFPLEVBQUUsTUFBTSxVQUFVLENBQUM7QUFHMUI7Ozs7R0FJRztBQUNILE1BQU0sQ0FBQyxNQUFNLGdCQUFnQixHQUFHLENBQUMsUUFBZ0IsRUFBVyxFQUFFLENBQzVELENBQUMsQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDLFFBQVEsQ0FBQyxDQUFDO0FBRTFCLE1BQU0sT0FBTyxTQUFVLFNBQVEsS0FBSztJQUdsQyxZQUFZLElBQVksRUFBRSxPQUFnQjtRQUN4QyxLQUFLLENBQUMsT0FBTyxJQUFJLFlBQVksQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDO1FBQ3JDLElBQUksQ0FBQyxJQUFJLEdBQUcsWUFBWSxDQUFDLElBQUksQ0FBQyxJQUFJLE1BQU0sQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUMvQyxJQUFJLENBQUMsVUFBVSxHQUFHLElBQUksQ0FBQztJQUN6QixDQUFDO0NBQ0Y7QUFFRCxNQUFNLENBQUMsTUFBTSxhQUFhLEdBQUcsQ0FBQyxRQUFnQixFQUFVLEVBQUU7SUFDeEQsSUFBSSxRQUFRLENBQUMsVUFBVSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUM7UUFDN0IsT0FBTyxJQUFJLENBQUMsSUFBSSxDQUFDLE9BQU8sRUFBRSxFQUFFLFFBQVEsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztJQUNqRCxDQUFDO0lBQ0QsT0FBTyxRQUFRLENBQUM7QUFDbEIsQ0FBQyxDQUFDO0FBRUY7OztHQUdHO0FBQ0gsTUFBTSxDQUFDLEtBQUssVUFBVSxZQUFZLENBQUMsUUFBZ0I7SUFDakQs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
+/**
+ * Calculates the threshold date based on the maximum age in days and the current timestamp (optional).
+ * @param maxAgeDays - The maximum age in days.
+ * @param [currentTimestamp] - The current timestamp. If not provided, the current date and time will be used.
+ * @returns The threshold date.
+ */
+export const getThresholdDate = (maxAgeDays, currentTimestamp) => {
+    const thresholdDate = currentTimestamp ? currentTimestamp : new Date();
+    thresholdDate.setDate(thresholdDate.getDate() - maxAgeDays);
+    return thresholdDate;
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidXRpbHMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvdXRpbHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxJQUFJLE1BQU0sTUFBTSxDQUFDO0FBQ3hCLE9BQU8sRUFBQyxPQUFPLEVBQUMsTUFBTSxJQUFJLENBQUM7QUFDM0IsT0FBTyxFQUFFLE1BQU0sVUFBVSxDQUFDO0FBRTFCOzs7O0dBSUc7QUFDSCxNQUFNLENBQUMsTUFBTSxnQkFBZ0IsR0FBRyxDQUFDLFFBQWdCLEVBQVcsRUFBRSxDQUM1RCxDQUFDLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxRQUFRLENBQUMsQ0FBQztBQUUxQjs7OztHQUlHO0FBQ0gsTUFBTSxDQUFDLE1BQU0sYUFBYSxHQUFHLENBQUMsUUFBZ0IsRUFBVSxFQUFFO0lBQ3hELE9BQU8sUUFBUSxDQUFDLFVBQVUsQ0FBQyxHQUFHLENBQUM7UUFDN0IsQ0FBQyxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsT0FBTyxFQUFFLEVBQUUsUUFBUSxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLDJDQUEyQztRQUNyRixDQUFDLENBQUMsUUFBUSxDQUFDO0FBQ2YsQ0FBQyxDQUFDO0FBRUY7Ozs7O0dBS0c7QUFDSCxNQUFNLFFBQVEsR0FBRyxDQUFDLEtBQVUsRUFBRSxFQUFFO0lBQzlCLE9BQU8sRUFBRSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLEtBQUssaUJBQWlCLENBQUM7QUFDdkQsQ0FBQyxDQUFDO0FBRUY7Ozs7OztHQU1HO0FBQ0gsTUFBTSxnQkFBZ0IsR0FBRyxDQUFDLEtBQVUsRUFBRSxFQUFFO0lBQ3RDLDBFQUEwRTtJQUMxRSxNQUFNLFdBQVcsR0FBRywrQ0FBK0MsQ0FBQztJQUVwRSxPQUFPLFFBQVEsQ0FBQyxLQUFLLENBQUMsSUFBSSxXQUFXLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxDQUFDO0FBQ3BELENBQUMsQ0FBQztBQUVG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

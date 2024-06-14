@@ -7,6 +7,12 @@ import {loadPassages, savePassages} from './passages.js';
 import {AxiosRequestConfig} from 'axios';
 
 // - - - - - - - - - -
+/**
+ * Loads the cache from the cache directory and returns a Promise that resolves to the Cache object.
+ * @param [cacheDir] - The cache directory to load from.
+ * @param [maxAgeDays] - The maximum age in days of the cached data. If provided, only cached data within this age will be loaded.
+ * @returns A Promise that resolves to the loaded Cache object.
+ */
 export const loadCache = async (
   cacheDir: string = defaultCacheDir,
   maxAgeDays?: number
@@ -24,6 +30,12 @@ export const loadCache = async (
 };
 
 // - - - - - - - - - -
+/**
+ * Saves the cache data to the specified cache directory.
+ * @param cache - The cache object that contains the data to be saved.
+ * @param [cacheDir] - The directory path where the cache data will be saved.
+ * @returns - A promise that resolves when the cache data is successfully saved, or rejects with an error if saving fails.
+ */
 export const saveCache = async (
   cache: Cache,
   cacheDir: string = defaultCacheDir
@@ -60,6 +72,10 @@ export const saveCache = async (
 };
 
 // - - - - - - - - - -
+/**
+ * Clear cache by resetting all cache properties and setting `updatedSinceLoad` to `true`.
+ * @param cache - The cache object to be cleared.
+ */
 export const clearCache = (cache: Cache): void => {
   cache.bibles = {};
   cache.bookNames = {};
@@ -68,11 +84,23 @@ export const clearCache = (cache: Cache): void => {
 };
 
 // - - - - - - - - - -
+/**
+ * Checks if any bible in the given list has the specified language.
+ * @param language - The ISO 639-3 three digit language code to be checked.
+ * @param bibles - The list of bibles to search in.
+ * @returns - True if any bible in the list has the specified language, false otherwise.
+ */
 const biblesHasLanguage = (language: string, bibles: Bibles): boolean => {
   return Object.values(bibles).some(bible => bible.language === language);
 };
 
 // - - - - - - - - - -
+/**
+ * Checks if the given book names have the specified language.
+ * @param language - The ISO 639-3 three digit language code to check for.
+ * @param bookNames - The book names to search through.
+ * @returns - True if the book names have the specified language, false otherwise.
+ */
 const bookNamesHasLanguage = (
   language: string,
   bookNames: BookNames
@@ -88,6 +116,12 @@ const bookNamesHasLanguage = (
 };
 
 // - - - - - - - - - -
+/**
+ * Checks if the given language is available in the cache.
+ * @param language - The ISO 639-3 three digit language code to check for.
+ * @param cache - The cache object.
+ * @returns - A boolean indicating if the language is available in the cache.
+ */
 const cacheHasLanguage = (language: string, cache: Cache): boolean => {
   if (!biblesHasLanguage(language, cache.bibles)) {
     return false;
@@ -97,6 +131,16 @@ const cacheHasLanguage = (language: string, cache: Cache): boolean => {
 };
 
 // - - - - - - - - - -
+/**
+ * Updates the cache with new data for specified languages.
+ * @async
+ * @param languages - The list of ISO 639-3 three digit language codes to update in the cache.
+ * @param cache - The cache object to update.
+ * @param [forceUpdate] - Flag indicating whether to force the update for all languages.
+ * @param [biblesToExclude] - The list of bibles to exclude from the update.
+ * @param [config] - Additional configuration options for the update request.
+ * @returns - A promise that resolves when the cache is updated.
+ */
 export const updateCache = async (
   languages: string[],
   cache: Cache,
@@ -123,6 +167,28 @@ export const updateCache = async (
 
     await updateBookNames(languagesToUpdate, cache, config, timestamp);
   }
+};
+
+/**
+ * Loads cache, updates and then saves it.
+ * @async
+ * @param languages - The list of ISO 639-3 three digit language codes to update in the cache.
+ * @param [forceUpdate] - Flag indicating whether to force the update for all languages.
+ * @param [biblesToExclude] - The list of bibles to exclude from the update.
+ * @param [config] - Additional configuration options for the update request.
+ * @param [cacheDir] - The cache directory to load from.
+ * @returns - A promise that resolves when the cache is loaded, updated, and saved successfully.
+ */
+export const loadUpdateSaveCache = async (
+  languages: string[],
+  forceUpdate = false,
+  biblesToExclude: string[] = [],
+  config: AxiosRequestConfig = {},
+  cacheDir: string = defaultCacheDir
+): Promise<void> => {
+  const cache = await loadCache(cacheDir);
+  await updateCache(languages, cache, forceUpdate, biblesToExclude, config);
+  await saveCache(cache, cacheDir);
 };
 
 // - - - - - - - - - -

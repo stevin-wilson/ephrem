@@ -1,5 +1,12 @@
-import {defaultCacheDir, removePeriod, writeJsonFile} from '../utils.js';
 import {
+  dateReviver,
+  defaultCacheDir,
+  getThresholdDate,
+  removePeriod,
+  writeJsonFile,
+} from '../utils.js';
+import {
+  Bible,
   BookIdWithLanguage,
   BookNameDetails,
   BookNameReference,
@@ -14,12 +21,23 @@ import {fetchBooks} from './api-bible.js';
 
 // - - - - - - - - - -
 //  BookNames -> Book
+/**
+ * Retrieves the path to the cache file for storing book names.
+ * @param [cacheDir] - The directory where the cache file is stored. Defaults to the default cache directory.
+ * @returns - The full path to the cache file for storing book names.
+ */
 const getBookNamesCachePath = (cacheDir: string = defaultCacheDir) => {
   return `${cacheDir}/book-names.json`;
 };
 
 // - - - - - - - - - -
 // serialize the BookNames map to JSON
+/**
+ * Saves the book names to a cache file.
+ * @param bookNames - The book names to be saved.
+ * @param [cacheDir] - The directory where the cache file will be saved. Defaults to the default cache directory.
+ * @returns - Resolves with no value on successful saving of the book names.
+ */
 export const saveBookNames = async (
   bookNames: BookNames,
   cacheDir: string = defaultCacheDir
@@ -32,16 +50,19 @@ export const saveBookNames = async (
 
 // - - - - - - - - - -
 // deserialize JSON back to a BookNames
+/**
+ * Removes expired book name references from the cache.
+ * @param bookNames - The cache of book names and their references.
+ * @param [maxAgeDays] - The maximum age of references to keep in days.
+ * @param [currentTimestamp] - The current timestamp to calculate the threshold date.
+ * @returns - The cleaned cache of book names without expired references.
+ */
 const cleanBookNamesCache = (
   bookNames: BookNames,
   maxAgeDays = 14,
   currentTimestamp?: Date
 ): BookNames => {
-  let thresholdDate = currentTimestamp;
-  if (thresholdDate === undefined) {
-    thresholdDate = new Date();
-  }
-  thresholdDate.setDate(thresholdDate.getDate() - maxAgeDays);
+  const thresholdDate = getThresholdDate(maxAgeDays, currentTimestamp);
 
   const cleanedBookNames: BookNames = {};
 
@@ -58,6 +79,16 @@ const cleanBookNamesCache = (
   return cleanedBookNames;
 };
 
+/**
+ * Loads the book names from the cache directory.
+ * @param [cacheDir] - The cache directory path.
+ * @param [maxAgeDays] - The maximum age of the cache in days. If provided,
+ *    the cache will be cleaned before returning the book names.
+ * @param [currentTimestamp] - The current timestamp to compare against
+ *    the cache age. If not provided, the current date and time will be used.
+ * @returns - A promise that resolves to the loaded book names.
+ * @throws {Error} - If there is an error reading or parsing the JSON file.
+ */
 export const loadBookNames = async (
   cacheDir: string = defaultCacheDir,
   maxAgeDays?: number,
@@ -68,13 +99,11 @@ export const loadBookNames = async (
       getBookNamesCachePath(cacheDir),
       'utf-8'
     );
-    const bookNames = JSON.parse(jsonData) as BookNames;
+    const bookNames = JSON.parse(jsonData, dateReviver) as BookNames;
 
-    if (typeof maxAgeDays === 'number' && maxAgeDays >= 0) {
-      return cleanBookNamesCache(bookNames, maxAgeDays, currentTimestamp);
-    } else {
-      return bookNames;
-    }
+    return typeof maxAgeDays === 'number' && maxAgeDays >= 0
+      ? cleanBookNamesCache(bookNames, maxAgeDays, currentTimestamp)
+      : bookNames;
   } catch (error) {
     // Type assertion to access error.code
     if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
@@ -87,133 +116,126 @@ export const loadBookNames = async (
 };
 
 // - - - - - - - - - -
+/**
+ * Retrieves an array of book names, based on the provided book responses.
+ * @param bookResponses - An array of book responses.
+ * @returns - An array of book name details.
+ */
 export const getBookNames = (
   bookResponses: BookResponse[]
 ): BookNameDetails[] => {
-  const bookNames: BookNameDetails[] = [];
+  const bookDetailsArray: BookNameDetails[] = [];
   const allowedBooks = Object.keys(books) as (keyof typeof books)[];
-
   for (const bookResponse of bookResponses) {
     const bookID = bookResponse.id as keyof typeof books;
     console.log(bookID);
     if (!allowedBooks.includes(bookID)) {
       continue;
     }
+    const bookDetail: BookNameDetails = {
+      name: removePeriod(bookResponse.name).toLowerCase(),
+      isAbbreviation: false,
+      id: bookID,
+    };
 
-    const newNames: BookNameDetails[] = [
-      {
-        name: removePeriod(bookResponse.name).toLowerCase(),
-        isAbbreviation: false,
-        id: bookID,
-      },
-    ];
-
-    for (let i = 0; i < newNames.length; i++) {
-      if (newNames[i].id === newNames[i].name) {
-        continue;
-      }
-
-      bookNames.push(newNames[i]);
+    if (bookDetail.id !== bookDetail.name) {
+      bookDetailsArray.push(bookDetail);
     }
   }
-  console.log(bookNames);
-  return bookNames;
+  console.log(bookDetailsArray);
+  return bookDetailsArray;
 };
 
+/**
+ * Checks if the book details in the given bookIdWithLanguage match the details in the bookNameReference.
+ * @param bookIdWithLanguage - The book ID and language details.
+ * @param bookNameReference - The book name reference details.
+ * @returns - Returns true if the book details match, false otherwise.
+ */
 const bookNameDetailsMatchReference = (
   bookIdWithLanguage: BookIdWithLanguage,
   bookNameReference: BookNameReference
 ): boolean => {
-  let output = true;
-
-  if (bookIdWithLanguage.id !== bookNameReference.id) {
-    output = false;
-  }
-
-  if (bookIdWithLanguage.language !== bookNameReference.language) {
-    output = false;
-  }
-
-  if (
-    bookIdWithLanguage.scriptDirection !== bookNameReference.scriptDirection
-  ) {
-    output = false;
-  }
-
-  if (bookIdWithLanguage.isAbbreviation !== bookNameReference.isAbbreviation) {
-    output = false;
-  }
-
-  return output;
+  return (
+    bookIdWithLanguage.id === bookNameReference.id &&
+    bookIdWithLanguage.language === bookNameReference.language &&
+    bookIdWithLanguage.scriptDirection === bookNameReference.scriptDirection &&
+    bookIdWithLanguage.isAbbreviation === bookNameReference.isAbbreviation
+  );
 };
 
+/**
+ * Updates the book names in the cache based on the provided languages.
+ * @param languages - The list of ISO 639-3 three digit language codes to update the book names for.
+ * @param cache - The cache object.
+ * @param [config] - The Axios request configuration.
+ * @param [timestamp] - The timestamp for the cache update.
+ * @returns - A Promise that resolves once the book names are updated in the cache.
+ */
 export const updateBookNames = async (
   languages: string[],
   cache: Cache,
   config: AxiosRequestConfig = {},
-  timestamp?: Date
+  timestamp = new Date()
 ): Promise<void> => {
-  if (timestamp === undefined) {
-    timestamp = new Date();
-  }
-
-  for (const [bibleAbbreviation, bible] of Object.entries(cache.bibles)) {
-    if (!languages.includes(bible.language)) {
-      continue;
-    }
-
-    const bookResponses = await fetchBooks(bible.id, config);
-
-    const bookNamesFromBible = getBookNames(bookResponses);
+  const handleBookReferences = async (
+    bibleAbbreviation: string,
+    bible: Bible,
+    bookNamesFromBible: BookNameDetails[]
+  ) => {
     for (const bookNameDetails of bookNamesFromBible) {
-      const bookReferences = cache.bookNames[bookNameDetails.name];
+      let bookReferences = cache.bookNames[bookNameDetails.name];
+      const thisBookIdWithLanguage: BookIdWithLanguage = {
+        id: bookNameDetails.id,
+        language: bible.language,
+        scriptDirection: bible.scriptDirection,
+        isAbbreviation: bookNameDetails.isAbbreviation,
+      };
       if (bookReferences === undefined || bookReferences.length === 0) {
-        cache.bookNames[bookNameDetails.name] = [
+        bookReferences = [
           {
-            id: bookNameDetails.id,
-            isAbbreviation: bookNameDetails.isAbbreviation,
-            language: bible.language,
-            scriptDirection: bible.scriptDirection,
+            ...thisBookIdWithLanguage,
             bibles: [bibleAbbreviation],
             cachedOn: timestamp,
           },
         ];
       } else {
-        const thisBookIdWithLanguage: BookIdWithLanguage = {
-          id: bookNameDetails.id,
-          language: bible.language,
-          scriptDirection: bible.scriptDirection,
-          isAbbreviation: bookNameDetails.isAbbreviation,
-        };
-
-        let addedToBookNames = false;
-
-        for (const bookReference of bookReferences) {
-          if (bookReference.bibles.includes(bibleAbbreviation)) {
-            addedToBookNames = true;
-            break;
-          }
-
+        const matched = bookReferences.some(bookReference => {
+          const referenceMatches = bookNameDetailsMatchReference(
+            thisBookIdWithLanguage,
+            bookReference
+          );
           if (
-            bookNameDetailsMatchReference(thisBookIdWithLanguage, bookReference)
+            referenceMatches ||
+            bookReference.bibles.includes(bibleAbbreviation)
           ) {
-            bookReference.bibles.push(bibleAbbreviation);
-            addedToBookNames = true;
-            break;
+            if (referenceMatches) bookReference.bibles.push(bibleAbbreviation);
+            return true;
           }
-        }
-
-        if (!addedToBookNames) {
+          // If no condition matches, return false
+          return false;
+        });
+        if (!matched) {
           bookReferences.push({
             ...thisBookIdWithLanguage,
             bibles: [bibleAbbreviation],
             cachedOn: timestamp,
           });
         }
-
-        cache.bookNames[bookNameDetails.name] = bookReferences;
       }
+      cache.bookNames[bookNameDetails.name] = bookReferences;
     }
-  }
+  };
+
+  // Create an array of promises to be resolved concurrently
+  const updatePromises = Object.entries(cache.bibles)
+    .filter(([, bible]) => languages.includes(bible.language))
+    .map(async ([bibleAbbreviation, bible]) => {
+      const bookResponses = await fetchBooks(bible.id, config);
+      const bookNamesFromBible = getBookNames(bookResponses);
+      await handleBookReferences(bibleAbbreviation, bible, bookNamesFromBible);
+    });
+
+  await Promise.all(updatePromises);
   cache.updatedSinceLoad = true;
 };

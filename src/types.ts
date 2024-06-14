@@ -1,8 +1,5 @@
 // - - - - - - - - - -
 import {books} from './books.js';
-
-export type ValueOf<T> = T[keyof T];
-
 // - - - - - - - - -
 export interface Reference {
   readonly book: keyof typeof books;
@@ -12,16 +9,6 @@ export interface Reference {
   readonly verseEnd?: string;
   readonly bible: string;
 }
-
-// - - - - - - - - - -
-export interface CachedOn {
-  cachedOn: Date;
-}
-
-// - - - - - - - - - -
-export type JSONFile = {
-  [key: string]: unknown;
-};
 
 // - - - - - - - - - -
 export type BibleAbbreviation = string; // NIV

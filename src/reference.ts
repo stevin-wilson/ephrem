@@ -1,24 +1,59 @@
 import {Reference, ReferenceGroup} from './types.js';
 
+/**
+ * Regular expression pattern for matching punctuation characters.
+ */
 const punctuationRegex = /[!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]/;
 
 // - - - - - - - - -
+
+/**
+ * Creates a passage boundary string based on the given input.
+ * @param book - The name of the book.
+ * @param [chapter] - The chapter number.
+ * @param [verse] - The verse number.
+ * @returns - The passage boundary string.
+ */
+const createPassageBoundary = (
+  book: string,
+  chapter?: string,
+  verse?: string
+): string => {
+  return verse ? `${book}.${chapter}.${verse}` : `${book}.${chapter}`;
+};
+
+/**
+ * Retrieves the passage ID based on the provided reference.
+ * @param reference - The reference object containing book, chapter, and verse information.
+ * @returns - The passage ID generated from the reference.
+ */
 const getPassageID = (reference: Reference): string => {
   const sections: string[] = [];
 
-  let requiredSection =
-    reference.verseStart !== undefined
-      ? `${reference.book}.${reference.chapterStart}.${reference.verseStart}`
-      : `${reference.book}.${reference.chapterStart}`;
-
+  let requiredSection = createPassageBoundary(
+    reference.book,
+    reference.chapterStart,
+    reference.verseStart
+  );
   let optionalSection: string | undefined = undefined;
 
   if (reference.chapterEnd !== undefined && reference.verseEnd !== undefined) {
-    optionalSection = `${reference.book}.${reference.chapterEnd}.${reference.verseEnd}`;
+    optionalSection = createPassageBoundary(
+      reference.book,
+      reference.chapterEnd,
+      reference.verseEnd
+    );
   } else if (reference.chapterEnd !== undefined) {
-    optionalSection = `${reference.book}.${reference.chapterEnd}`;
+    optionalSection = createPassageBoundary(
+      reference.book,
+      reference.chapterEnd
+    );
   } else if (reference.verseEnd !== undefined) {
-    requiredSection += `.${reference.verseEnd}`;
+    requiredSection = createPassageBoundary(
+      reference.book,
+      reference.chapterStart,
+      reference.verseEnd
+    );
   }
 
   sections.push(requiredSection);
@@ -28,6 +63,12 @@ const getPassageID = (reference: Reference): string => {
 
   return sections.join('-').replace(/\s+/g, '');
 };
+
+/**
+ * Checks if a given value is a valid string or undefined.
+ * @param value - The value to be checked.
+ * @returns - True if the value is a valid string or undefined, false otherwise.
+ */
 export const isValidStringOrUndefined = (
   value: string | undefined
 ): boolean => {
@@ -47,7 +88,12 @@ export const isValidStringOrUndefined = (
 };
 
 // - - - - - - - - -
-export const hasValidSyntax = (reference: Reference): boolean => {
+/**
+ * Checks if a given reference has a valid syntax.
+ * @param reference - The reference object to check.
+ * @returns - True if the reference has valid syntax, false otherwise.
+ */
+export const hasValidReferenceSyntax = (reference: Reference): boolean => {
   for (const attribute of [
     reference.chapterStart,
     reference.chapterEnd,
@@ -74,7 +120,12 @@ export const hasValidSyntax = (reference: Reference): boolean => {
 };
 
 // - - - - - - - - -
-export const isMultiChapter = (reference: Reference): boolean => {
+/**
+ * Determines if a given reference refers multiple chapters in the Bible.
+ * @param reference - The reference to check.
+ * @returns - True if the reference is multi-chapter, otherwise false.
+ */
+export const isMultiChapterReference = (reference: Reference): boolean => {
   let output: boolean;
   if (reference.chapterEnd === undefined) {
     output = false;
@@ -86,59 +137,68 @@ export const isMultiChapter = (reference: Reference): boolean => {
 };
 
 // - - - - - - - - -
-export const isSingleChapter = (reference: Reference): boolean => {
-  let output: boolean;
 
-  if (isMultiChapter(reference)) {
-    output = false;
-  } else {
-    output = true;
-  }
-
-  return output;
-};
-
-// - - - - - - - - -
-export const isSingleVerse = (reference: Reference): boolean => {
-  if (isMultiChapter(reference)) {
-    return false;
-  }
-
-  if (
+/**
+ * Determines whether a given reference refers to a single verse in the Bible.
+ * @param reference - The reference to check.
+ * @returns - True if the reference is a single verse reference, false otherwise.
+ */
+export const isSingleVerseReference = (reference: Reference): boolean => {
+  const isDifferentChapter =
     reference.chapterEnd !== undefined &&
-    reference.chapterEnd !== reference.chapterStart
-  ) {
-    return false;
-  }
-
-  if (reference.verseStart === undefined) {
-    return false;
-  }
-
-  if (
+    reference.chapterEnd !== reference.chapterStart;
+  const isDifferentVerse =
     reference.verseEnd !== undefined &&
-    reference.verseEnd !== reference.verseStart
-  ) {
-    return false;
-  }
+    reference.verseEnd !== reference.verseStart;
 
-  return true;
+  return !(
+    isMultiChapterReference(reference) ||
+    isDifferentChapter ||
+    reference.verseStart === undefined ||
+    isDifferentVerse
+  );
 };
 
 // - - - - - - - - -
-export const isSingleChapterMultipleVerses = (
+/**
+ * Determines if the given reference is a single chapter with multiple verses reference.
+ * @param reference - The reference to check.
+ * @returns - True if the reference is a single chapter with multiple verses reference, false otherwise.
+ */
+export const isSingleChapterMultipleVersesReference = (
   reference: Reference
 ): boolean => {
-  let output: boolean;
-
-  if (!isSingleChapter(reference)) {
-    output = false;
-  } else output = !isSingleVerse(reference);
-
-  return output;
+  return (
+    !isMultiChapterReference(reference) && !isSingleVerseReference(reference)
+  );
 };
 
 // - - - - - - - - -
+const referenceGroupRegex =
+  /^(.+?)\s+(\d+(?:-\d+)?)(?::(\d+(?:-\d+)?))?\s*(?:\(([^)]+)\))?$/;
+
+/**
+ * Retrieves the list of Bibles based on a given string.
+ * @param biblesPart - The string containing comma-separated Bible names or undefined if no Bible names are provided.
+ * @returns - An array of Bible names or undefined if no Bible names are provided.
+ */
+const getBiblesList = (biblesPart: string | undefined): string[] | undefined =>
+  biblesPart ? biblesPart.split(',').map(bible => bible.trim()) : undefined;
+
+/**
+ * Splits the input string by '-' character and trims the resulting substrings.
+ * @param input - The string to be split and trimmed.
+ * @returns - An array containing the trimmed substrings.
+ */
+const splitAndTrim = (input: string | undefined): string[] =>
+  (input || '').split('-');
+
+/**
+ * Simplifies a reference group string into a ReferenceGroup object.
+ * @param input - The input string representing the reference group.
+ * @returns - The simplified reference group object.
+ * @throws {Error} - If the input string is not in the correct format.
+ */
 export const simplifyReferenceGroup = (input: string): ReferenceGroup => {
   // From string input representing reference group, get a referenceGroup object,
   // for example, when Genesis 1:1 (NIV, KJV) is input,
@@ -149,50 +209,60 @@ export const simplifyReferenceGroup = (input: string): ReferenceGroup => {
   // return {bookName: Genesis, chapterStart: '1', chapterEnd: '2', bibles: [NIV, KJV]}
   // when യോഹന്നാൻ 3:16-17 (MAL10RO) is input,
   // return {bookName: യോഹന്നാൻ, chapterStart: '3', verseStart: '16', verseEnd: '17', bibles: [MAL10RO]}
-  const regex =
-    /^(.+?)\s+(\d+(?:-\d+)?)(?::(\d+(?:-\d+)?))?\s*(?:\(([^)]+)\))?$/;
-  const match = input.match(regex);
 
+  const match = input.match(referenceGroupRegex);
   if (!match) {
-    throw new Error('Input string is not in the correct format');
+    throw new Error(
+      'Input string does not match the reference group format. Please ensure your input is in the correct format such as: "Genesis 1:1 (NIV, KJV)" or "Genesis 1-2 (NIV, KJV)".'
+    );
+  }
+  const [, bookName, chapterPart, versePart, biblesPart] = match;
+
+  if (!bookName) {
+    throw new Error(
+      'Book name is missing or not in the correct format. It should be a string such as "Genesis".'
+    );
   }
 
-  const [_, bookName, chapterPart, versePart, biblesPart] = match;
+  const [chapterStart, chapterEnd] = splitAndTrim(chapterPart);
+  if (!chapterStart) {
+    throw new Error(
+      'Chapter start is missing or not in the correct format. It should be a number such as "1".'
+    );
+  }
 
-  const [chapterStart, chapterEnd] = chapterPart.split('-');
-  const [verseStart, verseEnd] = (versePart || '').split('-');
-  const bibles = biblesPart
-    ? biblesPart.split(',').map(bible => bible.trim())
-    : undefined;
+  const [verseStart, verseEnd] = splitAndTrim(versePart);
+  const bibles = getBiblesList(biblesPart);
 
   return {
-    bookName: bookName,
-    chapterStart: chapterStart,
-    chapterEnd: chapterEnd ? chapterEnd : undefined,
-    verseStart: verseStart ? verseStart : undefined,
-    verseEnd: verseEnd ? verseEnd : undefined,
+    bookName,
+    chapterStart,
+    chapterEnd: chapterEnd || undefined,
+    verseStart: verseStart || undefined,
+    verseEnd: verseEnd || undefined,
     bibles,
   };
 };
 
 // - - - - - - - - -
+/**
+ * Gets reference groups from the given input string.
+ * @param input - The input string containing reference groups.
+ * @param [groupSeparator] - The separator used to separate reference groups.
+ * @returns - The map of reference groups.
+ * @throws {Error} If the input is not a string.
+ */
 export const getReferenceGroups = (
   input: string,
   groupSeparator = ';'
 ): Map<string, ReferenceGroup> => {
-  const referenceGrpsStrings = input
+  return input
     .split(groupSeparator)
-    .map(group => group.trim())
-    .filter(group => group !== '');
-
-  const output: Map<string, ReferenceGroup> = new Map();
-
-  for (const referenceGrpsString of referenceGrpsStrings) {
-    output.set(
-      referenceGrpsString,
-      simplifyReferenceGroup(referenceGrpsString)
-    );
-  }
-
-  return output;
+    .reduce((acc: Map<string, ReferenceGroup>, group: string) => {
+      const trimmedGroup = group.trim();
+      if (trimmedGroup !== '') {
+        acc.set(trimmedGroup, simplifyReferenceGroup(trimmedGroup));
+      }
+      return acc;
+    }, new Map());
 };

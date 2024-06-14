@@ -2,10 +2,10 @@ import {expect, test} from 'vitest';
 
 import {
   getReferenceGroups,
-  hasValidSyntax,
-  isMultiChapter,
-  isSingleChapterMultipleVerses,
-  isSingleVerse,
+  hasValidReferenceSyntax,
+  isMultiChapterReference,
+  isSingleChapterMultipleVersesReference,
+  isSingleVerseReference,
   isValidStringOrUndefined,
   simplifyReferenceGroup,
 } from '../src/reference.js';
@@ -121,7 +121,7 @@ test('chapterStart <= 0', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidSyntax(reference)).toBe(false);
+  expect(hasValidReferenceSyntax(reference)).toBe(false);
 });
 
 test('chapterStart is float', () => {
@@ -132,7 +132,7 @@ test('chapterStart is float', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidSyntax(reference)).toBe(false);
+  expect(hasValidReferenceSyntax(reference)).toBe(false);
 });
 
 test('chapterEnd <= 0', () => {
@@ -144,7 +144,7 @@ test('chapterEnd <= 0', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidSyntax(reference)).toBe(false);
+  expect(hasValidReferenceSyntax(reference)).toBe(false);
 });
 
 test('chapterEnd is float', () => {
@@ -156,7 +156,7 @@ test('chapterEnd is float', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidSyntax(reference)).toBe(false);
+  expect(hasValidReferenceSyntax(reference)).toBe(false);
 });
 
 test('only verseEnd is specified ', () => {
@@ -168,7 +168,7 @@ test('only verseEnd is specified ', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidSyntax(reference)).toBe(false);
+  expect(hasValidReferenceSyntax(reference)).toBe(false);
 });
 
 test('verseStart <= 0', () => {
@@ -179,7 +179,7 @@ test('verseStart <= 0', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidSyntax(reference)).toBe(false);
+  expect(hasValidReferenceSyntax(reference)).toBe(false);
 });
 
 test('verseStart is float', () => {
@@ -190,7 +190,7 @@ test('verseStart is float', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidSyntax(reference)).toBe(false);
+  expect(hasValidReferenceSyntax(reference)).toBe(false);
 });
 
 test('verseEnd <= 0', () => {
@@ -202,7 +202,7 @@ test('verseEnd <= 0', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidSyntax(reference)).toBe(false);
+  expect(hasValidReferenceSyntax(reference)).toBe(false);
 });
 
 test('verseEnd is float', () => {
@@ -214,7 +214,7 @@ test('verseEnd is float', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidSyntax(reference)).toBe(false);
+  expect(hasValidReferenceSyntax(reference)).toBe(false);
 });
 
 test('verseStart specified and multi chapter', () => {
@@ -226,7 +226,7 @@ test('verseStart specified and multi chapter', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidSyntax(reference)).toBe(false);
+  expect(hasValidReferenceSyntax(reference)).toBe(false);
 });
 
 test('multi chapter', () => {
@@ -239,7 +239,7 @@ test('multi chapter', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidSyntax(reference)).toBe(true);
+  expect(hasValidReferenceSyntax(reference)).toBe(true);
 });
 
 // - - - - - - - - -
@@ -252,10 +252,10 @@ test('reference is single verse', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidSyntax(reference)).toBe(true);
-  expect(isSingleVerse(reference)).toBe(true);
-  expect(isMultiChapter(reference)).toBe(false);
-  expect(isSingleChapterMultipleVerses(reference)).toBe(false);
+  expect(hasValidReferenceSyntax(reference)).toBe(true);
+  expect(isSingleVerseReference(reference)).toBe(true);
+  expect(isMultiChapterReference(reference)).toBe(false);
+  expect(isSingleChapterMultipleVersesReference(reference)).toBe(false);
 });
 
 // - - - - - - - - -
@@ -269,10 +269,10 @@ test('reference contains multiple verses', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidSyntax(reference)).toBe(true);
-  expect(isSingleVerse(reference)).toBe(false);
-  expect(isMultiChapter(reference)).toBe(false);
-  expect(isSingleChapterMultipleVerses(reference)).toBe(true);
+  expect(hasValidReferenceSyntax(reference)).toBe(true);
+  expect(isSingleVerseReference(reference)).toBe(false);
+  expect(isMultiChapterReference(reference)).toBe(false);
+  expect(isSingleChapterMultipleVersesReference(reference)).toBe(true);
 });
 
 // - - - - - - - - -
@@ -287,10 +287,10 @@ test('reference contains multiple chapters', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidSyntax(reference)).toBe(true);
-  expect(isSingleVerse(reference)).toBe(false);
-  expect(isMultiChapter(reference)).toBe(true);
-  expect(isSingleChapterMultipleVerses(reference)).toBe(false);
+  expect(hasValidReferenceSyntax(reference)).toBe(true);
+  expect(isSingleVerseReference(reference)).toBe(false);
+  expect(isMultiChapterReference(reference)).toBe(true);
+  expect(isSingleChapterMultipleVersesReference(reference)).toBe(false);
 });
 
 test('reference contains multiple chapters in full', () => {
@@ -301,8 +301,8 @@ test('reference contains multiple chapters in full', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidSyntax(reference)).toBe(true);
-  expect(isSingleVerse(reference)).toBe(false);
-  expect(isMultiChapter(reference)).toBe(true);
-  expect(isSingleChapterMultipleVerses(reference)).toBe(false);
+  expect(hasValidReferenceSyntax(reference)).toBe(true);
+  expect(isSingleVerseReference(reference)).toBe(false);
+  expect(isMultiChapterReference(reference)).toBe(true);
+  expect(isSingleChapterMultipleVersesReference(reference)).toBe(false);
 });
