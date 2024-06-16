@@ -1,5 +1,5 @@
 import {expect, test} from 'vitest';
-import {parseReference} from '../src/parsers/simple.js';
+import {parseReferenceGroup} from '../src/parsers/simple.js';
 import {ReferenceGroup} from '../src/types.js';
 
 // - - - - - - - - -
@@ -14,7 +14,7 @@ test('single verse | multiple bibles', () => {
     verseEnd: undefined,
     bibles: ['NIV', 'KJV'],
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('single verse | single bible', () => {
@@ -27,7 +27,7 @@ test('single verse | single bible', () => {
     verseEnd: undefined,
     bibles: ['NIV'],
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('single verse | no bible', () => {
@@ -40,7 +40,7 @@ test('single verse | no bible', () => {
     verseEnd: undefined,
     bibles: undefined,
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('RTL | single verse | multiple bibles', () => {
@@ -53,7 +53,7 @@ test('RTL | single verse | multiple bibles', () => {
     verseEnd: undefined,
     bibles: ['NIV', 'KJV'],
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('RTL | single verse | single bible', () => {
@@ -66,7 +66,7 @@ test('RTL | single verse | single bible', () => {
     verseEnd: undefined,
     bibles: ['NIV'],
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('RTL | single verse | no bible', () => {
@@ -79,7 +79,7 @@ test('RTL | single verse | no bible', () => {
     verseEnd: undefined,
     bibles: undefined,
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('single chapter multi verse | multiple bibles', () => {
@@ -92,7 +92,7 @@ test('single chapter multi verse | multiple bibles', () => {
     verseEnd: '2',
     bibles: ['NIV', 'KJV'],
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('single chapter multi verse | single bible', () => {
@@ -105,7 +105,7 @@ test('single chapter multi verse | single bible', () => {
     verseEnd: '2',
     bibles: ['NIV'],
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('single chapter multi verse | no bible', () => {
@@ -118,7 +118,7 @@ test('single chapter multi verse | no bible', () => {
     verseEnd: '2',
     bibles: undefined,
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('RTL | single chapter multi verse | multiple bibles', () => {
@@ -131,7 +131,7 @@ test('RTL | single chapter multi verse | multiple bibles', () => {
     verseEnd: '2',
     bibles: ['NIV', 'KJV'],
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('RTL | single chapter multi verse | single bible', () => {
@@ -144,7 +144,7 @@ test('RTL | single chapter multi verse | single bible', () => {
     verseEnd: '2',
     bibles: ['NIV'],
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('RTL | single chapter multi verse | no bible', () => {
@@ -157,7 +157,7 @@ test('RTL | single chapter multi verse | no bible', () => {
     verseEnd: '2',
     bibles: undefined,
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('multi chapter | multiple bibles', () => {
@@ -170,7 +170,7 @@ test('multi chapter | multiple bibles', () => {
     verseEnd: undefined,
     bibles: ['NIV', 'KJV'],
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('multi chapter | single bible', () => {
@@ -183,7 +183,7 @@ test('multi chapter | single bible', () => {
     verseEnd: undefined,
     bibles: ['NIV'],
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('multi chapter | no bible', () => {
@@ -196,7 +196,7 @@ test('multi chapter | no bible', () => {
     verseEnd: undefined,
     bibles: undefined,
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('RTL | multi chapter | multiple bibles', () => {
@@ -209,7 +209,7 @@ test('RTL | multi chapter | multiple bibles', () => {
     verseEnd: undefined,
     bibles: ['NIV', 'KJV'],
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('RTL | multi chapter | single bible', () => {
@@ -222,7 +222,7 @@ test('RTL | multi chapter | single bible', () => {
     verseEnd: undefined,
     bibles: ['NIV'],
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('RTL | multi chapter | no bible', () => {
@@ -235,7 +235,7 @@ test('RTL | multi chapter | no bible', () => {
     verseEnd: undefined,
     bibles: undefined,
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('multi chapter with verses | multiple bibles', () => {
@@ -248,7 +248,7 @@ test('multi chapter with verses | multiple bibles', () => {
     verseEnd: '3',
     bibles: ['NIV', 'KJV'],
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('multi chapter with verses | single bible', () => {
@@ -261,7 +261,7 @@ test('multi chapter with verses | single bible', () => {
     verseEnd: '3',
     bibles: ['NIV'],
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('multi chapter with verses | no bible', () => {
@@ -274,7 +274,7 @@ test('multi chapter with verses | no bible', () => {
     verseEnd: '3',
     bibles: undefined,
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('RTL | multi chapter with verses | multiple bibles', () => {
@@ -287,7 +287,7 @@ test('RTL | multi chapter with verses | multiple bibles', () => {
     verseEnd: '3',
     bibles: ['NIV', 'KJV'],
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('RTL | multi chapter with verses | single bible', () => {
@@ -300,7 +300,7 @@ test('RTL | multi chapter with verses | single bible', () => {
     verseEnd: '3',
     bibles: ['NIV'],
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('RTL | multi chapter with verses | no bible', () => {
@@ -313,7 +313,7 @@ test('RTL | multi chapter with verses | no bible', () => {
     verseEnd: '3',
     bibles: undefined,
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('single chapter | multiple bibles', () => {
@@ -326,7 +326,7 @@ test('single chapter | multiple bibles', () => {
     verseEnd: undefined,
     bibles: ['NIV', 'KJV'],
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('single chapter | multiple bibles', () => {
@@ -339,7 +339,7 @@ test('single chapter | multiple bibles', () => {
     verseEnd: undefined,
     bibles: ['NIV', 'KJV'],
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('single chapter | single bible', () => {
@@ -352,7 +352,7 @@ test('single chapter | single bible', () => {
     verseEnd: undefined,
     bibles: ['NIV'],
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('single chapter | single bible | multi part book name', () => {
@@ -365,7 +365,7 @@ test('single chapter | single bible | multi part book name', () => {
     verseEnd: undefined,
     bibles: ['NIV'],
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('single chapter | no bible', () => {
@@ -378,7 +378,7 @@ test('single chapter | no bible', () => {
     verseEnd: undefined,
     bibles: undefined,
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('RTL | single chapter | multiple bibles', () => {
@@ -391,7 +391,7 @@ test('RTL | single chapter | multiple bibles', () => {
     verseEnd: undefined,
     bibles: ['NIV', 'KJV'],
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('RTL | single chapter | single bible', () => {
@@ -404,7 +404,7 @@ test('RTL | single chapter | single bible', () => {
     verseEnd: undefined,
     bibles: ['NIV'],
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
 test('RTL | single chapter | single bible', () => {
@@ -417,5 +417,5 @@ test('RTL | single chapter | single bible', () => {
     verseEnd: undefined,
     bibles: undefined,
   };
-  expect(parseReference(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });

@@ -36,6 +36,18 @@ export declare const sortObject: (obj: any) => any;
  */
 export declare const defaultCacheDir: string;
 /**
+ * The defaultBiblesToExclude variable is used to store a list of Bible versions
+ * that should be excluded. This variable is initialized during runtime by reading
+ * the EPHREM_BIBLES_TO_EXCLUDE environment variable. If the environment variable
+ * exists, it is expected to be a comma-separated list of Bible versions. The list
+ * is then converted into an array by splitting the string at commas and trimming
+ * any leading or trailing whitespace from each element. If the environment variable
+ * does not exist, the default value is an empty array.
+ *
+ * @type {string[]}
+ */
+export declare const defaultBiblesToExclude: string[];
+/**
  * Removes periods from a given string.
  * @param input - The input string from which periods should be removed.
  * @returns - The input string without periods.

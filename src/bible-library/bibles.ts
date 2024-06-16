@@ -8,7 +8,7 @@ import {
   writeJsonFile,
 } from '../utils.js';
 import fs from 'fs-extra';
-import {BibleResponse, Bibles, Cache} from '../types.js';
+import {BibleResponse, Bibles, BiblesCache} from '../types.js';
 
 // - - - - - - - - - -
 //  Abbreviation -> Bible
@@ -128,7 +128,7 @@ const prepareBibleData = (bibleResponse: BibleResponse, timestamp: Date) => {
  */
 export const updateBibles = async (
   languages: string[],
-  cache: Cache,
+  cache: BiblesCache,
   biblesToExclude: string[] = [],
   config: AxiosRequestConfig = {},
   timestamp: Date = new Date()

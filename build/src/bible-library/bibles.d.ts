@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
-import { Bibles, Cache } from '../types.js';
+import { Bibles, BiblesCache } from '../types.js';
 /**
  * Saves the Bibles object to the specified cache directory in JSON format.
  * If no cache directory is provided, the default cache directory will be used.
@@ -25,4 +25,4 @@ export declare const loadBibles: (cacheDir?: string, maxAgeDays?: number, curren
  * @param [timestamp] - The timestamp for the bible update.
  * @returns - A promise that resolves once the bibles have been updated.
  */
-export declare const updateBibles: (languages: string[], cache: Cache, biblesToExclude?: string[], config?: AxiosRequestConfig, timestamp?: Date) => Promise<void>;
+export declare const updateBibles: (languages: string[], cache: BiblesCache, biblesToExclude?: string[], config?: AxiosRequestConfig, timestamp?: Date) => Promise<void>;

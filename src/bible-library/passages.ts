@@ -5,15 +5,23 @@ import {
   writeJsonFile,
 } from '../utils.js';
 import {
-  Cache,
+  BiblesCache,
   Passage,
+  PassageAndFumsResponse,
   PassageOptions,
   PassageQuery,
   Passages,
+  PassagesCache,
 } from '../types.js';
 import fs from 'fs-extra';
 import {AxiosRequestConfig} from 'axios';
 import {fetchPassage} from './api-bible.js';
+import {
+  initializeBiblesCache,
+  initializePassagesCache,
+  needsBiblesCacheUpdate,
+  updateBiblesCache,
+} from './cache.js';
 
 /**
  * Returns the path to the cache file for passages.
@@ -126,22 +134,63 @@ export const passageQueriesAreEqual = (
 };
 
 // - - - - - - - - - -
-/**
- * Retrieves a Bible passage.
- * @param passageID - The ID of the passage.
- * @param bibleID - The ID of the Bible.
- * @param [passageOptions] - The options for the passage.
- * @param [config] - The configuration options for the request.
- * @param [timestamp] - The timestamp of when the passage was retrieved.
- * @returns - A Promise that resolves with the retrieved passage.
- */
 const getPassage = async (
   passageID: string,
-  bibleID: string,
+  bibleAbbreviation: string,
   passageOptions: PassageOptions = {},
+  biblesCache: BiblesCache = initializeBiblesCache(),
+  passagesCache: PassagesCache = initializePassagesCache(),
   config: AxiosRequestConfig = {},
-  timestamp: Date = new Date()
-): Promise<Passage> => {
+  languages: string[] = [],
+  biblesToExclude: string[] = [],
+  forceApiCall = false
+): Promise<PassageAndFumsResponse> => {
+  // if already present in cache, return PassageAndFumsResponse from cache
+  // else, fetch from API and return response and update PassageCache
+  const needToUpdateCache = needsBiblesCacheUpdate(
+    bibleAbbreviation,
+    languages,
+    biblesCache
+  );
+
+  if (needToUpdateCache) {
+    await updateBiblesCache(
+      languages,
+      biblesCache,
+      false,
+      biblesToExclude,
+      config
+    );
+  }
+
+  const bibleID = biblesCache.bibles[bibleAbbreviation]?.id;
+  if (!bibleID) {
+    throw new Error(
+      `Bible with abbreviation "${bibleAbbreviation}" not found in cache. Please ensure the correct abbreviations are used.`
+    );
+  }
+
+  const passageQuery: PassageQuery = {
+    passageID,
+    bibleID,
+    ...passageOptions,
+  };
+
+  const passageAndBible = getPassageAndBible(passageID, bibleAbbreviation);
+
+  if (!forceApiCall) {
+    const passages: Passage[] | undefined =
+      passagesCache.passages[passageAndBible];
+
+    if (passages !== undefined) {
+      for (const passage of passages) {
+        if (passageQueriesAreEqual(passage.query, passageQuery)) {
+          return passage.response;
+        }
+      }
+    }
+  }
+
   const passageAndFums = await fetchPassage(
     passageID,
     bibleID,
@@ -149,133 +198,18 @@ const getPassage = async (
     config
   );
 
-  const passageQuery: PassageQuery = {
-    passageID,
-    bibleID,
-    ...passageOptions,
-  };
-
-  return {
+  const passage: Passage = {
     query: passageQuery,
     response: passageAndFums,
-    cachedOn: timestamp,
-  };
-};
-
-// - - - - - - - - - -
-/**
- * Adds a new passage to the existing list of passages.
- * @param passages - The existing list of passages.
- * @param passageID - The ID of the passage to add.
- * @param bibleID - The ID of the Bible associated with the passage.
- * @param passageOptions - The options to be applied to the passage.
- * @param config - The configuration for the HTTP request.
- * @param timestamp - The timestamp to use for the passage.
- * @param cache - The cache object.
- * @param passageAndBible - The unique key to identify the passage in the cache.
- * @returns - A promise that resolves when the passage is added successfully.
- */
-const addToPassage = async (
-  passages: Passage[],
-  passageID: string,
-  bibleID: string,
-  passageOptions: PassageOptions,
-  config: AxiosRequestConfig,
-  timestamp: Date,
-  cache: Cache,
-  passageAndBible: string
-) => {
-  const newPassage: Passage = await getPassage(
-    passageID,
-    bibleID,
-    passageOptions,
-    config,
-    timestamp
-  );
-  passages.push(newPassage);
-  cache.passages[passageAndBible] = passages;
-};
-
-/**
- * Updates the passage in the cache with the given passageID and bibleAbbreviation.
- * @param passageID - The unique identifier of the passage.
- * @param bibleAbbreviation - The abbreviation of the bible.
- * @param cache - The cache object that holds the passages and bibles.
- * @param [passageOptions] - The options to include in the passage query.
- * @param [config] - The config object for the Axios request.
- * @param [timestamp] - The timestamp of the update.
- * @throws {Error} if the bibleID cannot be found in the cache.
- * @returns - A Promise that resolves when the passage is updated in the cache.
- */
-export const updatePassage = async (
-  passageID: string,
-  bibleAbbreviation: string,
-  cache: Cache,
-  passageOptions: PassageOptions = {},
-  config: AxiosRequestConfig = {},
-  timestamp: Date = new Date()
-): Promise<void> => {
-  const bibleID = cache.bibles[bibleAbbreviation]?.id;
-  if (!bibleID) {
-    throw new Error(
-      `Bible with abbreviation "${bibleAbbreviation}" not found in cache. Please ensure the correct abbreviations are used.`
-    );
-  }
-
-  const passageAndBible = getPassageAndBible(passageID, bibleAbbreviation);
-  const passageQuery: PassageQuery = {
-    passageID,
-    bibleID,
-    ...passageOptions,
+    cachedOn: new Date(),
   };
 
-  const passages: Passage[] | undefined = cache.passages[passageAndBible];
-  if (passages === undefined || passages.length === 0) {
-    try {
-      await addToPassage(
-        [],
-        passageID,
-        bibleID,
-        passageOptions,
-        config,
-        timestamp,
-        cache,
-        passageAndBible
-      );
-    } catch (error) {
-      throw new Error(
-        `Failed to add passage to cache: ${(error as Error).message}`
-      );
-    }
-  } else {
-    let addedToPassages = false;
-    for (const passage of passages) {
-      if (passageQueriesAreEqual(passage.query, passageQuery)) {
-        addedToPassages = true;
-        break;
-      }
-    }
-    if (!addedToPassages) {
-      try {
-        await addToPassage(
-          passages,
-          passageID,
-          bibleID,
-          passageOptions,
-          config,
-          timestamp,
-          cache,
-          passageAndBible
-        );
-      } catch (error) {
-        throw new Error(
-          `Failed to add passage to existing passages in cache: ${
-            (error as Error).message
-          }`
-        );
-      }
-    }
+  if (!(passageAndBible in passagesCache.passages)) {
+    passagesCache.passages[passageAndBible] = [] as Passage[];
   }
 
-  cache.updatedSinceLoad = true;
+  passagesCache.passages[passageAndBible].push(passage);
+  passagesCache.updatedSinceLoad = true;
+
+  return passageAndFums;
 };

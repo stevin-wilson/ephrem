@@ -7,12 +7,12 @@ import {
 } from '../utils.js';
 import {
   Bible,
+  BiblesCache,
   BookIdWithLanguage,
   BookNameDetails,
   BookNameReference,
   BookNames,
   BookResponse,
-  Cache,
 } from '../types.js';
 import fs from 'fs-extra';
 import {books} from '../books.js';
@@ -174,7 +174,7 @@ const bookNameDetailsMatchReference = (
  */
 export const updateBookNames = async (
   languages: string[],
-  cache: Cache,
+  cache: BiblesCache,
   config: AxiosRequestConfig = {},
   timestamp = new Date()
 ): Promise<void> => {

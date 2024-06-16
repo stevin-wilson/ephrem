@@ -383,7 +383,7 @@ const splitChapterAndVerse = (chapterVerse: string) => {
   return {chapterStart, chapterEnd, verseStart, verseEnd};
 };
 
-export const parseReference = (input: string): ReferenceGroup => {
+export const parseReferenceGroup = (input: string): ReferenceGroup => {
   const {translations, bookChapterVerse} =
     extractTranslationsAndBookChapterVerse(input);
   // eslint-disable-next-line prefer-const

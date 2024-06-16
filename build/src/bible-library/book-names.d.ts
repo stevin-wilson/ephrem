@@ -1,4 +1,4 @@
-import { BookNameDetails, BookNames, BookResponse, Cache } from '../types.js';
+import { BiblesCache, BookNameDetails, BookNames, BookResponse } from '../types.js';
 import { AxiosRequestConfig } from 'axios';
 /**
  * Saves the book names to a cache file.
@@ -32,4 +32,4 @@ export declare const getBookNames: (bookResponses: BookResponse[]) => BookNameDe
  * @param [timestamp] - The timestamp for the cache update.
  * @returns - A Promise that resolves once the book names are updated in the cache.
  */
-export declare const updateBookNames: (languages: string[], cache: Cache, config?: AxiosRequestConfig, timestamp?: Date) => Promise<void>;
+export declare const updateBookNames: (languages: string[], cache: BiblesCache, config?: AxiosRequestConfig, timestamp?: Date) => Promise<void>;

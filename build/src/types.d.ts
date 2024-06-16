@@ -95,10 +95,7 @@ export interface PassageQuery extends PassageOptions {
 }
 export interface Passage {
     readonly query: PassageQuery;
-    readonly reference: string;
-    readonly content: string;
-    readonly copyright: string;
-    readonly fums: string;
+    readonly response: PassageAndFumsResponse;
     readonly cachedOn: Date;
 }
 export type Passages = {
@@ -113,9 +110,13 @@ export interface ReferenceGroup {
     readonly bibles?: string[];
 }
 export interface Cache {
+    updatedSinceLoad: boolean;
+}
+export interface BiblesCache extends Cache {
     bibles: Bibles;
     bookNames: BookNames;
+}
+export interface PassagesCache extends Cache {
     passages: Passages;
-    updatedSinceLoad: boolean;
 }
 export {};

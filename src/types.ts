@@ -166,8 +166,17 @@ export interface ReferenceGroup {
 
 // - - - - - - - - - -
 export interface Cache {
+  updatedSinceLoad: boolean;
+}
+
+// - - - - - - - - - -
+export interface BiblesCache extends Cache {
   bibles: Bibles;
   bookNames: BookNames;
+}
+
+// - - - - - - - - - -
+
+export interface PassagesCache extends Cache {
   passages: Passages;
-  updatedSinceLoad: boolean;
 }
