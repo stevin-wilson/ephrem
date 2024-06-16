@@ -145,10 +145,7 @@ export interface PassageQuery extends PassageOptions {
 // - - - - - - - - - -
 export interface Passage {
   readonly query: PassageQuery;
-  readonly reference: string;
-  readonly content: string;
-  readonly copyright: string;
-  readonly fums: string;
+  readonly response: PassageAndFumsResponse;
   readonly cachedOn: Date;
 }
 

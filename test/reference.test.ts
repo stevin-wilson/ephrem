@@ -9,7 +9,6 @@ import {
   isValidStringOrUndefined,
   simplifyReferenceGroup,
 } from '../src/reference.js';
-import {books} from '../src/books.js';
 import {Reference, ReferenceGroup} from '../src/types.js';
 
 // - - - - - - - - -

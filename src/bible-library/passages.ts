@@ -157,8 +157,7 @@ const getPassage = async (
 
   return {
     query: passageQuery,
-    ...passageAndFums.data,
-    fums: passageAndFums.meta.fums,
+    response: passageAndFums,
     cachedOn: timestamp,
   };
 };
