@@ -161,7 +161,7 @@ export interface ReferenceGroup {
   readonly chapterEnd?: string;
   readonly verseStart?: string;
   readonly verseEnd?: string;
-  readonly bibles?: string[];
+  readonly bibles: string[];
 }
 
 // - - - - - - - - - -
@@ -180,3 +180,9 @@ export interface BiblesCache extends Cache {
 export interface PassagesCache extends Cache {
   passages: Passages;
 }
+
+// - - - - - - - - - -
+export type ReferenceMap = Map<string, Reference[]>;
+
+// - - - - - - - - - -
+export type PassageMap = Map<string, PassageAndFumsResponse[]>;

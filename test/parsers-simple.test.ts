@@ -1,5 +1,5 @@
 import {expect, test} from 'vitest';
-import {parseReferenceGroup} from '../src/parsers/simple.js';
+import {parseReferenceGroup} from '../src/parser.js';
 import {ReferenceGroup} from '../src/types.js';
 
 // - - - - - - - - -

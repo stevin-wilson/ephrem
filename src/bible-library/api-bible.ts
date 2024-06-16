@@ -7,9 +7,10 @@ import {
   PassageOptions,
 } from '../types.js';
 import createError from 'http-errors';
+import {defaultPassageOptions} from '../utils.js';
 
 // - - - - - - - - - -
-const defaultConfig = {
+export const defaultConfig = {
   method: 'GET',
   headers: {'api-key': process.env.API_BIBLE_API_KEY!},
 } as const;
@@ -100,21 +101,16 @@ const retryOn503 = async <T>(
  */
 const fetchFromAPI = async (
   url: string,
-  config: AxiosRequestConfig = {},
+  config: AxiosRequestConfig = defaultConfig,
   delayBetweenCalls: number | undefined = 1000 // delay between consecutive API calls in milliseconds
 ): Promise<unknown> => {
-  const finalConfig = {
-    ...defaultConfig,
-    ...config,
-  };
-
   // Wait for delay before making the API call
   if (delayBetweenCalls !== undefined) {
     await sleep(delayBetweenCalls);
   }
 
   return await retryOn503(() =>
-    axios.get(url, finalConfig).then(response => response.data.data)
+    axios.get(url, config).then(response => response.data.data)
   );
 };
 // - - - - - - - - - -
@@ -126,7 +122,7 @@ const fetchFromAPI = async (
  */
 export const fetchBibles = async (
   language: string,
-  config: AxiosRequestConfig = {}
+  config: AxiosRequestConfig = defaultConfig
 ): Promise<BibleResponse[]> => {
   const url = getAvailableBiblesURL(language);
   return (await fetchFromAPI(url, config)) as BibleResponse[];
@@ -140,7 +136,7 @@ export const fetchBibles = async (
  */
 export const fetchBooks = async (
   bibleID: string,
-  config: AxiosRequestConfig = {}
+  config: AxiosRequestConfig = defaultConfig
 ): Promise<BookResponse[]> => {
   const url = getAvailableBooksURL(bibleID);
   return (await fetchFromAPI(url, config)) as BookResponse[];
@@ -157,7 +153,7 @@ export const fetchBooks = async (
 const getPassageURL = (
   passageID: string,
   bibleID: string,
-  passageOptions: PassageOptions
+  passageOptions: PassageOptions = defaultPassageOptions
 ): string => {
   const {
     contentType = 'html',
@@ -211,18 +207,13 @@ class PassageError extends Error {
 export const fetchPassage = async (
   passageID: string,
   bibleID: string,
-  passageOptions: PassageOptions = {},
-  config: AxiosRequestConfig = {}
+  passageOptions: PassageOptions = defaultPassageOptions,
+  config: AxiosRequestConfig = defaultConfig
 ): Promise<PassageAndFumsResponse> => {
-  const finalConfig = {
-    ...defaultConfig,
-    ...config,
-  };
-
   const url = getPassageURL(passageID, bibleID, passageOptions);
 
   try {
-    const response = await axios.get(url, finalConfig);
+    const response = await axios.get(url, config);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     return response.data as PassageAndFumsResponse;
   } catch (error) {

@@ -27,7 +27,7 @@ const createPassageBoundary = (
  * @param reference - The reference object containing book, chapter, and verse information.
  * @returns - The passage ID generated from the reference.
  */
-const getPassageID = (reference: Reference): string => {
+export const getPassageID = (reference: Reference): string => {
   const sections: string[] = [];
 
   let requiredSection = createPassageBoundary(
@@ -171,98 +171,4 @@ export const isSingleChapterMultipleVersesReference = (
   return (
     !isMultiChapterReference(reference) && !isSingleVerseReference(reference)
   );
-};
-
-// - - - - - - - - -
-const referenceGroupRegex =
-  /^(.+?)\s+(\d+(?:-\d+)?)(?::(\d+(?:-\d+)?))?\s*(?:\(([^)]+)\))?$/;
-
-/**
- * Retrieves the list of Bibles based on a given string.
- * @param biblesPart - The string containing comma-separated Bible names or undefined if no Bible names are provided.
- * @returns - An array of Bible names or undefined if no Bible names are provided.
- */
-const getBiblesList = (biblesPart: string | undefined): string[] | undefined =>
-  biblesPart ? biblesPart.split(',').map(bible => bible.trim()) : undefined;
-
-/**
- * Splits the input string by '-' character and trims the resulting substrings.
- * @param input - The string to be split and trimmed.
- * @returns - An array containing the trimmed substrings.
- */
-const splitAndTrim = (input: string | undefined): string[] =>
-  (input || '').split('-');
-
-/**
- * Simplifies a reference group string into a ReferenceGroup object.
- * @param input - The input string representing the reference group.
- * @returns - The simplified reference group object.
- * @throws {Error} - If the input string is not in the correct format.
- */
-export const simplifyReferenceGroup = (input: string): ReferenceGroup => {
-  // From string input representing reference group, get a referenceGroup object,
-  // for example, when Genesis 1:1 (NIV, KJV) is input,
-  // return {bookName: Genesis, chapterStart: '1', verseStart: '1', bibles: [NIV, KJV]}
-  // for example, when Genesis 1-2 is input,
-  // return {bookName: Genesis, chapterStart: '1', chapterEnd: '2'}
-  // for example, when Genesis 1-2 (NIV, KJV) is input,
-  // return {bookName: Genesis, chapterStart: '1', chapterEnd: '2', bibles: [NIV, KJV]}
-  // when യോഹന്നാൻ 3:16-17 (MAL10RO) is input,
-  // return {bookName: യോഹന്നാൻ, chapterStart: '3', verseStart: '16', verseEnd: '17', bibles: [MAL10RO]}
-
-  const match = input.match(referenceGroupRegex);
-  if (!match) {
-    throw new Error(
-      'Input string does not match the reference group format. Please ensure your input is in the correct format such as: "Genesis 1:1 (NIV, KJV)" or "Genesis 1-2 (NIV, KJV)".'
-    );
-  }
-  const [, bookName, chapterPart, versePart, biblesPart] = match;
-
-  if (!bookName) {
-    throw new Error(
-      'Book name is missing or not in the correct format. It should be a string such as "Genesis".'
-    );
-  }
-
-  const [chapterStart, chapterEnd] = splitAndTrim(chapterPart);
-  if (!chapterStart) {
-    throw new Error(
-      'Chapter start is missing or not in the correct format. It should be a number such as "1".'
-    );
-  }
-
-  const [verseStart, verseEnd] = splitAndTrim(versePart);
-  const bibles = getBiblesList(biblesPart);
-
-  return {
-    bookName,
-    chapterStart,
-    chapterEnd: chapterEnd || undefined,
-    verseStart: verseStart || undefined,
-    verseEnd: verseEnd || undefined,
-    bibles,
-  };
-};
-
-// - - - - - - - - -
-/**
- * Gets reference groups from the given input string.
- * @param input - The input string containing reference groups.
- * @param [groupSeparator] - The separator used to separate reference groups.
- * @returns - The map of reference groups.
- * @throws {Error} If the input is not a string.
- */
-export const getReferenceGroups = (
-  input: string,
-  groupSeparator = ';'
-): Map<string, ReferenceGroup> => {
-  return input
-    .split(groupSeparator)
-    .reduce((acc: Map<string, ReferenceGroup>, group: string) => {
-      const trimmedGroup = group.trim();
-      if (trimmedGroup !== '') {
-        acc.set(trimmedGroup, simplifyReferenceGroup(trimmedGroup));
-      }
-      return acc;
-    }, new Map());
 };

@@ -1,9 +1,13 @@
 import {BiblesCache, VoteTally} from './types.js';
+import {AxiosRequestConfig} from 'axios';
+import {defaultBiblesToExclude, defaultLanguages} from './utils.js';
+import {books} from './books.js';
+import {defaultConfig} from './bible-library/api-bible.js';
 import {
+  loadBiblesCache,
   needsBiblesCacheUpdate,
   updateBiblesCache,
-} from './bible-library/cache.js';
-import {AxiosRequestConfig} from 'axios';
+} from './bible-library/bibles.js';
 
 /**
  * Finds the key with the maximum value in the given voteTally object.
@@ -25,35 +29,39 @@ const getKeyOfMaxValue = (voteTally: VoteTally): string | undefined => {
   return maxKey;
 };
 
-const getBookID = async (
+export const getBookID = async (
   bookName: string,
-  bibleAbbreviation: string | undefined,
-  languages: string[],
-  cache: BiblesCache,
+  biblesCache?: BiblesCache,
+  bibleAbbreviation?: string,
+  languages: string[] = defaultLanguages,
   useMajorityFallback = true,
   forceUpdateCache = false,
-  biblesToExclude: string[] = [],
-  config: AxiosRequestConfig = {}
-): Promise<string | undefined> => {
+  biblesToExclude: string[] = defaultBiblesToExclude,
+  config: AxiosRequestConfig = defaultConfig
+): Promise<keyof typeof books | undefined> => {
+  if (biblesCache === undefined) {
+    biblesCache = await loadBiblesCache();
+  }
+
   useMajorityFallback ||= !bibleAbbreviation;
 
   const needToUpdateCache = needsBiblesCacheUpdate(
+    biblesCache,
     bibleAbbreviation,
-    languages,
-    cache
+    languages
   );
 
   if (needToUpdateCache || forceUpdateCache) {
     await updateBiblesCache(
+      biblesCache,
       languages,
-      cache,
-      forceUpdateCache,
       biblesToExclude,
-      config
+      config,
+      forceUpdateCache
     );
   }
 
-  const bookReferences = cache.bookNames[bookName];
+  const bookReferences = biblesCache.bookNames[bookName];
   if (!bookReferences) {
     return undefined;
   }
@@ -61,22 +69,30 @@ const getBookID = async (
   let bookID: string | undefined = undefined;
 
   if (bibleAbbreviation) {
-    bookID = getBookIdInBible(bookName, bibleAbbreviation, cache);
+    bookID = await getBookIdInBible(bookName, bibleAbbreviation, biblesCache);
   }
 
   if (!bookID && useMajorityFallback) {
-    bookID = getBookIdByMajority(bookName, languages, cache);
+    bookID = await getBookIdByMajority(bookName, biblesCache, languages);
   }
 
-  return bookID;
+  if (bookID !== undefined && !(bookID in books)) {
+    bookID = undefined;
+  }
+
+  return bookID as keyof typeof books | undefined;
 };
 
-const getBookIdInBible = (
+const getBookIdInBible = async (
   bookName: string,
   bibleAbbreviation: string,
-  cache: BiblesCache
-): string | undefined => {
-  const bookReferences = cache.bookNames[bookName];
+  biblesCache?: BiblesCache
+): Promise<string | undefined> => {
+  if (biblesCache === undefined) {
+    biblesCache = await loadBiblesCache();
+  }
+
+  const bookReferences = biblesCache.bookNames[bookName];
   if (!bookReferences) {
     return undefined;
   }
@@ -92,12 +108,16 @@ const getBookIdInBible = (
   return undefined;
 };
 
-const getBookIdByMajority = (
+const getBookIdByMajority = async (
   bookName: string,
-  languages: string[] | undefined,
-  cache: BiblesCache
-): string | undefined => {
-  const bookReferences = cache.bookNames[bookName];
+  biblesCache?: BiblesCache,
+  languages?: string[]
+): Promise<string | undefined> => {
+  if (biblesCache === undefined) {
+    biblesCache = await loadBiblesCache();
+  }
+
+  const bookReferences = biblesCache.bookNames[bookName];
   if (!bookReferences) {
     return undefined;
   }

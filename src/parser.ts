@@ -1,4 +1,13 @@
-import {ReferenceGroup} from '../types.js';
+import {BiblesCache, Reference, ReferenceGroup, ReferenceMap} from './types.js';
+import {
+  defaultBibles,
+  defaultBiblesToExclude,
+  defaultLanguages,
+} from './utils.js';
+import {getBookID} from './identify-book.js';
+import {AxiosRequestConfig} from 'axios';
+import {defaultConfig} from './bible-library/api-bible.js';
+import {loadBiblesCache} from './bible-library/bibles.js';
 
 // Examples:
 //
@@ -383,6 +392,7 @@ const splitChapterAndVerse = (chapterVerse: string) => {
   return {chapterStart, chapterEnd, verseStart, verseEnd};
 };
 
+// - - - - - - - - -
 export const parseReferenceGroup = (input: string): ReferenceGroup => {
   const {translations, bookChapterVerse} =
     extractTranslationsAndBookChapterVerse(input);
@@ -405,6 +415,91 @@ export const parseReferenceGroup = (input: string): ReferenceGroup => {
     chapterEnd,
     verseStart,
     verseEnd,
-    bibles,
+    bibles: bibles ? bibles : defaultBibles,
   };
+};
+
+// - - - - - - - - -
+export const parseReference = async (
+  referenceGroup: ReferenceGroup,
+  biblesCache?: BiblesCache,
+  languages: string[] = defaultLanguages,
+  useMajorityFallback = true,
+  forceUpdateCache = false,
+  biblesToExclude: string[] = defaultBiblesToExclude,
+  config: AxiosRequestConfig = defaultConfig
+): Promise<Reference[]> => {
+  if (biblesCache === undefined) {
+    biblesCache = await loadBiblesCache();
+  }
+
+  const references: Reference[] = [];
+  for (const bible of referenceGroup.bibles) {
+    const bookId = await getBookID(
+      referenceGroup.bookName,
+      biblesCache,
+      bible,
+      languages,
+      useMajorityFallback,
+      forceUpdateCache,
+      biblesToExclude,
+      config
+    );
+
+    if (!bookId) {
+      continue;
+    }
+
+    const reference: Reference = {
+      book: bookId,
+      chapterStart: referenceGroup.chapterStart,
+      chapterEnd: referenceGroup.chapterEnd,
+      verseStart: referenceGroup.verseStart,
+      verseEnd: referenceGroup.verseEnd,
+      bible,
+    };
+    references.push(reference);
+  }
+
+  return references;
+};
+
+// - - - - - - - - -
+export const getReferenceMap = async (
+  input: string,
+  biblesCache?: BiblesCache,
+  delimiter = ';',
+  languages: string[] = defaultLanguages,
+  useMajorityFallback = true,
+  forceUpdateCache = false,
+  biblesToExclude: string[] = defaultBiblesToExclude,
+  config: AxiosRequestConfig = defaultConfig
+): Promise<ReferenceMap> => {
+  if ([',', '.', ' '].includes(delimiter)) {
+    throw Error;
+  }
+
+  const referenceGrpsStrings = input
+    .split(delimiter)
+    .map(group => group.trim())
+    .filter(group => group !== '');
+
+  const referenceMap: ReferenceMap = new Map();
+
+  for (const referenceGroupString of referenceGrpsStrings) {
+    const referenceGroup = parseReferenceGroup(referenceGroupString);
+    const references = await parseReference(
+      referenceGroup,
+      biblesCache,
+      languages,
+      useMajorityFallback,
+      forceUpdateCache,
+      biblesToExclude,
+      config
+    );
+
+    referenceMap.set(referenceGroupString, references);
+  }
+
+  return referenceMap;
 };

@@ -1,6 +1,7 @@
 import path from 'path';
 import {homedir} from 'os';
 import fs from 'fs-extra';
+import {PassageOptions} from './types.js';
 
 /**
  * Checks if an environment variable is set.
@@ -112,11 +113,36 @@ export const defaultCacheDir: string = expandHomeDir(
  * any leading or trailing whitespace from each element. If the environment variable
  * does not exist, the default value is an empty array.
  *
- * @type {string[]}
  */
 export const defaultBiblesToExclude = process.env.EPHREM_BIBLES_TO_EXCLUDE
   ? process.env.EPHREM_BIBLES_TO_EXCLUDE.split(',').map(s => s.trim())
   : [];
+
+export const defaultLanguages = process.env.EPHREM_LANGUAGES
+  ? process.env.EPHREM_LANGUAGES.split(',').map(s => s.trim())
+  : ['eng'];
+
+export const defaultBibles = process.env.EPHREM_DEFAULT_BIBLES
+  ? process.env.EPHREM_DEFAULT_BIBLES.split(',').map(s => s.trim())
+  : ['engKJV'];
+
+let contentType: 'html' | 'json' | 'text';
+if (
+  ['html', 'json', 'text'].includes(process.env.EPHREM_CONTENT_TYPE as string)
+) {
+  contentType = process.env.EPHREM_CONTENT_TYPE as 'html' | 'json' | 'text';
+} else {
+  contentType = 'text';
+}
+
+export const defaultPassageOptions: PassageOptions = {
+  contentType: contentType,
+  includeNotes: process.env.EPHREM_INCLUDE_NOTES === 'true',
+  includeTitles: process.env.EPHREM_INCLUDE_TITLES === 'true',
+  includeChapterNumbers: process.env.EPHREM_INCLUDE_CHAPTER_NUMBERS === 'true',
+  includeVerseNumbers: process.env.EPHREM_INCLUDE_VERSE_NUMBERS === 'true',
+  includeVerseSpans: process.env.EPHREM_INCLUDE_VERSE_SPANS === 'true',
+};
 
 /**
  * Removes periods from a given string.
