@@ -119,7 +119,7 @@ export const defaultBiblesToExclude = process.env.EPHREM_BIBLES_TO_EXCLUDE
   : [];
 
 export const defaultLanguages = process.env.EPHREM_LANGUAGES
-  ? process.env.EPHREM_LANGUAGES.split(',').map(s => s.trim())
+  ? process.env.EPHREM_LANGUAGES.split(',').map(s => normalizeLanguage(s))
   : ['eng'];
 
 export const defaultBibles = process.env.EPHREM_DEFAULT_BIBLES
@@ -176,3 +176,13 @@ export const removePunctuation = (input: string): string =>
 
 export const normalizeBookName = (bookName: string): string =>
   removePunctuation(bookName).toLowerCase();
+
+export const normalizeLanguage = (language: string): string | never => {
+  const normalized = removePunctuation(language).trim().toLowerCase();
+
+  if (normalized.length === 3 && /^[a-z]{3}$/.test(normalized)) {
+    return normalized;
+  } else {
+    throw new Error(`Invalid ISO 693-3 language code: ${language}`);
+  }
+};

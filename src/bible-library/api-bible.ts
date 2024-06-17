@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import axios, {AxiosRequestConfig} from 'axios';
+import axios, {AxiosError, AxiosRequestConfig} from 'axios';
 import {
   BibleResponse,
   BookResponse,
@@ -8,6 +8,10 @@ import {
 } from '../types.js';
 import createError from 'http-errors';
 import {defaultPassageOptions} from '../utils.js';
+
+const MAX_RETRIES = 3;
+const DELAY_BETWEEN_CALLS_MS = 1000;
+const INITIAL_BACKOFF_MS = 300;
 
 // - - - - - - - - - -
 export const defaultConfig = {
@@ -49,8 +53,8 @@ const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
  */
 const retryOn503 = async <T>(
   fn: () => Promise<T>,
-  retries = 3,
-  initialBackoff = 300
+  retries = MAX_RETRIES,
+  initialBackoff = INITIAL_BACKOFF_MS
 ): Promise<T> => {
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
@@ -102,16 +106,47 @@ const retryOn503 = async <T>(
 const fetchFromAPI = async (
   url: string,
   config: AxiosRequestConfig = defaultConfig,
-  delayBetweenCalls: number | undefined = 1000 // delay between consecutive API calls in milliseconds
+  delayBetweenCalls: number | undefined = DELAY_BETWEEN_CALLS_MS // delay between consecutive API calls in milliseconds
 ): Promise<unknown> => {
-  // Wait for delay before making the API call
-  if (delayBetweenCalls !== undefined) {
-    await sleep(delayBetweenCalls);
-  }
+  try {
+    // Wait for delay before making the API call
+    if (delayBetweenCalls !== undefined) {
+      await sleep(delayBetweenCalls);
+    }
 
-  return await retryOn503(() =>
-    axios.get(url, config).then(response => response.data.data)
-  );
+    const response = await retryOn503(() => axios.get(url, config));
+    return response.data.data;
+  } catch (error) {
+    // checking if error response exists
+    if (axios.isAxiosError(error) && error.response) {
+      // handling based on status code
+      switch (error.response.status) {
+        case 400:
+          throw new Error(
+            'Bad Request. Please check your input and try again.'
+          );
+        case 401:
+          throw new Error('Unauthorized. Please check your credentials.');
+        case 403:
+          throw new Error(
+            'Forbidden. You do not have permission to access this resource.'
+          );
+        case 404:
+          throw new Error(
+            'Not Found. The requested resource could not be found.'
+          );
+        case 500:
+          throw new Error('Server Error. Please try again later.');
+        default:
+          throw new Error('An unexpected error occurred. Please try again.');
+      }
+    } else {
+      // generic error message for non http related errors like network failure, etc.
+      throw new Error(
+        'An error occurred while fetching data. Please try again.'
+      );
+    }
+  }
 };
 // - - - - - - - - - -
 /**
@@ -195,66 +230,78 @@ class PassageError extends Error {
 
 // - - - - - - - - - -
 /**
- * Fetches a Bible passage by ID and Bible ID.
- * @async
- * @param passageID - The ID of the passage to fetch.
- * @param bibleID - The ID of the Bible from which to fetch the passage.
- * @param [passageOptions] - Optional parameters for fetching the passage.
- * @param [config] - Optional configuration for the Axios HTTP client.
- * @returns - A promise that resolves to the fetched passage and Fums (Find, Usages, Metadata, and Statistics) response.
+ * Handles passage fetching errors
+ * @param error - The thrown error object, which is of type Error.
  * @throws {PassageError} - If an error occurs during the passage fetch, a PassageError is thrown with relevant error details.
  */
+function handleFetchPassageError(error: Error): never {
+  if (axios.isAxiosError(error)) {
+    // error is AxiosError
+    const response = error.response;
+    if (response) {
+      switch (response.status) {
+        case 400:
+          throw new PassageError(
+            'Bad request. Please check your request content',
+            response.status,
+            response.statusText
+          );
+        case 404:
+          throw new PassageError(
+            'Invalid passage or bible id.',
+            response.status,
+            response.statusText
+          );
+        default:
+          throw new PassageError(
+            'An error occurred while fetching the passage.',
+            response.status,
+            response.statusText
+          );
+      }
+    } else {
+      // Request made but no response received
+      throw new PassageError(
+        'No response received from API. Please check your connection or API endpoint.',
+        0,
+        ''
+      );
+    }
+  } else {
+    // error is generic Error
+    throw new PassageError(error.message, 0, '');
+  }
+}
+
+// fetchPassage function implementation
 export const fetchPassage = async (
   passageID: string,
   bibleID: string,
   passageOptions: PassageOptions = defaultPassageOptions,
-  config: AxiosRequestConfig = defaultConfig
+  config: AxiosRequestConfig = defaultConfig,
+  delayBetweenCalls: number | undefined = DELAY_BETWEEN_CALLS_MS
 ): Promise<PassageAndFumsResponse> => {
-  const url = getPassageURL(passageID, bibleID, passageOptions);
+  const passageRequest = async () => {
+    const url = getPassageURL(passageID, bibleID, passageOptions);
+    const response = await axios.get(url, config);
+    return response.data as PassageAndFumsResponse;
+  };
+
+  // Wait for delay before making the API call
+  if (delayBetweenCalls !== undefined) {
+    await sleep(delayBetweenCalls);
+  }
 
   try {
-    const response = await axios.get(url, config);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    return response.data as PassageAndFumsResponse;
+    return await retryOn503(passageRequest, MAX_RETRIES);
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      if (error.response) {
-        switch (error.response.status) {
-          case 400:
-            throw new PassageError(
-              'Bad request. Please check your request content',
-              error.response.status,
-              error.response.statusText
-            );
-          case 404:
-            throw new PassageError(
-              'Invalid passage or bible id.',
-              error.response.status,
-              error.response.statusText
-            );
-          default:
-            throw new PassageError(
-              'An error occurred while fetching the passage.',
-              error.response.status,
-              error.response.statusText
-            );
-        }
-      } else if (error.request) {
-        throw new PassageError(
-          'No response received from API. Please check your connection or API endpoint.',
-          0,
-          ''
-        );
-      } else {
-        throw new PassageError(
-          'An error occurred in the request setup.',
-          0,
-          ''
-        );
-      }
+    let err: Error;
+    if (error instanceof Error) {
+      err = error;
     } else {
-      throw new PassageError('An unexpected error occurred.', 0, '');
+      err = new Error((error as {message?: string}).message || 'Unknown error');
     }
+    handleFetchPassageError(err);
   }
 };
 // - - - - - - - - - -
