@@ -7,6 +7,7 @@ import {
   defaultCacheDir,
   defaultLanguages,
   getThresholdDate,
+  normalizeBookName,
   removePeriod,
   writeJsonFile,
 } from '../utils.js';
@@ -238,12 +239,11 @@ export const getBookNames = (
   const allowedBooks = Object.keys(books) as (keyof typeof books)[];
   for (const bookResponse of bookResponses) {
     const bookID = bookResponse.id as keyof typeof books;
-    console.log(bookID);
     if (!allowedBooks.includes(bookID)) {
       continue;
     }
     const bookDetail: BookNameDetails = {
-      name: removePeriod(bookResponse.name).toLowerCase(),
+      name: normalizeBookName(bookResponse.name),
       isAbbreviation: false,
       id: bookID,
     };
@@ -252,7 +252,6 @@ export const getBookNames = (
       bookDetailsArray.push(bookDetail);
     }
   }
-  console.log(bookDetailsArray);
   return bookDetailsArray;
 };
 
@@ -357,8 +356,8 @@ export const updateBookNames = async (
 // - - - - - - - - - -
 export const loadBiblesCache = async (
   cacheDir: string = defaultCacheDir,
-  currentTimestamp = new Date(),
-  maxAgeDays: number | undefined = 14
+  maxAgeDays: number | undefined = 14,
+  currentTimestamp = new Date()
 ): Promise<BiblesCache> => {
   let bibles: Bibles = await loadBibles(cacheDir);
   let bookNames: BookNames = await loadBookNames(cacheDir);

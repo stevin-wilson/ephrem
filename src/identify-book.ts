@@ -1,6 +1,11 @@
 import {BiblesCache, VoteTally} from './types.js';
 import {AxiosRequestConfig} from 'axios';
-import {defaultBiblesToExclude, defaultLanguages} from './utils.js';
+import {
+  defaultBiblesToExclude,
+  defaultLanguages,
+  normalizeBookName,
+  removePeriod,
+} from './utils.js';
 import {books} from './books.js';
 import {defaultConfig} from './bible-library/api-bible.js';
 import {
@@ -43,6 +48,8 @@ export const getBookID = async (
     biblesCache = await loadBiblesCache();
   }
 
+  const normalizedBookName = normalizeBookName(bookName);
+
   useMajorityFallback ||= !bibleAbbreviation;
 
   const needToUpdateCache = needsBiblesCacheUpdate(
@@ -61,7 +68,7 @@ export const getBookID = async (
     );
   }
 
-  const bookReferences = biblesCache.bookNames[bookName];
+  const bookReferences = biblesCache.bookNames[normalizedBookName];
   if (!bookReferences) {
     return undefined;
   }
@@ -69,11 +76,19 @@ export const getBookID = async (
   let bookID: string | undefined = undefined;
 
   if (bibleAbbreviation) {
-    bookID = await getBookIdInBible(bookName, bibleAbbreviation, biblesCache);
+    bookID = await getBookIdInBible(
+      normalizedBookName,
+      bibleAbbreviation,
+      biblesCache
+    );
   }
 
   if (!bookID && useMajorityFallback) {
-    bookID = await getBookIdByMajority(bookName, biblesCache, languages);
+    bookID = await getBookIdByMajority(
+      normalizedBookName,
+      biblesCache,
+      languages
+    );
   }
 
   if (bookID !== undefined && !(bookID in books)) {

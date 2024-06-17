@@ -366,6 +366,17 @@ const extractTranslationsAndBookChapterVerse = (input: string) => {
   const bookChapterVerse = translations
     ? input.replace(`(${translations})`, '')
     : input;
+
+  // Validate the input format
+  if (bookChapterVerse.includes('-') && bookChapterVerse.includes(':')) {
+    const hyphenIndex = bookChapterVerse.indexOf('-');
+    const colonIndex = bookChapterVerse.indexOf(':');
+
+    if (hyphenIndex < colonIndex) {
+      throw new Error(`Invalid format for Reference: ${input}`);
+    }
+  }
+
   return {translations, bookChapterVerse};
 };
 
@@ -393,7 +404,10 @@ const splitChapterAndVerse = (chapterVerse: string) => {
 };
 
 // - - - - - - - - -
-export const parseReferenceGroup = (input: string): ReferenceGroup => {
+export const parseReferenceGroup = (
+  input: string,
+  fallbackBibles: string[] = defaultBibles
+): ReferenceGroup => {
   const {translations, bookChapterVerse} =
     extractTranslationsAndBookChapterVerse(input);
   // eslint-disable-next-line prefer-const
@@ -415,7 +429,7 @@ export const parseReferenceGroup = (input: string): ReferenceGroup => {
     chapterEnd,
     verseStart,
     verseEnd,
-    bibles: bibles ? bibles : defaultBibles,
+    bibles: bibles ? bibles : fallbackBibles,
   };
 };
 
@@ -429,10 +443,6 @@ export const parseReference = async (
   biblesToExclude: string[] = defaultBiblesToExclude,
   config: AxiosRequestConfig = defaultConfig
 ): Promise<Reference[]> => {
-  if (biblesCache === undefined) {
-    biblesCache = await loadBiblesCache();
-  }
-
   const references: Reference[] = [];
   for (const bible of referenceGroup.bibles) {
     const bookId = await getBookID(
@@ -469,6 +479,7 @@ export const getReferenceMap = async (
   input: string,
   biblesCache?: BiblesCache,
   delimiter = ';',
+  fallbackBibles: string[] = defaultBibles,
   languages: string[] = defaultLanguages,
   useMajorityFallback = true,
   forceUpdateCache = false,
@@ -487,7 +498,10 @@ export const getReferenceMap = async (
   const referenceMap: ReferenceMap = new Map();
 
   for (const referenceGroupString of referenceGrpsStrings) {
-    const referenceGroup = parseReferenceGroup(referenceGroupString);
+    const referenceGroup = parseReferenceGroup(
+      referenceGroupString,
+      fallbackBibles
+    );
     const references = await parseReference(
       referenceGroup,
       biblesCache,

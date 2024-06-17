@@ -1,10 +1,17 @@
 import {expect, test} from 'vitest';
-import {parseReferenceGroup} from '../src/parser.js';
-import {ReferenceGroup} from '../src/types.js';
+import {
+  getReferenceMap,
+  parseReference,
+  parseReferenceGroup,
+} from '../src/parser.js';
+import {Reference, ReferenceGroup} from '../src/types.js';
+import {loadBiblesCache} from '../src/bible-library/bibles.js';
+import {getBookID} from '../src/identify-book.js';
 
+const biblesCache = await loadBiblesCache('test/resources/cache', undefined);
 // - - - - - - - - -
 // Test get Reference Groups
-test('single verse | multiple bibles', () => {
+test('single verse | multiple bibles', async () => {
   const input = 'Genesis 1:1 (NIV, KJV)';
   const referenceGroup: ReferenceGroup = {
     bookName: 'Genesis',
@@ -14,7 +21,33 @@ test('single verse | multiple bibles', () => {
     verseEnd: undefined,
     bibles: ['NIV', 'KJV'],
   };
-  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
+  const references: Reference[] = [
+    {
+      book: 'GEN',
+      chapterStart: '1',
+      chapterEnd: undefined,
+      verseStart: '1',
+      verseEnd: undefined,
+      bible: 'NIV',
+    },
+    {
+      book: 'GEN',
+      chapterStart: '1',
+      chapterEnd: undefined,
+      verseStart: '1',
+      verseEnd: undefined,
+      bible: 'KJV',
+    },
+  ];
+  const bookID = await getBookID(referenceGroup.bookName, biblesCache);
+  expect(bookID).toStrictEqual('GEN');
+
+  const observedReferences = await parseReference(referenceGroup, biblesCache);
+  expect(observedReferences).toStrictEqual(references);
+
+  const referenceMap = await getReferenceMap(input, biblesCache);
+
+  expect(referenceMap.get(input)).toStrictEqual(references);
 });
 
 test('single verse | single bible', () => {
@@ -38,9 +71,11 @@ test('single verse | no bible', () => {
     chapterEnd: undefined,
     verseStart: '1',
     verseEnd: undefined,
-    bibles: undefined,
+    bibles: ['engKJV', 'MAL10RO'],
   };
-  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input, ['engKJV', 'MAL10RO'])).toStrictEqual(
+    referenceGroup
+  );
 });
 
 test('RTL | single verse | multiple bibles', () => {
@@ -77,9 +112,11 @@ test('RTL | single verse | no bible', () => {
     chapterEnd: undefined,
     verseStart: '1',
     verseEnd: undefined,
-    bibles: undefined,
+    bibles: ['engKJV', 'MAL10RO'],
   };
-  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input, ['engKJV', 'MAL10RO'])).toStrictEqual(
+    referenceGroup
+  );
 });
 
 test('single chapter multi verse | multiple bibles', () => {
@@ -116,9 +153,11 @@ test('single chapter multi verse | no bible', () => {
     chapterEnd: undefined,
     verseStart: '1',
     verseEnd: '2',
-    bibles: undefined,
+    bibles: ['engKJV', 'MAL10RO'],
   };
-  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input, ['engKJV', 'MAL10RO'])).toStrictEqual(
+    referenceGroup
+  );
 });
 
 test('RTL | single chapter multi verse | multiple bibles', () => {
@@ -155,9 +194,11 @@ test('RTL | single chapter multi verse | no bible', () => {
     chapterEnd: undefined,
     verseStart: '1',
     verseEnd: '2',
-    bibles: undefined,
+    bibles: ['engKJV', 'MAL10RO'],
   };
-  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input, ['engKJV', 'MAL10RO'])).toStrictEqual(
+    referenceGroup
+  );
 });
 
 test('multi chapter | multiple bibles', () => {
@@ -194,9 +235,11 @@ test('multi chapter | no bible', () => {
     chapterEnd: '2',
     verseStart: undefined,
     verseEnd: undefined,
-    bibles: undefined,
+    bibles: ['engKJV', 'MAL10RO'],
   };
-  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input, ['engKJV', 'MAL10RO'])).toStrictEqual(
+    referenceGroup
+  );
 });
 
 test('RTL | multi chapter | multiple bibles', () => {
@@ -233,9 +276,11 @@ test('RTL | multi chapter | no bible', () => {
     chapterEnd: '2',
     verseStart: undefined,
     verseEnd: undefined,
-    bibles: undefined,
+    bibles: ['engKJV', 'MAL10RO'],
   };
-  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input, ['engKJV', 'MAL10RO'])).toStrictEqual(
+    referenceGroup
+  );
 });
 
 test('multi chapter with verses | multiple bibles', () => {
@@ -272,9 +317,11 @@ test('multi chapter with verses | no bible', () => {
     chapterEnd: '2',
     verseStart: '1',
     verseEnd: '3',
-    bibles: undefined,
+    bibles: ['engKJV', 'MAL10RO'],
   };
-  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input, ['engKJV', 'MAL10RO'])).toStrictEqual(
+    referenceGroup
+  );
 });
 
 test('RTL | multi chapter with verses | multiple bibles', () => {
@@ -311,9 +358,11 @@ test('RTL | multi chapter with verses | no bible', () => {
     chapterEnd: '2',
     verseStart: '1',
     verseEnd: '3',
-    bibles: undefined,
+    bibles: ['engKJV', 'MAL10RO'],
   };
-  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input, ['engKJV', 'MAL10RO'])).toStrictEqual(
+    referenceGroup
+  );
 });
 
 test('single chapter | multiple bibles', () => {
@@ -376,9 +425,11 @@ test('single chapter | no bible', () => {
     chapterEnd: undefined,
     verseStart: undefined,
     verseEnd: undefined,
-    bibles: undefined,
+    bibles: ['engKJV', 'MAL10RO'],
   };
-  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input, ['engKJV', 'MAL10RO'])).toStrictEqual(
+    referenceGroup
+  );
 });
 
 test('RTL | single chapter | multiple bibles', () => {
@@ -407,7 +458,7 @@ test('RTL | single chapter | single bible', () => {
   expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
 });
 
-test('RTL | single chapter | single bible', () => {
+test('RTL | single chapter | no bible', () => {
   const input = 'صموئيل الأول 1';
   const referenceGroup: ReferenceGroup = {
     bookName: 'صموئيل الأول',
@@ -415,7 +466,101 @@ test('RTL | single chapter | single bible', () => {
     chapterEnd: undefined,
     verseStart: undefined,
     verseEnd: undefined,
-    bibles: undefined,
+    bibles: ['KJV'],
   };
-  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
+  expect(parseReferenceGroup(input, ['KJV'])).toStrictEqual(referenceGroup);
+});
+
+test('Invalid Input | multiple bibles', () => {
+  const input = 'Genesis 1-2:3 (NIV, KJV)';
+
+  // Test the exact error message
+  expect(() => parseReferenceGroup(input)).toThrowError();
+});
+
+test('Invalid Input | single bible', () => {
+  const input = 'Genesis 1-2:3 (NIV)';
+
+  // Test the exact error message
+  expect(() => parseReferenceGroup(input)).toThrowError();
+});
+
+test('Invalid Input | no bible', () => {
+  const input = 'Genesis 1-2:3';
+
+  // Test the exact error message
+  expect(() => parseReferenceGroup(input, ['KJV'])).toThrowError();
+});
+
+test('RTL | Invalid Input | multiple bibles', () => {
+  const input = 'صموئيل الأول 1-2:3(NIV, KJV)';
+
+  // Test the exact error message
+  expect(() => parseReferenceGroup(input)).toThrowError();
+});
+
+test('RTL | Invalid Input | single bible', () => {
+  const input = 'صموئيل الأول 1-2:3(KJV)';
+
+  // Test the exact error message
+  expect(() => parseReferenceGroup(input)).toThrowError();
+});
+
+test('RTL | Invalid Input | no bible', () => {
+  const input = 'صموئيل الأول 1-2:3';
+
+  // Test the exact error message
+  expect(() => parseReferenceGroup(input, ['KJV'])).toThrowError();
+});
+
+test('Invalid - Whole book | Multiple Bibles', () => {
+  const input = 'Genesis (NIV, KJV)';
+
+  // Test the exact error message
+  expect(() => parseReferenceGroup(input)).toThrowError(
+    /Invalid format for Reference/
+  );
+});
+
+test('Invalid - Whole book | single bible', () => {
+  const input = 'Genesis (NIV)';
+
+  // Test the exact error message
+  expect(() => parseReferenceGroup(input)).toThrowError(
+    /Invalid format for Reference/
+  );
+});
+
+test('Invalid - Whole book | no bibles', () => {
+  const input = 'Genesis';
+
+  // Test the exact error message
+  expect(() => parseReferenceGroup(input)).toThrowError(
+    /Invalid format for Reference/
+  );
+});
+
+test('RTL | Invalid Input | multiple bibles', () => {
+  const input = 'التكوين (NIV, KJV)';
+
+  // Test the exact error message
+  expect(() => parseReferenceGroup(input)).toThrowError();
+});
+
+test('RTL | Invalid - Whole book | single bible', () => {
+  const input = 'التكوين (KJV)';
+
+  // Test the exact error message
+  expect(() => parseReferenceGroup(input)).toThrowError(
+    /Invalid format for Reference/
+  );
+});
+
+test('RTL | Invalid - Whole book | no bibles', () => {
+  const input = 'التكوين';
+
+  // Test the exact error message
+  expect(() => parseReferenceGroup(input)).toThrowError(
+    /Invalid format for Reference/
+  );
 });

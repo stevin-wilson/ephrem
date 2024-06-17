@@ -165,3 +165,14 @@ export const getThresholdDate = (
   thresholdDate.setDate(thresholdDate.getDate() - maxAgeDays);
   return thresholdDate;
 };
+
+/**
+ * Removes punctuation from a given string.
+ * @param input - The input string from which punctuation should be removed.
+ * @returns - The input string without punctuation.
+ */
+export const removePunctuation = (input: string): string =>
+  input.replace(/\p{P}/gu, '');
+
+export const normalizeBookName = (bookName: string): string =>
+  removePunctuation(bookName).toLowerCase();

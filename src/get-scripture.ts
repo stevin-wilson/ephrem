@@ -1,4 +1,5 @@
 import {
+  defaultBibles,
   defaultBiblesToExclude,
   defaultLanguages,
   defaultPassageOptions,
@@ -28,6 +29,7 @@ import {loadBiblesCache, saveBiblesCache} from './bible-library/bibles.js';
 
 export const getSinglePassage = async (
   input: string,
+  fallbackBibles: string[] = defaultBibles,
   biblesCache?: BiblesCache,
   passagesCache?: PassagesCache,
   passageOptions: PassageOptions = defaultPassageOptions,
@@ -46,7 +48,7 @@ export const getSinglePassage = async (
     passagesCache = await loadPassagesCache();
   }
 
-  const referenceGroup = parseReferenceGroup(input);
+  const referenceGroup = parseReferenceGroup(input, fallbackBibles);
   const references = await parseReference(
     referenceGroup,
     biblesCache,
@@ -85,6 +87,7 @@ export const getMultiplePassages = async (
   biblesCache?: BiblesCache,
   passagesCache?: PassagesCache,
   delimiter = ';',
+  fallbackBibles: string[] = defaultBibles,
   languages: string[] = defaultLanguages,
   passageOptions: PassageOptions = defaultPassageOptions,
   useMajorityFallback = true,
@@ -105,6 +108,7 @@ export const getMultiplePassages = async (
     input,
     biblesCache,
     delimiter,
+    fallbackBibles,
     languages,
     useMajorityFallback,
     forceUpdateBiblesCache,
