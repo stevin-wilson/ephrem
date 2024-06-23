@@ -1,98 +1,87 @@
-import {STATUS_CODES} from 'http';
 import path from 'path';
 import {homedir} from 'os';
 import fs from 'fs-extra';
-import {CachedOn, JSONFile} from './types.js';
 
 /**
- * Checks if the specified environment variable is set.
- * @param variable - The name of the environment variable to check.
- * @returns - True if the environment variable is set, otherwise false.
+ * Checks if an environment variable is set.
+ * @param variable - The name of the environment variable.
+ * @returns - Returns true if the environment variable is set, otherwise false.
  */
 export const envVariableIsSet = (variable: string): boolean =>
   !!process.env[variable];
 
-export class HTTPError extends Error {
-  statusCode: number;
-
-  constructor(code: number, message?: string) {
-    super(message ?? STATUS_CODES[code]);
-    this.name = STATUS_CODES[code] ?? String(code);
-    this.statusCode = code;
-  }
-}
-
+/**
+ * Expands the home directory path if it starts with a tilde (~).
+ * @param filePath - The file path to expand.
+ * @returns - The expanded file path.
+ */
 export const expandHomeDir = (filePath: string): string => {
-  if (filePath.startsWith('~')) {
-    return path.join(homedir(), filePath.slice(1));
-  }
-  return filePath;
+  return filePath.startsWith('~')
+    ? path.join(homedir(), filePath.slice(1)) // Slice to remove `~` present at the start
+    : filePath;
 };
 
 /**
- *
- * @param filePath
+ * Determine if a value is a string.
+ * from https://www.bennadel.com/blog/3115-maintaining-javascript-date-values-during-deserialization-with-a-json-reviver.htm
+ * @param value - The value to check.
+ * @returns - Returns true if the value is a string, false otherwise.
  */
-export async function readJsonFile(filePath: string): Promise<JSONFile> {
-  try {
-    const data = await fs.readFile(filePath, 'utf-8');
-    return JSON.parse(data, dateReviver) as JSONFile;
-  } catch (error) {
-    console.error('Error reading or parsing JSON file:', error);
-    throw error;
-  }
-}
-
-// from https://www.bennadel.com/blog/3115-maintaining-javascript-date-values-during-deserialization-with-a-json-reviver.htm
-/**
- *
- * @param value
- */
-function isString(value: any) {
+const isString = (value: any) => {
   return {}.toString.call(value) === '[object String]';
-}
+};
 
 /**
+ * Checks if a given value is a serialized date.
  *
- * @param value
+ * Dates are serialized in TZ format, example: '1981-12-20T04:00:14.000Z'.
+ * @param value - The value to be checked.
+ * @returns - Return `true` if the value is a serialized date, otherwise `false`.
  */
-function isSerializedDate(value: any) {
+const isSerializedDate = (value: any) => {
   // Dates are serialized in TZ format, example: '1981-12-20T04:00:14.000Z'.
   const datePattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/;
 
   return isString(value) && datePattern.test(value);
-}
+};
 
 /**
- *
- * @param key
- * @param value
+ * Function to revive serialized dates.
+ * @param propName - The key of the property being processed.
+ * @param potentialDateStr - The value of the property being processed.
+ * @returns - The revived property value.
  */
-function dateReviver(key: string, value: any): any {
-  if (isSerializedDate(value)) {
-    return new Date(value);
+export const dateReviver = (propName: string, potentialDateStr: any): any => {
+  if (isSerializedDate(potentialDateStr)) {
+    return new Date(potentialDateStr);
   }
-
-  return value;
-}
+  return potentialDateStr;
+};
 
 /**
- *
- * @param filePath
- * @param jsonData
+ * Writes JSON data to a file asynchronously.
+ * @param filePath - The path to the file where the JSON data should be written.
+ * @param jsonData - The JSON data to be written to the file.
+ * @returns - A promise that resolves when the JSON data has been written successfully.
+ * @throws {Error} - If an error occurs while creating the directory or writing the file.
  */
-export async function writeJsonFile(
+export const writeJsonFile = async (
   filePath: string,
   jsonData: string
-): Promise<void> {
+): Promise<void> => {
   // Ensure the directory exists
   const dir = path.dirname(filePath);
   await fs.mkdir(dir, {recursive: true});
 
   // Write the JSON data to the file
   await fs.writeFile(filePath, jsonData, 'utf-8');
-}
+};
 
+/**
+ * Recursively sorts the given object alphabetically by its keys, including nested objects and arrays.
+ * @param obj - The object to be sorted.
+ * @returns - The sorted object.
+ */
 export const sortObject = (obj: any): any => {
   if (Array.isArray(obj)) {
     return obj.map(sortObject);
@@ -107,26 +96,43 @@ export const sortObject = (obj: any): any => {
   return obj;
 };
 
-export const cleanUpOldRecords = <K, V extends CachedOn>(
-  map: Map<K, V>,
-  maxAgeDays = 14
-): Map<K, V> => {
-  const thresholdDate = new Date();
+/**
+ * The default cache directory for storing data.
+ */
+
+/**
+ * Calculates the threshold date based on the maximum age in days and the current timestamp (optional).
+ * @param maxAgeDays - The maximum age in days.
+ * @param [currentTimestamp] - The current timestamp. If not provided, the current date and time will be used.
+ * @returns The threshold date.
+ */
+export const getThresholdDate = (
+  maxAgeDays: number,
+  currentTimestamp?: Date
+): Date => {
+  const thresholdDate = currentTimestamp ? currentTimestamp : new Date();
   thresholdDate.setDate(thresholdDate.getDate() - maxAgeDays);
-
-  const cleanedMap = new Map<K, V>();
-
-  map.forEach((value, key) => {
-    if (value.cachedOn > thresholdDate) {
-      cleanedMap.set(key, value);
-    }
-  });
-
-  return cleanedMap;
+  return thresholdDate;
 };
 
-export const defaultCacheDir: string = expandHomeDir(
-  process.env.CACHE_PATH || '~/ephrem/cache'
-);
+/**
+ * Removes punctuation from a given string.
+ * @param input - The input string from which punctuation should be removed.
+ * @returns - The input string without punctuation.
+ */
+export const removePunctuation = (input: string): string =>
+  input.replace(/\p{P}/gu, '');
 
-export const removePeriod = (input: string): string => input.replace(/\./g, '');
+export const normalizeBookName = (bookName: string): string =>
+  removePunctuation(bookName).toLowerCase();
+
+// - - - - - - - - - -
+export const normalizeLanguage = (language: string): string | never => {
+  const normalized = removePunctuation(language).trim().toLowerCase();
+
+  if (normalized.length === 3 && /^[a-z]{3}$/.test(normalized)) {
+    return normalized;
+  } else {
+    throw new Error(`Invalid ISO 693-3 language code: ${language}`);
+  }
+};
