@@ -1,5 +1,5 @@
 /**
- * Represents a collection of books.
+ * Represents a collection of bookIds.
  * GEN - The book of Genesis.
  * EXO - The book of Exodus.
  * LEV - The book of Leviticus.
@@ -102,7 +102,7 @@
  * '4BA' - The book of Baruch 4.
  * LAO - The book of Letter to the Laodiceans.
  */
-export const books = {
+export const BOOK_IDs = {
   GEN: 'Genesis',
   EXO: 'Exodus',
   LEV: 'Leviticus',

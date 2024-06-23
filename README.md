@@ -8,4 +8,4 @@
 Ephrem is a light-weight API wrapper for API.Bible, built using NodeJS and Typescript. 
 Ephrem validates bible references and fetches scripture text corresponding to the references.
 
-All languages and Bible translations on API.Bible are supported. Also, Deuterocanonical books are also supported.
+All languages and Bible translations on API.Bible are supported. Also, Deuterocanonical bookIds are also supported.

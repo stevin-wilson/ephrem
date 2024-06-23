@@ -2818,6 +2818,16 @@
         "WMBBE"
       ],
       "cachedOn": "2024-06-13T07:16:04.581Z"
+    },
+    {
+      "id": "1SA",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OSB"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
     }
   ],
   "2 kings": [
@@ -2843,6 +2853,40 @@
         "engWEBUS",
         "WMB",
         "WMBBE"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    },
+    {
+      "id": "2SA",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OSB"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "3 kings": [
+    {
+      "id": "1KI",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OSB"
+      ],
+      "cachedOn": "2024-06-13T07:16:04.581Z"
+    }
+  ],
+  "4 kings": [
+    {
+      "id": "2KI",
+      "isAbbreviation": false,
+      "language": "eng",
+      "scriptDirection": "LTR",
+      "bibles": [
+        "OSB"
       ],
       "cachedOn": "2024-06-13T07:16:04.581Z"
     }

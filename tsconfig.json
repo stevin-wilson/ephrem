@@ -3,16 +3,24 @@
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "build",
-    "lib": ["ES2021"],
+    "lib": [
+      "ES2021"
+    ],
     "target": "es2021",
     "module": "nodenext",
     "moduleResolution": "nodenext",
     "skipLibCheck": true,
     "sourceMap": false,
-    "inlineSourceMap": true,
+    "inlineSourceMap": true
   },
   "include": [
     "src/**/*.ts",
     "test/**/*.ts"
-  ]
+  ],
+  "typedocOptions": {
+    "entryPoints": [
+      "src/index.ts"
+    ],
+    "out": "docs"
+  }
 }

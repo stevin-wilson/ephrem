@@ -1,7 +1,6 @@
 import path from 'path';
 import {homedir} from 'os';
 import fs from 'fs-extra';
-import {PassageOptions} from './types.js';
 
 /**
  * Checks if an environment variable is set.
@@ -100,56 +99,6 @@ export const sortObject = (obj: any): any => {
 /**
  * The default cache directory for storing data.
  */
-export const defaultCacheDir: string = expandHomeDir(
-  process.env.CACHE_PATH || '~/ephrem/cache'
-);
-
-/**
- * The defaultBiblesToExclude variable is used to store a list of Bible versions
- * that should be excluded. This variable is initialized during runtime by reading
- * the EPHREM_BIBLES_TO_EXCLUDE environment variable. If the environment variable
- * exists, it is expected to be a comma-separated list of Bible versions. The list
- * is then converted into an array by splitting the string at commas and trimming
- * any leading or trailing whitespace from each element. If the environment variable
- * does not exist, the default value is an empty array.
- *
- */
-export const defaultBiblesToExclude = process.env.EPHREM_BIBLES_TO_EXCLUDE
-  ? process.env.EPHREM_BIBLES_TO_EXCLUDE.split(',').map(s => s.trim())
-  : [];
-
-export const defaultLanguages = process.env.EPHREM_LANGUAGES
-  ? process.env.EPHREM_LANGUAGES.split(',').map(s => normalizeLanguage(s))
-  : ['eng'];
-
-export const defaultBibles = process.env.EPHREM_DEFAULT_BIBLES
-  ? process.env.EPHREM_DEFAULT_BIBLES.split(',').map(s => s.trim())
-  : ['engKJV'];
-
-let contentType: 'html' | 'json' | 'text';
-if (
-  ['html', 'json', 'text'].includes(process.env.EPHREM_CONTENT_TYPE as string)
-) {
-  contentType = process.env.EPHREM_CONTENT_TYPE as 'html' | 'json' | 'text';
-} else {
-  contentType = 'text';
-}
-
-export const defaultPassageOptions: PassageOptions = {
-  contentType: contentType,
-  includeNotes: process.env.EPHREM_INCLUDE_NOTES === 'true',
-  includeTitles: process.env.EPHREM_INCLUDE_TITLES === 'true',
-  includeChapterNumbers: process.env.EPHREM_INCLUDE_CHAPTER_NUMBERS === 'true',
-  includeVerseNumbers: process.env.EPHREM_INCLUDE_VERSE_NUMBERS === 'true',
-  includeVerseSpans: process.env.EPHREM_INCLUDE_VERSE_SPANS === 'true',
-};
-
-/**
- * Removes periods from a given string.
- * @param input - The input string from which periods should be removed.
- * @returns - The input string without periods.
- */
-export const removePeriod = (input: string): string => input.replace(/\./g, '');
 
 /**
  * Calculates the threshold date based on the maximum age in days and the current timestamp (optional).
@@ -177,6 +126,7 @@ export const removePunctuation = (input: string): string =>
 export const normalizeBookName = (bookName: string): string =>
   removePunctuation(bookName).toLowerCase();
 
+// - - - - - - - - - -
 export const normalizeLanguage = (language: string): string | never => {
   const normalized = removePunctuation(language).trim().toLowerCase();
 
