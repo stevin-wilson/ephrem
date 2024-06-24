@@ -8,65 +8,138 @@ import {
   DEFAULT_PASSAGE_OPTIONS,
 } from './api-constants.js';
 import createError from 'http-errors';
-import {removePunctuation} from '../utils.js';
 import {PassageOptions} from './api-types.js';
+
+import {config, normalizeLanguage} from '../utils.js';
 
 // - - - - - - - - - -
 export const sleep = (ms: number) =>
   new Promise(resolve => setTimeout(resolve, ms));
 
 // - - - - - - - - - -
-export const MAX_RETRIES = !isNaN(Number(process.env.EPHREM_API_MAX_RETRIES))
-  ? Number(process.env.EPHREM_API_MAX_RETRIES)
-  : DEFAULT_MAX_RETRIES;
 
-export const INITIAL_BACKOFF_MS = !isNaN(
-  Number(process.env.EPHREM_API_INITIAL_BACKOFF_MS)
-)
-  ? Number(process.env.EPHREM_API_INITIAL_BACKOFF_MS)
-  : DEFAULT_INITIAL_BACKOFF_MS;
+export const setDefaultMaxRetries = (maxRetries: number) => {
+  const processedMaxRetries = maxRetries < 0 ? DEFAULT_MAX_RETRIES : maxRetries;
+  config.set('API_MAX_RETRIES', processedMaxRetries);
+};
 
-export const DELAY_BETWEEN_CALLS_MS = !isNaN(
-  Number(process.env.EPHREM_API_DELAY_BETWEEN_CALLS_MS)
-)
-  ? Number(process.env.EPHREM_API_DELAY_BETWEEN_CALLS_MS)
-  : DEFAULT_DELAY_BETWEEN_CALLS_MS;
+export const getDefaultMaxRetries = (): number => {
+  const maxRetriesUser = config.get('API_MAX_RETRIES');
+  return !isNaN(Number(maxRetriesUser))
+    ? Number(maxRetriesUser)
+    : DEFAULT_MAX_RETRIES;
+};
 
-export const LANGUAGES = process.env.EPHREM_LANGUAGES
-  ? process.env.EPHREM_LANGUAGES.split(',').map(s => s.trim())
-  : DEFAULT_LANGUAGES;
+// - - - - - - - - - -
+export const setDefaultInitialBackoffMs = (initialBackoffMs: number) => {
+  const processedInitialBackoffMs =
+    initialBackoffMs < 0 ? DEFAULT_INITIAL_BACKOFF_MS : initialBackoffMs;
+  config.set('API_INITIAL_BACKOFF_MS', processedInitialBackoffMs);
+};
 
-export const CONFIG = {
-  method: 'GET',
-  headers: {'api-key': process.env.API_BIBLE_API_KEY!},
-} as const;
+export const getDefaultInitialBackoffMs = (): number => {
+  const initialBackoffMsUser = config.get('DEFAULT_INITIAL_BACKOFF_MS');
+  return !isNaN(Number(initialBackoffMsUser))
+    ? Number(initialBackoffMsUser)
+    : DEFAULT_INITIAL_BACKOFF_MS;
+};
 
-export const PASSAGE_OPTIONS: PassageOptions = {
-  contentType:
-    (process.env.EPHREM_CONTENT_TYPE as 'html' | 'json' | 'text') ||
-    DEFAULT_PASSAGE_OPTIONS.contentType,
-  includeNotes:
-    process.env.EPHREM_INCLUDE_NOTES?.toLowerCase() === 'true' ||
-    DEFAULT_PASSAGE_OPTIONS.includeNotes,
-  includeTitles:
-    process.env.EPHREM_INCLUDE_TITLES?.toLowerCase() === 'true' ||
-    DEFAULT_PASSAGE_OPTIONS.includeTitles,
-  includeChapterNumbers:
-    process.env.EPHREM_INCLUDE_CHAPTER_NUMBERS?.toLowerCase() === 'true' ||
-    DEFAULT_PASSAGE_OPTIONS.includeChapterNumbers,
-  includeVerseNumbers:
-    process.env.EPHREM_INCLUDE_VERSE_NUMBERS?.toLowerCase() === 'true' ||
-    DEFAULT_PASSAGE_OPTIONS.includeVerseNumbers,
-  includeVerseSpans:
-    process.env.EPHREM_INCLUDE_VERSE_SPANS?.toLowerCase() === 'true' ||
-    DEFAULT_PASSAGE_OPTIONS.includeVerseSpans,
+// - - - - - - - - - -
+export const setDefaultDelayBetweenCallsMs = (delayBetweenCallsMs: number) => {
+  const processedDelayBetweenCallsMs =
+    delayBetweenCallsMs < 0
+      ? DEFAULT_DELAY_BETWEEN_CALLS_MS
+      : delayBetweenCallsMs;
+  config.set('API_DELAY_BETWEEN_CALLS_MS', processedDelayBetweenCallsMs);
+};
+
+export const getDefaultDelayBetweenCallsMs = (): number => {
+  const delayBetweenCallsMsUser = config.get('API_DELAY_BETWEEN_CALLS_MS');
+  return !isNaN(Number(delayBetweenCallsMsUser))
+    ? Number(delayBetweenCallsMsUser)
+    : DEFAULT_DELAY_BETWEEN_CALLS_MS;
+};
+
+// - - - - - - - - - -
+export const setDefaultLanguages = (languages: string[]) => {
+  try {
+    const processedLanguages = languages
+      .map(s => s.trim())
+      .filter(l => l !== '')
+      .map(s => normalizeLanguage(s));
+
+    if (processedLanguages.length > 0) {
+      config.set('LANGUAGES', processedLanguages);
+    } else {
+      throw Error(
+        'Empty list of languages. Please provide ISO 693-3 codes of language(s)'
+      );
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(`Error when setting LANGUAGES: ${error.message}`);
+    } else {
+      console.error('An error occurred when setting LANGUAGES');
+    }
+  }
+};
+
+export const getDefaultLanguages = (): string[] => {
+  let LANGUAGES = DEFAULT_LANGUAGES;
+  try {
+    const languagesUser = config.get('LANGUAGES');
+
+    const isValidArray =
+      Array.isArray(languagesUser) &&
+      languagesUser.every(s => typeof s === 'string');
+
+    LANGUAGES = isValidArray
+      ? languagesUser
+          .map(s => s.trim())
+          .filter(l => l !== '')
+          .map(s => normalizeLanguage(s))
+      : DEFAULT_LANGUAGES;
+  } catch (err) {
+    if (err instanceof Error) {
+      console.error(`Error when getting default LANGUAGES: ${err.message}`);
+    } else {
+      console.error('An error occurred when getting default LANGUAGES');
+    }
+  }
+
+  return LANGUAGES;
+};
+
+// - - - - - - - - - -
+export const setApiKey = (apiBibleKey: number) => {
+  config.set('API_BIBLE_KEY', apiBibleKey);
+};
+
+export const getDefaultApiConfig = () => {
+  const apiKey = config.get('API_BIBLE_KEY');
+  if (!apiKey) {
+    throw new Error('No API key provided');
+  }
+
+  return {
+    method: 'GET',
+    headers: {'api-key': apiKey},
+  };
+};
+
+export const setDefaultPassageOptions = (passageOptions: PassageOptions) => {
+  config.set('PASSAGE_OPTIONS', passageOptions);
+};
+
+export const getDefaultPassageOptions = (): PassageOptions => {
+  return config.get('PASSAGE_OPTIONS') || DEFAULT_PASSAGE_OPTIONS;
 };
 
 // - - - - - - - - - -
 export const retryOn503 = async <T>(
   fn: () => Promise<T>,
-  retries = MAX_RETRIES,
-  initialBackoff = INITIAL_BACKOFF_MS
+  retries = getDefaultMaxRetries(),
+  initialBackoff = getDefaultInitialBackoffMs()
 ): Promise<T> => {
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {

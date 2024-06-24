@@ -56,8 +56,8 @@ export const fetchBibles = async (
   const {
     language = undefined,
     config = CONFIG,
-    retries = MAX_RETRIES,
-    initialBackoff = INITIAL_BACKOFF_MS,
+    retries = getDefaultMaxRetries(),
+    initialBackoff = getDefaultInitialBackoffMs(),
     delayBetweenCalls = DELAY_BETWEEN_CALLS_MS,
   } = options;
 

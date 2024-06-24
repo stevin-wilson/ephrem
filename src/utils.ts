@@ -1,6 +1,9 @@
 import path from 'path';
 import {homedir} from 'os';
 import fs from 'fs-extra';
+import Conf from 'conf';
+
+export const config = new Conf({projectName: 'ephrem'});
 
 /**
  * Checks if an environment variable is set.

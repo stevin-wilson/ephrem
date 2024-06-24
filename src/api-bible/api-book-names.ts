@@ -46,8 +46,8 @@ export const fetchBooks = async (
   const {
     bibleID,
     config = CONFIG,
-    retries = MAX_RETRIES,
-    initialBackoff = INITIAL_BACKOFF_MS,
+    retries = getDefaultMaxRetries(),
+    initialBackoff = getDefaultInitialBackoffMs(),
     delayBetweenCalls = DELAY_BETWEEN_CALLS_MS,
   } = options;
 

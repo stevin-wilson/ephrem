@@ -54,8 +54,8 @@ export const updateBibles = async (
     biblesToExclude = BIBLES_TO_EXCLUDE,
     timestamp = new Date(),
     config = CONFIG,
-    retries = MAX_RETRIES,
-    initialBackoff = INITIAL_BACKOFF_MS,
+    retries = getDefaultMaxRetries(),
+    initialBackoff = getDefaultInitialBackoffMs(),
     delayBetweenCalls = DELAY_BETWEEN_CALLS_MS,
   } = options;
 
@@ -181,8 +181,8 @@ export const updateBookNames = async (
     languages = LANGUAGES,
     timestamp = new Date(),
     config = CONFIG,
-    retries = MAX_RETRIES,
-    initialBackoff = INITIAL_BACKOFF_MS,
+    retries = getDefaultMaxRetries(),
+    initialBackoff = getDefaultInitialBackoffMs(),
     delayBetweenCalls = DELAY_BETWEEN_CALLS_MS,
   } = options;
 
@@ -218,8 +218,8 @@ export const updateBiblesCache = async (options: UpdateBiblesCacheOptions) => {
     biblesToExclude = BIBLES_TO_EXCLUDE,
     timestamp = new Date(),
     config = CONFIG,
-    retries = MAX_RETRIES,
-    initialBackoff = INITIAL_BACKOFF_MS,
+    retries = getDefaultMaxRetries(),
+    initialBackoff = getDefaultInitialBackoffMs(),
     delayBetweenCalls = DELAY_BETWEEN_CALLS_MS,
   } = options;
 

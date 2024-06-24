@@ -12,6 +12,8 @@ import {loadBiblesCache, saveBiblesCache} from '../cache/cache-use-bibles.js';
 import {
   CONFIG,
   DELAY_BETWEEN_CALLS_MS,
+  getDefaultInitialBackoffMs,
+  getDefaultMaxRetries,
   INITIAL_BACKOFF_MS,
   LANGUAGES,
   MAX_RETRIES,
@@ -42,8 +44,8 @@ export const getPassages = async (
     biblesToExclude = BIBLES_TO_EXCLUDE,
     timestamp = new Date(),
     config = CONFIG,
-    retries = MAX_RETRIES,
-    initialBackoff = INITIAL_BACKOFF_MS,
+    retries = getDefaultMaxRetries(),
+    initialBackoff = getDefaultInitialBackoffMs(),
     delayBetweenCalls = DELAY_BETWEEN_CALLS_MS,
   } = options;
 

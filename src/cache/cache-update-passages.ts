@@ -53,8 +53,8 @@ export const preparePassage = async (
     biblesToExclude = BIBLES_TO_EXCLUDE,
     forceUpdateBiblesCache = false,
     forcePassageApiCall = false,
-    retries = MAX_RETRIES,
-    initialBackoff = INITIAL_BACKOFF_MS,
+    retries = getDefaultMaxRetries(),
+    initialBackoff = getDefaultInitialBackoffMs(),
     delayBetweenCalls = DELAY_BETWEEN_CALLS_MS,
   } = options;
 
