@@ -28,6 +28,7 @@ import {
   getDefaultBibles,
   getDefaultBiblesToExclude,
 } from '../cache/cache-utils.js';
+import {getValidLanguages} from '../utils.js';
 
 export const getPassages = async (
   options: GetPassagesOptions
@@ -51,12 +52,14 @@ export const getPassages = async (
     delayBetweenCalls = getDefaultDelayBetweenCallsMs(),
   } = options;
 
+  const processedLanguages = getValidLanguages(languages);
+
   const allReferences: References = await parseReferences({
     input,
     biblesCache,
     delimiter,
     defaultBibles,
-    languages,
+    languages: processedLanguages,
     useMajorityFallback,
     forceUpdateBiblesCache,
     biblesToExclude,
@@ -81,7 +84,7 @@ export const getPassages = async (
             biblesCache,
             config,
             passageOptions,
-            languages,
+            languages: processedLanguages,
             biblesToExclude,
             forceUpdateBiblesCache,
             forcePassageApiCall,

@@ -28,9 +28,9 @@ const printPassages = async (options: GetPassagesOptions): Promise<void> => {
 
   for (const passages of Object.values(passageOutput)) {
     passages.forEach(passage => {
-      chalk.yellow.bold(passage.data.reference);
-      chalk.white(passage.data.content);
-      chalk.gray.italic(passage.data.copyright);
+      console.log('\n');
+      console.log(chalk.blueBright.bold(passage.data.reference));
+      console.log(passage.data.content);
     });
   }
 };

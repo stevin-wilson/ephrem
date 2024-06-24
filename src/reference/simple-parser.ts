@@ -129,8 +129,6 @@ export const splitReferenceGroup = async (
       delayBetweenCalls,
     });
 
-    console.log(bookId);
-
     if (!bookId) {
       continue;
     }
