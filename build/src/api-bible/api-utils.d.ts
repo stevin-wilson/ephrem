@@ -1,0 +1,16 @@
+import { AxiosRequestConfig } from 'axios';
+import { PassageOptions } from './api-types.js';
+export declare const sleep: (ms: number) => Promise<unknown>;
+export declare const setDefaultMaxRetries: (maxRetries: number) => void;
+export declare const getDefaultMaxRetries: () => number;
+export declare const setDefaultInitialBackoffMs: (initialBackoffMs: number) => void;
+export declare const getDefaultInitialBackoffMs: () => number;
+export declare const setDefaultDelayBetweenCallsMs: (delayBetweenCallsMs: number) => void;
+export declare const getDefaultDelayBetweenCallsMs: () => number;
+export declare const setDefaultLanguages: (languages: string[]) => void;
+export declare const getDefaultLanguages: () => string[];
+export declare const setApiKey: (apiBibleKey: string) => void;
+export declare const getDefaultApiConfig: () => AxiosRequestConfig;
+export declare const setDefaultPassageOptions: (passageOptions: PassageOptions) => void;
+export declare const getDefaultPassageOptions: () => PassageOptions;
+export declare const retryOn503: <T>(fn: () => Promise<T>, retries?: number, initialBackoff?: number) => Promise<T>;

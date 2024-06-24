@@ -3,6 +3,8 @@ import {homedir} from 'os';
 import fs from 'fs-extra';
 import Conf from 'conf';
 
+const ISO_693_3_REGEX = /^[a-z]{3}$/;
+
 export const config = new Conf({projectName: 'ephrem'});
 
 /**
@@ -131,11 +133,13 @@ export const normalizeBookName = (bookName: string): string =>
 
 // - - - - - - - - - -
 export const normalizeLanguage = (language: string): string | never => {
-  const normalized = removePunctuation(language).trim().toLowerCase();
+  return removePunctuation(language).trim().toLowerCase();
+};
 
-  if (normalized.length === 3 && /^[a-z]{3}$/.test(normalized)) {
-    return normalized;
-  } else {
-    throw new Error(`Invalid ISO 693-3 language code: ${language}`);
-  }
+export const isIso6933Code = (language: string): boolean => {
+  return ISO_693_3_REGEX.test(language);
+};
+
+export const getValidLanguages = (languages: string[]): string[] => {
+  return languages.map(s => normalizeLanguage(s)).filter(s => isIso6933Code(s));
 };

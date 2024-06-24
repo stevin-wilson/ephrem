@@ -1,21 +1,15 @@
-import {
-  dateReviver,
-  getThresholdDate,
-  normalizeLanguage,
-  writeJsonFile,
-} from '../utils.js';
+import {dateReviver, getThresholdDate, writeJsonFile} from '../utils.js';
 import fs from 'fs-extra';
-import {CACHE_DIR, MAX_CACHE_AGE_DAYS} from './cache-utils.js';
-import {Bibles, Passages} from './cache-types.js';
-import {BibleResponse} from '../api-bible/api-types.js';
+import {Passages} from './cache-types.js';
+import {getDefaultCacheDir, getDefaultMaxCacheAgeDays} from './cache-utils.js';
 
-const getPassagesCachePath = (cacheDir: string = CACHE_DIR) => {
+const getPassagesCachePath = (cacheDir: string = getDefaultCacheDir()) => {
   return `${cacheDir}/passages.json`;
 };
 
 export const savePassages = async (
   passages: Passages,
-  cacheDir: string = CACHE_DIR
+  cacheDir: string = getDefaultCacheDir()
 ) => {
   await writeJsonFile(
     getPassagesCachePath(cacheDir),
@@ -26,7 +20,7 @@ export const savePassages = async (
 export const cleanPassagesCache = (
   passages: Passages,
   currentTimestamp?: Date,
-  maxCacheAgeDays = MAX_CACHE_AGE_DAYS
+  maxCacheAgeDays = getDefaultMaxCacheAgeDays()
 ): [Passages, boolean] => {
   if (!maxCacheAgeDays || maxCacheAgeDays < 0) {
     return [passages, false];
@@ -53,7 +47,7 @@ export const cleanPassagesCache = (
 };
 
 export const loadPassages = async (
-  cacheDir: string = CACHE_DIR
+  cacheDir: string = getDefaultCacheDir()
 ): Promise<Passages> => {
   try {
     const jsonData = await fs.readFile(getPassagesCachePath(cacheDir), 'utf-8');

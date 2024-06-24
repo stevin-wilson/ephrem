@@ -1,13 +1,8 @@
 import {loadBiblesCache} from '../cache/cache-use-bibles.js';
 import {
-  CONFIG,
-  DELAY_BETWEEN_CALLS_MS,
-  INITIAL_BACKOFF_MS,
-  LANGUAGES,
-  MAX_RETRIES,
-} from '../api-bible/api-utils.js';
-import {BIBLES_TO_EXCLUDE} from '../cache/cache-utils.js';
-import {getKeyOfMaxValue, USE_MAJORITY_FALLBACK} from './reference-utils.js';
+  getDefaultUseMajorityFallback,
+  getKeyOfMaxValue,
+} from './reference-utils.js';
 import {
   BookNotFoundError,
   GetBookIdOptions,
@@ -20,6 +15,14 @@ import {
   updateBiblesCache,
 } from '../cache/cache-update-bibles.js';
 import {BiblesCache} from '../cache/cache-types.js';
+import {
+  getDefaultApiConfig,
+  getDefaultDelayBetweenCallsMs,
+  getDefaultInitialBackoffMs,
+  getDefaultLanguages,
+  getDefaultMaxRetries,
+} from '../api-bible/api-utils.js';
+import {getDefaultBiblesToExclude} from '../cache/cache-utils.js';
 
 export const getBookID = async (
   options: GetBookIdOptions
@@ -27,16 +30,16 @@ export const getBookID = async (
   const {
     bookName,
     bibleAbbreviation,
-    useMajorityFallback = USE_MAJORITY_FALLBACK,
+    useMajorityFallback = getDefaultUseMajorityFallback(),
     forceUpdateBiblesCache = false,
     biblesCache = await loadBiblesCache(),
-    languages = LANGUAGES,
-    biblesToExclude = BIBLES_TO_EXCLUDE,
+    languages = getDefaultLanguages(),
+    biblesToExclude = getDefaultBiblesToExclude(),
     timestamp = new Date(),
-    config = CONFIG,
+    config = getDefaultApiConfig(),
     retries = getDefaultMaxRetries(),
     initialBackoff = getDefaultInitialBackoffMs(),
-    delayBetweenCalls = DELAY_BETWEEN_CALLS_MS,
+    delayBetweenCalls = getDefaultDelayBetweenCallsMs(),
   } = options;
 
   const normalizedBookName = normalizeBookName(bookName);

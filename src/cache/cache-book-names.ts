@@ -1,4 +1,3 @@
-import {CACHE_DIR, MAX_CACHE_AGE_DAYS} from './cache-utils.js';
 import {BookNameDetails, BookNames} from './cache-types.js';
 import {
   dateReviver,
@@ -9,14 +8,15 @@ import {
 import fs from 'fs-extra';
 import {BOOK_IDs} from '../reference/book-ids.js';
 import {BookResponse} from '../api-bible/api-types.js';
+import {getDefaultCacheDir, getDefaultMaxCacheAgeDays} from './cache-utils.js';
 
-const getBookNamesCachePath = (cacheDir: string = CACHE_DIR) => {
+const getBookNamesCachePath = (cacheDir: string = getDefaultCacheDir()) => {
   return `${cacheDir}/book-names.json`;
 };
 
 export const saveBookNames = async (
   bookNames: BookNames,
-  cacheDir: string = CACHE_DIR
+  cacheDir: string = getDefaultCacheDir()
 ) => {
   await writeJsonFile(
     getBookNamesCachePath(cacheDir),
@@ -27,7 +27,7 @@ export const saveBookNames = async (
 export const cleanBookNamesCache = (
   bookNames: BookNames,
   currentTimestamp?: Date,
-  maxCacheAgeDays = MAX_CACHE_AGE_DAYS
+  maxCacheAgeDays = getDefaultMaxCacheAgeDays()
 ): [BookNames, boolean] => {
   if (!maxCacheAgeDays || maxCacheAgeDays < 0) {
     return [bookNames, false];
@@ -53,7 +53,7 @@ export const cleanBookNamesCache = (
 };
 
 export const loadBookNames = async (
-  cacheDir: string = CACHE_DIR
+  cacheDir: string = getDefaultCacheDir()
 ): Promise<BookNames> => {
   try {
     const jsonData = await fs.readFile(

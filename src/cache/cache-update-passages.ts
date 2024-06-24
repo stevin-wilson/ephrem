@@ -4,23 +4,24 @@ import {
   PassagesCache,
   PreparePassageOptions,
 } from './cache-types.js';
-import {
-  CONFIG,
-  DELAY_BETWEEN_CALLS_MS,
-  INITIAL_BACKOFF_MS,
-  LANGUAGES,
-  MAX_RETRIES,
-  PASSAGE_OPTIONS,
-} from '../api-bible/api-utils.js';
-import {BIBLES_TO_EXCLUDE} from './cache-utils.js';
 import {PassageAndFumsResponse} from '../api-bible/api-types.js';
 import {getPassageAndBible, loadPassagesCache} from './cache-use-passages.js';
 import {loadBiblesCache} from './cache-use-bibles.js';
 import {
+  getBibleID,
   needsBiblesCacheUpdate,
   updateBiblesCache,
 } from './cache-update-bibles.js';
 import {fetchPassage} from '../api-bible/api-passages.js';
+import {
+  getDefaultApiConfig,
+  getDefaultDelayBetweenCallsMs,
+  getDefaultInitialBackoffMs,
+  getDefaultLanguages,
+  getDefaultMaxRetries,
+  getDefaultPassageOptions,
+} from '../api-bible/api-utils.js';
+import {getDefaultBiblesToExclude} from './cache-utils.js';
 
 export const passageQueriesAreEqual = (
   query1: PassageQuery,
@@ -47,15 +48,16 @@ export const preparePassage = async (
     bibleAbbreviation,
     passagesCache = await loadPassagesCache(),
     biblesCache = await loadBiblesCache(),
-    config = CONFIG,
-    passageOptions = PASSAGE_OPTIONS,
-    languages = LANGUAGES,
-    biblesToExclude = BIBLES_TO_EXCLUDE,
+    config = getDefaultApiConfig(),
+    passageOptions = getDefaultPassageOptions(),
+    languages = getDefaultLanguages(),
+    biblesToExclude = getDefaultBiblesToExclude(),
     forceUpdateBiblesCache = false,
     forcePassageApiCall = false,
     retries = getDefaultMaxRetries(),
     initialBackoff = getDefaultInitialBackoffMs(),
-    delayBetweenCalls = DELAY_BETWEEN_CALLS_MS,
+    delayBetweenCalls = getDefaultDelayBetweenCallsMs(),
+    timestamp = new Date(),
   } = options;
 
   const getPassageFromCache = (
@@ -94,11 +96,18 @@ export const preparePassage = async (
     });
   }
 
-  const bibleID = biblesCache.bibles[bibleAbbreviation]?.id;
-  if (!bibleID) {
-    const errorMessage = `Bible with abbreviation "${bibleAbbreviation}" not found in cache. Please ensure the correct abbreviations are used.`;
-    throw new Error(errorMessage);
-  }
+  const bibleID = await getBibleID({
+    bibleAbbreviation,
+    biblesCache,
+    forceUpdateBiblesCache,
+    languages,
+    biblesToExclude,
+    timestamp,
+    delayBetweenCalls,
+    config,
+    retries,
+    initialBackoff,
+  });
 
   const passageQuery: PassageQuery = {
     passageID,

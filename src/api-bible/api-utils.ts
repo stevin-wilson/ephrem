@@ -1,5 +1,5 @@
 // - - - - - - - - - -
-import axios from 'axios';
+import axios, {AxiosRequestConfig} from 'axios';
 import {
   DEFAULT_DELAY_BETWEEN_CALLS_MS,
   DEFAULT_INITIAL_BACKOFF_MS,
@@ -10,7 +10,7 @@ import {
 import createError from 'http-errors';
 import {PassageOptions} from './api-types.js';
 
-import {config, normalizeLanguage} from '../utils.js';
+import {config, getValidLanguages} from '../utils.js';
 
 // - - - - - - - - - -
 export const sleep = (ms: number) =>
@@ -20,6 +20,7 @@ export const sleep = (ms: number) =>
 
 export const setDefaultMaxRetries = (maxRetries: number) => {
   const processedMaxRetries = maxRetries < 0 ? DEFAULT_MAX_RETRIES : maxRetries;
+
   config.set('API_MAX_RETRIES', processedMaxRetries);
 };
 
@@ -34,6 +35,7 @@ export const getDefaultMaxRetries = (): number => {
 export const setDefaultInitialBackoffMs = (initialBackoffMs: number) => {
   const processedInitialBackoffMs =
     initialBackoffMs < 0 ? DEFAULT_INITIAL_BACKOFF_MS : initialBackoffMs;
+
   config.set('API_INITIAL_BACKOFF_MS', processedInitialBackoffMs);
 };
 
@@ -50,6 +52,7 @@ export const setDefaultDelayBetweenCallsMs = (delayBetweenCallsMs: number) => {
     delayBetweenCallsMs < 0
       ? DEFAULT_DELAY_BETWEEN_CALLS_MS
       : delayBetweenCallsMs;
+
   config.set('API_DELAY_BETWEEN_CALLS_MS', processedDelayBetweenCallsMs);
 };
 
@@ -62,73 +65,53 @@ export const getDefaultDelayBetweenCallsMs = (): number => {
 
 // - - - - - - - - - -
 export const setDefaultLanguages = (languages: string[]) => {
-  try {
-    const processedLanguages = languages
-      .map(s => s.trim())
-      .filter(l => l !== '')
-      .map(s => normalizeLanguage(s));
-
-    if (processedLanguages.length > 0) {
-      config.set('LANGUAGES', processedLanguages);
-    } else {
-      throw Error(
-        'Empty list of languages. Please provide ISO 693-3 codes of language(s)'
-      );
-    }
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error(`Error when setting LANGUAGES: ${error.message}`);
-    } else {
-      console.error('An error occurred when setting LANGUAGES');
-    }
+  const validLanguages = getValidLanguages(languages);
+  if (validLanguages.length > 0) {
+    config.set('LANGUAGES', validLanguages);
   }
 };
 
 export const getDefaultLanguages = (): string[] => {
-  let LANGUAGES = DEFAULT_LANGUAGES;
-  try {
-    const languagesUser = config.get('LANGUAGES');
+  const languages = config.get('LANGUAGES');
 
-    const isValidArray =
-      Array.isArray(languagesUser) &&
-      languagesUser.every(s => typeof s === 'string');
-
-    LANGUAGES = isValidArray
-      ? languagesUser
-          .map(s => s.trim())
-          .filter(l => l !== '')
-          .map(s => normalizeLanguage(s))
-      : DEFAULT_LANGUAGES;
-  } catch (err) {
-    if (err instanceof Error) {
-      console.error(`Error when getting default LANGUAGES: ${err.message}`);
-    } else {
-      console.error('An error occurred when getting default LANGUAGES');
-    }
+  let validLanguages: string[] = [];
+  if (Array.isArray(languages)) {
+    validLanguages = getValidLanguages(languages);
   }
 
-  return LANGUAGES;
+  if (validLanguages.length > 0) {
+    return validLanguages;
+  } else {
+    return DEFAULT_LANGUAGES;
+  }
 };
 
 // - - - - - - - - - -
-export const setApiKey = (apiBibleKey: number) => {
-  config.set('API_BIBLE_KEY', apiBibleKey);
+export const setApiKey = (apiBibleKey: string) => {
+  const processedApiKey = apiBibleKey.trim();
+
+  if (!processedApiKey) {
+    throw new Error('No API key provided');
+  }
+
+  config.set('API_BIBLE_KEY', processedApiKey);
 };
 
-export const getDefaultApiConfig = () => {
+export const getDefaultApiConfig = (): AxiosRequestConfig => {
   const apiKey = config.get('API_BIBLE_KEY');
   if (!apiKey) {
     throw new Error('No API key provided');
   }
-
   return {
     method: 'GET',
-    headers: {'api-key': apiKey},
+    headers: {'api-key': `${apiKey}`},
   };
 };
 
 export const setDefaultPassageOptions = (passageOptions: PassageOptions) => {
-  config.set('PASSAGE_OPTIONS', passageOptions);
+  if (passageOptions && Object.keys(passageOptions).length > 0) {
+    config.set('PASSAGE_OPTIONS', passageOptions);
+  }
 };
 
 export const getDefaultPassageOptions = (): PassageOptions => {

@@ -3,21 +3,19 @@ import {
   GetPassagesOptions,
   PassagesOutput,
 } from './passage-types.js';
-import {BIBLES, BIBLES_TO_EXCLUDE} from '../cache/cache-utils.js';
+
 import {
+  getDefaultUseMajorityFallback,
   getPassageID,
-  USE_MAJORITY_FALLBACK,
 } from '../reference/reference-utils.js';
 import {loadBiblesCache, saveBiblesCache} from '../cache/cache-use-bibles.js';
 import {
-  CONFIG,
-  DELAY_BETWEEN_CALLS_MS,
+  getDefaultApiConfig,
+  getDefaultDelayBetweenCallsMs,
   getDefaultInitialBackoffMs,
+  getDefaultLanguages,
   getDefaultMaxRetries,
-  INITIAL_BACKOFF_MS,
-  LANGUAGES,
-  MAX_RETRIES,
-  PASSAGE_OPTIONS,
+  getDefaultPassageOptions,
 } from '../api-bible/api-utils.js';
 import {
   loadPassagesCache,
@@ -26,27 +24,31 @@ import {
 import {parseReferences} from '../reference/simple-parser.js';
 import {References} from '../reference/reference-types.js';
 import {preparePassage} from '../cache/cache-update-passages.js';
+import {
+  getDefaultBibles,
+  getDefaultBiblesToExclude,
+} from '../cache/cache-utils.js';
 
 export const getPassages = async (
   options: GetPassagesOptions
 ): Promise<PassagesOutput> => {
   const {
     input,
-    passageOptions = PASSAGE_OPTIONS,
+    passageOptions = getDefaultPassageOptions(),
     forcePassageApiCall = false,
     delimiter = ';',
-    defaultBibles = BIBLES,
-    useMajorityFallback = USE_MAJORITY_FALLBACK,
+    defaultBibles = getDefaultBibles(),
+    useMajorityFallback = getDefaultUseMajorityFallback(),
     forceUpdateBiblesCache = false,
     biblesCache = await loadBiblesCache(),
     passagesCache = await loadPassagesCache(),
-    languages = LANGUAGES,
-    biblesToExclude = BIBLES_TO_EXCLUDE,
+    languages = getDefaultLanguages(),
+    biblesToExclude = getDefaultBiblesToExclude(),
     timestamp = new Date(),
-    config = CONFIG,
+    config = getDefaultApiConfig(),
     retries = getDefaultMaxRetries(),
     initialBackoff = getDefaultInitialBackoffMs(),
-    delayBetweenCalls = DELAY_BETWEEN_CALLS_MS,
+    delayBetweenCalls = getDefaultDelayBetweenCallsMs(),
   } = options;
 
   const allReferences: References = await parseReferences({

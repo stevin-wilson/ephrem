@@ -1,21 +1,15 @@
 import {
   Bible,
+  BibleNotAvailableError,
   BiblesCache,
   BookIdWithLanguage,
   BookNameDetails,
   BookNameReference,
+  GetBibleIdOptions,
   UpdateBiblesCacheOptions,
   UpdateBiblesOptions,
   UpdateBookNamesOptions,
 } from './cache-types.js';
-import {
-  CONFIG,
-  DELAY_BETWEEN_CALLS_MS,
-  INITIAL_BACKOFF_MS,
-  LANGUAGES,
-  MAX_RETRIES,
-} from '../api-bible/api-utils.js';
-import {BIBLES_TO_EXCLUDE} from './cache-utils.js';
 import {BibleResponse} from '../api-bible/api-types.js';
 import {normalizeLanguage} from '../utils.js';
 import {fetchBibles} from '../api-bible/api-bibles.js';
@@ -23,11 +17,19 @@ import {prepareBibleData} from './cache-bibles.js';
 import {languageInBiblesCache, loadBiblesCache} from './cache-use-bibles.js';
 import {fetchBooks} from '../api-bible/api-book-names.js';
 import {prepareBookNames} from './cache-book-names.js';
+import {
+  getDefaultApiConfig,
+  getDefaultDelayBetweenCallsMs,
+  getDefaultInitialBackoffMs,
+  getDefaultLanguages,
+  getDefaultMaxRetries,
+} from '../api-bible/api-utils.js';
+import {getDefaultBiblesToExclude} from './cache-utils.js';
 
 export const needsBiblesCacheUpdate = (
   biblesCache: BiblesCache,
   bibleAbbreviation?: string,
-  languages: string[] = LANGUAGES
+  languages: string[] = getDefaultLanguages()
 ): boolean => {
   let needToUpdateCache = false;
   if (bibleAbbreviation && !(bibleAbbreviation in biblesCache.bibles)) {
@@ -50,13 +52,13 @@ export const updateBibles = async (
 ): Promise<void> => {
   const {
     biblesCache = await loadBiblesCache(),
-    languages = LANGUAGES,
-    biblesToExclude = BIBLES_TO_EXCLUDE,
+    languages = getDefaultLanguages(),
+    biblesToExclude = getDefaultBiblesToExclude(),
     timestamp = new Date(),
-    config = CONFIG,
+    config = getDefaultApiConfig(),
     retries = getDefaultMaxRetries(),
     initialBackoff = getDefaultInitialBackoffMs(),
-    delayBetweenCalls = DELAY_BETWEEN_CALLS_MS,
+    delayBetweenCalls = getDefaultDelayBetweenCallsMs(),
   } = options;
 
   let bibleResponses: BibleResponse[] = [];
@@ -178,12 +180,12 @@ export const updateBookNames = async (
 ): Promise<void> => {
   const {
     biblesCache = (await loadBiblesCache()) as BiblesCache,
-    languages = LANGUAGES,
+    languages = getDefaultLanguages(),
     timestamp = new Date(),
-    config = CONFIG,
+    config = getDefaultApiConfig(),
     retries = getDefaultMaxRetries(),
     initialBackoff = getDefaultInitialBackoffMs(),
-    delayBetweenCalls = DELAY_BETWEEN_CALLS_MS,
+    delayBetweenCalls = getDefaultDelayBetweenCallsMs(),
   } = options;
 
   // Create an array of promises to be resolved concurrently
@@ -214,13 +216,13 @@ export const updateBiblesCache = async (options: UpdateBiblesCacheOptions) => {
   const {
     forceUpdateBiblesCache = false,
     biblesCache = await loadBiblesCache(),
-    languages = LANGUAGES,
-    biblesToExclude = BIBLES_TO_EXCLUDE,
+    languages = getDefaultLanguages(),
+    biblesToExclude = getDefaultBiblesToExclude(),
     timestamp = new Date(),
-    config = CONFIG,
+    config = getDefaultApiConfig(),
     retries = getDefaultMaxRetries(),
     initialBackoff = getDefaultInitialBackoffMs(),
-    delayBetweenCalls = DELAY_BETWEEN_CALLS_MS,
+    delayBetweenCalls = getDefaultDelayBetweenCallsMs(),
   } = options;
 
   let languagesToUpdate = languages;
@@ -254,4 +256,41 @@ export const updateBiblesCache = async (options: UpdateBiblesCacheOptions) => {
 
     biblesCache.updatedSinceLoad = true;
   }
+};
+
+export const getBibleID = async (
+  options: GetBibleIdOptions
+): Promise<string> => {
+  const {
+    bibleAbbreviation,
+    biblesCache = await loadBiblesCache(),
+    forceUpdateBiblesCache = false,
+    languages = getDefaultLanguages(),
+    biblesToExclude = getDefaultBiblesToExclude(),
+    timestamp = new Date(),
+    config = getDefaultApiConfig(),
+    retries = getDefaultMaxRetries(),
+    initialBackoff = getDefaultInitialBackoffMs(),
+    delayBetweenCalls = getDefaultDelayBetweenCallsMs(),
+  } = options;
+
+  const bibleId = biblesCache.bibles[bibleAbbreviation]?.id;
+  if (!bibleId) {
+    await updateBiblesCache({
+      forceUpdateBiblesCache,
+      biblesCache,
+      languages,
+      biblesToExclude,
+      timestamp,
+      config,
+      retries,
+      initialBackoff,
+      delayBetweenCalls,
+    });
+  }
+
+  if (!bibleId) {
+    throw new BibleNotAvailableError(options);
+  }
+  return bibleId;
 };

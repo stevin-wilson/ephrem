@@ -28,6 +28,7 @@
     "@types/figlet": "^1.5.8",
     "@types/fs-extra": "^11.0.4",
     "@types/http-errors": "^2.0.4",
+    "@types/inquirer": "^9.0.7",
     "@types/node": "^20.11.5",
     "eslint-plugin-jsdoc": "^48.2.6",
     "gts": "^5.3.0",

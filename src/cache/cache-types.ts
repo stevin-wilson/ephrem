@@ -34,7 +34,7 @@ export interface UpdateBookNamesOptions extends FetchOptions {
 }
 
 export interface UpdateBiblesCacheOptions extends UpdateBiblesOptions {
-  forceUpdateBiblesCache: boolean;
+  forceUpdateBiblesCache?: boolean;
 }
 
 export interface PreparePassageOptions extends UpdateBiblesCacheOptions {
@@ -99,4 +99,18 @@ export interface BookIdWithLanguage extends BookIdAndAbbreviation {
 export interface BookNameReference extends BookIdWithLanguage {
   readonly bibles: string[];
   readonly cachedOn: Date;
+}
+
+export interface GetBibleIdOptions extends UpdateBiblesCacheOptions {
+  bibleAbbreviation: string;
+}
+
+export class BibleNotAvailableError extends Error {
+  constructor(public context: GetBibleIdOptions) {
+    super(
+      'Bible is not available on API.Bible or is inaccessible using the current API key.'
+    );
+    this.name = 'BibleNotAvailableError';
+    this.context = context;
+  }
 }

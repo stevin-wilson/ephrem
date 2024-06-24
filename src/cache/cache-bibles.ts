@@ -6,17 +6,17 @@ import {
 } from '../utils.js';
 import fs from 'fs-extra';
 
-import {CACHE_DIR, MAX_CACHE_AGE_DAYS} from './cache-utils.js';
 import {Bibles} from './cache-types.js';
 import {BibleResponse} from '../api-bible/api-types.js';
+import {getDefaultCacheDir, getDefaultMaxCacheAgeDays} from './cache-utils.js';
 
-const getBiblesCachePath = (cacheDir: string = CACHE_DIR) => {
+const getBiblesCachePath = (cacheDir: string = getDefaultCacheDir()) => {
   return `${cacheDir}/bibles.json`;
 };
 
 export const saveBibles = async (
   bibles: Bibles,
-  cacheDir: string = CACHE_DIR
+  cacheDir: string = getDefaultCacheDir()
 ) => {
   await writeJsonFile(
     getBiblesCachePath(cacheDir),
@@ -27,7 +27,7 @@ export const saveBibles = async (
 export const cleanBibles = (
   bibles: Bibles,
   currentTimestamp?: Date,
-  maxCacheAgeDays = MAX_CACHE_AGE_DAYS
+  maxCacheAgeDays = getDefaultMaxCacheAgeDays()
 ): [Bibles, boolean] => {
   if (!maxCacheAgeDays || maxCacheAgeDays < 0) {
     return [bibles, false];
@@ -51,7 +51,7 @@ export const cleanBibles = (
 };
 
 export const loadBibles = async (
-  cacheDir: string = CACHE_DIR
+  cacheDir: string = getDefaultCacheDir()
 ): Promise<Bibles> => {
   try {
     const jsonData = await fs.readFile(getBiblesCachePath(cacheDir), 'utf-8');

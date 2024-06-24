@@ -1,10 +1,10 @@
-import {CACHE_DIR, MAX_CACHE_AGE_DAYS} from './cache-utils.js';
 import {Passages, PassagesCache} from './cache-types.js';
 import {
   cleanPassagesCache,
   loadPassages,
   savePassages,
 } from './cache-passages.js';
+import {getDefaultCacheDir, getDefaultMaxCacheAgeDays} from './cache-utils.js';
 
 export const getPassageAndBible = (
   passageID: string,
@@ -12,8 +12,8 @@ export const getPassageAndBible = (
 ) => `${passageID}@${bibleAbbreviation}`;
 
 export const loadPassagesCache = async (
-  cacheDir: string = CACHE_DIR,
-  maxCacheAgeDays: number | undefined = MAX_CACHE_AGE_DAYS,
+  cacheDir: string = getDefaultCacheDir(),
+  maxCacheAgeDays: number | undefined = getDefaultMaxCacheAgeDays(),
   currentTimestamp = new Date()
 ): Promise<PassagesCache> => {
   let passages: Passages = await loadPassages(cacheDir);
@@ -35,7 +35,7 @@ export const loadPassagesCache = async (
 
 export const savePassagesCache = async (
   passagesCache: PassagesCache,
-  cacheDir: string = CACHE_DIR
+  cacheDir: string = getDefaultCacheDir()
 ): Promise<void> => {
   if (!passagesCache.updatedSinceLoad) {
     return;

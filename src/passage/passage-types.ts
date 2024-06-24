@@ -22,20 +22,6 @@ export interface GetPassagesOptions extends ParseReferencesOptions {
   forcePassageApiCall?: boolean;
 }
 
-export interface GetBibleIdOptions extends UpdateBiblesCacheOptions {
-  bibleAbbreviation: string;
-}
-
-export class BibleNotAvailableError extends Error {
-  constructor(public context: GetBibleIdOptions) {
-    super(
-      'Bible is not available on API.Bible or is inaccessible using the current API key.'
-    );
-    this.name = 'BibleNotAvailableError';
-    this.context = context;
-  }
-}
-
 export class GetPassagesError extends Error {
   public readonly context?: GetPassagesOptions;
 

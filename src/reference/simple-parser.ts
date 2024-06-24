@@ -1,4 +1,3 @@
-import {BIBLES, BIBLES_TO_EXCLUDE} from '../cache/cache-utils.js';
 import {
   ParseReferencesOptions,
   Reference,
@@ -6,16 +5,20 @@ import {
   References,
   SplitReferenceGroupOptions,
 } from './reference-types.js';
-import {
-  CONFIG,
-  DELAY_BETWEEN_CALLS_MS,
-  INITIAL_BACKOFF_MS,
-  LANGUAGES,
-  MAX_RETRIES,
-} from '../api-bible/api-utils.js';
-import {USE_MAJORITY_FALLBACK} from './reference-utils.js';
 import {loadBiblesCache} from '../cache/cache-use-bibles.js';
 import {getBookID} from './identify-book.js';
+import {
+  getDefaultApiConfig,
+  getDefaultDelayBetweenCallsMs,
+  getDefaultInitialBackoffMs,
+  getDefaultLanguages,
+  getDefaultMaxRetries,
+} from '../api-bible/api-utils.js';
+import {
+  getDefaultBibles,
+  getDefaultBiblesToExclude,
+} from '../cache/cache-utils.js';
+import {getDefaultUseMajorityFallback} from './reference-utils.js';
 
 const extractTranslationsAndBookChapterVerse = (input: string) => {
   const translations = input.match(/\(([^)]+)\)/)?.[1];
@@ -62,7 +65,7 @@ const splitChapterAndVerse = (chapterVerse: string) => {
 // - - - - - - - - -
 export const parseReferenceGroup = (
   input: string,
-  defaultBibles: string[] = BIBLES
+  defaultBibles: string[] = getDefaultBibles()
 ): ReferenceGroup => {
   const {translations, bookChapterVerse} =
     extractTranslationsAndBookChapterVerse(input);
@@ -96,16 +99,16 @@ export const splitReferenceGroup = async (
 ): Promise<Reference[]> => {
   const {
     referenceGroup,
-    useMajorityFallback = USE_MAJORITY_FALLBACK,
+    useMajorityFallback = getDefaultUseMajorityFallback(),
     forceUpdateBiblesCache = false,
     biblesCache = await loadBiblesCache(),
-    languages = LANGUAGES,
-    biblesToExclude = BIBLES_TO_EXCLUDE,
+    languages = getDefaultLanguages(),
+    biblesToExclude = getDefaultBiblesToExclude(),
     timestamp = new Date(),
-    config = CONFIG,
+    config = getDefaultApiConfig(),
     retries = getDefaultMaxRetries(),
     initialBackoff = getDefaultInitialBackoffMs(),
-    delayBetweenCalls = DELAY_BETWEEN_CALLS_MS,
+    delayBetweenCalls = getDefaultDelayBetweenCallsMs(),
   } = options;
 
   const references: Reference[] = [];
@@ -153,17 +156,17 @@ export const parseReferences = async (
   const {
     input,
     delimiter = ';',
-    defaultBibles = BIBLES,
-    useMajorityFallback = USE_MAJORITY_FALLBACK,
+    defaultBibles = getDefaultBibles(),
+    useMajorityFallback = getDefaultUseMajorityFallback(),
     forceUpdateBiblesCache = false,
     biblesCache = await loadBiblesCache(),
-    languages = LANGUAGES,
-    biblesToExclude = BIBLES_TO_EXCLUDE,
+    languages = getDefaultLanguages(),
+    biblesToExclude = getDefaultBiblesToExclude(),
     timestamp = new Date(),
-    config = CONFIG,
+    config = getDefaultApiConfig(),
     retries = getDefaultMaxRetries(),
     initialBackoff = getDefaultInitialBackoffMs(),
-    delayBetweenCalls = DELAY_BETWEEN_CALLS_MS,
+    delayBetweenCalls = getDefaultDelayBetweenCallsMs(),
   } = options;
 
   if ([',', '.', ' '].includes(delimiter)) {

@@ -6,10 +6,10 @@ import {
   FetchBiblesOptions,
 } from './api-types.js';
 import {
-  CONFIG,
-  DELAY_BETWEEN_CALLS_MS,
-  INITIAL_BACKOFF_MS,
-  MAX_RETRIES,
+  getDefaultApiConfig,
+  getDefaultDelayBetweenCallsMs,
+  getDefaultInitialBackoffMs,
+  getDefaultMaxRetries,
   retryOn503,
   sleep,
 } from './api-utils.js';
@@ -55,10 +55,10 @@ export const fetchBibles = async (
 ): Promise<BibleResponse[]> => {
   const {
     language = undefined,
-    config = CONFIG,
+    config = getDefaultApiConfig(),
     retries = getDefaultMaxRetries(),
     initialBackoff = getDefaultInitialBackoffMs(),
-    delayBetweenCalls = DELAY_BETWEEN_CALLS_MS,
+    delayBetweenCalls = getDefaultDelayBetweenCallsMs(),
   } = options;
 
   const url = getAvailableBiblesURL(language);

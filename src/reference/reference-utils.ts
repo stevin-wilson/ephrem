@@ -1,11 +1,15 @@
 import {Reference, ReferenceGroup, VoteTally} from './reference-types.js';
 import {BOOK_IDs} from './book-ids.js';
 import {DEFAULT_USE_MAJORITY_FALLBACK} from './reference-constants.js';
+import {config, expandHomeDir} from '../utils.js';
 
-export const USE_MAJORITY_FALLBACK: boolean =
-  process.env.EPHREM_USE_MAJORITY_FALLBACK?.toLowerCase() === 'true'
-    ? true
-    : DEFAULT_USE_MAJORITY_FALLBACK;
+export const setDefaultUseMajorityFallback = (useMajorityFallback: boolean) => {
+  config.set('USE_MAJORITY_FALLBACK', useMajorityFallback);
+};
+
+export const getDefaultUseMajorityFallback = (): boolean => {
+  return Boolean(config.get('USE_MAJORITY_FALLBACK'));
+};
 
 const punctuationRegex = /[!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]/;
 

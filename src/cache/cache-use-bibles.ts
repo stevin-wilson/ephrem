@@ -1,4 +1,3 @@
-import {CACHE_DIR, MAX_CACHE_AGE_DAYS} from './cache-utils.js';
 import {Bibles, BiblesCache, BookNames} from './cache-types.js';
 import {cleanBibles, loadBibles, saveBibles} from './cache-bibles.js';
 import {
@@ -6,10 +5,11 @@ import {
   loadBookNames,
   saveBookNames,
 } from './cache-book-names.js';
+import {getDefaultCacheDir, getDefaultMaxCacheAgeDays} from './cache-utils.js';
 
 export const loadBiblesCache = async (
-  cacheDir: string = CACHE_DIR,
-  maxCacheAgeDays: number | undefined = MAX_CACHE_AGE_DAYS,
+  cacheDir: string = getDefaultCacheDir(),
+  maxCacheAgeDays: number | undefined = getDefaultMaxCacheAgeDays(),
   currentTimestamp = new Date()
 ): Promise<BiblesCache> => {
   let bibles: Bibles = await loadBibles(cacheDir);
@@ -42,7 +42,7 @@ export const loadBiblesCache = async (
 
 export const saveBiblesCache = async (
   biblesCache: BiblesCache,
-  cacheDir: string = CACHE_DIR
+  cacheDir: string = getDefaultCacheDir()
 ): Promise<void> => {
   if (!biblesCache.updatedSinceLoad) {
     return;

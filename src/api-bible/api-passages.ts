@@ -7,11 +7,11 @@ import {
 import {DEFAULT_PASSAGE_OPTIONS} from './api-constants.js';
 import axios, {AxiosError} from 'axios';
 import {
-  CONFIG,
-  DELAY_BETWEEN_CALLS_MS,
-  INITIAL_BACKOFF_MS,
-  MAX_RETRIES,
-  PASSAGE_OPTIONS,
+  getDefaultApiConfig,
+  getDefaultDelayBetweenCallsMs,
+  getDefaultInitialBackoffMs,
+  getDefaultMaxRetries,
+  getDefaultPassageOptions,
   retryOn503,
   sleep,
 } from './api-utils.js';
@@ -19,7 +19,7 @@ import {
 const getPassageURL = (
   passageID: string,
   bibleID: string,
-  passageOptions: PassageOptions = PASSAGE_OPTIONS
+  passageOptions: PassageOptions = getDefaultPassageOptions()
 ): string => {
   const {
     contentType = 'text',
@@ -79,10 +79,10 @@ export const fetchPassage = async (
     passageID,
     bibleID,
     passageOptions = DEFAULT_PASSAGE_OPTIONS,
-    config = CONFIG,
+    config = getDefaultApiConfig(),
     retries = getDefaultMaxRetries(),
     initialBackoff = getDefaultInitialBackoffMs(),
-    delayBetweenCalls = DELAY_BETWEEN_CALLS_MS,
+    delayBetweenCalls = getDefaultDelayBetweenCallsMs(),
   } = options;
 
   const url = getPassageURL(passageID, bibleID, passageOptions);
