@@ -1,4 +1,4 @@
-import {Passages, PassagesCache} from './cache-types.js';
+import {loadCacheOptions, Passages, PassagesCache} from './cache-types.js';
 import {
   cleanPassagesCache,
   loadPassages,
@@ -12,17 +12,21 @@ export const getPassageAndBible = (
 ) => `${passageID}@${bibleAbbreviation}`;
 
 export const loadPassagesCache = async (
-  cacheDir: string = getDefaultCacheDir(),
-  maxCacheAgeDays: number | undefined = getDefaultMaxCacheAgeDays(),
-  currentTimestamp = new Date()
+  options: loadCacheOptions = {}
 ): Promise<PassagesCache> => {
+  const {
+    cacheDir = getDefaultCacheDir(),
+    maxCacheAgeDays = getDefaultMaxCacheAgeDays(),
+    timestamp = new Date(),
+  } = options;
+
   let passages: Passages = await loadPassages(cacheDir);
   let updatedSinceLoad = false;
 
   if (maxCacheAgeDays !== undefined && maxCacheAgeDays >= 0) {
     [passages, updatedSinceLoad] = cleanPassagesCache(
       passages,
-      currentTimestamp,
+      timestamp,
       maxCacheAgeDays
     );
   }

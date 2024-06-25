@@ -1,14 +1,16 @@
 import {expect, test} from 'vitest';
+import {loadBiblesCache} from '../src/cache/cache-use-bibles.js';
+import {Reference, ReferenceGroup} from '../src/reference/reference-types.js';
+import {getBookID, parseReferences} from '../src/index.js';
 import {
-  getReferenceMap,
-  parseReference,
   parseReferenceGroup,
-} from '../src/parser.js';
-import {Reference, ReferenceGroup} from '../src/types.js';
-import {loadBiblesCache} from '../src/bibles.js';
-import {getBookID} from '../src/identify-book.js';
+  splitReferenceGroup,
+} from '../src/reference/simple-parser.js';
 
-const biblesCache = await loadBiblesCache('test/resources/cache', undefined);
+const biblesCache = await loadBiblesCache({
+  cacheDir: 'test/resources/cache',
+  maxCacheAgeDays: undefined,
+});
 // - - - - - - - - -
 // Test get Reference Groups
 test('single verse | multiple bibles', async () => {
@@ -45,15 +47,15 @@ test('single verse | multiple bibles', async () => {
   });
   expect(bookID).toStrictEqual('1KI');
 
-  const observedReferences = await parseReference({
+  const observedReferences = await splitReferenceGroup({
     referenceGroup,
     biblesCache,
   });
   expect(observedReferences).toStrictEqual(references);
 
-  const referenceMap = await getReferenceMap({input, biblesCache});
+  const referenceMap = await parseReferences({input, biblesCache});
 
-  expect(referenceMap.get(input)).toStrictEqual(references);
+  expect(referenceMap[input]).toStrictEqual(references);
 });
 
 test('single verse | no bible', async () => {
@@ -90,19 +92,19 @@ test('single verse | no bible', async () => {
   });
   expect(bookID).toStrictEqual('1KI');
 
-  const observedReferences = await parseReference({
+  const observedReferences = await splitReferenceGroup({
     referenceGroup,
     biblesCache,
   });
   expect(observedReferences).toStrictEqual(references);
 
-  const referenceMap = await getReferenceMap({
+  const referenceMap = await parseReferences({
     input,
     biblesCache,
     defaultBibles: ['OSB', 'MAL10RO'],
   });
 
-  expect(referenceMap.get(input)).toStrictEqual(references);
+  expect(referenceMap[input]).toStrictEqual(references);
 });
 
 test('RTL | single verse | multiple bibles', async () => {
@@ -143,7 +145,7 @@ test('RTL | single verse | multiple bibles', async () => {
   });
   expect(bookID).toStrictEqual('GEN');
 
-  const observedReferences = await parseReference({
+  const observedReferences = await splitReferenceGroup({
     referenceGroup,
     biblesCache,
     languages: ['arb'],
@@ -151,13 +153,13 @@ test('RTL | single verse | multiple bibles', async () => {
 
   expect(observedReferences).toStrictEqual(references);
 
-  const referenceMap = await getReferenceMap({
+  const referenceMap = await parseReferences({
     input,
     biblesCache,
     languages: ['arb'],
   });
 
-  expect(referenceMap.get(input)).toStrictEqual(references);
+  expect(referenceMap[input]).toStrictEqual(references);
 });
 
 test('RTL | single verse | no bible', async () => {
@@ -195,21 +197,21 @@ test('RTL | single verse | no bible', async () => {
   });
   expect(bookID).toStrictEqual('GEN');
 
-  const observedReferences = await parseReference({
+  const observedReferences = await splitReferenceGroup({
     referenceGroup,
     biblesCache,
     languages: ['arb'],
   });
   expect(observedReferences).toStrictEqual(references);
 
-  const referenceMap = await getReferenceMap({
+  const referenceMap = await parseReferences({
     input,
     biblesCache,
     defaultBibles: ['engKJV', 'MAL10RO'],
     languages: ['arb'],
   });
 
-  expect(referenceMap.get(input)).toStrictEqual(references);
+  expect(referenceMap[input]).toStrictEqual(references);
 });
 
 test('single chapter multi verse | multiple bibles', async () => {
@@ -247,19 +249,19 @@ test('single chapter multi verse | multiple bibles', async () => {
   });
   expect(bookID).toStrictEqual('GEN');
 
-  const observedReferences = await parseReference({
+  const observedReferences = await splitReferenceGroup({
     referenceGroup,
     biblesCache,
   });
 
   expect(observedReferences).toStrictEqual(references);
 
-  const referenceMap = await getReferenceMap({
+  const referenceMap = await parseReferences({
     input,
     biblesCache,
   });
 
-  expect(referenceMap.get(input)).toStrictEqual(references);
+  expect(referenceMap[input]).toStrictEqual(references);
 });
 
 test('single chapter multi verse | no bible', async () => {
@@ -296,19 +298,19 @@ test('single chapter multi verse | no bible', async () => {
   });
   expect(bookID).toStrictEqual('1KI');
 
-  const observedReferences = await parseReference({
+  const observedReferences = await splitReferenceGroup({
     referenceGroup,
     biblesCache,
   });
   expect(observedReferences).toStrictEqual(references);
 
-  const referenceMap = await getReferenceMap({
+  const referenceMap = await parseReferences({
     input,
     biblesCache,
     defaultBibles: ['OSB', 'MAL10RO'],
   });
 
-  expect(referenceMap.get(input)).toStrictEqual(references);
+  expect(referenceMap[input]).toStrictEqual(references);
 });
 
 test('RTL | single chapter multi verse | multiple bibles', async () => {
@@ -347,7 +349,7 @@ test('RTL | single chapter multi verse | multiple bibles', async () => {
   });
   expect(bookID).toStrictEqual('GEN');
 
-  const observedReferences = await parseReference({
+  const observedReferences = await splitReferenceGroup({
     referenceGroup,
     biblesCache,
     languages: ['arb'],
@@ -355,13 +357,13 @@ test('RTL | single chapter multi verse | multiple bibles', async () => {
 
   expect(observedReferences).toStrictEqual(references);
 
-  const referenceMap = await getReferenceMap({
+  const referenceMap = await parseReferences({
     input,
     biblesCache,
     languages: ['arb'],
   });
 
-  expect(referenceMap.get(input)).toStrictEqual(references);
+  expect(referenceMap[input]).toStrictEqual(references);
 });
 
 test('RTL | single chapter multi verse | no bible', async () => {
@@ -399,21 +401,21 @@ test('RTL | single chapter multi verse | no bible', async () => {
   });
   expect(bookID).toStrictEqual('GEN');
 
-  const observedReferences = await parseReference({
+  const observedReferences = await splitReferenceGroup({
     referenceGroup,
     biblesCache,
     languages: ['arb'],
   });
   expect(observedReferences).toStrictEqual(references);
 
-  const referenceMap = await getReferenceMap({
+  const referenceMap = await parseReferences({
     input,
     biblesCache,
     defaultBibles: ['engKJV', 'MAL10RO'],
     languages: ['arb'],
   });
 
-  expect(referenceMap.get(input)).toStrictEqual(references);
+  expect(referenceMap[input]).toStrictEqual(references);
 });
 
 test('multi chapter | multiple bibles', async () => {
@@ -451,19 +453,19 @@ test('multi chapter | multiple bibles', async () => {
   });
   expect(bookID).toStrictEqual('1KI');
 
-  const observedReferences = await parseReference({
+  const observedReferences = await splitReferenceGroup({
     referenceGroup,
     biblesCache,
   });
 
   expect(observedReferences).toStrictEqual(references);
 
-  const referenceMap = await getReferenceMap({
+  const referenceMap = await parseReferences({
     input,
     biblesCache,
   });
 
-  expect(referenceMap.get(input)).toStrictEqual(references);
+  expect(referenceMap[input]).toStrictEqual(references);
 });
 
 test('multi chapter | no bible', async () => {
@@ -500,19 +502,19 @@ test('multi chapter | no bible', async () => {
   });
   expect(bookID).toStrictEqual('1KI');
 
-  const observedReferences = await parseReference({
+  const observedReferences = await splitReferenceGroup({
     referenceGroup,
     biblesCache,
   });
   expect(observedReferences).toStrictEqual(references);
 
-  const referenceMap = await getReferenceMap({
+  const referenceMap = await parseReferences({
     input,
     biblesCache,
     defaultBibles: ['engKJV', 'MAL10RO'],
   });
 
-  expect(referenceMap.get(input)).toStrictEqual(references);
+  expect(referenceMap[input]).toStrictEqual(references);
 });
 
 test('RTL | multi chapter | multiple bibles', async () => {
@@ -551,7 +553,7 @@ test('RTL | multi chapter | multiple bibles', async () => {
   });
   expect(bookID).toStrictEqual('1SA');
 
-  const observedReferences = await parseReference({
+  const observedReferences = await splitReferenceGroup({
     referenceGroup,
     biblesCache,
     languages: ['arb'],
@@ -559,13 +561,13 @@ test('RTL | multi chapter | multiple bibles', async () => {
 
   expect(observedReferences).toStrictEqual(references);
 
-  const referenceMap = await getReferenceMap({
+  const referenceMap = await parseReferences({
     input,
     biblesCache,
     languages: ['arb'],
   });
 
-  expect(referenceMap.get(input)).toStrictEqual(references);
+  expect(referenceMap[input]).toStrictEqual(references);
 });
 
 test('RTL | multi chapter | no bible', async () => {
@@ -603,21 +605,21 @@ test('RTL | multi chapter | no bible', async () => {
   });
   expect(bookID).toStrictEqual('1SA');
 
-  const observedReferences = await parseReference({
+  const observedReferences = await splitReferenceGroup({
     referenceGroup,
     biblesCache,
     languages: ['arb'],
   });
   expect(observedReferences).toStrictEqual(references);
 
-  const referenceMap = await getReferenceMap({
+  const referenceMap = await parseReferences({
     input,
     biblesCache,
     defaultBibles: ['engKJV', 'MAL10RO'],
     languages: ['arb'],
   });
 
-  expect(referenceMap.get(input)).toStrictEqual(references);
+  expect(referenceMap[input]).toStrictEqual(references);
 });
 
 test('multi chapter with verses | multiple bibles', async () => {
@@ -656,7 +658,7 @@ test('multi chapter with verses | multiple bibles', async () => {
   });
   expect(bookID).toStrictEqual('1SA');
 
-  const observedReferences = await parseReference({
+  const observedReferences = await splitReferenceGroup({
     referenceGroup,
     biblesCache,
     languages: ['mal'],
@@ -664,13 +666,13 @@ test('multi chapter with verses | multiple bibles', async () => {
 
   expect(observedReferences).toStrictEqual(references);
 
-  const referenceMap = await getReferenceMap({
+  const referenceMap = await parseReferences({
     input,
     biblesCache,
     languages: ['mal'],
   });
 
-  expect(referenceMap.get(input)).toStrictEqual(references);
+  expect(referenceMap[input]).toStrictEqual(references);
 });
 
 test('multi chapter with verses | no bible', async () => {
@@ -708,21 +710,21 @@ test('multi chapter with verses | no bible', async () => {
   });
   expect(bookID).toStrictEqual('1SA');
 
-  const observedReferences = await parseReference({
+  const observedReferences = await splitReferenceGroup({
     referenceGroup,
     biblesCache,
     languages: ['mal'],
   });
   expect(observedReferences).toStrictEqual(references);
 
-  const referenceMap = await getReferenceMap({
+  const referenceMap = await parseReferences({
     input,
     biblesCache,
     defaultBibles: ['engKJV', 'BSB'],
     languages: ['mal'],
   });
 
-  expect(referenceMap.get(input)).toStrictEqual(references);
+  expect(referenceMap[input]).toStrictEqual(references);
 });
 
 test('RTL | multi chapter with verses | multiple bibles', async () => {
@@ -761,7 +763,7 @@ test('RTL | multi chapter with verses | multiple bibles', async () => {
   });
   expect(bookID).toStrictEqual('GEN');
 
-  const observedReferences = await parseReference({
+  const observedReferences = await splitReferenceGroup({
     referenceGroup,
     biblesCache,
     languages: ['arb'],
@@ -769,13 +771,13 @@ test('RTL | multi chapter with verses | multiple bibles', async () => {
 
   expect(observedReferences).toStrictEqual(references);
 
-  const referenceMap = await getReferenceMap({
+  const referenceMap = await parseReferences({
     input,
     biblesCache,
     languages: ['arb'],
   });
 
-  expect(referenceMap.get(input)).toStrictEqual(references);
+  expect(referenceMap[input]).toStrictEqual(references);
 });
 
 test('RTL | multi chapter with verses | no bible', async () => {
@@ -813,21 +815,21 @@ test('RTL | multi chapter with verses | no bible', async () => {
   });
   expect(bookID).toStrictEqual('GEN');
 
-  const observedReferences = await parseReference({
+  const observedReferences = await splitReferenceGroup({
     referenceGroup,
     biblesCache,
     languages: ['arb'],
   });
   expect(observedReferences).toStrictEqual(references);
 
-  const referenceMap = await getReferenceMap({
+  const referenceMap = await parseReferences({
     input,
     biblesCache,
     defaultBibles: ['engKJV', 'MAL10RO'],
     languages: ['arb'],
   });
 
-  expect(referenceMap.get(input)).toStrictEqual(references);
+  expect(referenceMap[input]).toStrictEqual(references);
 });
 
 test('single chapter | multiple bibles', async () => {
@@ -859,14 +861,15 @@ test('single chapter | multiple bibles', async () => {
     },
   ];
 
-  const bookID = await getBookID({
-    bookName: referenceGroup.bookName,
-    bibleAbbreviation: 'KJV',
-    biblesCache,
-    languages: ['eng'],
-    useMajorityFallback: false,
-  });
-  expect(bookID).toStrictEqual(undefined);
+  await expect(() =>
+    getBookID({
+      bookName: referenceGroup.bookName,
+      bibleAbbreviation: 'KJV',
+      biblesCache,
+      languages: ['eng'],
+      useMajorityFallback: false,
+    })
+  ).rejects.toThrowError();
 
   const bookID_pass = await getBookID({
     bookName: referenceGroup.bookName,
@@ -876,7 +879,7 @@ test('single chapter | multiple bibles', async () => {
   });
   expect(bookID_pass).toStrictEqual('1KI');
 
-  const observedReferences = await parseReference({
+  const observedReferences = await splitReferenceGroup({
     referenceGroup,
     biblesCache,
     languages: ['eng'],
@@ -884,31 +887,22 @@ test('single chapter | multiple bibles', async () => {
 
   expect(observedReferences).toStrictEqual(references);
 
-  const observedReferences_false = await parseReference({
-    referenceGroup,
-    biblesCache,
-    languages: ['eng'],
-    useMajorityFallback: false,
-  });
+  await expect(() =>
+    splitReferenceGroup({
+      referenceGroup,
+      biblesCache,
+      languages: ['eng'],
+      useMajorityFallback: false,
+    })
+  ).rejects.toThrowError();
 
-  expect(observedReferences_false).toStrictEqual([
-    {
-      book: '1SA',
-      chapterStart: '1',
-      chapterEnd: undefined,
-      verseStart: undefined,
-      verseEnd: undefined,
-      bible: 'OSB',
-    },
-  ]);
-
-  const referenceMap = await getReferenceMap({
+  const referenceMap = await parseReferences({
     input,
     biblesCache,
     languages: ['eng'],
   });
 
-  expect(referenceMap.get(input)).toStrictEqual(references);
+  expect(referenceMap[input]).toStrictEqual(references);
 });
 
 test('single chapter | multiple bibles', async () => {

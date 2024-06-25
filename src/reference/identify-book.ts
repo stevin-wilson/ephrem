@@ -27,15 +27,20 @@ import {getDefaultBiblesToExclude} from '../cache/cache-utils.js';
 export const getBookID = async (
   options: GetBookIdOptions
 ): Promise<keyof typeof BOOK_IDs> => {
+  const timestamp = options.timestamp ? options.timestamp : new Date();
+
   const {
     bookName,
     bibleAbbreviation,
     useMajorityFallback = getDefaultUseMajorityFallback(),
     forceUpdateBiblesCache = false,
-    biblesCache = await loadBiblesCache(),
+    biblesCache = await loadBiblesCache({
+      cacheDir: options.cacheDir,
+      maxCacheAgeDays: options.maxCacheAgeDays,
+      timestamp,
+    }),
     languages = getDefaultLanguages(),
     biblesToExclude = getDefaultBiblesToExclude(),
-    timestamp = new Date(),
     config = getDefaultApiConfig(),
     retries = getDefaultMaxRetries(),
     initialBackoff = getDefaultInitialBackoffMs(),

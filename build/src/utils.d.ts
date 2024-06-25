@@ -39,10 +39,10 @@ export declare const sortObject: (obj: any) => any;
 /**
  * Calculates the threshold date based on the maximum age in days and the current timestamp (optional).
  * @param maxAgeDays - The maximum age in days.
- * @param [currentTimestamp] - The current timestamp. If not provided, the current date and time will be used.
+ * @param [timestamp] - The current timestamp. If not provided, the current date and time will be used.
  * @returns The threshold date.
  */
-export declare const getThresholdDate: (maxAgeDays: number, currentTimestamp?: Date) => Date;
+export declare const getThresholdDate: (maxAgeDays: number, timestamp?: Date) => Date;
 /**
  * Removes punctuation from a given string.
  * @param input - The input string from which punctuation should be removed.

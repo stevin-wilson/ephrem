@@ -1,7 +1,6 @@
 import {Reference, ReferenceGroup, VoteTally} from './reference-types.js';
 import {BOOK_IDs} from './book-ids.js';
-import {DEFAULT_USE_MAJORITY_FALLBACK} from './reference-constants.js';
-import {config, expandHomeDir} from '../utils.js';
+import {config} from '../utils.js';
 
 export const setDefaultUseMajorityFallback = (useMajorityFallback: boolean) => {
   config.set('USE_MAJORITY_FALLBACK', useMajorityFallback);
@@ -29,56 +28,6 @@ export const isValidStringOrUndefined = (
       (Number.isInteger(parsedNumber) && parsedNumber > 0)
     );
   }
-};
-
-const createPassageBoundary = (
-  book: string,
-  chapter?: string,
-  verse?: string
-): string => {
-  return verse ? `${book}.${chapter}.${verse}` : `${book}.${chapter}`;
-};
-
-export const getPassageID = (reference: Reference): string => {
-  // Ensure reference is an object
-  if (typeof reference !== 'object' || reference === null) {
-    throw new Error('Reference must be an object');
-  }
-
-  const sections: string[] = [];
-
-  let requiredSection = createPassageBoundary(
-    reference.book,
-    reference.chapterStart,
-    reference.verseStart
-  );
-  let optionalSection: string | undefined = undefined;
-
-  if (reference.chapterEnd !== undefined && reference.verseEnd !== undefined) {
-    optionalSection = createPassageBoundary(
-      reference.book,
-      reference.chapterEnd,
-      reference.verseEnd
-    );
-  } else if (reference.chapterEnd !== undefined) {
-    optionalSection = createPassageBoundary(
-      reference.book,
-      reference.chapterEnd
-    );
-  } else if (reference.verseEnd !== undefined) {
-    requiredSection = createPassageBoundary(
-      reference.book,
-      reference.chapterStart,
-      reference.verseEnd
-    );
-  }
-
-  sections.push(requiredSection);
-  if (optionalSection) {
-    sections.push(optionalSection);
-  }
-
-  return sections.join('-').replace(/\s+/g, '');
 };
 
 export const hasValidReferenceGroupInformation = (

@@ -1,0 +1,51 @@
+import { expect, test } from 'vitest';
+import { getPassageID } from '../src/passage/passage-utils.js';
+// single verse
+test('multi chapter with verses', () => {
+    const reference = {
+        book: 'JHN',
+        chapterStart: '3',
+        chapterEnd: undefined,
+        verseStart: '16',
+        verseEnd: undefined,
+        bible: 'KJV',
+    };
+    expect(getPassageID(reference)).toBe('JHN.3.16');
+});
+// single chapter multi verse
+test('single chapter multiple verses', () => {
+    const reference = {
+        book: 'JHN',
+        chapterStart: '3',
+        chapterEnd: undefined,
+        verseStart: '1',
+        verseEnd: '3',
+        bible: 'KJV',
+    };
+    expect(getPassageID(reference)).toBe('JHN.3.1-JHN.3.3');
+});
+// multi chapter
+test('multi chapter without verses', () => {
+    const reference = {
+        book: 'JHN',
+        chapterStart: '3',
+        chapterEnd: '4',
+        verseStart: undefined,
+        verseEnd: undefined,
+        bible: 'KJV',
+    };
+    expect(getPassageID(reference)).toBe('JHN.3-JHN.4');
+});
+// multi chapter with verses
+test('multi chapter with verses', () => {
+    const reference = {
+        book: 'JHN',
+        chapterStart: '3',
+        chapterEnd: '4',
+        verseStart: '16',
+        verseEnd: '18',
+        bible: 'KJV',
+    };
+    expect(getPassageID(reference)).toBe('JHN.3.16-JHN.4.18');
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ2V0LXBhc3NhZ2UtaWQudGVzdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uL3Rlc3QvZ2V0LXBhc3NhZ2UtaWQudGVzdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLEVBQUMsTUFBTSxFQUFFLElBQUksRUFBQyxNQUFNLFFBQVEsQ0FBQztBQUVwQyxPQUFPLEVBQUMsWUFBWSxFQUFDLE1BQU0saUNBQWlDLENBQUM7QUFFN0QsZUFBZTtBQUNmLElBQUksQ0FBQywyQkFBMkIsRUFBRSxHQUFHLEVBQUU7SUFDckMsTUFBTSxTQUFTLEdBQWM7UUFDM0IsSUFBSSxFQUFFLEtBQUs7UUFDWCxZQUFZLEVBQUUsR0FBRztRQUNqQixVQUFVLEVBQUUsU0FBUztRQUNyQixVQUFVLEVBQUUsSUFBSTtRQUNoQixRQUFRLEVBQUUsU0FBUztRQUNuQixLQUFLLEVBQUUsS0FBSztLQUNiLENBQUM7SUFFRixNQUFNLENBQUMsWUFBWSxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDO0FBQ25ELENBQUMsQ0FBQyxDQUFDO0FBRUgsNkJBQTZCO0FBQzdCLElBQUksQ0FBQyxnQ0FBZ0MsRUFBRSxHQUFHLEVBQUU7SUFDMUMsTUFBTSxTQUFTLEdBQWM7UUFDM0IsSUFBSSxFQUFFLEtBQUs7UUFDWCxZQUFZLEVBQUUsR0FBRztRQUNqQixVQUFVLEVBQUUsU0FBUztRQUNyQixVQUFVLEVBQUUsR0FBRztRQUNmLFFBQVEsRUFBRSxHQUFHO1FBQ2IsS0FBSyxFQUFFLEtBQUs7S0FDYixDQUFDO0lBRUYsTUFBTSxDQUFDLFlBQVksQ0FBQyxTQUFTLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxDQUFDO0FBQzFELENBQUMsQ0FBQyxDQUFDO0FBRUgsZ0JBQWdCO0FBQ2hCLElBQUksQ0FBQyw4QkFBOEIsRUFBRSxHQUFHLEVBQUU7SUFDeEMsTUFBTSxTQUFTLEdBQWM7UUFDM0IsSUFBSSxFQUFFLEtBQUs7UUFDWCxZQUFZLEVBQUUsR0FBRztRQUNqQixVQUFVLEVBQUUsR0FBRztRQUNmLFVBQVUsRUFBRSxTQUFTO1FBQ3JCLFFBQVEsRUFBRSxTQUFTO1FBQ25CLEtBQUssRUFBRSxLQUFLO0tBQ2IsQ0FBQztJQUVGLE1BQU0sQ0FBQyxZQUFZLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsYUFBYSxDQUFDLENBQUM7QUFDdEQsQ0FBQyxDQUFDLENBQUM7QUFFSCw0QkFBNEI7QUFDNUIsSUFBSSxDQUFDLDJCQUEyQixFQUFFLEdBQUcsRUFBRTtJQUNyQyxNQUFNLFNBQVMsR0FBYztRQUMzQixJQUFJLEVBQUUsS0FBSztRQUNYLFlBQVksRUFBRSxHQUFHO1FBQ2pCLFVBQVUsRUFBRSxHQUFHO1FBQ2YsVUFBVSxFQUFFLElBQUk7UUFDaEIsUUFBUSxFQUFFLElBQUk7UUFDZCxLQUFLLEVBQUUsS0FBSztLQUNiLENBQUM7SUFFRixNQUFNLENBQUMsWUFBWSxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLG1CQUFtQixDQUFDLENBQUM7QUFDNUQsQ0FBQyxDQUFDLENBQUMifQ==

@@ -10,16 +10,25 @@ export interface Bible extends Cached {
 export type Bibles = {
     [BibleAbbreviation: string]: Bible;
 };
+export interface loadCacheOptions {
+    cacheDir?: string;
+    maxCacheAgeDays?: number;
+    timestamp?: Date;
+}
 export interface UpdateBiblesOptions extends FetchOptions {
     biblesCache?: BiblesCache;
     languages?: string[];
     biblesToExclude?: string[];
     timestamp?: Date;
+    cacheDir?: string;
+    maxCacheAgeDays?: number;
 }
 export interface UpdateBookNamesOptions extends FetchOptions {
     biblesCache?: BiblesCache;
     languages?: string[];
     timestamp?: Date;
+    cacheDir?: string;
+    maxCacheAgeDays?: number;
 }
 export interface UpdateBiblesCacheOptions extends UpdateBiblesOptions {
     forceUpdateBiblesCache?: boolean;

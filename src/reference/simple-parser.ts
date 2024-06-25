@@ -97,14 +97,19 @@ export const parseReferenceGroup = (
 export const splitReferenceGroup = async (
   options: SplitReferenceGroupOptions
 ): Promise<Reference[]> => {
+  const timestamp = options.timestamp ? options.timestamp : new Date();
+
   const {
     referenceGroup,
     useMajorityFallback = getDefaultUseMajorityFallback(),
     forceUpdateBiblesCache = false,
-    biblesCache = await loadBiblesCache(),
+    biblesCache = await loadBiblesCache({
+      cacheDir: options.cacheDir,
+      maxCacheAgeDays: options.maxCacheAgeDays,
+      timestamp,
+    }),
     languages = getDefaultLanguages(),
     biblesToExclude = getDefaultBiblesToExclude(),
-    timestamp = new Date(),
     config = getDefaultApiConfig(),
     retries = getDefaultMaxRetries(),
     initialBackoff = getDefaultInitialBackoffMs(),
@@ -151,16 +156,21 @@ export const splitReferenceGroup = async (
 export const parseReferences = async (
   options: ParseReferencesOptions
 ): Promise<References> => {
+  const timestamp = options.timestamp ? options.timestamp : new Date();
+
   const {
     input,
     delimiter = ';',
     defaultBibles = getDefaultBibles(),
     useMajorityFallback = getDefaultUseMajorityFallback(),
     forceUpdateBiblesCache = false,
-    biblesCache = await loadBiblesCache(),
+    biblesCache = await loadBiblesCache({
+      cacheDir: options.cacheDir,
+      maxCacheAgeDays: options.maxCacheAgeDays,
+      timestamp,
+    }),
     languages = getDefaultLanguages(),
     biblesToExclude = getDefaultBiblesToExclude(),
-    timestamp = new Date(),
     config = getDefaultApiConfig(),
     retries = getDefaultMaxRetries(),
     initialBackoff = getDefaultInitialBackoffMs(),

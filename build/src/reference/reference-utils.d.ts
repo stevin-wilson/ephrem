@@ -2,7 +2,6 @@ import { Reference, ReferenceGroup, VoteTally } from './reference-types.js';
 export declare const setDefaultUseMajorityFallback: (useMajorityFallback: boolean) => void;
 export declare const getDefaultUseMajorityFallback: () => boolean;
 export declare const isValidStringOrUndefined: (value: string | undefined) => boolean;
-export declare const getPassageID: (reference: Reference) => string;
 export declare const hasValidReferenceGroupInformation: (referenceGroup: any) => boolean;
 export declare const hasValidReferenceInformation: (reference: any) => boolean;
 export declare const isMultiChapterReference: (reference: Reference | ReferenceGroup) => boolean;

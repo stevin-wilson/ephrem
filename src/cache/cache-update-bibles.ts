@@ -50,11 +50,16 @@ export const needsBiblesCacheUpdate = (
 export const updateBibles = async (
   options: UpdateBiblesOptions
 ): Promise<void> => {
+  const timestamp = options.timestamp ? options.timestamp : new Date();
+
   const {
-    biblesCache = await loadBiblesCache(),
+    biblesCache = await loadBiblesCache({
+      cacheDir: options.cacheDir,
+      maxCacheAgeDays: options.maxCacheAgeDays,
+      timestamp,
+    }),
     languages = getDefaultLanguages(),
     biblesToExclude = getDefaultBiblesToExclude(),
-    timestamp = new Date(),
     config = getDefaultApiConfig(),
     retries = getDefaultMaxRetries(),
     initialBackoff = getDefaultInitialBackoffMs(),
@@ -178,10 +183,15 @@ const handleBookReferences = async (
 export const updateBookNames = async (
   options: UpdateBookNamesOptions
 ): Promise<void> => {
+  const timestamp = options.timestamp ? options.timestamp : new Date();
+
   const {
-    biblesCache = (await loadBiblesCache()) as BiblesCache,
+    biblesCache = await loadBiblesCache({
+      cacheDir: options.cacheDir,
+      maxCacheAgeDays: options.maxCacheAgeDays,
+      timestamp,
+    }),
     languages = getDefaultLanguages(),
-    timestamp = new Date(),
     config = getDefaultApiConfig(),
     retries = getDefaultMaxRetries(),
     initialBackoff = getDefaultInitialBackoffMs(),
@@ -213,12 +223,17 @@ export const updateBookNames = async (
 };
 
 export const updateBiblesCache = async (options: UpdateBiblesCacheOptions) => {
+  const timestamp = options.timestamp ? options.timestamp : new Date();
+
   const {
     forceUpdateBiblesCache = false,
-    biblesCache = await loadBiblesCache(),
+    biblesCache = await loadBiblesCache({
+      cacheDir: options.cacheDir,
+      maxCacheAgeDays: options.maxCacheAgeDays,
+      timestamp,
+    }),
     languages = getDefaultLanguages(),
     biblesToExclude = getDefaultBiblesToExclude(),
-    timestamp = new Date(),
     config = getDefaultApiConfig(),
     retries = getDefaultMaxRetries(),
     initialBackoff = getDefaultInitialBackoffMs(),
@@ -261,13 +276,18 @@ export const updateBiblesCache = async (options: UpdateBiblesCacheOptions) => {
 export const getBibleID = async (
   options: GetBibleIdOptions
 ): Promise<string> => {
+  const timestamp = options.timestamp ? options.timestamp : new Date();
+
   const {
     bibleAbbreviation,
-    biblesCache = await loadBiblesCache(),
+    biblesCache = await loadBiblesCache({
+      cacheDir: options.cacheDir,
+      maxCacheAgeDays: options.maxCacheAgeDays,
+      timestamp,
+    }),
     forceUpdateBiblesCache = false,
     languages = getDefaultLanguages(),
     biblesToExclude = getDefaultBiblesToExclude(),
-    timestamp = new Date(),
     config = getDefaultApiConfig(),
     retries = getDefaultMaxRetries(),
     initialBackoff = getDefaultInitialBackoffMs(),

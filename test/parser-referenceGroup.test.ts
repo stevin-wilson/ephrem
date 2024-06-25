@@ -1,6 +1,6 @@
 import {expect, test} from 'vitest';
-import {parseReferenceGroup} from '../src/parser.js';
-import {ReferenceGroup} from '../src/types.js';
+import {parseReferenceGroup} from '../src/reference/simple-parser.js';
+import {ReferenceGroup} from '../src/reference/reference-types.js';
 
 // - - - - - - - - -
 // Test get Reference Groups
@@ -8,6 +8,19 @@ test('single verse | multiple bibles', () => {
   const input = 'Genesis 1:1 (NIV, KJV)';
   const referenceGroup: ReferenceGroup = {
     bookName: 'Genesis',
+    chapterStart: '1',
+    chapterEnd: undefined,
+    verseStart: '1',
+    verseEnd: undefined,
+    bibles: ['NIV', 'KJV'],
+  };
+  expect(parseReferenceGroup(input)).toStrictEqual(referenceGroup);
+});
+
+test('single verse | lower case book name | multiple bibles', () => {
+  const input = 'genesis 1:1 (NIV, KJV)';
+  const referenceGroup: ReferenceGroup = {
+    bookName: 'genesis',
     chapterStart: '1',
     chapterEnd: undefined,
     verseStart: '1',

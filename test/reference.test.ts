@@ -1,81 +1,97 @@
 import {expect, test} from 'vitest';
-
+import {parseReferences} from '../src/reference/simple-parser.js';
+import {loadBiblesCache} from '../src/cache/cache-use-bibles.js';
 import {
-  getReferenceGroups,
-  hasValidReferenceSyntax,
+  hasValidReferenceInformation,
   isMultiChapterReference,
   isSingleChapterMultipleVersesReference,
   isSingleVerseReference,
   isValidStringOrUndefined,
-  simplifyReferenceGroup,
-} from '../src/reference.js';
-import {Reference, ReferenceGroup} from '../src/types.js';
+} from '../src/reference/reference-utils.js';
+import {Reference} from '../src/reference/reference-types.js';
+
+const biblesCache = await loadBiblesCache({
+  cacheDir: 'test/resources/cache',
+  maxCacheAgeDays: undefined,
+});
 
 // - - - - - - - - -
 // Test get Reference Groups
-test('get reference groups', () => {
+test('get reference groups', async () => {
   const input = 'Genesis 1:1 (NIV, KJV); John 3:16-17 (MAL10RO)';
 
-  expect(getReferenceGroups(input)).toStrictEqual([
-    'Genesis 1:1 (NIV, KJV)',
-    'John 3:16-17 (MAL10RO)',
-  ]);
+  const expectedOutput = {
+    'Genesis 1:1 (NIV, KJV)': [
+      {
+        book: 'GEN',
+        chapterStart: '1',
+        chapterEnd: undefined,
+        verseStart: '1',
+        verseEnd: undefined,
+        bible: 'NIV',
+      },
+      {
+        book: 'GEN',
+        chapterStart: '1',
+        chapterEnd: undefined,
+        verseStart: '1',
+        verseEnd: undefined,
+        bible: 'KJV',
+      },
+    ],
+    'John 3:16-17 (MAL10RO)': [
+      {
+        book: 'JHN',
+        chapterStart: '3',
+        chapterEnd: undefined,
+        verseStart: '16',
+        verseEnd: '17',
+        bible: 'MAL10RO',
+      },
+    ],
+  };
+
+  expect(await parseReferences({input, biblesCache})).toStrictEqual(
+    expectedOutput
+  );
 });
 
-test('ignore empty reference group', () => {
+test('ignore empty reference group', async () => {
   const input = 'Genesis 1:1 (NIV, KJV); John 3:16-17 (MAL10RO); \t \n';
 
-  expect(getReferenceGroups(input)).toStrictEqual([
-    'Genesis 1:1 (NIV, KJV)',
-    'John 3:16-17 (MAL10RO)',
-  ]);
-});
-
-// - - - - - - - - -
-// test simplify reference group
-test('simplify single verse with translations', () => {
-  const expectation: ReferenceGroup = {
-    bookName: 'Genesis',
-    chapterStart: '1',
-    verseStart: '1',
-    bibles: ['NIV', 'KJV'],
+  const expectedOutput = {
+    'Genesis 1:1 (NIV, KJV)': [
+      {
+        book: 'GEN',
+        chapterStart: '1',
+        chapterEnd: undefined,
+        verseStart: '1',
+        verseEnd: undefined,
+        bible: 'NIV',
+      },
+      {
+        book: 'GEN',
+        chapterStart: '1',
+        chapterEnd: undefined,
+        verseStart: '1',
+        verseEnd: undefined,
+        bible: 'KJV',
+      },
+    ],
+    'John 3:16-17 (MAL10RO)': [
+      {
+        book: 'JHN',
+        chapterStart: '3',
+        chapterEnd: undefined,
+        verseStart: '16',
+        verseEnd: '17',
+        bible: 'MAL10RO',
+      },
+    ],
   };
 
-  expect(simplifyReferenceGroup('Genesis 1:1 (NIV, KJV)')).toEqual(expectation);
-});
-
-test('simplify multiple chapters without translation', () => {
-  const expectation: ReferenceGroup = {
-    bookName: 'Genesis',
-    chapterStart: '1',
-    chapterEnd: '2',
-  };
-
-  expect(simplifyReferenceGroup('Genesis 1-2')).toEqual(expectation);
-});
-
-test('simplify multiple chapters with translation and book abbreviation', () => {
-  const expectation: ReferenceGroup = {
-    bookName: 'Gen.',
-    chapterStart: '1',
-    chapterEnd: '2',
-    bibles: ['NIV', 'KJV'],
-  };
-
-  expect(simplifyReferenceGroup('Gen. 1-2   (NIV,KJV)')).toEqual(expectation);
-});
-
-test('simplify malayalam reference group', () => {
-  const expectation: ReferenceGroup = {
-    bookName: 'യോഹന്നാൻ',
-    chapterStart: '3',
-    verseStart: '16',
-    verseEnd: '17',
-    bibles: ['MAL10RO'],
-  };
-
-  expect(simplifyReferenceGroup('യോഹന്നാൻ 3:16-17 (MAL10RO)')).toEqual(
-    expectation
+  expect(await parseReferences({input, biblesCache})).toStrictEqual(
+    expectedOutput
   );
 });
 
@@ -120,7 +136,7 @@ test('chapterStart <= 0', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidReferenceSyntax(reference)).toBe(false);
+  expect(hasValidReferenceInformation(reference)).toBe(false);
 });
 
 test('chapterStart is float', () => {
@@ -131,7 +147,7 @@ test('chapterStart is float', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidReferenceSyntax(reference)).toBe(false);
+  expect(hasValidReferenceInformation(reference)).toBe(false);
 });
 
 test('chapterEnd <= 0', () => {
@@ -143,7 +159,7 @@ test('chapterEnd <= 0', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidReferenceSyntax(reference)).toBe(false);
+  expect(hasValidReferenceInformation(reference)).toBe(false);
 });
 
 test('chapterEnd is float', () => {
@@ -155,7 +171,7 @@ test('chapterEnd is float', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidReferenceSyntax(reference)).toBe(false);
+  expect(hasValidReferenceInformation(reference)).toBe(false);
 });
 
 test('only verseEnd is specified ', () => {
@@ -167,7 +183,7 @@ test('only verseEnd is specified ', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidReferenceSyntax(reference)).toBe(false);
+  expect(hasValidReferenceInformation(reference)).toBe(false);
 });
 
 test('verseStart <= 0', () => {
@@ -178,7 +194,7 @@ test('verseStart <= 0', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidReferenceSyntax(reference)).toBe(false);
+  expect(hasValidReferenceInformation(reference)).toBe(false);
 });
 
 test('verseStart is float', () => {
@@ -189,7 +205,7 @@ test('verseStart is float', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidReferenceSyntax(reference)).toBe(false);
+  expect(hasValidReferenceInformation(reference)).toBe(false);
 });
 
 test('verseEnd <= 0', () => {
@@ -201,7 +217,7 @@ test('verseEnd <= 0', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidReferenceSyntax(reference)).toBe(false);
+  expect(hasValidReferenceInformation(reference)).toBe(false);
 });
 
 test('verseEnd is float', () => {
@@ -213,7 +229,7 @@ test('verseEnd is float', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidReferenceSyntax(reference)).toBe(false);
+  expect(hasValidReferenceInformation(reference)).toBe(false);
 });
 
 test('verseStart specified and multi chapter', () => {
@@ -225,7 +241,7 @@ test('verseStart specified and multi chapter', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidReferenceSyntax(reference)).toBe(false);
+  expect(hasValidReferenceInformation(reference)).toBe(false);
 });
 
 test('multi chapter', () => {
@@ -238,7 +254,7 @@ test('multi chapter', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidReferenceSyntax(reference)).toBe(true);
+  expect(hasValidReferenceInformation(reference)).toBe(true);
 });
 
 // - - - - - - - - -
@@ -251,7 +267,7 @@ test('reference is single verse', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidReferenceSyntax(reference)).toBe(true);
+  expect(hasValidReferenceInformation(reference)).toBe(true);
   expect(isSingleVerseReference(reference)).toBe(true);
   expect(isMultiChapterReference(reference)).toBe(false);
   expect(isSingleChapterMultipleVersesReference(reference)).toBe(false);
@@ -268,7 +284,7 @@ test('reference contains multiple verses', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidReferenceSyntax(reference)).toBe(true);
+  expect(hasValidReferenceInformation(reference)).toBe(true);
   expect(isSingleVerseReference(reference)).toBe(false);
   expect(isMultiChapterReference(reference)).toBe(false);
   expect(isSingleChapterMultipleVersesReference(reference)).toBe(true);
@@ -286,7 +302,7 @@ test('reference contains multiple chapters', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidReferenceSyntax(reference)).toBe(true);
+  expect(hasValidReferenceInformation(reference)).toBe(true);
   expect(isSingleVerseReference(reference)).toBe(false);
   expect(isMultiChapterReference(reference)).toBe(true);
   expect(isSingleChapterMultipleVersesReference(reference)).toBe(false);
@@ -300,7 +316,7 @@ test('reference contains multiple chapters in full', () => {
     bible: 'KJV',
   };
 
-  expect(hasValidReferenceSyntax(reference)).toBe(true);
+  expect(hasValidReferenceInformation(reference)).toBe(true);
   expect(isSingleVerseReference(reference)).toBe(false);
   expect(isMultiChapterReference(reference)).toBe(true);
   expect(isSingleChapterMultipleVersesReference(reference)).toBe(false);

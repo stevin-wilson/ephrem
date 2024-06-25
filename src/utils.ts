@@ -108,14 +108,14 @@ export const sortObject = (obj: any): any => {
 /**
  * Calculates the threshold date based on the maximum age in days and the current timestamp (optional).
  * @param maxAgeDays - The maximum age in days.
- * @param [currentTimestamp] - The current timestamp. If not provided, the current date and time will be used.
+ * @param [timestamp] - The current timestamp. If not provided, the current date and time will be used.
  * @returns The threshold date.
  */
 export const getThresholdDate = (
   maxAgeDays: number,
-  currentTimestamp?: Date
+  timestamp?: Date
 ): Date => {
-  const thresholdDate = currentTimestamp ? currentTimestamp : new Date();
+  const thresholdDate = timestamp ? timestamp : new Date();
   thresholdDate.setDate(thresholdDate.getDate() - maxAgeDays);
   return thresholdDate;
 };

@@ -4,10 +4,7 @@ import {
   PassagesOutput,
 } from './passage-types.js';
 
-import {
-  getDefaultUseMajorityFallback,
-  getPassageID,
-} from '../reference/reference-utils.js';
+import {getDefaultUseMajorityFallback} from '../reference/reference-utils.js';
 import {loadBiblesCache, saveBiblesCache} from '../cache/cache-use-bibles.js';
 import {
   getDefaultApiConfig,
@@ -29,10 +26,13 @@ import {
   getDefaultBiblesToExclude,
 } from '../cache/cache-utils.js';
 import {getValidLanguages} from '../utils.js';
+import {getPassageID} from './passage-utils.js';
 
 export const getPassages = async (
   options: GetPassagesOptions
 ): Promise<PassagesOutput> => {
+  const timestamp = options.timestamp ? options.timestamp : new Date();
+
   const {
     input,
     passageOptions = getDefaultPassageOptions(),
@@ -41,11 +41,18 @@ export const getPassages = async (
     defaultBibles = getDefaultBibles(),
     useMajorityFallback = getDefaultUseMajorityFallback(),
     forceUpdateBiblesCache = false,
-    biblesCache = await loadBiblesCache(),
-    passagesCache = await loadPassagesCache(),
+    biblesCache = await loadBiblesCache({
+      cacheDir: options.cacheDir,
+      maxCacheAgeDays: options.maxCacheAgeDays,
+      timestamp,
+    }),
+    passagesCache = await loadPassagesCache({
+      cacheDir: options.cacheDir,
+      maxCacheAgeDays: options.maxCacheAgeDays,
+      timestamp,
+    }),
     languages = getDefaultLanguages(),
     biblesToExclude = getDefaultBiblesToExclude(),
-    timestamp = new Date(),
     config = getDefaultApiConfig(),
     retries = getDefaultMaxRetries(),
     initialBackoff = getDefaultInitialBackoffMs(),

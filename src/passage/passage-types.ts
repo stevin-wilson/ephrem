@@ -1,18 +1,9 @@
-import {AxiosRequestConfig} from 'axios';
 import {
-  FetchBiblesOptions,
   PassageAndFumsResponse,
   PassageOptions,
 } from '../api-bible/api-types.js';
-import {
-  GetBookIdOptions,
-  ParseReferencesOptions,
-} from '../reference/reference-types.js';
-import {
-  BiblesCache,
-  PassagesCache,
-  UpdateBiblesCacheOptions,
-} from '../cache/cache-types.js';
+import {ParseReferencesOptions} from '../reference/reference-types.js';
+import {PassagesCache} from '../cache/cache-types.js';
 
 export type PassagesOutput = Record<string, PassageAndFumsResponse[]>;
 

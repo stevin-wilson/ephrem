@@ -26,14 +26,14 @@ export const saveBibles = async (
 
 export const cleanBibles = (
   bibles: Bibles,
-  currentTimestamp?: Date,
+  timestamp?: Date,
   maxCacheAgeDays = getDefaultMaxCacheAgeDays()
 ): [Bibles, boolean] => {
   if (!maxCacheAgeDays || maxCacheAgeDays < 0) {
     return [bibles, false];
   }
 
-  const thresholdDate = getThresholdDate(maxCacheAgeDays, currentTimestamp);
+  const thresholdDate = getThresholdDate(maxCacheAgeDays, timestamp);
 
   const cleanedBibles: Bibles = {};
   let removedRecords = false;

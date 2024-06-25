@@ -3,13 +3,17 @@ import {Command} from 'commander';
 import figlet from 'figlet';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
-import {DEFAULT_LANGUAGES} from '../api-bible/api-constants.js';
+import {
+  DEFAULT_LANGUAGES,
+  DEFAULT_PASSAGE_OPTIONS,
+} from '../api-bible/api-constants.js';
 import {
   setApiKey,
   setDefaultLanguages,
   setDefaultPassageOptions,
 } from '../api-bible/api-utils.js';
 import {
+  DEFAULT_BIBLES,
   DEFAULT_BIBLES_TO_EXCLUDE,
   DEFAULT_CACHE_DIR,
 } from '../cache/cache-constants.js';
@@ -22,6 +26,13 @@ import {setDefaultUseMajorityFallback} from '../reference/reference-utils.js';
 import {PassageOptions} from '../api-bible/api-types.js';
 import {getPassages} from '../passage/get-passages.js';
 import {GetPassagesOptions} from '../passage/passage-types.js';
+import {normalizeLanguage} from '../utils.js';
+
+const showFigletText = () => {
+  console.log(
+    chalk.magenta.bold(figlet.textSync('Ephrem', {horizontalLayout: 'full'}))
+  );
+};
 
 const printPassages = async (options: GetPassagesOptions): Promise<void> => {
   const passageOutput = await getPassages(options);
@@ -35,10 +46,6 @@ const printPassages = async (options: GetPassagesOptions): Promise<void> => {
   }
 };
 
-console.log(
-  chalk.magenta.bold(figlet.textSync('Ephrem', {horizontalLayout: 'full'}))
-);
-
 const program = new Command();
 
 program
@@ -50,6 +57,7 @@ program
   .command('init')
   .description('Setup user config to fetch passages from API.Bible')
   .action(() => {
+    showFigletText();
     const questions = [
       {
         name: 'apiKey',
@@ -66,19 +74,12 @@ program
         name: 'bibles',
         message: 'Enter your preferred Bible(s). Use comma as separator:',
         type: 'input',
-        default: DEFAULT_LANGUAGES.join(','),
-      },
-      {
-        name: 'useMajorityFallback',
-        message:
-          'If book name is not in a Bible, identify Book code from other Bibles that have the book name as fallback:',
-        type: 'checkbox',
-        choices: [{name: 'useMajorityFallback', value: 'useMajorityFallback'}],
+        default: DEFAULT_BIBLES.join(','),
       },
       {
         name: 'biblesToExclude',
         message:
-          'Enter Bible(s) to ignore when inferring book ID in the fallback method. Use comma as separator:',
+          'Enter Bible(s) to ignore when inferring book ID from a book name. Use comma as separator:',
         type: 'input',
         default: DEFAULT_BIBLES_TO_EXCLUDE.join(','),
       },
@@ -143,10 +144,17 @@ program
   .description('Fetch passages from API.Bible')
   .argument('<passages>', 'Passages to retrieve')
   .option(
+    '--languages <type>',
+    'List of languages associated with the reference or Bibles',
+    DEFAULT_LANGUAGES.join(',')
+  )
+  .option(
     '--content-type <type>',
     'The content type for the passage output',
     /^(json|html|text)$/i,
-    'text'
+    DEFAULT_PASSAGE_OPTIONS.contentType
+      ? DEFAULT_PASSAGE_OPTIONS.contentType
+      : 'text'
   )
   .option('--include-notes <boolean>', 'Should notes be included', false)
   .option('--include-titles <boolean>', 'Should titles be included', false)
@@ -170,6 +178,7 @@ program
       passages,
       {
         contentType,
+        languages,
         includeNotes,
         includeTitles,
         includeChapterNumbers,
@@ -187,9 +196,17 @@ program
           includeVerseNumbers,
           includeVerseSpans,
         },
+        languages: languages
+          .split(',')
+          .map((l: string) => normalizeLanguage(l)),
       });
     }
   );
-
+if (
+  !process.argv.includes('get-passages') ||
+  (process.argv.includes('get-passages') &&
+    (process.argv.includes('--help') || process.argv.includes('-h')))
+) {
+  showFigletText();
+}
 program.parse(process.argv);
-// options

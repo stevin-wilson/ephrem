@@ -43,11 +43,21 @@ export const passageQueriesAreEqual = (
 export const preparePassage = async (
   options: PreparePassageOptions
 ): Promise<PassageAndFumsResponse> => {
+  const timestamp = options.timestamp ? options.timestamp : new Date();
+
   const {
     passageID,
     bibleAbbreviation,
-    passagesCache = await loadPassagesCache(),
-    biblesCache = await loadBiblesCache(),
+    passagesCache = await loadPassagesCache({
+      cacheDir: options.cacheDir,
+      maxCacheAgeDays: options.maxCacheAgeDays,
+      timestamp,
+    }),
+    biblesCache = await loadBiblesCache({
+      cacheDir: options.cacheDir,
+      maxCacheAgeDays: options.maxCacheAgeDays,
+      timestamp,
+    }),
     config = getDefaultApiConfig(),
     passageOptions = getDefaultPassageOptions(),
     languages = getDefaultLanguages(),
@@ -57,7 +67,6 @@ export const preparePassage = async (
     retries = getDefaultMaxRetries(),
     initialBackoff = getDefaultInitialBackoffMs(),
     delayBetweenCalls = getDefaultDelayBetweenCallsMs(),
-    timestamp = new Date(),
   } = options;
 
   const getPassageFromCache = (

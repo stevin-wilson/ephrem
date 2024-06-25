@@ -19,14 +19,14 @@ export const savePassages = async (
 
 export const cleanPassagesCache = (
   passages: Passages,
-  currentTimestamp?: Date,
+  timestamp?: Date,
   maxCacheAgeDays = getDefaultMaxCacheAgeDays()
 ): [Passages, boolean] => {
   if (!maxCacheAgeDays || maxCacheAgeDays < 0) {
     return [passages, false];
   }
 
-  const thresholdDate = getThresholdDate(maxCacheAgeDays, currentTimestamp);
+  const thresholdDate = getThresholdDate(maxCacheAgeDays, timestamp);
 
   const cleanedPassages: Passages = {};
   let removedRecords = false;

@@ -26,14 +26,14 @@ export const saveBookNames = async (
 
 export const cleanBookNamesCache = (
   bookNames: BookNames,
-  currentTimestamp?: Date,
+  timestamp?: Date,
   maxCacheAgeDays = getDefaultMaxCacheAgeDays()
 ): [BookNames, boolean] => {
   if (!maxCacheAgeDays || maxCacheAgeDays < 0) {
     return [bookNames, false];
   }
 
-  const thresholdDate = getThresholdDate(maxCacheAgeDays, currentTimestamp);
+  const thresholdDate = getThresholdDate(maxCacheAgeDays, timestamp);
 
   const cleanedBookNames: BookNames = {};
   let removedRecords = false;

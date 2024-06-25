@@ -1,7 +1,5 @@
 import {BOOK_IDs} from './book-ids.js';
-import {AxiosRequestConfig} from 'axios';
 import {UpdateBiblesCacheOptions} from '../cache/cache-types.js';
-import {FetchBiblesOptions} from '../api-bible/api-types.js';
 
 export interface ReferenceGroup {
   readonly bookName: string;
