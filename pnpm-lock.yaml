@@ -9,109 +9,109 @@ importers:
   .:
     devDependencies:
       '@eslint-community/eslint-plugin-eslint-comments':
-        specifier: ^4.4.0
+        specifier: 4.4.0
         version: 4.4.0(eslint@9.12.0(jiti@2.3.3))
       '@eslint/js':
-        specifier: ^9.12.0
+        specifier: 9.12.0
         version: 9.12.0
       '@release-it/conventional-changelog':
-        specifier: ^9.0.0
+        specifier: 9.0.0
         version: 9.0.0(conventional-commits-filter@5.0.0)(conventional-commits-parser@6.0.0)(release-it@17.8.2(typescript@5.6.3))
       '@types/eslint-plugin-markdown':
-        specifier: ^2.0.2
+        specifier: 2.0.2
         version: 2.0.2
       '@types/eslint__js':
-        specifier: ^8.42.3
+        specifier: 8.42.3
         version: 8.42.3
       '@types/node':
-        specifier: ^22.7.5
+        specifier: 22.7.5
         version: 22.7.5
       '@vitest/coverage-v8':
-        specifier: ^2.1.2
+        specifier: 2.1.2
         version: 2.1.2(vitest@2.1.2(@types/node@22.7.5))
       '@vitest/eslint-plugin':
-        specifier: ^1.1.7
+        specifier: 1.1.7
         version: 1.1.7(@typescript-eslint/utils@8.8.1(eslint@9.12.0(jiti@2.3.3))(typescript@5.6.3))(eslint@9.12.0(jiti@2.3.3))(typescript@5.6.3)(vitest@2.1.2(@types/node@22.7.5))
       console-fail-test:
-        specifier: ^0.5.0
+        specifier: 0.5.0
         version: 0.5.0
       cspell:
-        specifier: ^8.15.1
+        specifier: 8.15.1
         version: 8.15.1
       eslint:
-        specifier: ^9.12.0
+        specifier: 9.12.0
         version: 9.12.0(jiti@2.3.3)
       eslint-plugin-jsdoc:
-        specifier: ^50.3.2
+        specifier: 50.3.2
         version: 50.3.2(eslint@9.12.0(jiti@2.3.3))
       eslint-plugin-jsonc:
-        specifier: ^2.16.0
+        specifier: 2.16.0
         version: 2.16.0(eslint@9.12.0(jiti@2.3.3))
       eslint-plugin-markdown:
-        specifier: ^5.1.0
+        specifier: 5.1.0
         version: 5.1.0(eslint@9.12.0(jiti@2.3.3))
       eslint-plugin-n:
-        specifier: ^17.11.1
+        specifier: 17.11.1
         version: 17.11.1(eslint@9.12.0(jiti@2.3.3))
       eslint-plugin-package-json:
-        specifier: ^0.15.3
+        specifier: 0.15.3
         version: 0.15.3(eslint@9.12.0(jiti@2.3.3))(jsonc-eslint-parser@2.4.0)
       eslint-plugin-perfectionist:
-        specifier: ^3.8.0
+        specifier: 3.8.0
         version: 3.8.0(eslint@9.12.0(jiti@2.3.3))(typescript@5.6.3)
       eslint-plugin-regexp:
-        specifier: ^2.6.0
+        specifier: 2.6.0
         version: 2.6.0(eslint@9.12.0(jiti@2.3.3))
       eslint-plugin-yml:
-        specifier: ^1.14.0
+        specifier: 1.14.0
         version: 1.14.0(eslint@9.12.0(jiti@2.3.3))
       husky:
-        specifier: ^9.1.6
+        specifier: 9.1.6
         version: 9.1.6
       jsonc-eslint-parser:
-        specifier: ^2.4.0
+        specifier: 2.4.0
         version: 2.4.0
       knip:
-        specifier: ^5.33.3
+        specifier: 5.33.3
         version: 5.33.3(@types/node@22.7.5)(typescript@5.6.3)
       lint-staged:
-        specifier: ^15.2.10
+        specifier: 15.2.10
         version: 15.2.10
       markdownlint:
-        specifier: ^0.35.0
+        specifier: 0.35.0
         version: 0.35.0
       markdownlint-cli:
-        specifier: ^0.42.0
+        specifier: 0.42.0
         version: 0.42.0
       prettier:
-        specifier: ^3.3.3
+        specifier: 3.3.3
         version: 3.3.3
       prettier-plugin-curly:
-        specifier: ^0.3.1
+        specifier: 0.3.1
         version: 0.3.1(prettier@3.3.3)
       prettier-plugin-packagejson:
-        specifier: ^2.5.3
+        specifier: 2.5.3
         version: 2.5.3(prettier@3.3.3)
       prettier-plugin-sh:
-        specifier: ^0.14.0
+        specifier: 0.14.0
         version: 0.14.0(prettier@3.3.3)
       release-it:
-        specifier: ^17.8.2
+        specifier: 17.8.2
         version: 17.8.2(typescript@5.6.3)
       sentences-per-line:
-        specifier: ^0.2.1
+        specifier: 0.2.1
         version: 0.2.1
       tsup:
-        specifier: ^8.3.0
+        specifier: 8.3.0
         version: 8.3.0(jiti@2.3.3)(postcss@8.4.47)(typescript@5.6.3)(yaml@2.5.1)
       typescript:
-        specifier: ^5.6.3
+        specifier: 5.6.3
         version: 5.6.3
       typescript-eslint:
-        specifier: ^8.8.1
+        specifier: 8.8.1
         version: 8.8.1(eslint@9.12.0(jiti@2.3.3))(typescript@5.6.3)
       vitest:
-        specifier: ^2.1.2
+        specifier: 2.1.2
         version: 2.1.2(@types/node@22.7.5)
 
 packages:
