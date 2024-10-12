@@ -1,3 +1,9 @@
+## [0.1.2](https://github.com/stevin-wilson/ephrem/compare/0.1.1...0.1.2) (2024-10-12)
+
+### Bug Fixes
+
+- add ide settings ([7db23f0](https://github.com/stevin-wilson/ephrem/commit/7db23f004f95d6704e4ba91f8e3fe26237d22f24))
+
 ## [0.1.1](https://github.com/stevin-wilson/ephrem/compare/0.1.0...0.1.1) (2024-10-12)
 
 ### Bug Fixes
