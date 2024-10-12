@@ -1,6 +1,6 @@
 <h1 align="center">Ephrem</h1>
 
-<p align="center">Ephrem is a light-weight API wrapper for API.Bible, built using NodeJS and Typescript. Ephrem validates bible references and fetches scripture text corresponding to the references.</p>
+<p align="center">Ephrem is a lightweight NodeJS and TypeScript API wrapper for API.Bible that validates Bible references and retrieves the corresponding scripture text.</p>
 
 <p align="center">
 	<!-- prettier-ignore-start -->
