@@ -17,15 +17,39 @@
 
 ## Usage
 
+### Installation
+
 ```shell
 npm i ephrem
 ```
 
-```ts
-import { greet } from "ephrem";
+### Setup (one-time)
 
-greet("Hello, world! 💖");
+```ts
+import { setupEphrem } from "ephrem";
+
+setupEphrem(languageIds, apiBibleKey);
 ```
+
+### Get Passage From API.Bible
+
+```ts
+import { getPassageWithDetails } from "ephrem";
+
+getPassageWithDetails("John 3:16 (KJV)").then((passage) => {
+	console.log(passage);
+});
+```
+
+### Customize Bible Abbreviations
+
+```ts
+import { getBibleAbbreviationsFilepath } from "ephrem";
+
+console.log(getBibleAbbreviationsFilepath());
+```
+
+You can edit this file to customize the abbreviations for each Bible.
 
 ## Contributors
 

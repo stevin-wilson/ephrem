@@ -4,11 +4,17 @@ import axiosRetry from "axios-retry";
 import * as fs from "node:fs";
 import path from "node:path";
 
-import { ephremPaths } from "./utils.js";
+import {
+	BaseEphremError,
+	ephremPaths,
+	normalizeBookName,
+	removePunctuation,
+} from "./utils.js";
 
 // – – – – – – – – – –
 const API_BIBLE_BASE_URL = "https://api.scripture.api.bible";
 const API_BIBLE_TIMEOUT = 10000;
+const ISO_693_3_REGEX = /^[a-z]{3}$/;
 
 export const BIBLES_DATA_PATH = path.join(ephremPaths.data, "bibles.json");
 export const ABB_TO_ID_MAPPING_PATH = path.join(
@@ -21,14 +27,44 @@ export const NAMES_TO_BIBLES_PATH = path.join(
 	"book-names-to-bibles.json",
 );
 
-// BaseError class
-export class BaseEphremError extends Error {
-	public context: Record<string, unknown>;
+// – – – – – – – – – –
+export class InvalidAPIBibleKeyError extends BaseEphremError {
+	public context: {
+		apiBibleKey: string | undefined;
+	};
 
-	constructor(message: string) {
-		super(message);
-		this.name = "BaseEphremError";
-		this.context = {};
+	constructor(apiBibleKey: string | undefined) {
+		super("API.Bible Key was not found or is invalid");
+		this.name = "InvalidAPIBibleKeyError";
+		this.context = { apiBibleKey };
+	}
+}
+
+// – – – – – – – – – –
+export class InvalidLanguageIDError extends BaseEphremError {
+	public context: {
+		languageId: string;
+	};
+
+	constructor(languageId: string) {
+		super("Language ID does not match ISO 639-3 format (lower case)");
+		this.name = "InvalidLanguageIDError";
+		this.context = { languageId };
+	}
+}
+
+// – – – – – – – – – –
+export class BiblesNotAvailableError extends BaseEphremError {
+	public context: {
+		languageId: string;
+	};
+
+	constructor(languageId: string) {
+		super(
+			"No Bibles were available for the given language using the specified API.Bible key",
+		);
+		this.name = "BiblesNotAvailableError";
+		this.context = { languageId };
 	}
 }
 
@@ -188,6 +224,7 @@ export type BookId = string;
 type BibleAbbreviation = string;
 export type BooksAndBibles = Record<BookName, Record<BibleId, BookId>>;
 export type BiblesMap = Record<BibleAbbreviation, BibleId>;
+
 // – – – – – – – – – –
 
 function filterUndefinedFromPassageOptions(
@@ -210,7 +247,7 @@ axiosRetry(axios, {
 // – – – – – – – – – –
 const getDefaultApiHeader = (apiBibleKey: string): RawAxiosRequestHeaders => {
 	if (!apiBibleKey) {
-		throw new Error("No API.Bible key provided. Run `ephrem init`");
+		throw new InvalidAPIBibleKeyError(apiBibleKey);
 	}
 	return { Accept: "application/json", "api-key": apiBibleKey };
 };
@@ -219,15 +256,29 @@ const getDefaultApiHeader = (apiBibleKey: string): RawAxiosRequestHeaders => {
 const getBiblesFromApiConfig = (
 	languageId: string,
 	apiBibleKey: string,
-): AxiosRequestConfig => ({
-	baseURL: API_BIBLE_BASE_URL,
-	headers: getDefaultApiHeader(apiBibleKey),
-	params: {
-		"include-full-details": false,
-		language: languageId,
-	},
-	timeout: API_BIBLE_TIMEOUT,
-});
+): AxiosRequestConfig => {
+	const normalizedLanguageId = removePunctuation(languageId)
+		.trim()
+		.toLowerCase();
+
+	if (!ISO_693_3_REGEX.test(normalizedLanguageId)) {
+		throw new InvalidLanguageIDError(languageId);
+	}
+
+	if (!apiBibleKey) {
+		throw new InvalidAPIBibleKeyError(apiBibleKey);
+	}
+
+	return {
+		baseURL: API_BIBLE_BASE_URL,
+		headers: getDefaultApiHeader(apiBibleKey),
+		params: {
+			"include-full-details": false,
+			language: normalizedLanguageId,
+		},
+		timeout: API_BIBLE_TIMEOUT,
+	};
+};
 
 // – – – – – – – – – –
 const handleGetBiblesFromApiError = (
@@ -270,16 +321,23 @@ const getBiblesFromApi = async (
 ): Promise<BibleResponse[]> => {
 	const config = getBiblesFromApiConfig(languageId, apiBibleKey);
 
+	let bibles: BibleResponse[] = [];
 	try {
 		const response = await axios.get<{ data: BibleResponse[] }>(
 			"/v1/bibles",
 			config,
 		);
 
-		return response.data.data;
+		bibles = response.data.data;
 	} catch (error) {
 		throw handleGetBiblesFromApiError(error, languageId);
 	}
+
+	if (bibles.length === 0) {
+		throw new BiblesNotAvailableError(languageId);
+	}
+
+	return bibles;
 };
 
 // – – – – – – – – – –
@@ -374,14 +432,20 @@ const handleGetBooksFromApiError = (
 };
 
 // – – – – – – – – – –
-const getBooksFromApiConfig = (apiBibleKey: string): AxiosRequestConfig => ({
-	baseURL: API_BIBLE_BASE_URL,
-	headers: getDefaultApiHeader(apiBibleKey),
-	params: {
-		"include-chapters": false,
-	},
-	timeout: API_BIBLE_TIMEOUT,
-});
+const getBooksFromApiConfig = (apiBibleKey: string): AxiosRequestConfig => {
+	if (!apiBibleKey) {
+		throw new InvalidAPIBibleKeyError(apiBibleKey);
+	}
+
+	return {
+		baseURL: API_BIBLE_BASE_URL,
+		headers: getDefaultApiHeader(apiBibleKey),
+		params: {
+			"include-chapters": false,
+		},
+		timeout: API_BIBLE_TIMEOUT,
+	};
+};
 
 // – – – – – – – – – –
 const getBooksFromApi = async (
@@ -419,12 +483,14 @@ const getBookNamesToBibles = (books: Book[]): BooksAndBibles => {
 	const bookNamesToBibles: BooksAndBibles = {};
 
 	for (const book of books) {
-		if (!(book.name in bookNamesToBibles)) {
-			bookNamesToBibles[book.name] = {};
+		const bookName = normalizeBookName(book.name);
+
+		if (!(bookName in bookNamesToBibles)) {
+			bookNamesToBibles[bookName] = {};
 		}
 
-		if (!(book.bibleId in bookNamesToBibles[book.name])) {
-			bookNamesToBibles[book.name][book.bibleId] = book.id;
+		if (!(book.bibleId in bookNamesToBibles[bookName])) {
+			bookNamesToBibles[bookName][book.bibleId] = book.id;
 		}
 	}
 
@@ -477,12 +543,18 @@ export const setupEphrem = async (
 const getPassageFromApiConfig = (
 	passageOptions: PassageOptions,
 	apiBibleKey: string,
-): AxiosRequestConfig => ({
-	baseURL: API_BIBLE_BASE_URL,
-	headers: getDefaultApiHeader(apiBibleKey),
-	params: filterUndefinedFromPassageOptions(passageOptions),
-	timeout: API_BIBLE_TIMEOUT,
-});
+): AxiosRequestConfig => {
+	if (!apiBibleKey) {
+		throw new InvalidAPIBibleKeyError(apiBibleKey);
+	}
+
+	return {
+		baseURL: API_BIBLE_BASE_URL,
+		headers: getDefaultApiHeader(apiBibleKey),
+		params: filterUndefinedFromPassageOptions(passageOptions),
+		timeout: API_BIBLE_TIMEOUT,
+	};
+};
 
 // – – – – – – – – – –
 const handleGetPassageFromApiError = (
@@ -551,3 +623,7 @@ export const getPassageFromApi = async (
 		);
 	}
 };
+
+// – – – – – – – – – –
+export const getBibleAbbreviationsFilepath = (): string =>
+	ABB_TO_ID_MAPPING_PATH;

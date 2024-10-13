@@ -16,6 +16,66 @@ import {
 	PassageWithDetails,
 } from "./api-bible.js";
 import { BOOK_IDs } from "./book-ids.js";
+import { BaseEphremError, normalizeBookName } from "./utils.js";
+
+// – – – – – – – – – –
+export class BookIdNotFoundError extends BaseEphremError {
+	public context: {
+		bibleId: string;
+		bookId: string;
+	};
+
+	constructor(bookId: string, bibleId: string) {
+		super("Book ID could not be found in the Bible");
+		this.name = "BookIdNotFoundError";
+		this.context = { bibleId, bookId };
+	}
+}
+
+// – – – – – – – – – –
+export class FallbackBibleNotFoundError extends BaseEphremError {
+	public context: {
+		fallbackBibleAbbreviation: string | undefined;
+		input: string;
+	};
+
+	constructor(input: string, fallbackBibleAbbreviation: string | undefined) {
+		super(
+			"Input does not indicate a bible abbreviation, and no fallback Bible Abbreviation was provided",
+		);
+		this.name = "FallbackBibleNotFoundError";
+		this.context = { fallbackBibleAbbreviation, input };
+	}
+}
+
+// – – – – – – – – – –
+export class UnknownBibleAbbreviationError extends BaseEphremError {
+	public context: {
+		bibleAbbreviation: string;
+		mappingFile: string;
+	};
+
+	constructor(bibleAbbreviation: string, mappingFile: string) {
+		super("Bible Abbreviation could not be found in the mapping file");
+		this.name = "UnknownBibleAbbreviationError";
+		this.context = { bibleAbbreviation, mappingFile };
+	}
+}
+
+// – – – – – – – – – –
+export class InvalidReferenceError extends BaseEphremError {
+	public context: {
+		input: string;
+	};
+
+	constructor(input: string) {
+		super(
+			"Input reference is invalid. Please check the reference and try again.",
+		);
+		this.name = "InvalidReferenceError";
+		this.context = { input };
+	}
+}
 
 // – – – – – – – – – –
 export type VoteTally = Record<string, number>;
@@ -40,15 +100,15 @@ export interface Reference extends ReferenceWithoutBible {
 
 // – – – – – – – – – –
 const getBookIdInBible = (
-	bookName: string,
+	normalizedBookName: string,
 	bibleId: string,
 	bookNamesToBibles: BooksAndBibles,
 ): string | undefined => {
-	if (!(bookName in bookNamesToBibles)) {
+	if (!(normalizedBookName in bookNamesToBibles)) {
 		return undefined;
 	}
 
-	return bookNamesToBibles[bookName][bibleId];
+	return bookNamesToBibles[normalizedBookName][bibleId];
 };
 
 // – – – – – – – – – –
@@ -61,15 +121,15 @@ const getKeyOfMaxValue = (obj: VoteTally): string | undefined => {
 
 // – – – – – – – – – –
 const getBookIdByMajority = (
-	bookName: string,
+	normalizedBookName: string,
 	bibleMap: BiblesMap,
 	bookNamesToBibles: BooksAndBibles,
 ): string | undefined => {
-	if (!(bookName in bookNamesToBibles)) {
+	if (!(normalizedBookName in bookNamesToBibles)) {
 		return undefined;
 	}
 
-	const biblesWithBook = bookNamesToBibles[bookName];
+	const biblesWithBook = bookNamesToBibles[normalizedBookName];
 	const biblesToConsider = Object.values(bibleMap);
 
 	const voteTally: VoteTally = {};
@@ -95,10 +155,12 @@ export const getBookId = async (
 		await fs.promises.readFile(NAMES_TO_BIBLES_PATH, "utf-8"),
 	) as BooksAndBibles;
 
+	const normalizedBookName = normalizeBookName(bookName);
+
 	let bookId: string | undefined = undefined;
 
 	if (bibleId !== undefined) {
-		bookId = getBookIdInBible(bookName, bibleId, bookNamesToBibles);
+		bookId = getBookIdInBible(normalizedBookName, bibleId, bookNamesToBibles);
 	}
 
 	if (bookId === undefined) {
@@ -106,7 +168,11 @@ export const getBookId = async (
 			await fs.promises.readFile(ABB_TO_ID_MAPPING_PATH, "utf-8"),
 		) as BiblesMap;
 
-		bookId = getBookIdByMajority(bookName, bibleMap, bookNamesToBibles);
+		bookId = getBookIdByMajority(
+			normalizedBookName,
+			bibleMap,
+			bookNamesToBibles,
+		);
 	}
 
 	if (bookId && bookId in BOOK_IDs) {
@@ -129,7 +195,7 @@ const extractTranslationAndBookChapterVerse = (input: string) => {
 		const colonIndex = bookChapterVerse.indexOf(":");
 
 		if (hyphenIndex < colonIndex) {
-			throw new Error(`Invalid format for Reference: ${input}`);
+			throw new InvalidReferenceError(input);
 		}
 	}
 
@@ -172,7 +238,7 @@ export const parseReference = async (
 	let [bookName, chapterVerse] = bookChapterVerse.split(/\s+(?=\d)/);
 
 	if (!bookName || !chapterVerse) {
-		throw new Error(`Invalid format for Reference: ${input}`);
+		throw new InvalidReferenceError(input);
 	}
 
 	let targetBibleAbbreviation: string;
@@ -180,7 +246,7 @@ export const parseReference = async (
 		targetBibleAbbreviation = bibleAbbreviation;
 	} else {
 		if (!fallbackBibleAbbreviation) {
-			throw new Error("No fallback Bible Abbreviation provided");
+			throw new FallbackBibleNotFoundError(input, fallbackBibleAbbreviation);
 		}
 
 		targetBibleAbbreviation = fallbackBibleAbbreviation;
@@ -191,7 +257,10 @@ export const parseReference = async (
 	) as BiblesMap;
 
 	if (!(targetBibleAbbreviation in bibleMap)) {
-		throw new Error(`Invalid Bible Abbreviation: ${targetBibleAbbreviation}`);
+		throw new UnknownBibleAbbreviationError(
+			targetBibleAbbreviation,
+			ABB_TO_ID_MAPPING_PATH,
+		);
 	}
 
 	const bibleId = bibleMap[targetBibleAbbreviation];
@@ -224,7 +293,7 @@ const createPassageBoundary = (
 };
 
 // – – – – – – – – – –
-const getPassageID = (reference: ReferenceWithoutBible): string => {
+export const getPassageId = (reference: ReferenceWithoutBible): string => {
 	const sections: string[] = [];
 
 	const requiredSection = createPassageBoundary(
@@ -240,12 +309,18 @@ const getPassageID = (reference: ReferenceWithoutBible): string => {
 			reference.chapterEnd,
 			reference.verseEnd,
 		);
-	} else if (reference.chapterEnd !== undefined) {
+	} else if (
+		reference.chapterEnd !== undefined &&
+		reference.chapterEnd !== reference.chapterStart
+	) {
 		optionalSection = createPassageBoundary(
 			reference.bookId,
 			reference.chapterEnd,
 		);
-	} else if (reference.verseEnd !== undefined) {
+	} else if (
+		reference.verseEnd !== undefined &&
+		reference.verseStart !== reference.verseEnd
+	) {
 		optionalSection = createPassageBoundary(
 			reference.bookId,
 			reference.chapterStart,
@@ -271,10 +346,10 @@ export const getPassage = async (
 	const reference = await parseReference(input, fallbackBibleAbbreviation);
 
 	if (!reference) {
-		throw new Error(`Invalid Input: ${input}`);
+		throw new InvalidReferenceError(input);
 	}
 
-	const passageId = getPassageID(reference);
+	const passageId = getPassageId(reference);
 
 	return await getPassageFromApi(
 		passageId,
@@ -294,10 +369,10 @@ export const getPassageWithDetails = async (
 	const reference = await parseReference(input, fallbackBibleAbbreviation);
 
 	if (!reference) {
-		throw new Error(`Invalid Input: ${input}`);
+		throw new InvalidReferenceError(input);
 	}
 
-	const passageId = getPassageID(reference);
+	const passageId = getPassageId(reference);
 
 	const passageAndFums = await getPassageFromApi(
 		passageId,
@@ -322,7 +397,7 @@ export const getPassageWithDetails = async (
 				book.id === reference.bookId && book.bibleId === reference.bibleId,
 		) ??
 		(() => {
-			throw new Error(`Book not found for id: ${reference.bookId}`);
+			throw new BookIdNotFoundError(reference.bookId, reference.bibleId);
 		})();
 
 	return {
