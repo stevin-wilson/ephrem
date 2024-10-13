@@ -254,15 +254,11 @@ const getDefaultApiHeader = (apiBibleKey: string): RawAxiosRequestHeaders => {
 
 // – – – – – – – – – –
 const getBiblesFromApiConfig = (
-	languageId: string,
+	normalizedLanguageId: string,
 	apiBibleKey: string,
 ): AxiosRequestConfig => {
-	const normalizedLanguageId = removePunctuation(languageId)
-		.trim()
-		.toLowerCase();
-
 	if (!ISO_693_3_REGEX.test(normalizedLanguageId)) {
-		throw new InvalidLanguageIDError(languageId);
+		throw new InvalidLanguageIDError(normalizedLanguageId);
 	}
 
 	if (!apiBibleKey) {
@@ -316,10 +312,10 @@ const handleGetBiblesFromApiError = (
 // – – – – – – – – – –
 // fetchBibles
 const getBiblesFromApi = async (
-	languageId: string,
+	normalizedLanguageId: string,
 	apiBibleKey: string,
 ): Promise<BibleResponse[]> => {
-	const config = getBiblesFromApiConfig(languageId, apiBibleKey);
+	const config = getBiblesFromApiConfig(normalizedLanguageId, apiBibleKey);
 
 	let bibles: BibleResponse[] = [];
 	try {
@@ -330,11 +326,11 @@ const getBiblesFromApi = async (
 
 		bibles = response.data.data;
 	} catch (error) {
-		throw handleGetBiblesFromApiError(error, languageId);
+		throw handleGetBiblesFromApiError(error, normalizedLanguageId);
 	}
 
 	if (bibles.length === 0) {
-		throw new BiblesNotAvailableError(languageId);
+		throw new BiblesNotAvailableError(normalizedLanguageId);
 	}
 
 	return bibles;
@@ -345,8 +341,16 @@ const getBiblesInLanguages = async (
 	languageIds: string[],
 	apiBibleKey: string,
 ): Promise<BibleResponse[]> => {
+	const normalizedLanguageIds = languageIds.map((languageId) =>
+		removePunctuation(languageId).trim().toLowerCase(),
+	);
+
+	const uniqueLanguageIds = [...new Set(normalizedLanguageIds)];
+
 	const bibles = await Promise.all(
-		languageIds.map((languageId) => getBiblesFromApi(languageId, apiBibleKey)),
+		uniqueLanguageIds.map((normalizedLanguageId) =>
+			getBiblesFromApi(normalizedLanguageId, apiBibleKey),
+		),
 	);
 
 	return bibles.flat();
@@ -625,5 +629,10 @@ export const getPassageFromApi = async (
 };
 
 // – – – – – – – – – –
+/**
+ * Bible abbreviations mapping file can be used to customize the abbreviations/labels that can be used to refer to a Bible.
+ * This function returns the path to the Bible abbreviations mapping file.
+ * @returns The file path to the Bible abbreviations mapping file.
+ */
 export const getBibleAbbreviationsFilepath = (): string =>
 	ABB_TO_ID_MAPPING_PATH;
