@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="feat: basic validation of language Ids, check if API key is empty">
+    <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="feat: throw an error if no Bible is available for a language">
+      <change afterPath="$PROJECT_DIR$/src/reference.test.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api-bible.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api-bible.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reference.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reference.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,6 +102,10 @@
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Vitest.reference to passage ID conversion.executor": "Run",
+    "Vitest.reference to passage ID conversion.multiple verses alternative reference.executor": "Run",
+    "Vitest.reference to passage ID conversion.single chapter reference.executor": "Run",
+    "Vitest.reference to passage ID conversion.single verse alternative reference.executor": "Run",
     "git-widget-placeholder": "feature/setup-ephrem",
     "last_opened_file_path": "/Users/stevin/PycharmProjects/ephrem",
     "node.js.detected.package.eslint": "true",
@@ -121,25 +126,60 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="npm.lint">
-    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="build" />
-      </scripts>
+  <component name="RunManager" selected="Vitest.reference to passage ID conversion">
+    <configuration name="reference to passage ID conversion" type="JavaScriptTestRunnerVitest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
+      <vitest-package value="$PROJECT_DIR$/node_modules/vitest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <vitest-options value="--run" />
       <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/src/reference.test.ts" />
+      <test-names>
+        <test-name value="reference to passage ID conversion" />
+      </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="format" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="format" />
-      </scripts>
+    <configuration name="reference to passage ID conversion.multiple verses alternative reference" type="JavaScriptTestRunnerVitest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
+      <vitest-package value="$PROJECT_DIR$/node_modules/vitest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <vitest-options value="--run" />
       <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/reference.test.ts" />
+      <test-names>
+        <test-name value="reference to passage ID conversion" />
+        <test-name value="multiple verses alternative reference" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="reference to passage ID conversion.single chapter reference" type="JavaScriptTestRunnerVitest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <vitest-package value="$PROJECT_DIR$/node_modules/vitest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <vitest-options value="--run" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/reference.test.ts" />
+      <test-names>
+        <test-name value="reference to passage ID conversion" />
+        <test-name value="single chapter reference" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="reference to passage ID conversion.single verse alternative reference" type="JavaScriptTestRunnerVitest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <vitest-package value="$PROJECT_DIR$/node_modules/vitest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <vitest-options value="--run" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/reference.test.ts" />
+      <test-names>
+        <test-name value="reference to passage ID conversion" />
+        <test-name value="single verse alternative reference" />
+      </test-names>
       <method v="2" />
     </configuration>
     <configuration name="lint" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -152,33 +192,13 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="lint:spelling" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="lint:spelling" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="prepare" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="prepare" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Vitest.reference to passage ID conversion" />
+        <item itemvalue="Vitest.reference to passage ID conversion.single chapter reference" />
+        <item itemvalue="Vitest.reference to passage ID conversion.multiple verses alternative reference" />
+        <item itemvalue="Vitest.reference to passage ID conversion.single verse alternative reference" />
         <item itemvalue="npm.lint" />
-        <item itemvalue="npm.build" />
-        <item itemvalue="npm.format" />
-        <item itemvalue="npm.lint:spelling" />
-        <item itemvalue="npm.prepare" />
       </list>
     </recent_temporary>
   </component>
@@ -237,7 +257,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728808520557</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="feat: throw an error if no Bible is available for a language">
+      <option name="closed" value="true" />
+      <created>1728809160832</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1728809160832</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -260,6 +288,7 @@
     <MESSAGE value="feat: get bibles, books and passages from API.Bible" />
     <MESSAGE value="feat: parse references" />
     <MESSAGE value="feat: basic validation of language Ids, check if API key is empty" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: basic validation of language Ids, check if API key is empty" />
+    <MESSAGE value="feat: throw an error if no Bible is available for a language" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: throw an error if no Bible is available for a language" />
   </component>
 </project>

@@ -293,7 +293,7 @@ const createPassageBoundary = (
 };
 
 // – – – – – – – – – –
-const getPassageID = (reference: ReferenceWithoutBible): string => {
+export const getPassageId = (reference: ReferenceWithoutBible): string => {
 	const sections: string[] = [];
 
 	const requiredSection = createPassageBoundary(
@@ -309,12 +309,18 @@ const getPassageID = (reference: ReferenceWithoutBible): string => {
 			reference.chapterEnd,
 			reference.verseEnd,
 		);
-	} else if (reference.chapterEnd !== undefined) {
+	} else if (
+		reference.chapterEnd !== undefined &&
+		reference.chapterEnd !== reference.chapterStart
+	) {
 		optionalSection = createPassageBoundary(
 			reference.bookId,
 			reference.chapterEnd,
 		);
-	} else if (reference.verseEnd !== undefined) {
+	} else if (
+		reference.verseEnd !== undefined &&
+		reference.verseStart !== reference.verseEnd
+	) {
 		optionalSection = createPassageBoundary(
 			reference.bookId,
 			reference.chapterStart,
@@ -343,7 +349,7 @@ export const getPassage = async (
 		throw new InvalidReferenceError(input);
 	}
 
-	const passageId = getPassageID(reference);
+	const passageId = getPassageId(reference);
 
 	return await getPassageFromApi(
 		passageId,
@@ -366,7 +372,7 @@ export const getPassageWithDetails = async (
 		throw new InvalidReferenceError(input);
 	}
 
-	const passageId = getPassageID(reference);
+	const passageId = getPassageId(reference);
 
 	const passageAndFums = await getPassageFromApi(
 		passageId,
