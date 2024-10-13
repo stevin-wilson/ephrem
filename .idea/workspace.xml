@@ -139,7 +139,7 @@
       <recent name="$PROJECT_DIR$/tests" />
     </key>
   </component>
-  <component name="RunManager" selected="Vitest.get Book ID">
+  <component name="RunManager" selected="npm.format">
     <configuration name="get Book ID" type="JavaScriptTestRunnerVitest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <vitest-package value="$PROJECT_DIR$/node_modules/vitest" />
@@ -199,10 +199,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.format" />
         <item itemvalue="Vitest.get Book ID" />
         <item itemvalue="Vitest.get Book ID.should return book code/Id" />
         <item itemvalue="npm.build" />
-        <item itemvalue="npm.format" />
         <item itemvalue="npm.lint" />
       </list>
     </recent_temporary>
