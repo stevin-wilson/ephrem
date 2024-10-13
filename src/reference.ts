@@ -2,9 +2,18 @@ import fs from "node:fs";
 
 import {
 	ABB_TO_ID_MAPPING_PATH,
+	BibleId,
+	BibleResponse,
+	BIBLES_DATA_PATH,
 	BiblesMap,
+	Book,
+	BOOKS_DATA_PATH,
 	BooksAndBibles,
+	getPassageFromApi,
 	NAMES_TO_BIBLES_PATH,
+	PassageAndFumsResponse,
+	PassageOptions,
+	PassageWithDetails,
 } from "./api-bible.js";
 import { BOOK_IDs } from "./book-ids.js";
 
@@ -202,5 +211,124 @@ export const parseReference = async (
 		chapterStart,
 		verseEnd,
 		verseStart,
+	};
+};
+
+// – – – – – – – – – –
+const createPassageBoundary = (
+	bookId: string,
+	chapter: string,
+	verse?: string,
+): string => {
+	return verse ? `${bookId}.${chapter}.${verse}` : `${bookId}.${chapter}`;
+};
+
+// – – – – – – – – – –
+const getPassageID = (reference: ReferenceWithoutBible): string => {
+	const sections: string[] = [];
+
+	const requiredSection = createPassageBoundary(
+		reference.bookId,
+		reference.chapterStart,
+		reference.verseStart,
+	);
+	let optionalSection: string | undefined = undefined;
+
+	if (reference.chapterEnd !== undefined && reference.verseEnd !== undefined) {
+		optionalSection = createPassageBoundary(
+			reference.bookId,
+			reference.chapterEnd,
+			reference.verseEnd,
+		);
+	} else if (reference.chapterEnd !== undefined) {
+		optionalSection = createPassageBoundary(
+			reference.bookId,
+			reference.chapterEnd,
+		);
+	} else if (reference.verseEnd !== undefined) {
+		optionalSection = createPassageBoundary(
+			reference.bookId,
+			reference.chapterStart,
+			reference.verseEnd,
+		);
+	}
+
+	sections.push(requiredSection);
+	if (optionalSection) {
+		sections.push(optionalSection);
+	}
+
+	return sections.join("-").replace(/\s+/g, "");
+};
+
+// – – – – – – – – – –
+export const getPassage = async (
+	input: string,
+	passageOptions: PassageOptions,
+	apiBibleKey: string,
+	fallbackBibleAbbreviation?: string,
+): Promise<PassageAndFumsResponse> => {
+	const reference = await parseReference(input, fallbackBibleAbbreviation);
+
+	if (!reference) {
+		throw new Error(`Invalid Input: ${input}`);
+	}
+
+	const passageId = getPassageID(reference);
+
+	return await getPassageFromApi(
+		passageId,
+		reference.bibleId,
+		passageOptions,
+		apiBibleKey,
+	);
+};
+
+// – – – – – – – – – –
+export const getPassageWithDetails = async (
+	input: string,
+	passageOptions: PassageOptions,
+	apiBibleKey: string,
+	fallbackBibleAbbreviation?: string,
+): Promise<PassageWithDetails> => {
+	const reference = await parseReference(input, fallbackBibleAbbreviation);
+
+	if (!reference) {
+		throw new Error(`Invalid Input: ${input}`);
+	}
+
+	const passageId = getPassageID(reference);
+
+	const passageAndFums = await getPassageFromApi(
+		passageId,
+		reference.bibleId,
+		passageOptions,
+		apiBibleKey,
+	);
+
+	const biblesData = JSON.parse(
+		await fs.promises.readFile(BIBLES_DATA_PATH, "utf-8"),
+	) as Record<BibleId, BibleResponse>;
+
+	const bible = biblesData[reference.bibleId];
+
+	const books = JSON.parse(
+		await fs.promises.readFile(BOOKS_DATA_PATH, "utf-8"),
+	) as Book[];
+
+	const book =
+		books.find(
+			(book) =>
+				book.id === reference.bookId && book.bibleId === reference.bibleId,
+		) ??
+		(() => {
+			throw new Error(`Book not found for id: ${reference.bookId}`);
+		})();
+
+	return {
+		bible,
+		book,
+		fums: passageAndFums.meta,
+		passage: passageAndFums.data,
 	};
 };
