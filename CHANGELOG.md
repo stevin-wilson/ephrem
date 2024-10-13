@@ -1,3 +1,13 @@
+# [0.3.0](https://github.com/stevin-wilson/ephrem/compare/0.2.0...0.3.0) (2024-10-13)
+
+### Bug Fixes
+
+- add words to cspell dictionary ([311b782](https://github.com/stevin-wilson/ephrem/commit/311b782e673506ef8bc9d0872b84efc4dfeef94a))
+
+### Features
+
+- parse references ([79563ff](https://github.com/stevin-wilson/ephrem/commit/79563ff8d7f270d2698e670cff83a234820a6b62))
+
 # [0.2.0](https://github.com/stevin-wilson/ephrem/compare/0.1.2...0.2.0) (2024-10-13)
 
 ### Bug Fixes
