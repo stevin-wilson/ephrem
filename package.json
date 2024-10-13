@@ -33,6 +33,11 @@
 	"lint-staged": {
 		"*": "prettier --ignore-unknown --write"
 	},
+	"dependencies": {
+		"axios": "^1.7.7",
+		"axios-retry": "^4.5.0",
+		"env-paths": "^3.0.0"
+	},
 	"devDependencies": {
 		"@eslint-community/eslint-plugin-eslint-comments": "4.4.0",
 		"@eslint/js": "9.12.0",
