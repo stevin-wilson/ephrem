@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="fix: cspell errors">
+    <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="fix: do not double count whe identifying book ID based on majority.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cspell.json" beforeDir="false" afterPath="$PROJECT_DIR$/cspell.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api-bible.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api-bible.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/reference.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reference.test.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/reference.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reference.ts" afterDir="false" />
     </list>
@@ -129,6 +129,8 @@
     "npm.lint:packages.executor": "Run",
     "npm.lint:spelling.executor": "Run",
     "npm.prepare.executor": "Run",
+    "npm.test.executor": "Run",
+    "npm.tsc.executor": "Run",
     "prettierjs.PrettierConfiguration.Package": "/Users/stevin/PycharmProjects/ephrem/node_modules/prettier",
     "settings.editor.selected.configurable": "preferences.lookFeel",
     "ts.external.directory.path": "/Users/stevin/PycharmProjects/ephrem/node_modules/typescript/lib",
@@ -141,55 +143,52 @@
       <recent name="$PROJECT_DIR$/tests" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.lint:spelling">
-    <configuration name="parse References" type="JavaScriptTestRunnerVitest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <vitest-package value="$PROJECT_DIR$/node_modules/vitest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <vitest-options value="--run" />
-      <envs />
-      <scope-kind value="SUITE" />
-      <test-file value="$PROJECT_DIR$/src/reference.test.ts" />
-      <test-names>
-        <test-name value="parse References" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="lint" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="npm.format">
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
-        <script value="lint" />
+        <script value="build" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="lint:knip" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+    <configuration name="format" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
-        <script value="lint:knip" />
+        <script value="format" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="lint:md" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+    <configuration name="prepare" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
-        <script value="lint:md" />
+        <script value="prepare" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="lint:spelling" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+    <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
-        <script value="lint:spelling" />
+        <script value="test" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="tsc" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="tsc" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -197,11 +196,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.lint:spelling" />
-        <item itemvalue="npm.lint:md" />
-        <item itemvalue="npm.lint:knip" />
-        <item itemvalue="npm.lint" />
-        <item itemvalue="Vitest.parse References" />
+        <item itemvalue="npm.format" />
+        <item itemvalue="npm.prepare" />
+        <item itemvalue="npm.build" />
+        <item itemvalue="npm.tsc" />
+        <item itemvalue="npm.test" />
       </list>
     </recent_temporary>
   </component>
@@ -228,7 +227,7 @@
       <workItem from="1728700671530" duration="10000" />
       <workItem from="1728704551480" duration="17891000" />
       <workItem from="1728837835457" duration="3242000" />
-      <workItem from="1728855601962" duration="1179000" />
+      <workItem from="1728855601962" duration="2046000" />
     </task>
     <task id="LOCAL-00001" summary="fix: markdown lint">
       <option name="closed" value="true" />
@@ -310,7 +309,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728840971330</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="fix: do not double count whe identifying book ID based on majority.">
+      <option name="closed" value="true" />
+      <created>1728856848754</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1728856848755</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -338,14 +345,15 @@
     <MESSAGE value="tests: for reference-related functions" />
     <MESSAGE value="fix: remove unused import" />
     <MESSAGE value="fix: cspell errors" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: cspell errors" />
+    <MESSAGE value="fix: do not double count whe identifying book ID based on majority." />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: do not double count whe identifying book ID based on majority." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/reference.ts</url>
-          <line>2</line>
+          <line>18</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

@@ -371,20 +371,18 @@ export const getPassageWithDetails = async (
 	apiBibleKey: string,
 	fallbackBibleAbbreviation?: string,
 ): Promise<PassageWithDetails> => {
+	const passageAndFums = await getPassage(
+		input,
+		passageOptions,
+		apiBibleKey,
+		fallbackBibleAbbreviation,
+	);
+
 	const reference = await parseReference(input, fallbackBibleAbbreviation);
 
 	if (!reference) {
 		throw new InvalidReferenceError(input);
 	}
-
-	const passageId = getPassageId(reference);
-
-	const passageAndFums = await getPassageFromApi(
-		passageId,
-		reference.bibleId,
-		passageOptions,
-		apiBibleKey,
-	);
 
 	const biblesData = JSON.parse(
 		await fs.promises.readFile(BIBLES_DATA_PATH, "utf-8"),

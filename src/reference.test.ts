@@ -125,6 +125,14 @@ describe("get Book ID", () => {
 
 // – – – – – – – – – –
 describe("parse References", () => {
+	// single verse LTR
+	// single verse LTR - fallback bible
+	// multiple verses LTR
+	// multiple verses LTR - fallback bible
+	// whole chapter LTR
+	// whole chapter LTR - fallback bible
+	// multiple chapters LTR
+	// multiple chapters LTR - fallback bible
 	it("multiple verses - LTR citations", async () => {
 		const result = await parseReference("John 3:16-20 (KJV)");
 
@@ -139,6 +147,15 @@ describe("parse References", () => {
 
 		expect(result).toStrictEqual(expected);
 	});
+
+	// single verse RTL
+	// single verse RTL - fallback bible
+	// multiple verses RTL
+	// multiple verses RTL - fallback bible
+	// whole chapter RTL
+	// whole chapter RTL - fallback bible
+	// multiple chapters RTL
+	// multiple chapters RTL - fallback bible
 
 	it("multiple verses - RTL citations", async () => {
 		const result = await parseReference("إنجيل يوحنا 3:16-20 (KJV)");
