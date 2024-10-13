@@ -54,6 +54,21 @@ export class InvalidLanguageIDError extends BaseEphremError {
 }
 
 // – – – – – – – – – –
+export class BiblesNotAvailableError extends BaseEphremError {
+	public context: {
+		languageId: string;
+	};
+
+	constructor(languageId: string) {
+		super(
+			"No Bibles were available for the given language using the specified API.Bible key",
+		);
+		this.name = "BiblesNotAvailableError";
+		this.context = { languageId };
+	}
+}
+
+// – – – – – – – – – –
 export class BiblesFetchError extends BaseEphremError {
 	public context: {
 		languageId: string;
@@ -232,7 +247,7 @@ axiosRetry(axios, {
 // – – – – – – – – – –
 const getDefaultApiHeader = (apiBibleKey: string): RawAxiosRequestHeaders => {
 	if (!apiBibleKey) {
-		throw new Error("No API.Bible key provided. Run `ephrem init`");
+		throw new InvalidAPIBibleKeyError(apiBibleKey);
 	}
 	return { Accept: "application/json", "api-key": apiBibleKey };
 };
@@ -306,16 +321,23 @@ const getBiblesFromApi = async (
 ): Promise<BibleResponse[]> => {
 	const config = getBiblesFromApiConfig(languageId, apiBibleKey);
 
+	let bibles: BibleResponse[] = [];
 	try {
 		const response = await axios.get<{ data: BibleResponse[] }>(
 			"/v1/bibles",
 			config,
 		);
 
-		return response.data.data;
+		bibles = response.data.data;
 	} catch (error) {
 		throw handleGetBiblesFromApiError(error, languageId);
 	}
+
+	if (bibles.length === 0) {
+		throw new BiblesNotAvailableError(languageId);
+	}
+
+	return bibles;
 };
 
 // – – – – – – – – – –
