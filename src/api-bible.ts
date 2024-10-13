@@ -10,12 +10,12 @@ import { ephremPaths } from "./utils.js";
 const API_BIBLE_BASE_URL = "https://api.scripture.api.bible";
 const API_BIBLE_TIMEOUT = 10000;
 
-const BIBLES_DATA_PATH = path.join(ephremPaths.data, "bibles.json");
+export const BIBLES_DATA_PATH = path.join(ephremPaths.data, "bibles.json");
 export const ABB_TO_ID_MAPPING_PATH = path.join(
 	ephremPaths.data,
 	"bibles-map.json",
 );
-const BOOKS_DATA_PATH = path.join(ephremPaths.data, "books.json");
+export const BOOKS_DATA_PATH = path.join(ephremPaths.data, "books.json");
 export const NAMES_TO_BIBLES_PATH = path.join(
 	ephremPaths.data,
 	"book-names-to-bibles.json",
@@ -174,9 +174,17 @@ export interface PassageAndFumsResponse {
 	readonly [key: string]: unknown;
 }
 
+// – – – – – – – – – –
+export interface PassageWithDetails {
+	readonly bible: BibleResponse;
+	readonly book: Book;
+	readonly fums: FumsResponse;
+	readonly passage: PassageResponse;
+}
+
 type BookName = string;
-type BibleId = string;
-type BookId = string;
+export type BibleId = string;
+export type BookId = string;
 type BibleAbbreviation = string;
 export type BooksAndBibles = Record<BookName, Record<BibleId, BookId>>;
 export type BiblesMap = Record<BibleAbbreviation, BibleId>;
