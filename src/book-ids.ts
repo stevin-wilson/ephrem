@@ -1,3 +1,5 @@
+// cspell:disable
+
 /**
  * Represents a collection of bookIds.
  * GEN – The book of Genesis.
