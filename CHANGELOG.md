@@ -1,3 +1,10 @@
+# [0.5.0](https://github.com/stevin-wilson/ephrem/compare/0.4.0...0.5.0) (2024-10-13)
+
+### Features
+
+- basic validation of language Ids, check if API key is empty ([25de9e7](https://github.com/stevin-wilson/ephrem/commit/25de9e706d4f54f76e8e231642ea94978828ce1e))
+- throw an error if no Bible is available for a language ([42dd162](https://github.com/stevin-wilson/ephrem/commit/42dd16239fb7411d6a219ae468427d41cdef1b13))
+
 # [0.4.0](https://github.com/stevin-wilson/ephrem/compare/0.3.0...0.4.0) (2024-10-13)
 
 ### Features
