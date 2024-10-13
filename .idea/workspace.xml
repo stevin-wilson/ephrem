@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="fix: remove unused import">
+    <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="fix: cspell errors">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cspell.json" beforeDir="false" afterPath="$PROJECT_DIR$/cspell.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reference.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reference.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reference.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reference.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,12 +106,13 @@
     "Vitest.get Book ID.executor": "Run",
     "Vitest.get Book ID.should return book code/Id.executor": "Run",
     "Vitest.normalizeBookName.executor": "Run",
+    "Vitest.parse References.executor": "Run",
     "Vitest.reference to passage ID conversion.executor": "Run",
     "Vitest.reference to passage ID conversion.multiple verses alternative reference.executor": "Run",
     "Vitest.reference to passage ID conversion.single chapter reference.executor": "Run",
     "Vitest.reference to passage ID conversion.single verse alternative reference.executor": "Run",
     "Vitest.removePunctuation.executor": "Run",
-    "git-widget-placeholder": "fix/improve-coverage",
+    "git-widget-placeholder": "#21 on fix/improve-coverage",
     "last_opened_file_path": "/Users/stevin/PycharmProjects/ephrem",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
@@ -121,6 +124,7 @@
     "npm.build.executor": "Run",
     "npm.format.executor": "Run",
     "npm.lint.executor": "Run",
+    "npm.lint:knip.executor": "Run",
     "npm.lint:md.executor": "Run",
     "npm.lint:packages.executor": "Run",
     "npm.lint:spelling.executor": "Run",
@@ -138,7 +142,7 @@
     </key>
   </component>
   <component name="RunManager" selected="npm.lint:spelling">
-    <configuration name="get Book ID" type="JavaScriptTestRunnerVitest" temporary="true" nameIsGenerated="true">
+    <configuration name="parse References" type="JavaScriptTestRunnerVitest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <vitest-package value="$PROJECT_DIR$/node_modules/vitest" />
       <working-dir value="$PROJECT_DIR$" />
@@ -147,32 +151,8 @@
       <scope-kind value="SUITE" />
       <test-file value="$PROJECT_DIR$/src/reference.test.ts" />
       <test-names>
-        <test-name value="get Book ID" />
+        <test-name value="parse References" />
       </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="get Book ID.should return book code/Id" type="JavaScriptTestRunnerVitest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <vitest-package value="$PROJECT_DIR$/node_modules/vitest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <vitest-options value="--run" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/src/reference.test.ts" />
-      <test-names>
-        <test-name value="get Book ID" />
-        <test-name value="should return book code/Id" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="format" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="format" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
       <method v="2" />
     </configuration>
     <configuration name="lint" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -180,6 +160,26 @@
       <command value="run" />
       <scripts>
         <script value="lint" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="lint:knip" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="lint:knip" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="lint:md" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="lint:md" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -198,10 +198,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.lint:spelling" />
+        <item itemvalue="npm.lint:md" />
+        <item itemvalue="npm.lint:knip" />
         <item itemvalue="npm.lint" />
-        <item itemvalue="npm.format" />
-        <item itemvalue="Vitest.get Book ID" />
-        <item itemvalue="Vitest.get Book ID.should return book code/Id" />
+        <item itemvalue="Vitest.parse References" />
       </list>
     </recent_temporary>
   </component>
@@ -227,7 +227,8 @@
       <workItem from="1728699278442" duration="158000" />
       <workItem from="1728700671530" duration="10000" />
       <workItem from="1728704551480" duration="17891000" />
-      <workItem from="1728837835457" duration="3118000" />
+      <workItem from="1728837835457" duration="3242000" />
+      <workItem from="1728855601962" duration="1179000" />
     </task>
     <task id="LOCAL-00001" summary="fix: markdown lint">
       <option name="closed" value="true" />
@@ -301,7 +302,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728840825997</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="fix: cspell errors">
+      <option name="closed" value="true" />
+      <created>1728840971330</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1728840971330</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -328,7 +337,8 @@
     <MESSAGE value="tests: for getPassageID from reference" />
     <MESSAGE value="tests: for reference-related functions" />
     <MESSAGE value="fix: remove unused import" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: remove unused import" />
+    <MESSAGE value="fix: cspell errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: cspell errors" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -336,7 +346,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/reference.ts</url>
           <line>2</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

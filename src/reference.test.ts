@@ -19,7 +19,13 @@ vi.mock("./api-bible.js", () => {
 	};
 });
 
-import { getBookId, getPassageId, ReferenceWithoutBible } from "./reference.js";
+import {
+	getBookId,
+	getPassageId,
+	parseReference,
+	Reference,
+	ReferenceWithoutBible,
+} from "./reference.js";
 
 // – – – – – – – – – –
 describe("reference to passage ID conversion", () => {
@@ -102,5 +108,50 @@ describe("get Book ID", () => {
 		const result = await getBookId("Genesis");
 
 		expect(result).toBe("GEN");
+	});
+
+	it("should be compatible with other LTR languages", async () => {
+		const result = await getBookId("2 ശമുവേൽ");
+
+		expect(result).toBe("2SA");
+	});
+
+	it("should be compatible with RTL languages", async () => {
+		const result = await getBookId("العبرانيين");
+
+		expect(result).toBe("HEB");
+	});
+});
+
+// – – – – – – – – – –
+describe("parse References", () => {
+	it("multiple verses - LTR citations", async () => {
+		const result = await parseReference("John 3:16-20 (KJV)");
+
+		const expected: Reference = {
+			bibleId: "de4e12af7f28f599-02",
+			bookId: "JHN",
+			chapterEnd: undefined,
+			chapterStart: "3",
+			verseEnd: "20",
+			verseStart: "16",
+		};
+
+		expect(result).toStrictEqual(expected);
+	});
+
+	it("multiple verses - RTL citations", async () => {
+		const result = await parseReference("إنجيل يوحنا 3:16-20 (KJV)");
+
+		const expected: Reference = {
+			bibleId: "de4e12af7f28f599-02",
+			bookId: "JHN",
+			chapterEnd: undefined,
+			chapterStart: "3",
+			verseEnd: "20",
+			verseStart: "16",
+		};
+
+		expect(result).toStrictEqual(expected);
 	});
 });

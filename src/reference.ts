@@ -133,14 +133,19 @@ const getBookIdByMajority = (
 	const biblesToConsider = Object.values(bibleMap);
 
 	const voteTally: VoteTally = {};
+	const alreadyConsideredBibleIds: string[] = [];
 	for (const [bibleId, bookId] of Object.entries(biblesWithBook)) {
-		if (!biblesToConsider.includes(bibleId)) {
+		if (
+			alreadyConsideredBibleIds.includes(bibleId) ||
+			!biblesToConsider.includes(bibleId)
+		) {
 			continue;
 		}
 
 		voteTally[bookId] ||= 0;
 
 		voteTally[bookId] += 1;
+		alreadyConsideredBibleIds.push(bibleId);
 	}
 
 	return getKeyOfMaxValue(voteTally);
