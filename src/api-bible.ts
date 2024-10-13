@@ -226,14 +226,32 @@ export type BooksAndBibles = Record<BookName, Record<BibleId, BookId>>;
 export type BiblesMap = Record<BibleAbbreviation, BibleId>;
 
 // – – – – – – – – – –
-
-function filterUndefinedFromPassageOptions(
+const convertPassageOptionsForApi = (
 	options: PassageOptions,
-): Record<string, unknown> {
+): Record<string, unknown> => {
+	const {
+		contentType,
+		includeChapterNumbers,
+		includeNotes,
+		includeTitles,
+		includeVerseNumbers,
+		includeVerseSpans,
+	} = options;
+
+	const precursor = {
+		"content-type": contentType,
+		"include-chapter-numbers": includeChapterNumbers,
+		"include-notes": includeNotes,
+		"include-titles": includeTitles,
+		"include-verse-numbers": includeVerseNumbers,
+		"include-verse-spans": includeVerseSpans,
+	};
+
+	// filter out undefined values
 	return Object.fromEntries(
-		Object.entries(options).filter(([, value]) => value !== undefined),
+		Object.entries(precursor).filter(([, value]) => value !== undefined),
 	);
-}
+};
 
 // – – – – – – – – – –
 // Exponential back-off retry delay between requests
@@ -555,7 +573,7 @@ const getPassageFromApiConfig = (
 	return {
 		baseURL: API_BIBLE_BASE_URL,
 		headers: getDefaultApiHeader(apiBibleKey),
-		params: filterUndefinedFromPassageOptions(passageOptions),
+		params: convertPassageOptionsForApi(passageOptions),
 		timeout: API_BIBLE_TIMEOUT,
 	};
 };

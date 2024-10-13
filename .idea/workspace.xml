@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="fix: do not double count whe identifying book ID based on majority.">
+    <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="refactor: call `getPassage` within `getPassageWithDetails`">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/api-bible.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api-bible.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/reference.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reference.test.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reference.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reference.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,6 +105,8 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Vitest.get Book ID.executor": "Run",
     "Vitest.get Book ID.should return book code/Id.executor": "Run",
+    "Vitest.get passage.executor": "Run",
+    "Vitest.get passage.get passage with details.executor": "Debug",
     "Vitest.normalizeBookName.executor": "Run",
     "Vitest.parse References.executor": "Run",
     "Vitest.reference to passage ID conversion.executor": "Run",
@@ -143,7 +145,34 @@
       <recent name="$PROJECT_DIR$/tests" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.format">
+  <component name="RunManager" selected="npm.lint">
+    <configuration name="get passage" type="JavaScriptTestRunnerVitest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <vitest-package value="$PROJECT_DIR$/node_modules/vitest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <vitest-options value="--run" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/src/reference.test.ts" />
+      <test-names>
+        <test-name value="get passage" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="get passage.get passage with details" type="JavaScriptTestRunnerVitest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <vitest-package value="$PROJECT_DIR$/node_modules/vitest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <vitest-options value="--run" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/reference.test.ts" />
+      <test-names>
+        <test-name value="get passage" />
+        <test-name value="get passage with details" />
+      </test-names>
+      <method v="2" />
+    </configuration>
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -164,31 +193,11 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="prepare" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+    <configuration name="lint" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
-        <script value="prepare" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="test" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="tsc" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="tsc" />
+        <script value="lint" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -196,11 +205,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.lint" />
         <item itemvalue="npm.format" />
-        <item itemvalue="npm.prepare" />
         <item itemvalue="npm.build" />
-        <item itemvalue="npm.tsc" />
-        <item itemvalue="npm.test" />
+        <item itemvalue="Vitest.get passage" />
+        <item itemvalue="Vitest.get passage.get passage with details" />
       </list>
     </recent_temporary>
   </component>
@@ -227,7 +236,7 @@
       <workItem from="1728700671530" duration="10000" />
       <workItem from="1728704551480" duration="17891000" />
       <workItem from="1728837835457" duration="3242000" />
-      <workItem from="1728855601962" duration="2046000" />
+      <workItem from="1728855601962" duration="3964000" />
     </task>
     <task id="LOCAL-00001" summary="fix: markdown lint">
       <option name="closed" value="true" />
@@ -317,7 +326,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728856848755</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="refactor: call `getPassage` within `getPassageWithDetails`">
+      <option name="closed" value="true" />
+      <created>1728857772633</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1728857772633</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -346,7 +363,8 @@
     <MESSAGE value="fix: remove unused import" />
     <MESSAGE value="fix: cspell errors" />
     <MESSAGE value="fix: do not double count whe identifying book ID based on majority." />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: do not double count whe identifying book ID based on majority." />
+    <MESSAGE value="refactor: call `getPassage` within `getPassageWithDetails`" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: call `getPassage` within `getPassageWithDetails`" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
