@@ -623,3 +623,7 @@ export const getPassageFromApi = async (
 		);
 	}
 };
+
+// – – – – – – – – – –
+export const getBibleAbbreviationsFilepath = (): string =>
+	ABB_TO_ID_MAPPING_PATH;

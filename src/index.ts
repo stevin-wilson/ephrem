@@ -1,4 +1,4 @@
-export { setupEphrem } from "./api-bible.js";
+export { getBibleAbbreviationsFilepath, setupEphrem } from "./api-bible.js";
 export {
 	getPassage,
 	getPassageWithDetails,
