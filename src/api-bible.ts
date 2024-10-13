@@ -11,9 +11,12 @@ const API_BIBLE_BASE_URL = "https://api.scripture.api.bible";
 const API_BIBLE_TIMEOUT = 10000;
 
 const BIBLES_DATA_PATH = path.join(ephremPaths.data, "bibles.json");
-const ABB_TO_ID_MAPPING_PATH = path.join(ephremPaths.data, "bibles-map.json");
+export const ABB_TO_ID_MAPPING_PATH = path.join(
+	ephremPaths.data,
+	"bibles-map.json",
+);
 const BOOKS_DATA_PATH = path.join(ephremPaths.data, "books.json");
-const NAMES_TO_BIBLES_PATH = path.join(
+export const NAMES_TO_BIBLES_PATH = path.join(
 	ephremPaths.data,
 	"book-names-to-bibles.json",
 );
@@ -171,12 +174,12 @@ export interface PassageAndFumsResponse {
 	readonly [key: string]: unknown;
 }
 
-// – – – – – – – – – –
-export interface BookAndBibles {
-	readonly bibleIds: string[];
-	readonly book: string;
-}
-
+type BookName = string;
+type BibleId = string;
+type BookId = string;
+type BibleAbbreviation = string;
+export type BooksAndBibles = Record<BookName, Record<BibleId, BookId>>;
+export type BiblesMap = Record<BibleAbbreviation, BibleId>;
 // – – – – – – – – – –
 
 function filterUndefinedFromPassageOptions(
@@ -285,7 +288,7 @@ const getBiblesInLanguages = async (
 
 // – – – – – – – – – –
 const writeBiblesMap = async (bibles: BibleResponse[]) => {
-	const biblesMap = bibles.reduce<Record<string, string>>((acc, bible) => {
+	const biblesMap = bibles.reduce<BiblesMap>((acc, bible) => {
 		acc[bible.abbreviation] = bible.id;
 		acc[bible.abbreviationLocal] = bible.id;
 		return acc;
@@ -299,7 +302,7 @@ const writeBiblesMap = async (bibles: BibleResponse[]) => {
 
 // – – – – – – – – – –
 const writeBiblesData = async (bibles: BibleResponse[]) => {
-	const biblesData = bibles.reduce<Record<string, BibleResponse>>(
+	const biblesData = bibles.reduce<Record<BibleId, BibleResponse>>(
 		(acc, bible) => {
 			acc[bible.id] = bible;
 			return acc;
@@ -404,15 +407,18 @@ const getBooksFromBibles = async (
 };
 
 // – – – – – – – – – –
-const getBookNamesToBibles = (books: Book[]): Record<string, BookAndBibles> => {
-	const bookNamesToBibles: Record<string, BookAndBibles> = {};
+const getBookNamesToBibles = (books: Book[]): BooksAndBibles => {
+	const bookNamesToBibles: BooksAndBibles = {};
 
-	books.forEach((book) => {
+	for (const book of books) {
 		if (!(book.name in bookNamesToBibles)) {
-			bookNamesToBibles[book.name] = { bibleIds: [], book: book.id };
+			bookNamesToBibles[book.name] = {};
 		}
-		bookNamesToBibles[book.name].bibleIds.push(book.bibleId);
-	});
+
+		if (!(book.bibleId in bookNamesToBibles[book.name])) {
+			bookNamesToBibles[book.name][book.bibleId] = book.id;
+		}
+	}
 
 	return bookNamesToBibles;
 };
@@ -432,7 +438,7 @@ const setupBooks = async (apiBibleKey: string): Promise<string> => {
 	// parse BIBLES_DATA_PATH to get bible IDs
 	const biblesData = JSON.parse(
 		await fs.promises.readFile(BIBLES_DATA_PATH, "utf-8"),
-	) as Record<string, BibleResponse>;
+	) as Record<BibleId, BibleResponse>;
 
 	const bibleIds = Object.keys(biblesData);
 
