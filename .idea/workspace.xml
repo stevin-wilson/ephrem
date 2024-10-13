@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="feat: get bibles, books and passages from API.Bible">
-      <change afterPath="$PROJECT_DIR$/src/reference.ts" afterDir="false" />
+    <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="feat: parse references">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api-bible.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api-bible.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cspell.json" beforeDir="false" afterPath="$PROJECT_DIR$/cspell.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +114,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="npm.format">
+  <component name="RunManager" selected="npm.lint:spelling">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -167,10 +167,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.format" />
-        <item itemvalue="npm.lint" />
         <item itemvalue="npm.lint:spelling" />
         <item itemvalue="npm.prepare" />
+        <item itemvalue="npm.format" />
+        <item itemvalue="npm.lint" />
         <item itemvalue="npm.build" />
       </list>
     </recent_temporary>
@@ -214,7 +214,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728795843451</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="feat: parse references">
+      <option name="closed" value="true" />
+      <created>1728802610117</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1728802610117</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -235,6 +243,7 @@
     <MESSAGE value="fix: markdown lint" />
     <MESSAGE value="fix: add ide settings" />
     <MESSAGE value="feat: get bibles, books and passages from API.Bible" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: get bibles, books and passages from API.Bible" />
+    <MESSAGE value="feat: parse references" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: parse references" />
   </component>
 </project>
