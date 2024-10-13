@@ -1,6 +1,6 @@
 {
 	"name": "ephrem",
-	"version": "0.3.0",
+	"version": "0.4.0",
 	"description": "Ephrem is a light-weight API wrapper for API.Bible, built using NodeJS and Typescript. Ephrem validates bible references and fetches scripture text corresponding to the references.",
 	"repository": {
 		"type": "git",

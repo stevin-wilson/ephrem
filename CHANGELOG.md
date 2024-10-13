@@ -1,3 +1,9 @@
+# [0.4.0](https://github.com/stevin-wilson/ephrem/compare/0.3.0...0.4.0) (2024-10-13)
+
+### Features
+
+- fetch passage from API.Bible ([7d61698](https://github.com/stevin-wilson/ephrem/commit/7d6169871e3a5d214f6fddcd84ac4a05d9687448))
+
 # [0.3.0](https://github.com/stevin-wilson/ephrem/compare/0.2.0...0.3.0) (2024-10-13)
 
 ### Bug Fixes
