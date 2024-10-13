@@ -51,7 +51,7 @@ jobs:
       - run: pnpm format --list-different
   test:
     env:
-      API_KEY: ${{ secrets.API_BIBLE_API_KEY }}
+      API_BIBLE_API_KEY: ${{ secrets.API_BIBLE_API_KEY }}
     name: Test
     runs-on: ubuntu-latest
     steps:
