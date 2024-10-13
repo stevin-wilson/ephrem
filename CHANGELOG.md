@@ -1,3 +1,13 @@
+# [0.2.0](https://github.com/stevin-wilson/ephrem/compare/0.1.2...0.2.0) (2024-10-13)
+
+### Bug Fixes
+
+- disable spell check for book-ids ([9dccbe9](https://github.com/stevin-wilson/ephrem/commit/9dccbe9a2412cffd7602a7f8cb95950c4ebbf97b))
+
+### Features
+
+- get bibles, books and passages from API.Bible ([3a4cff6](https://github.com/stevin-wilson/ephrem/commit/3a4cff6b4bedb78b87caea5003a16ef0237fdc14))
+
 ## [0.1.2](https://github.com/stevin-wilson/ephrem/compare/0.1.1...0.1.2) (2024-10-12)
 
 ### Bug Fixes
