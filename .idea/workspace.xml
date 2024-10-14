@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="feat: add functions to get passages from reference">
+    <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="docs: add docstrings">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/reference.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reference.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -159,7 +160,7 @@
       <recent name="$PROJECT_DIR$/tests" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.tsc">
+  <component name="RunManager" selected="npm.test">
     <configuration name="lint:md" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -212,8 +213,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.tsc" />
         <item itemvalue="npm.test" />
+        <item itemvalue="npm.tsc" />
         <item itemvalue="npm.prepare" />
         <item itemvalue="npm.lint:spelling" />
         <item itemvalue="npm.lint:md" />
@@ -400,7 +401,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728883796339</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="docs: add docstrings">
+      <option name="closed" value="true" />
+      <created>1728884012817</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1728884012817</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -436,7 +445,8 @@
     <MESSAGE value="docs: improve README" />
     <MESSAGE value="fix: markdown lint errors" />
     <MESSAGE value="feat: add functions to get passages from reference" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add functions to get passages from reference" />
+    <MESSAGE value="docs: add docstrings" />
+    <option name="LAST_COMMIT_MESSAGE" value="docs: add docstrings" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

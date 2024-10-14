@@ -146,6 +146,22 @@ export interface Reference extends ReferenceWithoutBible {
 
 // – – – – – – – – – –
 /**
+ * Retrieves the Bible ID from the specified Bible abbreviation.
+ * @param bibleAbbreviation The abbreviation of the Bible to retrieve the ID for.
+ * @returns A promise that resolves to the Bible ID or undefined if not found.
+ */
+export const getBibleIdFromAbbreviation = async (
+	bibleAbbreviation: string,
+): Promise<string | undefined> => {
+	const bibleMap = JSON.parse(
+		await fs.promises.readFile(ABB_TO_ID_MAPPING_PATH, "utf-8"),
+	) as BiblesMap;
+
+	return bibleMap[bibleAbbreviation];
+};
+
+// – – – – – – – – – –
+/**
  * Retrieves the details of a Bible from the specified Bible ID.
  * @param bibleId The ID of the Bible to retrieve.
  * @returns A promise that resolves to the Bible details or undefined if not found.
@@ -362,18 +378,14 @@ export const parseReference = async (
 		targetBibleAbbreviation = fallbackBibleAbbreviation;
 	}
 
-	const bibleMap = JSON.parse(
-		await fs.promises.readFile(ABB_TO_ID_MAPPING_PATH, "utf-8"),
-	) as BiblesMap;
+	const bibleId = await getBibleIdFromAbbreviation(targetBibleAbbreviation);
 
-	if (!(targetBibleAbbreviation in bibleMap)) {
+	if (bibleId === undefined) {
 		throw new UnknownBibleAbbreviationError(
 			targetBibleAbbreviation,
 			ABB_TO_ID_MAPPING_PATH,
 		);
 	}
-
-	const bibleId = bibleMap[targetBibleAbbreviation];
 
 	const bookId = await getBookId(bookName.trim(), bibleId);
 	if (!bookId) {
