@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="fix: markdown lint errors">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +46,10 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
+                    <option name="branchName" value="docs/keywords" />
+                    <option name="lastUsedInstant" value="1728876194" />
+                  </RecentBranch>
+                  <RecentBranch>
                     <option name="branchName" value="docs/readme" />
                     <option name="lastUsedInstant" value="1728871559" />
                   </RecentBranch>
@@ -60,10 +64,6 @@
                   <RecentBranch>
                     <option name="branchName" value="fix/improve-coverage" />
                     <option name="lastUsedInstant" value="1728830583" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="feature/setup-ephrem" />
-                    <option name="lastUsedInstant" value="1728805835" />
                   </RecentBranch>
                 </list>
               </option>
@@ -128,7 +128,7 @@
     "Vitest.reference to passage ID conversion.single chapter reference.executor": "Run",
     "Vitest.reference to passage ID conversion.single verse alternative reference.executor": "Run",
     "Vitest.removePunctuation.executor": "Run",
-    "git-widget-placeholder": "docs/readme",
+    "git-widget-placeholder": "docs/keywords",
     "last_opened_file_path": "/Users/stevin/PycharmProjects/ephrem",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
