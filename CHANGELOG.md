@@ -1,3 +1,9 @@
+## [0.5.3](https://github.com/stevin-wilson/ephrem/compare/0.5.2...0.5.3) (2024-10-14)
+
+### Bug Fixes
+
+- markdown lint errors ([69a20c9](https://github.com/stevin-wilson/ephrem/commit/69a20c97f3b2f42a4c7755560e561190dc9d9985))
+
 ## [0.5.2](https://github.com/stevin-wilson/ephrem/compare/0.5.1...0.5.2) (2024-10-14)
 
 ### Bug Fixes
