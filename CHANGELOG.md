@@ -1,3 +1,11 @@
+## [0.5.1](https://github.com/stevin-wilson/ephrem/compare/0.5.0...0.5.1) (2024-10-14)
+
+### Bug Fixes
+
+- cspell errors ([ddd9f75](https://github.com/stevin-wilson/ephrem/commit/ddd9f75df66f4c6cf172efa6a3c5bee27cd38e7e))
+- do not double count whe identifying book ID based on majority. ([e9f59f0](https://github.com/stevin-wilson/ephrem/commit/e9f59f0996510811814434d2d33ed2474b6a9661))
+- remove unused import ([2f9505c](https://github.com/stevin-wilson/ephrem/commit/2f9505c2872eb505219c4d53f48679b4b1095392))
+
 # [0.5.0](https://github.com/stevin-wilson/ephrem/compare/0.4.0...0.5.0) (2024-10-13)
 
 ### Features
