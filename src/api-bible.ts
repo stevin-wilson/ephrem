@@ -226,6 +226,11 @@ export type BooksAndBibles = Record<BookName, Record<BibleId, BookId>>;
 export type BiblesMap = Record<BibleAbbreviation, BibleId>;
 
 // – – – – – – – – – –
+/**
+ * Converts the given passage options into a format suitable for the API request.
+ * @param options The options for fetching the passage.
+ * @returns A record containing the passage options formatted for the API request.
+ */
 const convertPassageOptionsForApi = (
 	options: PassageOptions,
 ): Record<string, unknown> => {
@@ -551,6 +556,12 @@ const setupBooks = async (apiBibleKey: string): Promise<string> => {
 };
 
 // – – – – – – – – – –
+/**
+ * Sets up the Ephrem environment by fetching and writing Bible and book data from API.Bible.
+ * @param languageIds An array of language IDs (ISO-639-3; lower case) to fetch Bibles for.
+ * @param apiBibleKey The API key for accessing the API.Bible service.
+ * @returns A promise that resolves to the path where the data is stored.
+ */
 export const setupEphrem = async (
 	languageIds: string[],
 	apiBibleKey: string,

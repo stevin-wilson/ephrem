@@ -1,5 +1,6 @@
 export { getBibleAbbreviationsFilepath, setupEphrem } from "./api-bible.js";
 export {
+	getBookId,
 	getPassage,
 	getPassageWithDetails,
 	parseReference,
