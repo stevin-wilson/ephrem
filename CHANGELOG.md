@@ -1,3 +1,9 @@
+# [0.8.0](https://github.com/stevin-wilson/ephrem/compare/0.7.0...0.8.0) (2024-10-14)
+
+### Features
+
+- export USFM Book IDs ([ccf55cd](https://github.com/stevin-wilson/ephrem/commit/ccf55cd03e773b41efde6aea8e3e39e0326bff3e))
+
 # [0.7.0](https://github.com/stevin-wilson/ephrem/compare/0.6.0...0.7.0) (2024-10-14)
 
 ### Features
