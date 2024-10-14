@@ -8,6 +8,7 @@ export {
 	PassageFetchError,
 	setupEphrem,
 } from "./api-bible.js";
+export { BOOK_IDs } from "./book-ids.js";
 export {
 	BibleNotAvailableError,
 	BookIdNotFoundError,
