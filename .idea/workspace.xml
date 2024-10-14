@@ -4,15 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="fix: syntax error">
+    <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="docs: improve README">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cspell.json" beforeDir="false" afterPath="$PROJECT_DIR$/cspell.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExportToHTMLSettings">
+    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/exportToHTML" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -157,42 +159,12 @@
       <recent name="$PROJECT_DIR$/tests" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.lint:spelling">
-    <configuration name="lint" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="lint" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="lint:knip" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="lint:knip" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="npm.lint:md">
     <configuration name="lint:md" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
         <script value="lint:md" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="lint:packages" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="lint:packages" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -208,13 +180,43 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="prepare" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="prepare" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="test" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="tsc" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="tsc" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.lint:spelling" />
-        <item itemvalue="npm.lint:packages" />
         <item itemvalue="npm.lint:md" />
-        <item itemvalue="npm.lint:knip" />
-        <item itemvalue="npm.lint" />
+        <item itemvalue="npm.tsc" />
+        <item itemvalue="npm.lint:spelling" />
+        <item itemvalue="npm.prepare" />
+        <item itemvalue="npm.test" />
       </list>
     </recent_temporary>
   </component>
@@ -244,7 +246,7 @@
       <workItem from="1728855601962" duration="4437000" />
       <workItem from="1728865539300" duration="2591000" />
       <workItem from="1728869493384" duration="644000" />
-      <workItem from="1728870348527" duration="5058000" />
+      <workItem from="1728870348527" duration="5458000" />
     </task>
     <task id="LOCAL-00001" summary="fix: markdown lint">
       <option name="closed" value="true" />
@@ -374,7 +376,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728869802452</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="docs: improve README">
+      <option name="closed" value="true" />
+      <created>1728875549343</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1728875549343</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -407,7 +417,8 @@
     <MESSAGE value="test: get passage with details" />
     <MESSAGE value="docs: define docstrings for public functions" />
     <MESSAGE value="fix: syntax error" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: syntax error" />
+    <MESSAGE value="docs: improve README" />
+    <option name="LAST_COMMIT_MESSAGE" value="docs: improve README" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
