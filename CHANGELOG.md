@@ -1,3 +1,10 @@
+# [0.6.0](https://github.com/stevin-wilson/ephrem/compare/0.5.4...0.6.0) (2024-10-14)
+
+### Features
+
+- add functions to get passages from reference ([53a985d](https://github.com/stevin-wilson/ephrem/commit/53a985d50d6f16f0dac273072a59e0ea12cf3293))
+- get BibleId from abbreviation ([35077db](https://github.com/stevin-wilson/ephrem/commit/35077db012d53657e18f2d0e5705fdc4fadd597e))
+
 ## [0.5.4](https://github.com/stevin-wilson/ephrem/compare/0.5.3...0.5.4) (2024-10-14)
 
 ### Bug Fixes
