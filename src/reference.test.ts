@@ -2,6 +2,7 @@ import path from "node:path";
 import { describe, expect, it, vi } from "vitest";
 
 import {
+	BookNotInBibleError,
 	getBookId,
 	getPassageId,
 	getPassageWithDetails,
@@ -130,13 +131,38 @@ describe("get Book ID", () => {
 // – – – – – – – – – –
 describe("parse References", () => {
 	// single verse LTR
+	it("single verse LTR", async () => {
+		const result = await parseReference("John 3:16 (KJV)");
+
+		const expected: Reference = {
+			bibleId: "de4e12af7f28f599-02",
+			bookId: "JHN",
+			chapterEnd: undefined,
+			chapterStart: "3",
+			verseEnd: undefined,
+			verseStart: "16",
+		};
+
+		expect(result).toStrictEqual(expected);
+	});
+
 	// single verse LTR - fallback bible
+	it("single verse LTR - fallback bible", async () => {
+		const result = await parseReference("John 3:16", "KJV");
+
+		const expected: Reference = {
+			bibleId: "de4e12af7f28f599-02",
+			bookId: "JHN",
+			chapterEnd: undefined,
+			chapterStart: "3",
+			verseEnd: undefined,
+			verseStart: "16",
+		};
+
+		expect(result).toStrictEqual(expected);
+	});
+
 	// multiple verses LTR
-	// multiple verses LTR - fallback bible
-	// whole chapter LTR
-	// whole chapter LTR - fallback bible
-	// multiple chapters LTR
-	// multiple chapters LTR - fallback bible
 	it("multiple verses - LTR citations", async () => {
 		const result = await parseReference("John 3:16-20 (KJV)");
 
@@ -152,15 +178,145 @@ describe("parse References", () => {
 		expect(result).toStrictEqual(expected);
 	});
 
-	// single verse RTL
-	// single verse RTL - fallback bible
-	// multiple verses RTL
-	// multiple verses RTL - fallback bible
-	// whole chapter RTL
-	// whole chapter RTL - fallback bible
-	// multiple chapters RTL
-	// multiple chapters RTL - fallback bible
+	// multiple verses LTR - fallback bible
+	it("multiple verses LTR - fallback bible", async () => {
+		const result = await parseReference("John 3:16-20", "KJV");
 
+		const expected: Reference = {
+			bibleId: "de4e12af7f28f599-02",
+			bookId: "JHN",
+			chapterEnd: undefined,
+			chapterStart: "3",
+			verseEnd: "20",
+			verseStart: "16",
+		};
+
+		expect(result).toStrictEqual(expected);
+	});
+
+	// multiple chapter multiple verses LTR
+	it("multiple chapter multiple verses LTR", async () => {
+		const result = await parseReference("John 3:16-4:20 (KJV)");
+
+		const expected: Reference = {
+			bibleId: "de4e12af7f28f599-02",
+			bookId: "JHN",
+			chapterEnd: "4",
+			chapterStart: "3",
+			verseEnd: "20",
+			verseStart: "16",
+		};
+
+		expect(result).toStrictEqual(expected);
+	});
+	// multiple chapter multiple verses LTR - fallback bible
+	it("multiple chapter multiple verses LTR - fallback bible", async () => {
+		const result = await parseReference("John 3:16-4:20", "KJV");
+
+		const expected: Reference = {
+			bibleId: "de4e12af7f28f599-02",
+			bookId: "JHN",
+			chapterEnd: "4",
+			chapterStart: "3",
+			verseEnd: "20",
+			verseStart: "16",
+		};
+
+		expect(result).toStrictEqual(expected);
+	});
+	// whole chapter LTR
+	it("whole chapter LTR", async () => {
+		const result = await parseReference("John 3 (KJV)");
+
+		const expected: Reference = {
+			bibleId: "de4e12af7f28f599-02",
+			bookId: "JHN",
+			chapterEnd: undefined,
+			chapterStart: "3",
+			verseEnd: undefined,
+			verseStart: undefined,
+		};
+
+		expect(result).toStrictEqual(expected);
+	});
+	// whole chapter LTR - fallback bible
+	it("whole chapter LTR - fallback bible", async () => {
+		const result = await parseReference("John 3", "KJV");
+
+		const expected: Reference = {
+			bibleId: "de4e12af7f28f599-02",
+			bookId: "JHN",
+			chapterEnd: undefined,
+			chapterStart: "3",
+			verseEnd: undefined,
+			verseStart: undefined,
+		};
+
+		expect(result).toStrictEqual(expected);
+	});
+	// multiple chapters LTR
+	it("multiple chapters LTR", async () => {
+		const result = await parseReference("John 3-4 (KJV)");
+
+		const expected: Reference = {
+			bibleId: "de4e12af7f28f599-02",
+			bookId: "JHN",
+			chapterEnd: "4",
+			chapterStart: "3",
+			verseEnd: undefined,
+			verseStart: undefined,
+		};
+
+		expect(result).toStrictEqual(expected);
+	});
+	// multiple chapters LTR - fallback bible
+	it("multiple chapters LTR - fallback bible", async () => {
+		const result = await parseReference("John 3-4", "KJV");
+
+		const expected: Reference = {
+			bibleId: "de4e12af7f28f599-02",
+			bookId: "JHN",
+			chapterEnd: "4",
+			chapterStart: "3",
+			verseEnd: undefined,
+			verseStart: undefined,
+		};
+
+		expect(result).toStrictEqual(expected);
+	});
+
+	// single verse RTL
+	it("single verse RTL", async () => {
+		const result = await parseReference("إنجيل يوحنا 3:16 (KJV)");
+
+		const expected: Reference = {
+			bibleId: "de4e12af7f28f599-02",
+			bookId: "JHN",
+			chapterEnd: undefined,
+			chapterStart: "3",
+			verseEnd: undefined,
+			verseStart: "16",
+		};
+
+		expect(result).toStrictEqual(expected);
+	});
+
+	// single verse RTL - fallback bible
+	it("single verse RTL - fallback bible", async () => {
+		const result = await parseReference("إنجيل يوحنا 3:16", "KJV");
+
+		const expected: Reference = {
+			bibleId: "de4e12af7f28f599-02",
+			bookId: "JHN",
+			chapterEnd: undefined,
+			chapterStart: "3",
+			verseEnd: undefined,
+			verseStart: "16",
+		};
+
+		expect(result).toStrictEqual(expected);
+	});
+	// multiple verses RTL
 	it("multiple verses - RTL citations", async () => {
 		const result = await parseReference("إنجيل يوحنا 3:16-20 (KJV)");
 
@@ -171,6 +327,111 @@ describe("parse References", () => {
 			chapterStart: "3",
 			verseEnd: "20",
 			verseStart: "16",
+		};
+
+		expect(result).toStrictEqual(expected);
+	});
+	// multiple verses RTL - fallback bible
+	it("multiple verses RTL - fallback bible", async () => {
+		const result = await parseReference("إنجيل يوحنا 3:16-20", "KJV");
+
+		const expected: Reference = {
+			bibleId: "de4e12af7f28f599-02",
+			bookId: "JHN",
+			chapterEnd: undefined,
+			chapterStart: "3",
+			verseEnd: "20",
+			verseStart: "16",
+		};
+
+		expect(result).toStrictEqual(expected);
+	});
+	// multiple chapter multiple verses RTL
+	it("multiple chapter multiple verses RTL", async () => {
+		const result = await parseReference("إنجيل يوحنا 3:16-4:20 (KJV)");
+
+		const expected: Reference = {
+			bibleId: "de4e12af7f28f599-02",
+			bookId: "JHN",
+			chapterEnd: "4",
+			chapterStart: "3",
+			verseEnd: "20",
+			verseStart: "16",
+		};
+
+		expect(result).toStrictEqual(expected);
+	});
+	// multiple chapter multiple verses RTL - fallback bible
+	it("multiple chapter multiple verses RTL - fallback bible", async () => {
+		const result = await parseReference("إنجيل يوحنا 3:16-4:20", "KJV");
+
+		const expected: Reference = {
+			bibleId: "de4e12af7f28f599-02",
+			bookId: "JHN",
+			chapterEnd: "4",
+			chapterStart: "3",
+			verseEnd: "20",
+			verseStart: "16",
+		};
+
+		expect(result).toStrictEqual(expected);
+	});
+	// whole chapter RTL
+	it("whole chapter RTL", async () => {
+		const result = await parseReference("إنجيل يوحنا 3 (KJV)");
+
+		const expected: Reference = {
+			bibleId: "de4e12af7f28f599-02",
+			bookId: "JHN",
+			chapterEnd: undefined,
+			chapterStart: "3",
+			verseEnd: undefined,
+			verseStart: undefined,
+		};
+
+		expect(result).toStrictEqual(expected);
+	});
+	// whole chapter RTL - fallback bible
+	it("whole chapter RTL - fallback bible", async () => {
+		const result = await parseReference("إنجيل يوحنا 3", "KJV");
+
+		const expected: Reference = {
+			bibleId: "de4e12af7f28f599-02",
+			bookId: "JHN",
+			chapterEnd: undefined,
+			chapterStart: "3",
+			verseEnd: undefined,
+			verseStart: undefined,
+		};
+
+		expect(result).toStrictEqual(expected);
+	});
+	// multiple chapters RTL
+	it("multiple chapters RTL", async () => {
+		const result = await parseReference("إنجيل يوحنا 3-4 (KJV)");
+
+		const expected: Reference = {
+			bibleId: "de4e12af7f28f599-02",
+			bookId: "JHN",
+			chapterEnd: "4",
+			chapterStart: "3",
+			verseEnd: undefined,
+			verseStart: undefined,
+		};
+
+		expect(result).toStrictEqual(expected);
+	});
+	// multiple chapters RTL - fallback bible
+	it("multiple chapters RTL - fallback bible", async () => {
+		const result = await parseReference("إنجيل يوحنا 3-4", "KJV");
+
+		const expected: Reference = {
+			bibleId: "de4e12af7f28f599-02",
+			bookId: "JHN",
+			chapterEnd: "4",
+			chapterStart: "3",
+			verseEnd: undefined,
+			verseStart: undefined,
 		};
 
 		expect(result).toStrictEqual(expected);
@@ -237,5 +498,19 @@ describe("get passage", () => {
 		expect(result.book).toStrictEqual(expectedBook);
 		expect(result.passage.content).toStrictEqual(expectedPassage);
 		expect(result.passage.reference).toStrictEqual("John 3:16-20");
+	});
+});
+
+// – – – – – – – – – –
+describe("check if book is in bible", () => {
+	it("should throw an error when the book is not in the bible", async () => {
+		await expect(
+			getPassageWithDetails(
+				"Judith 1:1 (BSB)",
+				{},
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+				process.env.API_BIBLE_API_KEY!,
+			),
+		).rejects.toThrowError(BookNotInBibleError);
 	});
 });

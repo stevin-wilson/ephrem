@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="test: get passage with details">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reference.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reference.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reference.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reference.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,12 +102,25 @@
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Vitest.check if book is in bible.executor": "Run",
     "Vitest.get Book ID.executor": "Run",
     "Vitest.get Book ID.should return book code/Id.executor": "Run",
     "Vitest.get passage.executor": "Run",
     "Vitest.get passage.get passage with details.executor": "Debug",
+    "Vitest.multiple verses RTL - fallback bible.executor": "Run",
     "Vitest.normalizeBookName.executor": "Run",
     "Vitest.parse References.executor": "Run",
+    "Vitest.parse References.multiple chapter multiple verses LTR.executor": "Run",
+    "Vitest.parse References.multiple chapter multiple verses RTL - fallback bible.executor": "Run",
+    "Vitest.parse References.multiple chapter multiple verses RTL.executor": "Run",
+    "Vitest.parse References.multiple chapters RTL - fallback bible.executor": "Run",
+    "Vitest.parse References.multiple verses LTR - fallback bible.executor": "Run",
+    "Vitest.parse References.multiple verses RTL - fallback bible.executor": "Run",
+    "Vitest.parse References.single verse LTR.executor": "Run",
+    "Vitest.parse References.single verse RTL - fallback bible.executor": "Run",
+    "Vitest.parse References.single verse RTL.executor": "Run",
+    "Vitest.parse References.whole chapter RTL - fallback bible.executor": "Run",
+    "Vitest.parse References.whole chapter RTL.executor": "Run",
     "Vitest.reference to passage ID conversion.executor": "Run",
     "Vitest.reference to passage ID conversion.multiple verses alternative reference.executor": "Run",
     "Vitest.reference to passage ID conversion.single chapter reference.executor": "Run",
@@ -144,6 +158,16 @@
     </key>
   </component>
   <component name="RunManager" selected="npm.tsc">
+    <configuration name="lint:knip" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="lint:knip" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="lint:md" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -174,16 +198,6 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="test" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <configuration name="tsc" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -197,10 +211,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.tsc" />
-        <item itemvalue="npm.test" />
         <item itemvalue="npm.prepare" />
         <item itemvalue="npm.lint:spelling" />
         <item itemvalue="npm.lint:md" />
+        <item itemvalue="npm.lint:knip" />
       </list>
     </recent_temporary>
   </component>
@@ -227,7 +241,8 @@
       <workItem from="1728700671530" duration="10000" />
       <workItem from="1728704551480" duration="17891000" />
       <workItem from="1728837835457" duration="3242000" />
-      <workItem from="1728855601962" duration="4416000" />
+      <workItem from="1728855601962" duration="4437000" />
+      <workItem from="1728865539300" duration="2591000" />
     </task>
     <task id="LOCAL-00001" summary="fix: markdown lint">
       <option name="closed" value="true" />
@@ -333,7 +348,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728859669254</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="test: get passage with details">
+      <option name="closed" value="true" />
+      <created>1728860030133</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1728860030133</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

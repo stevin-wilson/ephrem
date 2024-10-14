@@ -78,6 +78,37 @@ export class InvalidReferenceError extends BaseEphremError {
 }
 
 // – – – – – – – – – –
+export class BookNotInBibleError extends BaseEphremError {
+	public context: {
+		availableBookIds: string[];
+		bibleName: string;
+		bibleNameLocal: string;
+		bookId: string;
+		input: string;
+	};
+
+	constructor(
+		input: string,
+		bookId: string,
+		availableBookIds: string[],
+		bibleName: string,
+		bibleNameLocal: string,
+	) {
+		super(
+			"Requested Book is not available in this Bible. Please check the reference and try again.",
+		);
+		this.name = "BookNotInBibleError";
+		this.context = {
+			availableBookIds,
+			bibleName,
+			bibleNameLocal,
+			bookId,
+			input,
+		};
+	}
+}
+
+// – – – – – – – – – –
 export type VoteTally = Record<string, number>;
 
 // – – – – – – – – – –
@@ -97,6 +128,15 @@ export interface ReferenceWithoutBible extends ChaptersAndVerses {
 export interface Reference extends ReferenceWithoutBible {
 	readonly bibleId: string;
 }
+
+// – – – – – – – – – –
+const bookIsInBible = (
+	bookId: string,
+	bibleId: string,
+	books: Book[],
+): boolean => {
+	return books.some((book) => book.id === bookId && book.bibleId === bibleId);
+};
 
 // – – – – – – – – – –
 const getBookIdInBible = (
@@ -273,6 +313,26 @@ export const parseReference = async (
 	const bookId = await getBookId(bookName.trim(), bibleId);
 	if (!bookId) {
 		return undefined;
+	}
+
+	const booksData = JSON.parse(
+		await fs.promises.readFile(BOOKS_DATA_PATH, "utf-8"),
+	) as Book[];
+
+	const biblesData = JSON.parse(
+		await fs.promises.readFile(BIBLES_DATA_PATH, "utf-8"),
+	) as Record<BibleId, BibleResponse>;
+
+	if (!bookIsInBible(bookId, bibleId, booksData)) {
+		throw new BookNotInBibleError(
+			input,
+			bookId,
+			booksData
+				.filter((book) => book.bibleId === bibleId)
+				.map((book) => book.id),
+			biblesData[bibleId].name,
+			biblesData[bibleId].nameLocal,
+		);
 	}
 
 	const { chapterEnd, chapterStart, verseEnd, verseStart } =
