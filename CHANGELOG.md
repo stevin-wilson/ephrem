@@ -1,3 +1,9 @@
+# [0.7.0](https://github.com/stevin-wilson/ephrem/compare/0.6.0...0.7.0) (2024-10-14)
+
+### Features
+
+- export error classes for use in ephrem-ai ([0b77a03](https://github.com/stevin-wilson/ephrem/commit/0b77a0322c345eb3346790a6f4d6ee619b69cc71))
+
 # [0.6.0](https://github.com/stevin-wilson/ephrem/compare/0.5.4...0.6.0) (2024-10-14)
 
 ### Features
