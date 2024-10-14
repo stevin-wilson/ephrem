@@ -121,7 +121,7 @@ export interface ChaptersAndVerses {
 
 // – – – – – – – – – –
 export interface ReferenceWithoutBible extends ChaptersAndVerses {
-	bookId: keyof typeof BOOK_IDs; // Must be a USFM Book Identifier. Consider deuterocanonical books when applicable
+	readonly bookId: keyof typeof BOOK_IDs; // Must be a USFM Book Identifier. Consider deuterocanonical books when applicable
 }
 
 // – – – – – – – – – –

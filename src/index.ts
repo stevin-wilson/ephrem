@@ -4,7 +4,5 @@ export {
 	getPassage,
 	getPassageWithDetails,
 	parseReference,
-	Reference,
-	ReferenceWithoutBible,
 } from "./reference.js";
 export { BaseEphremError } from "./utils.js";
