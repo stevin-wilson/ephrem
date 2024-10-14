@@ -192,6 +192,12 @@ const getBookIdByMajority = (
 };
 
 // – – – – – – – – – –
+/**
+ * Retrieves the USFM book ID based on the provided book name and optional Bible ID.
+ * @param bookName The name of the book to retrieve the ID for.
+ * @param [bibleId] An optional Bible ID to narrow down the search.
+ * @returns A promise that resolves to the book ID or undefined if not found.
+ */
 export const getBookId = async (
 	bookName: string,
 	bibleId?: string,
@@ -272,6 +278,16 @@ const splitChapterAndVerse = (chapterVerse: string) => {
 };
 
 // – – – – – – – – – –
+/**
+ * Parses a reference from the input string and returns a Reference object.
+ * @param input The input string containing the reference to be parsed.
+ * @param [fallbackBibleAbbreviation] An optional fallback Bible abbreviation.
+ * @returns A promise that resolves to a Reference object or undefined if the book ID is not found.
+ * @throws {InvalidReferenceError} If the input reference is invalid.
+ * @throws {FallbackBibleNotFoundError} If no fallback Bible abbreviation is provided when needed.
+ * @throws {UnknownBibleAbbreviationError} If the Bible abbreviation is not found in the mapping file.
+ * @throws {BookNotInBibleError} If the book is not found in the specified Bible.
+ */
 export const parseReference = async (
 	input: string,
 	fallbackBibleAbbreviation?: string,
@@ -402,6 +418,15 @@ export const getPassageId = (reference: ReferenceWithoutBible): string => {
 };
 
 // – – – – – – – – – –
+/**
+ * Fetches a passage from the API.Bible service based on the provided input and options.
+ * @param input The input string containing the reference to the passage.
+ * @param passageOptions Options for fetching the passage.
+ * @param apiBibleKey The API key for accessing the API.Bible service.
+ * @param [fallbackBibleAbbreviation] An optional fallback Bible abbreviation.
+ * @returns A promise that resolves to the passage and FUMS response.
+ * @throws {InvalidReferenceError} If the reference is invalid.
+ */
 export const getPassage = async (
 	input: string,
 	passageOptions: PassageOptions,
@@ -425,6 +450,16 @@ export const getPassage = async (
 };
 
 // – – – – – – – – – –
+/**
+ * Fetches a passage with detailed information (about the Bible and the Book) from the API.Bible service based on the provided input and options.
+ * @param input The input string containing the reference to the passage.
+ * @param passageOptions Options for fetching the passage.
+ * @param apiBibleKey The API key for accessing the API.Bible service.
+ * @param [fallbackBibleAbbreviation] An optional fallback Bible abbreviation.
+ * @returns A promise that resolves to the passage with detailed information.
+ * @throws {InvalidReferenceError} If the reference is invalid.
+ * @throws {BookIdNotFoundError} If the book ID is not found in the Bible.
+ */
 export const getPassageWithDetails = async (
 	input: string,
 	passageOptions: PassageOptions,

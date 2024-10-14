@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="test: get passage with details">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reference.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reference.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api-bible.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api-bible.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/reference.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reference.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +46,10 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
+                    <option name="branchName" value="docs/docstrings" />
+                    <option name="lastUsedInstant" value="1728868374" />
+                  </RecentBranch>
+                  <RecentBranch>
                     <option name="branchName" value="fix/improve-coverage" />
                     <option name="lastUsedInstant" value="1728830583" />
                   </RecentBranch>
@@ -58,10 +64,6 @@
                   <RecentBranch>
                     <option name="branchName" value="feature/get-passage" />
                     <option name="lastUsedInstant" value="1728803042" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="feature/parse-reference" />
-                    <option name="lastUsedInstant" value="1728799717" />
                   </RecentBranch>
                 </list>
               </option>
@@ -126,7 +128,7 @@
     "Vitest.reference to passage ID conversion.single chapter reference.executor": "Run",
     "Vitest.reference to passage ID conversion.single verse alternative reference.executor": "Run",
     "Vitest.removePunctuation.executor": "Run",
-    "git-widget-placeholder": "#21 on fix/improve-coverage",
+    "git-widget-placeholder": "docs/docstrings",
     "last_opened_file_path": "/Users/stevin/PycharmProjects/ephrem",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
@@ -158,16 +160,6 @@
     </key>
   </component>
   <component name="RunManager" selected="npm.tsc">
-    <configuration name="lint:knip" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="lint:knip" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <configuration name="lint:md" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -198,6 +190,16 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="test" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="tsc" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -211,10 +213,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.tsc" />
+        <item itemvalue="npm.test" />
         <item itemvalue="npm.prepare" />
         <item itemvalue="npm.lint:spelling" />
         <item itemvalue="npm.lint:md" />
-        <item itemvalue="npm.lint:knip" />
       </list>
     </recent_temporary>
   </component>
