@@ -112,8 +112,8 @@ import { getPassageWithDetails } from "ephrem";
 const apiBibleKey = process.env.API_BIBLE_KEY;
 
 getPassageWithDetails("John 3:16 (KJV)", { contentType: "text" }, apiBibleKey)
-	.then((passage) => {
-		console.log(`Passage Text: ${passage.passage.content}`);
+	.then((details) => {
+		console.log(`Passage Text: ${details.passage.content}`);
 	})
 	.catch((err) => console.error(`Error fetching passage: ${err.message}`));
 ```

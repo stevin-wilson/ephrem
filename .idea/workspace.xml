@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="docs: improve README">
+    <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="fix: markdown lint errors">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
@@ -246,7 +246,7 @@
       <workItem from="1728855601962" duration="4437000" />
       <workItem from="1728865539300" duration="2591000" />
       <workItem from="1728869493384" duration="644000" />
-      <workItem from="1728870348527" duration="5458000" />
+      <workItem from="1728870348527" duration="5523000" />
     </task>
     <task id="LOCAL-00001" summary="fix: markdown lint">
       <option name="closed" value="true" />
@@ -384,7 +384,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728875549343</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="fix: markdown lint errors">
+      <option name="closed" value="true" />
+      <created>1728875849403</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1728875849403</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -418,7 +426,8 @@
     <MESSAGE value="docs: define docstrings for public functions" />
     <MESSAGE value="fix: syntax error" />
     <MESSAGE value="docs: improve README" />
-    <option name="LAST_COMMIT_MESSAGE" value="docs: improve README" />
+    <MESSAGE value="fix: markdown lint errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: markdown lint errors" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
