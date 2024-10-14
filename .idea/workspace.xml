@@ -4,14 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="fix: syntax error">
+    <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="fix: markdown lint errors">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api-bible.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api-bible.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExportToHTMLSettings">
+    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/exportToHTML" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -43,6 +46,14 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
+                    <option name="branchName" value="docs/readme" />
+                    <option name="lastUsedInstant" value="1728871559" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1728870409" />
+                  </RecentBranch>
+                  <RecentBranch>
                     <option name="branchName" value="docs/docstrings" />
                     <option name="lastUsedInstant" value="1728868374" />
                   </RecentBranch>
@@ -51,16 +62,8 @@
                     <option name="lastUsedInstant" value="1728830583" />
                   </RecentBranch>
                   <RecentBranch>
-                    <option name="branchName" value="main" />
-                    <option name="lastUsedInstant" value="1728829651" />
-                  </RecentBranch>
-                  <RecentBranch>
                     <option name="branchName" value="feature/setup-ephrem" />
                     <option name="lastUsedInstant" value="1728805835" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="feature/get-passage" />
-                    <option name="lastUsedInstant" value="1728803042" />
                   </RecentBranch>
                 </list>
               </option>
@@ -96,67 +99,67 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Vitest.check if book is in bible.executor&quot;: &quot;Run&quot;,
-    &quot;Vitest.get Book ID.executor&quot;: &quot;Run&quot;,
-    &quot;Vitest.get Book ID.should return book code/Id.executor&quot;: &quot;Run&quot;,
-    &quot;Vitest.get passage.executor&quot;: &quot;Run&quot;,
-    &quot;Vitest.get passage.get passage with details.executor&quot;: &quot;Debug&quot;,
-    &quot;Vitest.multiple verses RTL - fallback bible.executor&quot;: &quot;Run&quot;,
-    &quot;Vitest.normalizeBookName.executor&quot;: &quot;Run&quot;,
-    &quot;Vitest.parse References.executor&quot;: &quot;Run&quot;,
-    &quot;Vitest.parse References.multiple chapter multiple verses LTR.executor&quot;: &quot;Run&quot;,
-    &quot;Vitest.parse References.multiple chapter multiple verses RTL - fallback bible.executor&quot;: &quot;Run&quot;,
-    &quot;Vitest.parse References.multiple chapter multiple verses RTL.executor&quot;: &quot;Run&quot;,
-    &quot;Vitest.parse References.multiple chapters RTL - fallback bible.executor&quot;: &quot;Run&quot;,
-    &quot;Vitest.parse References.multiple verses LTR - fallback bible.executor&quot;: &quot;Run&quot;,
-    &quot;Vitest.parse References.multiple verses RTL - fallback bible.executor&quot;: &quot;Run&quot;,
-    &quot;Vitest.parse References.single verse LTR.executor&quot;: &quot;Run&quot;,
-    &quot;Vitest.parse References.single verse RTL - fallback bible.executor&quot;: &quot;Run&quot;,
-    &quot;Vitest.parse References.single verse RTL.executor&quot;: &quot;Run&quot;,
-    &quot;Vitest.parse References.whole chapter RTL - fallback bible.executor&quot;: &quot;Run&quot;,
-    &quot;Vitest.parse References.whole chapter RTL.executor&quot;: &quot;Run&quot;,
-    &quot;Vitest.reference to passage ID conversion.executor&quot;: &quot;Run&quot;,
-    &quot;Vitest.reference to passage ID conversion.multiple verses alternative reference.executor&quot;: &quot;Run&quot;,
-    &quot;Vitest.reference to passage ID conversion.single chapter reference.executor&quot;: &quot;Run&quot;,
-    &quot;Vitest.reference to passage ID conversion.single verse alternative reference.executor&quot;: &quot;Run&quot;,
-    &quot;Vitest.removePunctuation.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;docs/docstrings&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/stevin/PycharmProjects/ephrem&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.build.executor&quot;: &quot;Run&quot;,
-    &quot;npm.format.executor&quot;: &quot;Run&quot;,
-    &quot;npm.lint.executor&quot;: &quot;Run&quot;,
-    &quot;npm.lint:knip.executor&quot;: &quot;Run&quot;,
-    &quot;npm.lint:md.executor&quot;: &quot;Run&quot;,
-    &quot;npm.lint:packages.executor&quot;: &quot;Run&quot;,
-    &quot;npm.lint:spelling.executor&quot;: &quot;Run&quot;,
-    &quot;npm.prepare.executor&quot;: &quot;Run&quot;,
-    &quot;npm.test.executor&quot;: &quot;Run&quot;,
-    &quot;npm.tsc.executor&quot;: &quot;Run&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/stevin/PycharmProjects/ephrem/node_modules/prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/stevin/PycharmProjects/ephrem/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Vitest.check if book is in bible.executor": "Run",
+    "Vitest.get Book ID.executor": "Run",
+    "Vitest.get Book ID.should return book code/Id.executor": "Run",
+    "Vitest.get passage.executor": "Run",
+    "Vitest.get passage.get passage with details.executor": "Debug",
+    "Vitest.multiple verses RTL - fallback bible.executor": "Run",
+    "Vitest.normalizeBookName.executor": "Run",
+    "Vitest.parse References.executor": "Run",
+    "Vitest.parse References.multiple chapter multiple verses LTR.executor": "Run",
+    "Vitest.parse References.multiple chapter multiple verses RTL - fallback bible.executor": "Run",
+    "Vitest.parse References.multiple chapter multiple verses RTL.executor": "Run",
+    "Vitest.parse References.multiple chapters RTL - fallback bible.executor": "Run",
+    "Vitest.parse References.multiple verses LTR - fallback bible.executor": "Run",
+    "Vitest.parse References.multiple verses RTL - fallback bible.executor": "Run",
+    "Vitest.parse References.single verse LTR.executor": "Run",
+    "Vitest.parse References.single verse RTL - fallback bible.executor": "Run",
+    "Vitest.parse References.single verse RTL.executor": "Run",
+    "Vitest.parse References.whole chapter RTL - fallback bible.executor": "Run",
+    "Vitest.parse References.whole chapter RTL.executor": "Run",
+    "Vitest.reference to passage ID conversion.executor": "Run",
+    "Vitest.reference to passage ID conversion.multiple verses alternative reference.executor": "Run",
+    "Vitest.reference to passage ID conversion.single chapter reference.executor": "Run",
+    "Vitest.reference to passage ID conversion.single verse alternative reference.executor": "Run",
+    "Vitest.removePunctuation.executor": "Run",
+    "git-widget-placeholder": "docs/readme",
+    "last_opened_file_path": "/Users/stevin/PycharmProjects/ephrem",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.build.executor": "Run",
+    "npm.format.executor": "Run",
+    "npm.lint.executor": "Run",
+    "npm.lint:knip.executor": "Run",
+    "npm.lint:md.executor": "Run",
+    "npm.lint:packages.executor": "Run",
+    "npm.lint:spelling.executor": "Run",
+    "npm.prepare.executor": "Run",
+    "npm.test.executor": "Run",
+    "npm.tsc.executor": "Run",
+    "prettierjs.PrettierConfiguration.Package": "/Users/stevin/PycharmProjects/ephrem/node_modules/prettier",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "ts.external.directory.path": "/Users/stevin/PycharmProjects/ephrem/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/tests" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.tsc">
+  <component name="RunManager" selected="npm.lint:md">
     <configuration name="lint:md" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -209,11 +212,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.tsc" />
-        <item itemvalue="npm.test" />
-        <item itemvalue="npm.prepare" />
-        <item itemvalue="npm.lint:spelling" />
         <item itemvalue="npm.lint:md" />
+        <item itemvalue="npm.tsc" />
+        <item itemvalue="npm.lint:spelling" />
+        <item itemvalue="npm.prepare" />
+        <item itemvalue="npm.test" />
       </list>
     </recent_temporary>
   </component>
@@ -243,6 +246,7 @@
       <workItem from="1728855601962" duration="4437000" />
       <workItem from="1728865539300" duration="2591000" />
       <workItem from="1728869493384" duration="644000" />
+      <workItem from="1728870348527" duration="5523000" />
     </task>
     <task id="LOCAL-00001" summary="fix: markdown lint">
       <option name="closed" value="true" />
@@ -372,7 +376,23 @@
       <option name="project" value="LOCAL" />
       <updated>1728869802452</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="docs: improve README">
+      <option name="closed" value="true" />
+      <created>1728875549343</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1728875549343</updated>
+    </task>
+    <task id="LOCAL-00018" summary="fix: markdown lint errors">
+      <option name="closed" value="true" />
+      <created>1728875849403</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1728875849403</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -405,7 +425,9 @@
     <MESSAGE value="test: get passage with details" />
     <MESSAGE value="docs: define docstrings for public functions" />
     <MESSAGE value="fix: syntax error" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: syntax error" />
+    <MESSAGE value="docs: improve README" />
+    <MESSAGE value="fix: markdown lint errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: markdown lint errors" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
