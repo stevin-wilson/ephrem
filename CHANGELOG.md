@@ -1,3 +1,9 @@
+## [0.5.4](https://github.com/stevin-wilson/ephrem/compare/0.5.3...0.5.4) (2024-10-14)
+
+### Bug Fixes
+
+- readme ([0642d61](https://github.com/stevin-wilson/ephrem/commit/0642d61baa7b3390e255e5cd59f69297c51c4984))
+
 ## [0.5.3](https://github.com/stevin-wilson/ephrem/compare/0.5.2...0.5.3) (2024-10-14)
 
 ### Bug Fixes
