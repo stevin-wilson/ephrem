@@ -78,6 +78,21 @@ export class InvalidReferenceError extends BaseEphremError {
 }
 
 // – – – – – – – – – –
+export class BibleNotAvailableError extends BaseEphremError {
+	public context: {
+		bibleId: string;
+	};
+
+	constructor(bibleId: string) {
+		super(
+			"Requested Bible is not available. Please check if the API.Bible key has access to this Bible.",
+		);
+		this.name = "BibleNotAvailableError";
+		this.context = { bibleId };
+	}
+}
+
+// – – – – – – – – – –
 export class BookNotInBibleError extends BaseEphremError {
 	public context: {
 		availableBookIds: string[];
@@ -128,6 +143,56 @@ export interface ReferenceWithoutBible extends ChaptersAndVerses {
 export interface Reference extends ReferenceWithoutBible {
 	readonly bibleId: string;
 }
+
+// – – – – – – – – – –
+/**
+ * Retrieves the Bible ID from the specified Bible abbreviation.
+ * @param bibleAbbreviation The abbreviation of the Bible to retrieve the ID for.
+ * @returns A promise that resolves to the Bible ID or undefined if not found.
+ */
+export const getBibleIdFromAbbreviation = async (
+	bibleAbbreviation: string,
+): Promise<string | undefined> => {
+	const bibleMap = JSON.parse(
+		await fs.promises.readFile(ABB_TO_ID_MAPPING_PATH, "utf-8"),
+	) as BiblesMap;
+
+	return bibleMap[bibleAbbreviation];
+};
+
+// – – – – – – – – – –
+/**
+ * Retrieves the details of a Bible from the specified Bible ID.
+ * @param bibleId The ID of the Bible to retrieve.
+ * @returns A promise that resolves to the Bible details or undefined if not found.
+ */
+export const getBibleDetails = async (
+	bibleId: string,
+): Promise<BibleResponse | undefined> => {
+	const biblesData = JSON.parse(
+		await fs.promises.readFile(BIBLES_DATA_PATH, "utf-8"),
+	) as Record<BibleId, BibleResponse>;
+
+	return biblesData[bibleId];
+};
+
+// – – – – – – – – – –
+/**
+ * Retrieves the details of a book from the specified Bible.
+ * @param bookId The ID of the book to retrieve.
+ * @param bibleId The ID of the Bible to search within.
+ * @returns A promise that resolves to the book details or undefined if not found.
+ */
+export const getBookDetails = async (
+	bookId: string,
+	bibleId: string,
+): Promise<Book | undefined> => {
+	const books = JSON.parse(
+		await fs.promises.readFile(BOOKS_DATA_PATH, "utf-8"),
+	) as Book[];
+
+	return books.find((book) => book.id === bookId && book.bibleId === bibleId);
+};
 
 // – – – – – – – – – –
 const bookIsInBible = (
@@ -313,18 +378,14 @@ export const parseReference = async (
 		targetBibleAbbreviation = fallbackBibleAbbreviation;
 	}
 
-	const bibleMap = JSON.parse(
-		await fs.promises.readFile(ABB_TO_ID_MAPPING_PATH, "utf-8"),
-	) as BiblesMap;
+	const bibleId = await getBibleIdFromAbbreviation(targetBibleAbbreviation);
 
-	if (!(targetBibleAbbreviation in bibleMap)) {
+	if (bibleId === undefined) {
 		throw new UnknownBibleAbbreviationError(
 			targetBibleAbbreviation,
 			ABB_TO_ID_MAPPING_PATH,
 		);
 	}
-
-	const bibleId = bibleMap[targetBibleAbbreviation];
 
 	const bookId = await getBookId(bookName.trim(), bibleId);
 	if (!bookId) {
@@ -419,6 +480,29 @@ export const getPassageId = (reference: ReferenceWithoutBible): string => {
 
 // – – – – – – – – – –
 /**
+ * Fetches a passage from the API.Bible service based on the provided reference and options.
+ * @param reference The reference object containing the book, chapter, and verse details.
+ * @param passageOptions The options for fetching the passage.
+ * @param apiBibleKey The API key for accessing the API.Bible service.
+ * @returns A promise that resolves to the passage and FUMS response.
+ */
+export const getPassageFromReference = async (
+	reference: Reference,
+	passageOptions: PassageOptions,
+	apiBibleKey: string,
+): Promise<PassageAndFumsResponse> => {
+	const passageId = getPassageId(reference);
+
+	return await getPassageFromApi(
+		passageId,
+		reference.bibleId,
+		passageOptions,
+		apiBibleKey,
+	);
+};
+
+// – – – – – – – – – –
+/**
  * Fetches a passage from the API.Bible service based on the provided input and options.
  * @param input The input string containing the reference to the passage.
  * @param passageOptions Options for fetching the passage.
@@ -439,14 +523,31 @@ export const getPassage = async (
 		throw new InvalidReferenceError(input);
 	}
 
-	const passageId = getPassageId(reference);
+	return await getPassageFromReference(reference, passageOptions, apiBibleKey);
+};
 
-	return await getPassageFromApi(
-		passageId,
-		reference.bibleId,
-		passageOptions,
-		apiBibleKey,
-	);
+// – – – – – – – – – –
+export const _getPassageWithDetails = async (
+	passageAndFums: PassageAndFumsResponse,
+	reference: Reference,
+): Promise<PassageWithDetails> => {
+	const bible = await getBibleDetails(reference.bibleId);
+
+	if (bible === undefined) {
+		throw new BibleNotAvailableError(reference.bibleId);
+	}
+
+	const book = await getBookDetails(reference.bookId, reference.bibleId);
+	if (book === undefined) {
+		throw new BookIdNotFoundError(reference.bookId, reference.bibleId);
+	}
+
+	return {
+		bible,
+		book,
+		fums: passageAndFums.meta,
+		passage: passageAndFums.data,
+	};
 };
 
 // – – – – – – – – – –
@@ -479,29 +580,30 @@ export const getPassageWithDetails = async (
 		throw new InvalidReferenceError(input);
 	}
 
-	const biblesData = JSON.parse(
-		await fs.promises.readFile(BIBLES_DATA_PATH, "utf-8"),
-	) as Record<BibleId, BibleResponse>;
+	return await _getPassageWithDetails(passageAndFums, reference);
+};
 
-	const bible = biblesData[reference.bibleId];
+// – – – – – – – – – –
+/**
+ * Fetches a passage with detailed information (about the Bible and the Book) from the API.Bible service based on the provided reference and options.
+ * @param reference The reference object containing the book, chapter, and verse details.
+ * @param passageOptions The options for fetching the passage.
+ * @param apiBibleKey The API key for accessing the API.Bible service.
+ * @returns A promise that resolves to the passage with detailed information.
+ * @throws {InvalidReferenceError} If the reference is invalid.
+ * @throws {BookIdNotFoundError} If the book ID is not found in the Bible.
+ * @throws {BibleNotAvailableError} If the Bible is not available.
+ */
+export const getPassageWithDetailsFromReference = async (
+	reference: Reference,
+	passageOptions: PassageOptions,
+	apiBibleKey: string,
+): Promise<PassageWithDetails> => {
+	const passageAndFums = await getPassageFromReference(
+		reference,
+		passageOptions,
+		apiBibleKey,
+	);
 
-	const books = JSON.parse(
-		await fs.promises.readFile(BOOKS_DATA_PATH, "utf-8"),
-	) as Book[];
-
-	const book =
-		books.find(
-			(book) =>
-				book.id === reference.bookId && book.bibleId === reference.bibleId,
-		) ??
-		(() => {
-			throw new BookIdNotFoundError(reference.bookId, reference.bibleId);
-		})();
-
-	return {
-		bible,
-		book,
-		fums: passageAndFums.meta,
-		passage: passageAndFums.data,
-	};
+	return await _getPassageWithDetails(passageAndFums, reference);
 };
