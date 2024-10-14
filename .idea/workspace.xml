@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="fix: markdown lint errors">
+    <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="feat: add functions to get passages from reference">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reference.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reference.test.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/reference.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reference.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -394,7 +392,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728875849403</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="feat: add functions to get passages from reference">
+      <option name="closed" value="true" />
+      <created>1728883796339</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1728883796339</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -429,7 +435,8 @@
     <MESSAGE value="fix: syntax error" />
     <MESSAGE value="docs: improve README" />
     <MESSAGE value="fix: markdown lint errors" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: markdown lint errors" />
+    <MESSAGE value="feat: add functions to get passages from reference" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add functions to get passages from reference" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

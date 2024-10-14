@@ -145,6 +145,11 @@ export interface Reference extends ReferenceWithoutBible {
 }
 
 // – – – – – – – – – –
+/**
+ * Retrieves the details of a Bible from the specified Bible ID.
+ * @param bibleId The ID of the Bible to retrieve.
+ * @returns A promise that resolves to the Bible details or undefined if not found.
+ */
 export const getBibleDetails = async (
 	bibleId: string,
 ): Promise<BibleResponse | undefined> => {
@@ -156,6 +161,12 @@ export const getBibleDetails = async (
 };
 
 // – – – – – – – – – –
+/**
+ * Retrieves the details of a book from the specified Bible.
+ * @param bookId The ID of the book to retrieve.
+ * @param bibleId The ID of the Bible to search within.
+ * @returns A promise that resolves to the book details or undefined if not found.
+ */
 export const getBookDetails = async (
 	bookId: string,
 	bibleId: string,
