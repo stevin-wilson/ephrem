@@ -78,6 +78,37 @@ export class InvalidReferenceError extends BaseEphremError {
 }
 
 // – – – – – – – – – –
+export class BookNotInBibleError extends BaseEphremError {
+	public context: {
+		availableBookIds: string[];
+		bibleName: string;
+		bibleNameLocal: string;
+		bookId: string;
+		input: string;
+	};
+
+	constructor(
+		input: string,
+		bookId: string,
+		availableBookIds: string[],
+		bibleName: string,
+		bibleNameLocal: string,
+	) {
+		super(
+			"Requested Book is not available in this Bible. Please check the reference and try again.",
+		);
+		this.name = "BookNotInBibleError";
+		this.context = {
+			availableBookIds,
+			bibleName,
+			bibleNameLocal,
+			bookId,
+			input,
+		};
+	}
+}
+
+// – – – – – – – – – –
 export type VoteTally = Record<string, number>;
 
 // – – – – – – – – – –
@@ -97,6 +128,15 @@ export interface ReferenceWithoutBible extends ChaptersAndVerses {
 export interface Reference extends ReferenceWithoutBible {
 	readonly bibleId: string;
 }
+
+// – – – – – – – – – –
+const bookIsInBible = (
+	bookId: string,
+	bibleId: string,
+	books: Book[],
+): boolean => {
+	return books.some((book) => book.id === bookId && book.bibleId === bibleId);
+};
 
 // – – – – – – – – – –
 const getBookIdInBible = (
@@ -133,14 +173,19 @@ const getBookIdByMajority = (
 	const biblesToConsider = Object.values(bibleMap);
 
 	const voteTally: VoteTally = {};
+	const alreadyConsideredBibleIds: string[] = [];
 	for (const [bibleId, bookId] of Object.entries(biblesWithBook)) {
-		if (!biblesToConsider.includes(bibleId)) {
+		if (
+			alreadyConsideredBibleIds.includes(bibleId) ||
+			!biblesToConsider.includes(bibleId)
+		) {
 			continue;
 		}
 
 		voteTally[bookId] ||= 0;
 
 		voteTally[bookId] += 1;
+		alreadyConsideredBibleIds.push(bibleId);
 	}
 
 	return getKeyOfMaxValue(voteTally);
@@ -270,6 +315,26 @@ export const parseReference = async (
 		return undefined;
 	}
 
+	const booksData = JSON.parse(
+		await fs.promises.readFile(BOOKS_DATA_PATH, "utf-8"),
+	) as Book[];
+
+	const biblesData = JSON.parse(
+		await fs.promises.readFile(BIBLES_DATA_PATH, "utf-8"),
+	) as Record<BibleId, BibleResponse>;
+
+	if (!bookIsInBible(bookId, bibleId, booksData)) {
+		throw new BookNotInBibleError(
+			input,
+			bookId,
+			booksData
+				.filter((book) => book.bibleId === bibleId)
+				.map((book) => book.id),
+			biblesData[bibleId].name,
+			biblesData[bibleId].nameLocal,
+		);
+	}
+
 	const { chapterEnd, chapterStart, verseEnd, verseStart } =
 		splitChapterAndVerse(chapterVerse);
 
@@ -366,20 +431,18 @@ export const getPassageWithDetails = async (
 	apiBibleKey: string,
 	fallbackBibleAbbreviation?: string,
 ): Promise<PassageWithDetails> => {
+	const passageAndFums = await getPassage(
+		input,
+		passageOptions,
+		apiBibleKey,
+		fallbackBibleAbbreviation,
+	);
+
 	const reference = await parseReference(input, fallbackBibleAbbreviation);
 
 	if (!reference) {
 		throw new InvalidReferenceError(input);
 	}
-
-	const passageId = getPassageId(reference);
-
-	const passageAndFums = await getPassageFromApi(
-		passageId,
-		reference.bibleId,
-		passageOptions,
-		apiBibleKey,
-	);
 
 	const biblesData = JSON.parse(
 		await fs.promises.readFile(BIBLES_DATA_PATH, "utf-8"),

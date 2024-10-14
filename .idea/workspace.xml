@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="tests: for getPassageID from reference">
+    <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="test: get passage with details">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api-bible.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api-bible.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reference.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reference.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reference.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reference.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +44,14 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
+                    <option name="branchName" value="fix/improve-coverage" />
+                    <option name="lastUsedInstant" value="1728830583" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1728829651" />
+                  </RecentBranch>
+                  <RecentBranch>
                     <option name="branchName" value="feature/setup-ephrem" />
                     <option name="lastUsedInstant" value="1728805835" />
                   </RecentBranch>
@@ -53,16 +60,8 @@
                     <option name="lastUsedInstant" value="1728803042" />
                   </RecentBranch>
                   <RecentBranch>
-                    <option name="branchName" value="main" />
-                    <option name="lastUsedInstant" value="1728803002" />
-                  </RecentBranch>
-                  <RecentBranch>
                     <option name="branchName" value="feature/parse-reference" />
                     <option name="lastUsedInstant" value="1728799717" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="feature/get-bibles" />
-                    <option name="lastUsedInstant" value="1728784390" />
                   </RecentBranch>
                 </list>
               </option>
@@ -103,91 +102,107 @@
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Vitest.check if book is in bible.executor": "Run",
+    "Vitest.get Book ID.executor": "Run",
+    "Vitest.get Book ID.should return book code/Id.executor": "Run",
+    "Vitest.get passage.executor": "Run",
+    "Vitest.get passage.get passage with details.executor": "Debug",
+    "Vitest.multiple verses RTL - fallback bible.executor": "Run",
+    "Vitest.normalizeBookName.executor": "Run",
+    "Vitest.parse References.executor": "Run",
+    "Vitest.parse References.multiple chapter multiple verses LTR.executor": "Run",
+    "Vitest.parse References.multiple chapter multiple verses RTL - fallback bible.executor": "Run",
+    "Vitest.parse References.multiple chapter multiple verses RTL.executor": "Run",
+    "Vitest.parse References.multiple chapters RTL - fallback bible.executor": "Run",
+    "Vitest.parse References.multiple verses LTR - fallback bible.executor": "Run",
+    "Vitest.parse References.multiple verses RTL - fallback bible.executor": "Run",
+    "Vitest.parse References.single verse LTR.executor": "Run",
+    "Vitest.parse References.single verse RTL - fallback bible.executor": "Run",
+    "Vitest.parse References.single verse RTL.executor": "Run",
+    "Vitest.parse References.whole chapter RTL - fallback bible.executor": "Run",
+    "Vitest.parse References.whole chapter RTL.executor": "Run",
     "Vitest.reference to passage ID conversion.executor": "Run",
     "Vitest.reference to passage ID conversion.multiple verses alternative reference.executor": "Run",
     "Vitest.reference to passage ID conversion.single chapter reference.executor": "Run",
     "Vitest.reference to passage ID conversion.single verse alternative reference.executor": "Run",
-    "git-widget-placeholder": "feature/setup-ephrem",
+    "Vitest.removePunctuation.executor": "Run",
+    "git-widget-placeholder": "#21 on fix/improve-coverage",
     "last_opened_file_path": "/Users/stevin/PycharmProjects/ephrem",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "npm.build.executor": "Run",
     "npm.format.executor": "Run",
     "npm.lint.executor": "Run",
+    "npm.lint:knip.executor": "Run",
     "npm.lint:md.executor": "Run",
     "npm.lint:packages.executor": "Run",
     "npm.lint:spelling.executor": "Run",
     "npm.prepare.executor": "Run",
+    "npm.test.executor": "Run",
+    "npm.tsc.executor": "Run",
     "prettierjs.PrettierConfiguration.Package": "/Users/stevin/PycharmProjects/ephrem/node_modules/prettier",
     "settings.editor.selected.configurable": "preferences.lookFeel",
     "ts.external.directory.path": "/Users/stevin/PycharmProjects/ephrem/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="npm.lint">
-    <configuration name="reference to passage ID conversion" type="JavaScriptTestRunnerVitest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <vitest-package value="$PROJECT_DIR$/node_modules/vitest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <vitest-options value="--run" />
-      <envs />
-      <scope-kind value="SUITE" />
-      <test-file value="$PROJECT_DIR$/src/reference.test.ts" />
-      <test-names>
-        <test-name value="reference to passage ID conversion" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="reference to passage ID conversion.multiple verses alternative reference" type="JavaScriptTestRunnerVitest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <vitest-package value="$PROJECT_DIR$/node_modules/vitest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <vitest-options value="--run" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/src/reference.test.ts" />
-      <test-names>
-        <test-name value="reference to passage ID conversion" />
-        <test-name value="multiple verses alternative reference" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="reference to passage ID conversion.single chapter reference" type="JavaScriptTestRunnerVitest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <vitest-package value="$PROJECT_DIR$/node_modules/vitest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <vitest-options value="--run" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/src/reference.test.ts" />
-      <test-names>
-        <test-name value="reference to passage ID conversion" />
-        <test-name value="single chapter reference" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="reference to passage ID conversion.single verse alternative reference" type="JavaScriptTestRunnerVitest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <vitest-package value="$PROJECT_DIR$/node_modules/vitest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <vitest-options value="--run" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/src/reference.test.ts" />
-      <test-names>
-        <test-name value="reference to passage ID conversion" />
-        <test-name value="single verse alternative reference" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="lint" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/tests" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.tsc">
+    <configuration name="lint:knip" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
-        <script value="lint" />
+        <script value="lint:knip" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="lint:md" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="lint:md" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="lint:spelling" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="lint:spelling" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="prepare" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="prepare" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="tsc" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="tsc" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -195,11 +210,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.lint" />
-        <item itemvalue="Vitest.reference to passage ID conversion" />
-        <item itemvalue="Vitest.reference to passage ID conversion.single chapter reference" />
-        <item itemvalue="Vitest.reference to passage ID conversion.multiple verses alternative reference" />
-        <item itemvalue="Vitest.reference to passage ID conversion.single verse alternative reference" />
+        <item itemvalue="npm.tsc" />
+        <item itemvalue="npm.prepare" />
+        <item itemvalue="npm.lint:spelling" />
+        <item itemvalue="npm.lint:md" />
+        <item itemvalue="npm.lint:knip" />
       </list>
     </recent_temporary>
   </component>
@@ -225,6 +240,9 @@
       <workItem from="1728699278442" duration="158000" />
       <workItem from="1728700671530" duration="10000" />
       <workItem from="1728704551480" duration="17891000" />
+      <workItem from="1728837835457" duration="3242000" />
+      <workItem from="1728855601962" duration="4437000" />
+      <workItem from="1728865539300" duration="2591000" />
     </task>
     <task id="LOCAL-00001" summary="fix: markdown lint">
       <option name="closed" value="true" />
@@ -274,7 +292,71 @@
       <option name="project" value="LOCAL" />
       <updated>1728809928598</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="tests: for reference-related functions">
+      <option name="closed" value="true" />
+      <created>1728840669053</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1728840669053</updated>
+    </task>
+    <task id="LOCAL-00008" summary="tests: for reference-related functions">
+      <option name="closed" value="true" />
+      <created>1728840677221</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1728840677221</updated>
+    </task>
+    <task id="LOCAL-00009" summary="fix: remove unused import">
+      <option name="closed" value="true" />
+      <created>1728840825997</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1728840825997</updated>
+    </task>
+    <task id="LOCAL-00010" summary="fix: cspell errors">
+      <option name="closed" value="true" />
+      <created>1728840971330</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1728840971330</updated>
+    </task>
+    <task id="LOCAL-00011" summary="fix: do not double count whe identifying book ID based on majority.">
+      <option name="closed" value="true" />
+      <created>1728856848754</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1728856848755</updated>
+    </task>
+    <task id="LOCAL-00012" summary="refactor: call `getPassage` within `getPassageWithDetails`">
+      <option name="closed" value="true" />
+      <created>1728857772633</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1728857772633</updated>
+    </task>
+    <task id="LOCAL-00013" summary="test: get passage with details">
+      <option name="closed" value="true" />
+      <created>1728859669254</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1728859669254</updated>
+    </task>
+    <task id="LOCAL-00014" summary="test: get passage with details">
+      <option name="closed" value="true" />
+      <created>1728860030133</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1728860030133</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -299,6 +381,23 @@
     <MESSAGE value="feat: basic validation of language Ids, check if API key is empty" />
     <MESSAGE value="feat: throw an error if no Bible is available for a language" />
     <MESSAGE value="tests: for getPassageID from reference" />
-    <option name="LAST_COMMIT_MESSAGE" value="tests: for getPassageID from reference" />
+    <MESSAGE value="tests: for reference-related functions" />
+    <MESSAGE value="fix: remove unused import" />
+    <MESSAGE value="fix: cspell errors" />
+    <MESSAGE value="fix: do not double count whe identifying book ID based on majority." />
+    <MESSAGE value="refactor: call `getPassage` within `getPassageWithDetails`" />
+    <MESSAGE value="test: get passage with details" />
+    <option name="LAST_COMMIT_MESSAGE" value="test: get passage with details" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/reference.ts</url>
+          <line>18</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -6,7 +6,9 @@
 		"coverage",
 		"lib",
 		"node_modules",
-		"pnpm-lock.yaml"
+		"pnpm-lock.yaml",
+		"src/test-resources",
+		"src/reference.test.ts"
 	],
 	"words": [
 		"ephrem",
@@ -14,6 +16,7 @@
 		"Stevin",
 		"Wilson",
 		"USFM",
-		"deuterocanonical"
+		"deuterocanonical",
+		"ഉൽപ്പത്തി"
 	]
 }

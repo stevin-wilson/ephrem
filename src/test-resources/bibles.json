@@ -1,0 +1,1428 @@
+{
+	"685d1470fe4d5c3b-01": {
+		"id": "685d1470fe4d5c3b-01",
+		"dblId": "685d1470fe4d5c3b",
+		"relatedDbl": null,
+		"name": "American Standard Version (Byzantine Text with Apocrypha)",
+		"nameLocal": "American Standard Version Byzantine Text with Apocrypha",
+		"abbreviation": "ASVBT",
+		"abbreviationLocal": "ASVBT",
+		"description": null,
+		"descriptionLocal": null,
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "US",
+				"name": "United States of America",
+				"nameLocal": "United States of America"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T18:57:14.000Z",
+		"audioBibles": []
+	},
+	"bba9f40183526463-01": {
+		"id": "bba9f40183526463-01",
+		"dblId": "bba9f40183526463",
+		"relatedDbl": null,
+		"name": "Berean Standard Bible",
+		"nameLocal": "English: Berean Standard Bible",
+		"abbreviation": "BSB",
+		"abbreviationLocal": "BSB",
+		"description": "Berean Standard Bible",
+		"descriptionLocal": "English: Berean Standard Bible",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "US",
+				"name": "United States of America",
+				"nameLocal": "United States of America"
+			},
+			{
+				"id": "GB",
+				"name": "United Kingdom of Great Britain and Northern Ireland",
+				"nameLocal": "United Kingdom of Great Britain and Northern Ireland"
+			},
+			{
+				"id": "AU",
+				"name": "Australia",
+				"nameLocal": "Australia"
+			},
+			{
+				"id": "CA",
+				"name": "Canada",
+				"nameLocal": "Canada"
+			},
+			{
+				"id": "AG",
+				"name": "Antigua and Barbuda",
+				"nameLocal": "Antigua and Barbuda"
+			},
+			{
+				"id": "BS",
+				"name": "Bahamas",
+				"nameLocal": "Bahamas"
+			},
+			{
+				"id": "BB",
+				"name": "Barbados",
+				"nameLocal": "Barbados"
+			},
+			{
+				"id": "BZ",
+				"name": "Belize",
+				"nameLocal": "Belize"
+			},
+			{
+				"id": "DM",
+				"name": "Dominica",
+				"nameLocal": "Dominica"
+			},
+			{
+				"id": "DO",
+				"name": "Dominican Republic",
+				"nameLocal": "Dominican Republic"
+			},
+			{
+				"id": "AS",
+				"name": "American Samoa",
+				"nameLocal": "American Samoa"
+			},
+			{
+				"id": "GU",
+				"name": "Guam",
+				"nameLocal": "Guam"
+			},
+			{
+				"id": "HT",
+				"name": "Haiti",
+				"nameLocal": "Haiti"
+			},
+			{
+				"id": "GY",
+				"name": "Guyana",
+				"nameLocal": "Guyana"
+			},
+			{
+				"id": "IL",
+				"name": "Israel",
+				"nameLocal": "Israel"
+			},
+			{
+				"id": "IE",
+				"name": "Ireland",
+				"nameLocal": "Ireland"
+			},
+			{
+				"id": "JM",
+				"name": "Jamaica",
+				"nameLocal": "Jamaica"
+			},
+			{
+				"id": "MT",
+				"name": "Malta",
+				"nameLocal": "Malta"
+			},
+			{
+				"id": "NZ",
+				"name": "New Zealand",
+				"nameLocal": "New Zealand"
+			},
+			{
+				"id": "PH",
+				"name": "Philippines",
+				"nameLocal": "Philippines"
+			},
+			{
+				"id": "KN",
+				"name": "Saint Kitts and Nevis",
+				"nameLocal": "Saint Kitts and Nevis"
+			},
+			{
+				"id": "LC",
+				"name": "Saint Lucia",
+				"nameLocal": "Saint Lucia"
+			},
+			{
+				"id": "VC",
+				"name": "Saint Vincent and the Grenadines",
+				"nameLocal": "Saint Vincent and the Grenadines"
+			},
+			{
+				"id": "TT",
+				"name": "Trinidad and Tobago",
+				"nameLocal": "Trinidad and Tobago"
+			},
+			{
+				"id": "NG",
+				"name": "Nigeria",
+				"nameLocal": "Nigeria"
+			},
+			{
+				"id": "ZA",
+				"name": "South Africa",
+				"nameLocal": "South Africa"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-29T00:44:58.000Z",
+		"audioBibles": []
+	},
+	"6bab4d6c61b31b80-01": {
+		"id": "6bab4d6c61b31b80-01",
+		"dblId": "6bab4d6c61b31b80",
+		"relatedDbl": null,
+		"name": "Brenton English Septuagint (Updated Spelling and Formatting)",
+		"nameLocal": "Brenton English Septuagint (Updated Spelling and Formatting)",
+		"abbreviation": "engLXXup",
+		"abbreviationLocal": "LXXup",
+		"description": "common",
+		"descriptionLocal": "common",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "ZZ",
+				"name": "Unspecific",
+				"nameLocal": "Unspecific"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T19:11:26.000Z",
+		"audioBibles": []
+	},
+	"65bfdebd704a8324-01": {
+		"id": "65bfdebd704a8324-01",
+		"dblId": "65bfdebd704a8324",
+		"relatedDbl": null,
+		"name": "Brenton English translation of the Septuagint",
+		"nameLocal": "Brenton English translation of the Septuagint",
+		"abbreviation": "engbrent",
+		"abbreviationLocal": "Brenton",
+		"description": "Septuagint",
+		"descriptionLocal": "Septuagint",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "GB",
+				"name": "United Kingdom",
+				"nameLocal": "United Kingdom"
+			},
+			{
+				"id": "US",
+				"name": "United States",
+				"nameLocal": "United States"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T18:50:23.000Z",
+		"audioBibles": []
+	},
+	"55212e3cf5d04d49-01": {
+		"id": "55212e3cf5d04d49-01",
+		"dblId": "55212e3cf5d04d49",
+		"relatedDbl": null,
+		"name": "Cambridge Paragraph Bible of the KJV",
+		"nameLocal": "Cambridge Paragraph Bible of the KJV",
+		"abbreviation": "engKJVCPB",
+		"abbreviationLocal": "KJVCPB",
+		"description": "Common",
+		"descriptionLocal": "Common",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "US",
+				"name": "United States",
+				"nameLocal": "United States"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T17:55:54.000Z",
+		"audioBibles": []
+	},
+	"179568874c45066f-01": {
+		"id": "179568874c45066f-01",
+		"dblId": "179568874c45066f",
+		"relatedDbl": null,
+		"name": "Douay-Rheims American 1899",
+		"nameLocal": "Douay-Rheims American 1899",
+		"abbreviation": "engDRA",
+		"abbreviationLocal": "DRA",
+		"description": "The Holy Bible in English, Douay-Rheims American Edition of 1899, translated from the Latin Vulgate",
+		"descriptionLocal": "Catholic",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "US",
+				"name": "United States",
+				"nameLocal": "United States"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T14:31:19.000Z",
+		"audioBibles": []
+	},
+	"55ec700d9e0d77ea-01": {
+		"id": "55ec700d9e0d77ea-01",
+		"dblId": "55ec700d9e0d77ea",
+		"relatedDbl": null,
+		"name": "English Majority Text Version",
+		"nameLocal": "English Majority Text Version",
+		"abbreviation": "engEMTV",
+		"abbreviationLocal": "EMTV",
+		"description": "common",
+		"descriptionLocal": "common",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "US",
+				"name": "United States",
+				"nameLocal": "United States"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T18:01:52.000Z",
+		"audioBibles": []
+	},
+	"65eec8e0b60e656b-01": {
+		"id": "65eec8e0b60e656b-01",
+		"dblId": "65eec8e0b60e656b",
+		"relatedDbl": null,
+		"name": "Free Bible Version",
+		"nameLocal": "Free Bible Version",
+		"abbreviation": "FBV",
+		"abbreviationLocal": "FBV",
+		"description": "Protestant FBV full 3.0 beta",
+		"descriptionLocal": "Protestant FBV full 3.0 beta",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "US",
+				"name": "United States of America",
+				"nameLocal": "United States of America"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T18:50:59.000Z",
+		"audioBibles": []
+	},
+	"c315fa9f71d4af3a-01": {
+		"id": "c315fa9f71d4af3a-01",
+		"dblId": "c315fa9f71d4af3a",
+		"relatedDbl": null,
+		"name": "Geneva Bible",
+		"nameLocal": "Geneva Bible",
+		"abbreviation": "enggnv",
+		"abbreviationLocal": "GNV",
+		"description": "common",
+		"descriptionLocal": "common",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "GB",
+				"name": "United Kingdom",
+				"nameLocal": "United Kingdom"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-29T01:21:00.000Z",
+		"audioBibles": []
+	},
+	"bf8f1c7f3f9045a5-01": {
+		"id": "bf8f1c7f3f9045a5-01",
+		"dblId": "bf8f1c7f3f9045a5",
+		"relatedDbl": null,
+		"name": "JPS TaNaKH 1917",
+		"nameLocal": "JPS TaNaKH 1917",
+		"abbreviation": "engojps",
+		"abbreviationLocal": "OJPS",
+		"description": "Jewish",
+		"descriptionLocal": "Jewish",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "US",
+				"name": "United States",
+				"nameLocal": "United States"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-29T01:01:15.000Z",
+		"audioBibles": []
+	},
+	"de4e12af7f28f599-01": {
+		"id": "de4e12af7f28f599-01",
+		"dblId": "de4e12af7f28f599",
+		"relatedDbl": null,
+		"name": "King James (Authorised) Version",
+		"nameLocal": "King James Version",
+		"abbreviation": "engKJV",
+		"abbreviationLocal": "KJV",
+		"description": "Ecumenical",
+		"descriptionLocal": "Ecumenical",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "GB",
+				"name": "United Kingdom of Great Britain and Northern Ireland",
+				"nameLocal": "United Kingdom of Great Britain and Northern Ireland"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-29T04:03:56.000Z",
+		"audioBibles": []
+	},
+	"de4e12af7f28f599-02": {
+		"id": "de4e12af7f28f599-02",
+		"dblId": "de4e12af7f28f599",
+		"relatedDbl": null,
+		"name": "King James (Authorised) Version",
+		"nameLocal": "King James Version",
+		"abbreviation": "engKJV",
+		"abbreviationLocal": "KJV",
+		"description": "Protestant",
+		"descriptionLocal": "Protestant",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "GB",
+				"name": "United Kingdom of Great Britain and Northern Ireland",
+				"nameLocal": "United Kingdom of Great Britain and Northern Ireland"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-29T04:04:35.000Z",
+		"audioBibles": []
+	},
+	"01b29f4b342acc35-01": {
+		"id": "01b29f4b342acc35-01",
+		"dblId": "01b29f4b342acc35",
+		"relatedDbl": null,
+		"name": "Literal Standard Version",
+		"nameLocal": "Literal Standard Version",
+		"abbreviation": "LSV",
+		"abbreviationLocal": "LSV",
+		"description": "Protestant",
+		"descriptionLocal": "Protestant",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "US",
+				"name": "United States of America",
+				"nameLocal": "United States of America"
+			},
+			{
+				"id": "GB",
+				"name": "United Kingdom of Great Britain and Northern Ireland",
+				"nameLocal": "United Kingdom of Great Britain and Northern Ireland"
+			},
+			{
+				"id": "CA",
+				"name": "Canada",
+				"nameLocal": "Canada"
+			},
+			{
+				"id": "AU",
+				"name": "Australia",
+				"nameLocal": "Australia"
+			},
+			{
+				"id": "ZA",
+				"name": "South Africa",
+				"nameLocal": "South Africa"
+			},
+			{
+				"id": "NZ",
+				"name": "New Zealand",
+				"nameLocal": "New Zealand"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-27T21:39:40.000Z",
+		"audioBibles": []
+	},
+	"40072c4a5aba4022-01": {
+		"id": "40072c4a5aba4022-01",
+		"dblId": "40072c4a5aba4022",
+		"relatedDbl": null,
+		"name": "Revised Version 1885",
+		"nameLocal": "Revised Version 1885",
+		"abbreviation": "engRV",
+		"abbreviationLocal": "RV",
+		"description": "Interconfessional",
+		"descriptionLocal": "Interconfessional",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "GB",
+				"name": "United Kingdom of Great Britain and Northern Ireland",
+				"nameLocal": "United Kingdom of Great Britain and Northern Ireland"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T16:46:43.000Z",
+		"audioBibles": []
+	},
+	"ec290b5045ff54a5-01": {
+		"id": "ec290b5045ff54a5-01",
+		"dblId": "ec290b5045ff54a5",
+		"relatedDbl": null,
+		"name": "Targum Onkelos Etheridge",
+		"nameLocal": "Targum Onkelos Etheridge",
+		"abbreviation": "engOKE",
+		"abbreviationLocal": "OKE",
+		"description": "common",
+		"descriptionLocal": "common",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "ZZ",
+				"name": "Unspecific",
+				"nameLocal": "Unspecific"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-29T05:31:23.000Z",
+		"audioBibles": []
+	},
+	"2f0fd81d7b85b923-01": {
+		"id": "2f0fd81d7b85b923-01",
+		"dblId": "2f0fd81d7b85b923",
+		"relatedDbl": null,
+		"name": "The English New Testament According to Family 35",
+		"nameLocal": "The English New Testament According to Family 35",
+		"abbreviation": "engF35",
+		"abbreviationLocal": "F35",
+		"description": "Common",
+		"descriptionLocal": "Common",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "ZZ",
+				"name": "Unspecific",
+				"nameLocal": "Unspecific"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T15:49:57.000Z",
+		"audioBibles": []
+	},
+	"06125adad2d5898a-01": {
+		"id": "06125adad2d5898a-01",
+		"dblId": "06125adad2d5898a",
+		"relatedDbl": null,
+		"name": "The Holy Bible, American Standard Version",
+		"nameLocal": "The Holy Bible, American Standard Version",
+		"abbreviation": "ASV",
+		"abbreviationLocal": "ASV",
+		"description": "Bible",
+		"descriptionLocal": "Bible",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "US",
+				"name": "United States of America",
+				"nameLocal": "United States of America"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T13:36:08.000Z",
+		"audioBibles": []
+	},
+	"c89622d31b60c444-02": {
+		"id": "c89622d31b60c444-02",
+		"dblId": "c89622d31b60c444",
+		"relatedDbl": null,
+		"name": "The Orthodox Jewish Bible",
+		"nameLocal": "The Orthodox Jewish Bible",
+		"abbreviation": "TOJB2011",
+		"abbreviationLocal": "TOJB2011",
+		"description": "OT follows Tanakh order, NT follows usual Protestant order",
+		"descriptionLocal": "OT follows Tanakh order, NT follows usual Protestant order",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "US",
+				"name": "United States of America",
+				"nameLocal": "United States of America"
+			},
+			{
+				"id": "IL",
+				"name": "Israel",
+				"nameLocal": "Israel"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-29T01:55:15.000Z",
+		"audioBibles": []
+	},
+	"32339cf2f720ff8e-01": {
+		"id": "32339cf2f720ff8e-01",
+		"dblId": "32339cf2f720ff8e",
+		"relatedDbl": null,
+		"name": "The Text-Critical English New Testament",
+		"nameLocal": "The Text-Critical English New Testament",
+		"abbreviation": "TCENT",
+		"abbreviationLocal": "TCENT",
+		"description": "common",
+		"descriptionLocal": "common",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "US",
+				"name": "United States of America",
+				"nameLocal": "United States of America"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T16:02:46.000Z",
+		"audioBibles": []
+	},
+	"66c22495370cdfc0-01": {
+		"id": "66c22495370cdfc0-01",
+		"dblId": "66c22495370cdfc0",
+		"relatedDbl": null,
+		"name": "Translation for Translators",
+		"nameLocal": "Translation for Translators",
+		"abbreviation": "T4T",
+		"abbreviationLocal": "T4T",
+		"description": "common",
+		"descriptionLocal": "common",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "US",
+				"name": "United States of America",
+				"nameLocal": "United States of America"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T18:53:49.000Z",
+		"audioBibles": []
+	},
+	"9879dbb7cfe39e4d-01": {
+		"id": "9879dbb7cfe39e4d-01",
+		"dblId": "9879dbb7cfe39e4d",
+		"relatedDbl": null,
+		"name": "World English Bible",
+		"nameLocal": "World English Bible",
+		"abbreviation": "WEB",
+		"abbreviationLocal": "WEB",
+		"description": "Ecumenical",
+		"descriptionLocal": "Ecumenical",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "US",
+				"name": "United States of America",
+				"nameLocal": "United States of America"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T21:52:13.000Z",
+		"audioBibles": [
+			{
+				"id": "105a06b6146d11e7-01",
+				"name": "English - World English Bible 2013 (Drama NT)",
+				"nameLocal": "English - World English Bible 2013 (Drama NT)",
+				"dblId": "105a06b6146d11e7"
+			}
+		]
+	},
+	"9879dbb7cfe39e4d-02": {
+		"id": "9879dbb7cfe39e4d-02",
+		"dblId": "9879dbb7cfe39e4d",
+		"relatedDbl": null,
+		"name": "World English Bible",
+		"nameLocal": "World English Bible",
+		"abbreviation": "WEB",
+		"abbreviationLocal": "WEB",
+		"description": "Catholic",
+		"descriptionLocal": "Catholic",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "US",
+				"name": "United States of America",
+				"nameLocal": "United States of America"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T21:52:43.000Z",
+		"audioBibles": [
+			{
+				"id": "105a06b6146d11e7-01",
+				"name": "English - World English Bible 2013 (Drama NT)",
+				"nameLocal": "English - World English Bible 2013 (Drama NT)",
+				"dblId": "105a06b6146d11e7"
+			}
+		]
+	},
+	"9879dbb7cfe39e4d-03": {
+		"id": "9879dbb7cfe39e4d-03",
+		"dblId": "9879dbb7cfe39e4d",
+		"relatedDbl": null,
+		"name": "World English Bible",
+		"nameLocal": "World English Bible",
+		"abbreviation": "WEB",
+		"abbreviationLocal": "WEB",
+		"description": "Orthodox",
+		"descriptionLocal": "Orthodox",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "US",
+				"name": "United States of America",
+				"nameLocal": "United States of America"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T21:53:12.000Z",
+		"audioBibles": [
+			{
+				"id": "105a06b6146d11e7-01",
+				"name": "English - World English Bible 2013 (Drama NT)",
+				"nameLocal": "English - World English Bible 2013 (Drama NT)",
+				"dblId": "105a06b6146d11e7"
+			}
+		]
+	},
+	"9879dbb7cfe39e4d-04": {
+		"id": "9879dbb7cfe39e4d-04",
+		"dblId": "9879dbb7cfe39e4d",
+		"relatedDbl": null,
+		"name": "World English Bible",
+		"nameLocal": "World English Bible",
+		"abbreviation": "WEB",
+		"abbreviationLocal": "WEB",
+		"description": "Protestant",
+		"descriptionLocal": "Protestant",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "US",
+				"name": "United States of America",
+				"nameLocal": "United States of America"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T21:53:41.000Z",
+		"audioBibles": [
+			{
+				"id": "105a06b6146d11e7-01",
+				"name": "English - World English Bible 2013 (Drama NT)",
+				"nameLocal": "English - World English Bible 2013 (Drama NT)",
+				"dblId": "105a06b6146d11e7"
+			}
+		]
+	},
+	"7142879509583d59-01": {
+		"id": "7142879509583d59-01",
+		"dblId": "7142879509583d59",
+		"relatedDbl": null,
+		"name": "World English Bible British Edition",
+		"nameLocal": "World English Bible British Edition",
+		"abbreviation": "WEBBE",
+		"abbreviationLocal": "WEBBE",
+		"description": "Ecumenical",
+		"descriptionLocal": "Ecumenical",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "GB",
+				"name": "United Kingdom",
+				"nameLocal": "United Kingdom"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T19:31:15.000Z",
+		"audioBibles": []
+	},
+	"7142879509583d59-02": {
+		"id": "7142879509583d59-02",
+		"dblId": "7142879509583d59",
+		"relatedDbl": null,
+		"name": "World English Bible British Edition",
+		"nameLocal": "World English Bible British Edition",
+		"abbreviation": "WEBBE",
+		"abbreviationLocal": "WEBBE",
+		"description": "Catholic",
+		"descriptionLocal": "Catholic",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "GB",
+				"name": "United Kingdom",
+				"nameLocal": "United Kingdom"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T19:31:43.000Z",
+		"audioBibles": []
+	},
+	"7142879509583d59-03": {
+		"id": "7142879509583d59-03",
+		"dblId": "7142879509583d59",
+		"relatedDbl": null,
+		"name": "World English Bible British Edition",
+		"nameLocal": "World English Bible British Edition",
+		"abbreviation": "WEBBE",
+		"abbreviationLocal": "WEBBE",
+		"description": "Orthodox",
+		"descriptionLocal": "Orthodox",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "GB",
+				"name": "United Kingdom",
+				"nameLocal": "United Kingdom"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T19:32:10.000Z",
+		"audioBibles": []
+	},
+	"7142879509583d59-04": {
+		"id": "7142879509583d59-04",
+		"dblId": "7142879509583d59",
+		"relatedDbl": null,
+		"name": "World English Bible British Edition",
+		"nameLocal": "World English Bible British Edition",
+		"abbreviation": "WEBBE",
+		"abbreviationLocal": "WEBBE",
+		"description": "Protestant",
+		"descriptionLocal": "Protestant",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "GB",
+				"name": "United Kingdom",
+				"nameLocal": "United Kingdom"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T19:32:36.000Z",
+		"audioBibles": []
+	},
+	"72f4e6dc683324df-01": {
+		"id": "72f4e6dc683324df-01",
+		"dblId": "72f4e6dc683324df",
+		"relatedDbl": null,
+		"name": "World English Bible Updated",
+		"nameLocal": "World English Bible Updated",
+		"abbreviation": "engWEBU",
+		"abbreviationLocal": "WEBU",
+		"description": "Ecumenical",
+		"descriptionLocal": "Ecumenical",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "US",
+				"name": "United States of America",
+				"nameLocal": "United States of America"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T19:40:34.000Z",
+		"audioBibles": []
+	},
+	"72f4e6dc683324df-02": {
+		"id": "72f4e6dc683324df-02",
+		"dblId": "72f4e6dc683324df",
+		"relatedDbl": null,
+		"name": "World English Bible Updated",
+		"nameLocal": "World English Bible Updated",
+		"abbreviation": "engWEBU",
+		"abbreviationLocal": "WEBU",
+		"description": "Protestant",
+		"descriptionLocal": "Protestant",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "US",
+				"name": "United States of America",
+				"nameLocal": "United States of America"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T19:41:04.000Z",
+		"audioBibles": []
+	},
+	"72f4e6dc683324df-03": {
+		"id": "72f4e6dc683324df-03",
+		"dblId": "72f4e6dc683324df",
+		"relatedDbl": null,
+		"name": "World English Bible Updated",
+		"nameLocal": "World English Bible Updated",
+		"abbreviation": "engWEBU",
+		"abbreviationLocal": "WEBU",
+		"description": "Catholic",
+		"descriptionLocal": "Catholic",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "US",
+				"name": "United States of America",
+				"nameLocal": "United States of America"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T19:41:27.000Z",
+		"audioBibles": []
+	},
+	"32664dc3288a28df-01": {
+		"id": "32664dc3288a28df-01",
+		"dblId": "32664dc3288a28df",
+		"relatedDbl": null,
+		"name": "World English Bible, American English Edition, without Strong's Numbers",
+		"nameLocal": "World English Bible, American English Edition, without Strong's Numbers",
+		"abbreviation": "engWEBUS",
+		"abbreviationLocal": "WEBUS",
+		"description": "Ecumenical",
+		"descriptionLocal": "Ecumenical",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "US",
+				"name": "United States of America",
+				"nameLocal": "United States of America"
+			},
+			{
+				"id": "CA",
+				"name": "Canada",
+				"nameLocal": "Canada"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T16:04:23.000Z",
+		"audioBibles": []
+	},
+	"32664dc3288a28df-02": {
+		"id": "32664dc3288a28df-02",
+		"dblId": "32664dc3288a28df",
+		"relatedDbl": null,
+		"name": "World English Bible, American English Edition, without Strong's Numbers",
+		"nameLocal": "World English Bible, American English Edition, without Strong's Numbers",
+		"abbreviation": "engWEBUS",
+		"abbreviationLocal": "WEBUS",
+		"description": "Protestant",
+		"descriptionLocal": "Protestant",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "US",
+				"name": "United States of America",
+				"nameLocal": "United States of America"
+			},
+			{
+				"id": "CA",
+				"name": "Canada",
+				"nameLocal": "Canada"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T16:04:50.000Z",
+		"audioBibles": []
+	},
+	"32664dc3288a28df-03": {
+		"id": "32664dc3288a28df-03",
+		"dblId": "32664dc3288a28df",
+		"relatedDbl": null,
+		"name": "World English Bible, American English Edition, without Strong's Numbers",
+		"nameLocal": "World English Bible, American English Edition, without Strong's Numbers",
+		"abbreviation": "engWEBUS",
+		"abbreviationLocal": "WEBUS",
+		"description": "Orthodox",
+		"descriptionLocal": "Orthodox",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "US",
+				"name": "United States of America",
+				"nameLocal": "United States of America"
+			},
+			{
+				"id": "CA",
+				"name": "Canada",
+				"nameLocal": "Canada"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T16:05:13.000Z",
+		"audioBibles": []
+	},
+	"f72b840c855f362c-04": {
+		"id": "f72b840c855f362c-04",
+		"dblId": "f72b840c855f362c",
+		"relatedDbl": null,
+		"name": "World Messianic Bible",
+		"nameLocal": "World Messianic Bible",
+		"abbreviation": "WMB",
+		"abbreviationLocal": "WMB",
+		"description": "Messianic",
+		"descriptionLocal": "Messianic",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "US",
+				"name": "United States of America",
+				"nameLocal": "United States of America"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-29T06:41:28.000Z",
+		"audioBibles": []
+	},
+	"04da588535d2f823-04": {
+		"id": "04da588535d2f823-04",
+		"dblId": "04da588535d2f823",
+		"relatedDbl": null,
+		"name": "World Messianic Bible British Edition",
+		"nameLocal": "World Messianic Bible British Edition",
+		"abbreviation": "WMBBE",
+		"abbreviationLocal": "WMBBE",
+		"description": "Messianic",
+		"descriptionLocal": "Messianic",
+		"language": {
+			"id": "eng",
+			"name": "English",
+			"nameLocal": "English",
+			"script": "Latin",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "AU",
+				"name": "Australia",
+				"nameLocal": "Australia"
+			},
+			{
+				"id": "AS",
+				"name": "American Samoa",
+				"nameLocal": "American Samoa"
+			},
+			{
+				"id": "BS",
+				"name": "Bahamas",
+				"nameLocal": "Bahamas"
+			},
+			{
+				"id": "BZ",
+				"name": "Belize",
+				"nameLocal": "Belize"
+			},
+			{
+				"id": "IO",
+				"name": "British Indian Ocean Territory",
+				"nameLocal": "British Indian Ocean Territory"
+			},
+			{
+				"id": "VG",
+				"name": "Virgin Islands, British",
+				"nameLocal": "Virgin Islands, British"
+			},
+			{
+				"id": "CA",
+				"name": "Canada",
+				"nameLocal": "Canada"
+			},
+			{
+				"id": "KE",
+				"name": "Kenya",
+				"nameLocal": "Kenya"
+			},
+			{
+				"id": "FM",
+				"name": "Micronesia, Federated States of",
+				"nameLocal": "Micronesia, Federated States of"
+			},
+			{
+				"id": "NZ",
+				"name": "New Zealand",
+				"nameLocal": "New Zealand"
+			},
+			{
+				"id": "PG",
+				"name": "Papua New Guinea",
+				"nameLocal": "Papua New Guinea"
+			},
+			{
+				"id": "WS",
+				"name": "Samoa",
+				"nameLocal": "Samoa"
+			},
+			{
+				"id": "SG",
+				"name": "Singapore",
+				"nameLocal": "Singapore"
+			},
+			{
+				"id": "TO",
+				"name": "Tonga",
+				"nameLocal": "Tonga"
+			},
+			{
+				"id": "GB",
+				"name": "United Kingdom of Great Britain and Northern Ireland",
+				"nameLocal": "United Kingdom of Great Britain and Northern Ireland"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T13:32:27.000Z",
+		"audioBibles": []
+	},
+	"b17e246951402e50-01": {
+		"id": "b17e246951402e50-01",
+		"dblId": "b17e246951402e50",
+		"relatedDbl": null,
+		"name": "Biblica® Open New Arabic Version 2012",
+		"nameLocal": "كتاب الحياة مجانى",
+		"abbreviation": "ONAV",
+		"abbreviationLocal": "KEHM",
+		"description": "Holy Bible",
+		"descriptionLocal": "ا‫لكتاب المقدس",
+		"language": {
+			"id": "arb",
+			"name": "Arabic, Standard",
+			"nameLocal": "العربية",
+			"script": "Arabic",
+			"scriptDirection": "RTL"
+		},
+		"countries": [
+			{
+				"id": "EG",
+				"name": "Egypt",
+				"nameLocal": "Egypt"
+			},
+			{
+				"id": "SA",
+				"name": "Saudi Arabia",
+				"nameLocal": "Saudi Arabia"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T23:55:37.000Z",
+		"audioBibles": [
+			{
+				"id": "26b7a1cd2f8f4878-01",
+				"name": "Biblica® Open New Arabic Version 2012, Audio Edition",
+				"nameLocal": "Ketab El Hayat Majani/كتاب الحياة مجانى",
+				"dblId": "26b7a1cd2f8f4878"
+			}
+		]
+	},
+	"de295e9ba65f6d0f-01": {
+		"id": "de295e9ba65f6d0f-01",
+		"dblId": "de295e9ba65f6d0f",
+		"relatedDbl": null,
+		"name": "Biblica® Open Malayalam Contemporary Version 2020",
+		"nameLocal": "Biblica® സമകാലിക മലയാള സ്വതന്ത്ര വിവർത്തനം 2020",
+		"abbreviation": "OMCV",
+		"abbreviationLocal": "OMCV",
+		"description": "Holy Bible",
+		"descriptionLocal": "വിശുദ്ധ ബൈബിൾ",
+		"language": {
+			"id": "mal",
+			"name": "Malayalam",
+			"nameLocal": "മലയാളം",
+			"script": "Malayalam",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "IN",
+				"name": "India",
+				"nameLocal": "India"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-29T04:02:47.000Z",
+		"audioBibles": [
+			{
+				"id": "4496fa3731f54ccd-01",
+				"name": "Biblica® Open Malayalam Contemporary Version™, Audio Edition",
+				"nameLocal": "Biblica® സമകാലിക മലയാളവിവർത്തനം-സ്വതന്ത്ര ഉപലബ്ധി ™, ഓഡിയോ പതിപ്പ്",
+				"dblId": "4496fa3731f54ccd"
+			}
+		]
+	},
+	"3ea0147e32eebe47-01": {
+		"id": "3ea0147e32eebe47-01",
+		"dblId": "3ea0147e32eebe47",
+		"relatedDbl": null,
+		"name": "Indian Revised Version (IRV) Malayalam - 2019",
+		"nameLocal": "ഇന്ത്യൻ റിവൈസ്ഡ് വേർഷൻ - മലയാളം",
+		"abbreviation": "IRVMAL",
+		"abbreviationLocal": "IRVMAL",
+		"description": "Whole Bible",
+		"descriptionLocal": "Whole Bible",
+		"language": {
+			"id": "mal",
+			"name": "Malayalam",
+			"nameLocal": "മലയാളം",
+			"script": "Malayalam",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "IN",
+				"name": "India",
+				"nameLocal": "India"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T16:44:36.000Z",
+		"audioBibles": [
+			{
+				"id": "57e37c60c3a94d4f-01",
+				"name": "Malayalam Indian Revised Version (IRV)",
+				"nameLocal": "Malayalam Indian Revised Version (IRV)",
+				"dblId": "57e37c60c3a94d4f"
+			}
+		]
+	},
+	"805e795e07fb9422-01": {
+		"id": "805e795e07fb9422-01",
+		"dblId": "805e795e07fb9422",
+		"relatedDbl": null,
+		"name": "Malayalam Sathyavedapusthakam 1910 Edition (Revised Orthography)",
+		"nameLocal": "മലയാളം സത്യവേദപുസ്തകം 1910 പതിപ്പ് (പരിഷ്കരിച്ച ലിപിയിൽ)",
+		"abbreviation": "MAL10RO",
+		"abbreviationLocal": "വേദപുസ്തകം",
+		"description": "Protestant Bible",
+		"descriptionLocal": "പ്രൊട്ടസ്റ്റൻ്റ് വേദപുസ്തകം",
+		"language": {
+			"id": "mal",
+			"name": "Malayalam",
+			"nameLocal": "മലയാളം",
+			"script": "Malayalam",
+			"scriptDirection": "LTR"
+		},
+		"countries": [
+			{
+				"id": "IN",
+				"name": "India",
+				"nameLocal": "India"
+			}
+		],
+		"type": "text",
+		"updatedAt": "2024-06-28T20:29:33.000Z",
+		"audioBibles": [
+			{
+				"id": "5ac60e8e8a74417a-01",
+				"name": "Malayalam Bible (മലയാളം സത്യവേദപുസ്തകം), Binoy Chacko Audio Bible",
+				"nameLocal": "Malayalam Bible (മലയാളം സത്യവേദപുസ്തകം), Binoy Chacko Audio Bible",
+				"dblId": "5ac60e8e8a74417a"
+			}
+		]
+	}
+}
