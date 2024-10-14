@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="docs: define docstrings for public functions">
+    <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="fix: syntax error">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reference.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reference.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api-bible.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api-bible.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -243,7 +242,7 @@
       <workItem from="1728837835457" duration="3242000" />
       <workItem from="1728855601962" duration="4437000" />
       <workItem from="1728865539300" duration="2591000" />
-      <workItem from="1728869493384" duration="290000" />
+      <workItem from="1728869493384" duration="644000" />
     </task>
     <task id="LOCAL-00001" summary="fix: markdown lint">
       <option name="closed" value="true" />
@@ -365,7 +364,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728869533122</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="fix: syntax error">
+      <option name="closed" value="true" />
+      <created>1728869802452</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1728869802452</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -397,7 +404,8 @@
     <MESSAGE value="refactor: call `getPassage` within `getPassageWithDetails`" />
     <MESSAGE value="test: get passage with details" />
     <MESSAGE value="docs: define docstrings for public functions" />
-    <option name="LAST_COMMIT_MESSAGE" value="docs: define docstrings for public functions" />
+    <MESSAGE value="fix: syntax error" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: syntax error" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

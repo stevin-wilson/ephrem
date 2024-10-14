@@ -226,6 +226,11 @@ export type BooksAndBibles = Record<BookName, Record<BibleId, BookId>>;
 export type BiblesMap = Record<BibleAbbreviation, BibleId>;
 
 // – – – – – – – – – –
+/**
+ * Converts the given passage options into a format suitable for the API request.
+ * @param options The options for fetching the passage.
+ * @returns A record containing the passage options formatted for the API request.
+ */
 const convertPassageOptionsForApi = (
 	options: PassageOptions,
 ): Record<string, unknown> => {
