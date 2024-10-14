@@ -1,11 +1,13 @@
 import path from "node:path";
 import { describe, expect, it, vi } from "vitest";
 
+import { BOOK_IDs } from "./book-ids.js";
 import {
 	BookNotInBibleError,
 	getBookId,
 	getPassageId,
 	getPassageWithDetails,
+	getPassageWithDetailsFromReference,
 	parseReference,
 	Reference,
 	ReferenceWithoutBible,
@@ -441,16 +443,18 @@ describe("parse References", () => {
 // – – – – – – – – – –
 describe("get passage", () => {
 	it("get passage with details", async () => {
+		const passageOptions = {
+			contentType: "text" as "html" | "json" | "text",
+			includeChapterNumbers: false,
+			includeNotes: false,
+			includeTitles: false,
+			includeVerseNumbers: false,
+			includeVerseSpans: false,
+		};
+
 		const result = await getPassageWithDetails(
 			"John 3:16-20 (KJV)",
-			{
-				contentType: "text",
-				includeChapterNumbers: false,
-				includeNotes: false,
-				includeTitles: false,
-				includeVerseNumbers: false,
-				includeVerseSpans: false,
-			},
+			passageOptions,
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			process.env.API_BIBLE_API_KEY!,
 		);
@@ -498,6 +502,27 @@ describe("get passage", () => {
 		expect(result.book).toStrictEqual(expectedBook);
 		expect(result.passage.content).toStrictEqual(expectedPassage);
 		expect(result.passage.reference).toStrictEqual("John 3:16-20");
+
+		const reference = {
+			bibleId: "de4e12af7f28f599-02",
+			bookId: "JHN" as keyof typeof BOOK_IDs,
+			chapterEnd: undefined,
+			chapterStart: "3",
+			verseEnd: "20",
+			verseStart: "16",
+		};
+
+		const resultFromReference = await getPassageWithDetailsFromReference(
+			reference,
+			passageOptions,
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			process.env.API_BIBLE_API_KEY!,
+		);
+
+		expect(resultFromReference.bible).toStrictEqual(expectedBible);
+		expect(resultFromReference.book).toStrictEqual(expectedBook);
+		expect(resultFromReference.passage.content).toStrictEqual(expectedPassage);
+		expect(resultFromReference.passage.reference).toStrictEqual("John 3:16-20");
 	});
 });
 
