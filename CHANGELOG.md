@@ -1,3 +1,9 @@
+## [0.5.2](https://github.com/stevin-wilson/ephrem/compare/0.5.1...0.5.2) (2024-10-14)
+
+### Bug Fixes
+
+- syntax error ([41628cf](https://github.com/stevin-wilson/ephrem/commit/41628cfb0d91f81237ada8769ffb4c0a50fe239c))
+
 ## [0.5.1](https://github.com/stevin-wilson/ephrem/compare/0.5.0...0.5.1) (2024-10-14)
 
 ### Bug Fixes
