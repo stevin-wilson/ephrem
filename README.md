@@ -45,10 +45,11 @@ Examples include:
 
 2. _Customizable Bible Abbreviations_
 
-- The package offers flexibility in specifying custom Bible abbreviations, allowing users to override default
-- abbreviations with those more familiar to their region or language.
-  For example, if the official abbreviation of a
-- Bible is in English characters, you can define a local-language abbreviation that suits your needs.
+The package offers flexibility in specifying custom Bible abbreviations, allowing users to override default
+abbreviations with those more familiar to their region or language.
+
+For example, if the official abbreviation of a Bible is in English characters, you can define a
+local-language abbreviation that suits your needs.
 
 3. _Passage Options for Flexible Output_
 
