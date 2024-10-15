@@ -483,22 +483,15 @@ export const getPassageId = (reference: ReferenceWithoutBible): string => {
  * Fetches a passage from the API.Bible service based on the provided reference and options.
  * @param reference The reference object containing the book, chapter, and verse details.
  * @param passageOptions The options for fetching the passage.
- * @param apiBibleKey The API key for accessing the API.Bible service.
  * @returns A promise that resolves to the passage and FUMS response.
  */
 export const getPassageFromReference = async (
 	reference: Reference,
 	passageOptions: PassageOptions,
-	apiBibleKey: string,
 ): Promise<PassageAndFumsResponse> => {
 	const passageId = getPassageId(reference);
 
-	return await getPassageFromApi(
-		passageId,
-		reference.bibleId,
-		passageOptions,
-		apiBibleKey,
-	);
+	return await getPassageFromApi(passageId, reference.bibleId, passageOptions);
 };
 
 // – – – – – – – – – –
@@ -506,7 +499,6 @@ export const getPassageFromReference = async (
  * Fetches a passage from the API.Bible service based on the provided input and options.
  * @param input The input string containing the reference to the passage.
  * @param passageOptions Options for fetching the passage.
- * @param apiBibleKey The API key for accessing the API.Bible service.
  * @param [fallbackBibleAbbreviation] An optional fallback Bible abbreviation.
  * @returns A promise that resolves to the passage and FUMS response.
  * @throws {InvalidReferenceError} If the reference is invalid.
@@ -514,7 +506,6 @@ export const getPassageFromReference = async (
 export const getPassage = async (
 	input: string,
 	passageOptions: PassageOptions,
-	apiBibleKey: string,
 	fallbackBibleAbbreviation?: string,
 ): Promise<PassageAndFumsResponse> => {
 	const reference = await parseReference(input, fallbackBibleAbbreviation);
@@ -523,7 +514,7 @@ export const getPassage = async (
 		throw new InvalidReferenceError(input);
 	}
 
-	return await getPassageFromReference(reference, passageOptions, apiBibleKey);
+	return await getPassageFromReference(reference, passageOptions);
 };
 
 // – – – – – – – – – –
@@ -555,7 +546,6 @@ export const _getPassageWithDetails = async (
  * Fetches a passage with detailed information (about the Bible and the Book) from the API.Bible service based on the provided input and options.
  * @param input The input string containing the reference to the passage.
  * @param passageOptions Options for fetching the passage.
- * @param apiBibleKey The API key for accessing the API.Bible service.
  * @param [fallbackBibleAbbreviation] An optional fallback Bible abbreviation.
  * @returns A promise that resolves to the passage with detailed information.
  * @throws {InvalidReferenceError} If the reference is invalid.
@@ -564,13 +554,11 @@ export const _getPassageWithDetails = async (
 export const getPassageWithDetails = async (
 	input: string,
 	passageOptions: PassageOptions,
-	apiBibleKey: string,
 	fallbackBibleAbbreviation?: string,
 ): Promise<PassageWithDetails> => {
 	const passageAndFums = await getPassage(
 		input,
 		passageOptions,
-		apiBibleKey,
 		fallbackBibleAbbreviation,
 	);
 
@@ -588,7 +576,6 @@ export const getPassageWithDetails = async (
  * Fetches a passage with detailed information (about the Bible and the Book) from the API.Bible service based on the provided reference and options.
  * @param reference The reference object containing the book, chapter, and verse details.
  * @param passageOptions The options for fetching the passage.
- * @param apiBibleKey The API key for accessing the API.Bible service.
  * @returns A promise that resolves to the passage with detailed information.
  * @throws {InvalidReferenceError} If the reference is invalid.
  * @throws {BookIdNotFoundError} If the book ID is not found in the Bible.
@@ -597,12 +584,10 @@ export const getPassageWithDetails = async (
 export const getPassageWithDetailsFromReference = async (
 	reference: Reference,
 	passageOptions: PassageOptions,
-	apiBibleKey: string,
 ): Promise<PassageWithDetails> => {
 	const passageAndFums = await getPassageFromReference(
 		reference,
 		passageOptions,
-		apiBibleKey,
 	);
 
 	return await _getPassageWithDetails(passageAndFums, reference);
