@@ -84,22 +84,56 @@ npm i ephrem
 
 Before using Ephrem, you’ll need to configure it by fetching Bible and book data for the languages you need from
 API.Bible.
-Use the `setupEphrem` function to complete the setup:
+The package requires the API.Bible API key to be set as an environment variable.
+
+#### Setting the API_BIBLE_API_KEY Environment Variable
+
+Follow the steps below based on your platform to set the environment variable.
+
+##### Windows
+
+1. Open Start and search for “Environment Variables”.
+2. Click on Edit the system environment variables.
+3. In the System Properties window, click Environment Variables.
+4. Under User variables, click New.
+5. Set the Variable name to `API_BIBLE_API_KEY` and the Variable value to your API.Bible key.
+6. Click OK to save.
+
+Alternatively, if you are using PowerShell, you can set it temporarily with:
+
+```shell
+$env:API_BIBLE_API_KEY = "your-api-bible-key"
+```
+
+##### macOS / Linux
+
+1. Open a Terminal.
+2. Use the following command to set the environment variable temporarily (only for the current session):
+
+```shell
+export API_BIBLE_API_KEY="your-api-bible-key"
+```
+
+3. To set the environment variable permanently, add the above line to your shell configuration file:
+
+- If using bash, add it to your `~/.bashrc` or `~/.bash_profile`.
+- If using zsh, add it to your `~/.zshrc`.
+
+#### Setting Up Ephrem
+
+Once the environment variable is set, use the `setupEphrem` function to fetch and store Bible data for the languages you need:
 
 ```ts
 import { setupEphrem } from "ephrem";
 
-// Load API key from .env or environment variable
-const apiBibleKey = process.env.API_BIBLE_KEY;
-
-setupEphrem(["eng", "ara"], apiBibleKey)
+setupEphrem(["eng", "ara"])
 	.then((path) => console.log(`Bible data stored at: ${path}`))
 	.catch((err) => console.error(`Setup failed: ${err.message}`));
 ```
 
-Here, 'eng' and 'ara' are the ISO-639-3 language codes for English and Arabic, respectively.
-The API key can be loaded from a .env file using a library like dotenv or set directly as an environment variable.
-This setup fetches the necessary Bible data and saves it for efficient future use.
+Here, `eng` and `ara` are the ISO-639-3 language codes for English and Arabic, respectively.
+The API key is securely picked up from the `API_BIBLE_API_KEY` environment variable.
+This setup will download the necessary Bible data and store it for efficient future use.
 
 ### Fetching a Bible Passage
 
@@ -109,10 +143,7 @@ To retrieve a Bible passage with additional details about the Bible and the Book
 ```ts
 import { getPassageWithDetails } from "ephrem";
 
-// Load API key from .env or environment variable
-const apiBibleKey = process.env.API_BIBLE_KEY;
-
-getPassageWithDetails("John 3:16 (KJV)", { contentType: "text" }, apiBibleKey)
+getPassageWithDetails("John 3:16 (KJV)", { contentType: "text" })
 	.then((details) => {
 		console.log(`Passage Text: ${details.passage.content}`);
 	})

@@ -455,8 +455,6 @@ describe("get passage", () => {
 		const result = await getPassageWithDetails(
 			"John 3:16-20 (KJV)",
 			passageOptions,
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-			process.env.API_BIBLE_API_KEY!,
 		);
 
 		const expectedPassage =
@@ -515,8 +513,6 @@ describe("get passage", () => {
 		const resultFromReference = await getPassageWithDetailsFromReference(
 			reference,
 			passageOptions,
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-			process.env.API_BIBLE_API_KEY!,
 		);
 
 		expect(resultFromReference.bible).toStrictEqual(expectedBible);
@@ -530,12 +526,7 @@ describe("get passage", () => {
 describe("check if book is in bible", () => {
 	it("should throw an error when the book is not in the bible", async () => {
 		await expect(
-			getPassageWithDetails(
-				"Judith 1:1 (BSB)",
-				{},
-				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-				process.env.API_BIBLE_API_KEY!,
-			),
+			getPassageWithDetails("Judith 1:1 (BSB)", {}),
 		).rejects.toThrowError(BookNotInBibleError);
 	});
 });

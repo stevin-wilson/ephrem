@@ -1,9 +1,9 @@
 export {
+	ApiBibleKeyNotFoundError,
 	BiblesFetchError,
 	BiblesNotAvailableError,
 	BooksFetchError,
 	getBibleAbbreviationsFilepath,
-	InvalidAPIBibleKeyError,
 	InvalidLanguageIDError,
 	PassageFetchError,
 	setupEphrem,

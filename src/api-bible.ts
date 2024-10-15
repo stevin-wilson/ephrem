@@ -28,17 +28,18 @@ export const NAMES_TO_BIBLES_PATH = path.join(
 );
 
 // – – – – – – – – – –
-export class InvalidAPIBibleKeyError extends BaseEphremError {
-	public context: {
-		apiBibleKey: string | undefined;
-	};
-
-	constructor(apiBibleKey: string | undefined) {
-		super("API.Bible Key was not found or is invalid");
-		this.name = "InvalidAPIBibleKeyError";
-		this.context = { apiBibleKey };
+export class ApiBibleKeyNotFoundError extends BaseEphremError {
+	constructor() {
+		super("API.Bible Key not found. Please provide a valid API key.");
+		this.name = "ApiBibleKeyNotFoundError";
+		this.context = {};
 	}
 }
+
+// – – – – – – – – – –
+export const hasApiBibleKey = (): boolean => {
+	return process.env.API_BIBLE_API_KEY !== undefined;
+};
 
 // – – – – – – – – – –
 export class InvalidLanguageIDError extends BaseEphremError {
@@ -268,29 +269,27 @@ axiosRetry(axios, {
 });
 
 // – – – – – – – – – –
-const getDefaultApiHeader = (apiBibleKey: string): RawAxiosRequestHeaders => {
-	if (!apiBibleKey) {
-		throw new InvalidAPIBibleKeyError(apiBibleKey);
+const getDefaultApiHeader = (): RawAxiosRequestHeaders => {
+	if (!hasApiBibleKey()) {
+		throw new ApiBibleKeyNotFoundError();
 	}
-	return { Accept: "application/json", "api-key": apiBibleKey };
+	return {
+		Accept: "application/json",
+		"api-key": process.env.API_BIBLE_API_KEY,
+	};
 };
 
 // – – – – – – – – – –
 const getBiblesFromApiConfig = (
 	normalizedLanguageId: string,
-	apiBibleKey: string,
 ): AxiosRequestConfig => {
 	if (!ISO_693_3_REGEX.test(normalizedLanguageId)) {
 		throw new InvalidLanguageIDError(normalizedLanguageId);
 	}
 
-	if (!apiBibleKey) {
-		throw new InvalidAPIBibleKeyError(apiBibleKey);
-	}
-
 	return {
 		baseURL: API_BIBLE_BASE_URL,
-		headers: getDefaultApiHeader(apiBibleKey),
+		headers: getDefaultApiHeader(),
 		params: {
 			"include-full-details": false,
 			language: normalizedLanguageId,
@@ -336,9 +335,8 @@ const handleGetBiblesFromApiError = (
 // fetchBibles
 const getBiblesFromApi = async (
 	normalizedLanguageId: string,
-	apiBibleKey: string,
 ): Promise<BibleResponse[]> => {
-	const config = getBiblesFromApiConfig(normalizedLanguageId, apiBibleKey);
+	const config = getBiblesFromApiConfig(normalizedLanguageId);
 
 	let bibles: BibleResponse[] = [];
 	try {
@@ -362,7 +360,6 @@ const getBiblesFromApi = async (
 // – – – – – – – – – –
 const getBiblesInLanguages = async (
 	languageIds: string[],
-	apiBibleKey: string,
 ): Promise<BibleResponse[]> => {
 	const normalizedLanguageIds = languageIds.map((languageId) =>
 		removePunctuation(languageId).trim().toLowerCase(),
@@ -372,7 +369,7 @@ const getBiblesInLanguages = async (
 
 	const bibles = await Promise.all(
 		uniqueLanguageIds.map((normalizedLanguageId) =>
-			getBiblesFromApi(normalizedLanguageId, apiBibleKey),
+			getBiblesFromApi(normalizedLanguageId),
 		),
 	);
 
@@ -410,11 +407,8 @@ const writeBiblesData = async (bibles: BibleResponse[]) => {
 };
 
 // – – – – – – – – – –
-const setupBibles = async (
-	languageIds: string[],
-	apiBibleKey: string,
-): Promise<string> => {
-	const bibles = await getBiblesInLanguages(languageIds, apiBibleKey);
+const setupBibles = async (languageIds: string[]): Promise<string> => {
+	const bibles = await getBiblesInLanguages(languageIds);
 
 	// write bible abbreviation to bible ID mapping
 	await writeBiblesMap(bibles);
@@ -459,14 +453,14 @@ const handleGetBooksFromApiError = (
 };
 
 // – – – – – – – – – –
-const getBooksFromApiConfig = (apiBibleKey: string): AxiosRequestConfig => {
-	if (!apiBibleKey) {
-		throw new InvalidAPIBibleKeyError(apiBibleKey);
+const getBooksFromApiConfig = (): AxiosRequestConfig => {
+	if (!hasApiBibleKey()) {
+		throw new ApiBibleKeyNotFoundError();
 	}
 
 	return {
 		baseURL: API_BIBLE_BASE_URL,
-		headers: getDefaultApiHeader(apiBibleKey),
+		headers: getDefaultApiHeader(),
 		params: {
 			"include-chapters": false,
 		},
@@ -475,11 +469,8 @@ const getBooksFromApiConfig = (apiBibleKey: string): AxiosRequestConfig => {
 };
 
 // – – – – – – – – – –
-const getBooksFromApi = async (
-	bibleId: string,
-	apiBibleKey: string,
-): Promise<Book[]> => {
-	const config = getBooksFromApiConfig(apiBibleKey);
+const getBooksFromApi = async (bibleId: string): Promise<Book[]> => {
+	const config = getBooksFromApiConfig();
 
 	try {
 		const response = await axios.get<{ data: Book[] }>(
@@ -494,12 +485,9 @@ const getBooksFromApi = async (
 };
 
 // – – – – – – – – – –
-const getBooksFromBibles = async (
-	bibleIds: string[],
-	apiBibleKey: string,
-): Promise<Book[]> => {
+const getBooksFromBibles = async (bibleIds: string[]): Promise<Book[]> => {
 	const books = await Promise.all(
-		bibleIds.map((bibleId) => getBooksFromApi(bibleId, apiBibleKey)),
+		bibleIds.map((bibleId) => getBooksFromApi(bibleId)),
 	);
 
 	return books.flat();
@@ -535,7 +523,7 @@ const writeBookNamesToBibles = async (books: Book[]): Promise<void> => {
 };
 
 // – – – – – – – – – –
-const setupBooks = async (apiBibleKey: string): Promise<string> => {
+const setupBooks = async (): Promise<string> => {
 	// parse BIBLES_DATA_PATH to get bible IDs
 	const biblesData = JSON.parse(
 		await fs.promises.readFile(BIBLES_DATA_PATH, "utf-8"),
@@ -544,7 +532,7 @@ const setupBooks = async (apiBibleKey: string): Promise<string> => {
 	const bibleIds = Object.keys(biblesData);
 
 	// iterate over each bible and get books
-	const books = await getBooksFromBibles(bibleIds, apiBibleKey);
+	const books = await getBooksFromBibles(bibleIds);
 
 	// write books data
 	await fs.promises.writeFile(BOOKS_DATA_PATH, JSON.stringify(books, null, 2));
@@ -559,15 +547,11 @@ const setupBooks = async (apiBibleKey: string): Promise<string> => {
 /**
  * Sets up the Ephrem environment by fetching and writing Bible and book data from API.Bible.
  * @param languageIds An array of language IDs (ISO-639-3; lower case) to fetch Bibles for.
- * @param apiBibleKey The API key for accessing the API.Bible service.
  * @returns A promise that resolves to the path where the data is stored.
  */
-export const setupEphrem = async (
-	languageIds: string[],
-	apiBibleKey: string,
-): Promise<string> => {
-	await setupBibles(languageIds, apiBibleKey);
-	await setupBooks(apiBibleKey);
+export const setupEphrem = async (languageIds: string[]): Promise<string> => {
+	await setupBibles(languageIds);
+	await setupBooks();
 
 	return ephremPaths.data;
 };
@@ -575,15 +559,14 @@ export const setupEphrem = async (
 // – – – – – – – – – –
 const getPassageFromApiConfig = (
 	passageOptions: PassageOptions,
-	apiBibleKey: string,
 ): AxiosRequestConfig => {
-	if (!apiBibleKey) {
-		throw new InvalidAPIBibleKeyError(apiBibleKey);
+	if (!hasApiBibleKey()) {
+		throw new ApiBibleKeyNotFoundError();
 	}
 
 	return {
 		baseURL: API_BIBLE_BASE_URL,
-		headers: getDefaultApiHeader(apiBibleKey),
+		headers: getDefaultApiHeader(),
 		params: convertPassageOptionsForApi(passageOptions),
 		timeout: API_BIBLE_TIMEOUT,
 	};
@@ -636,9 +619,8 @@ export const getPassageFromApi = async (
 	passageId: string,
 	bibleId: string,
 	passageOptions: PassageOptions,
-	apiBibleKey: string,
 ): Promise<PassageAndFumsResponse> => {
-	const config = getPassageFromApiConfig(passageOptions, apiBibleKey);
+	const config = getPassageFromApiConfig(passageOptions);
 
 	try {
 		const response = await axios.get<PassageAndFumsResponse>(
