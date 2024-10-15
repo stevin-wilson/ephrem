@@ -1,3 +1,9 @@
+## [0.8.1](https://github.com/stevin-wilson/ephrem/compare/0.8.0...0.8.1) (2024-10-15)
+
+### Bug Fixes
+
+- load API.Bible API key from environment variable ([3e819fd](https://github.com/stevin-wilson/ephrem/commit/3e819fd538f8ab3cc4cd71d1edb9f5b8df3db27b))
+
 # [0.8.0](https://github.com/stevin-wilson/ephrem/compare/0.7.0...0.8.0) (2024-10-14)
 
 ### Features
