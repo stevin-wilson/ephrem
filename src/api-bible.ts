@@ -6,6 +6,7 @@ import path from "node:path";
 
 import {
 	BaseEphremError,
+	createDataDir,
 	ephremPaths,
 	normalizeBookName,
 	removePunctuation,
@@ -544,6 +545,8 @@ const setupBooks = async (): Promise<string> => {
  * @returns A promise that resolves to the path where the data is stored.
  */
 export const setupEphrem = async (languageIds: string[]): Promise<string> => {
+	await createDataDir();
+
 	await setupBibles(languageIds);
 	await setupBooks();
 

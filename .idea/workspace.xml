@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="style: simplify interface names">
+    <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="fix: correct method to export types">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api-bible.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api-bible.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,12 +47,16 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
-                    <option name="branchName" value="feature/export-interfaces" />
-                    <option name="lastUsedInstant" value="1729076014" />
+                    <option name="branchName" value="fix/setup-directory" />
+                    <option name="lastUsedInstant" value="1729079688" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="main" />
-                    <option name="lastUsedInstant" value="1729075991" />
+                    <option name="lastUsedInstant" value="1729079611" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="feature/export-interfaces" />
+                    <option name="lastUsedInstant" value="1729076014" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="fix/api-key-parameters" />
@@ -60,10 +65,6 @@
                   <RecentBranch>
                     <option name="branchName" value="feature/export-book-ids" />
                     <option name="lastUsedInstant" value="1728912925" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="feature/modify-exports" />
-                    <option name="lastUsedInstant" value="1728912084" />
                   </RecentBranch>
                 </list>
               </option>
@@ -131,7 +132,7 @@
     "Vitest.reference to passage ID conversion.single chapter reference.executor": "Run",
     "Vitest.reference to passage ID conversion.single verse alternative reference.executor": "Run",
     "Vitest.removePunctuation.executor": "Run",
-    "git-widget-placeholder": "feature/export-interfaces",
+    "git-widget-placeholder": "fix/setup-directory",
     "last_opened_file_path": "/Users/stevin/PycharmProjects/ephrem",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
@@ -446,7 +447,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729076671237</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="fix: correct method to export types">
+      <option name="closed" value="true" />
+      <created>1729077884674</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1729077884674</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -487,7 +496,8 @@
     <MESSAGE value="feat: export USFM Book IDs" />
     <MESSAGE value="feat: export interfaces and types" />
     <MESSAGE value="style: simplify interface names" />
-    <option name="LAST_COMMIT_MESSAGE" value="style: simplify interface names" />
+    <MESSAGE value="fix: correct method to export types" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: correct method to export types" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

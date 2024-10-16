@@ -1,10 +1,27 @@
 // – – – – – – – – – –
 import envPaths from "env-paths";
-
+import fs from "node:fs";
+// – – – – – – – – – –
 export const PROJECT_NAME = "ephrem";
-
+// – – – – – – – – – –
 export const ephremPaths = envPaths(PROJECT_NAME);
+// – – – – – – – – – –
+export const createDataDir = async () => {
+	try {
+		// Try to create the directory
+		await fs.promises.mkdir(ephremPaths.data, { recursive: true });
+		console.log("Created Ephrem Data Directory successfully.");
+	} catch (error) {
+		// Handle the case where the directory already exists or any other error
+		if (error instanceof Error && "code" in error && error.code === "EEXIST") {
+			console.log("Ephrem Data Directory already exists.");
+		} else {
+			console.error("Error creating Ephrem Data Directory:", error);
+		}
+	}
+};
 
+// – – – – – – – – – –
 export const removePunctuation = (input: string): string =>
 	input.replace(/\p{P}/gu, "");
 
