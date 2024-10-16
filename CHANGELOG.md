@@ -1,3 +1,9 @@
+## [0.9.1](https://github.com/stevin-wilson/ephrem/compare/0.9.0...0.9.1) (2024-10-16)
+
+### Bug Fixes
+
+- create data directory if it does not exist ([a42f78c](https://github.com/stevin-wilson/ephrem/commit/a42f78cad0a11aed4ea92634f35a2353c7fabcaa))
+
 # [0.9.0](https://github.com/stevin-wilson/ephrem/compare/0.8.1...0.9.0) (2024-10-16)
 
 ### Bug Fixes
