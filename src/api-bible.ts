@@ -152,7 +152,7 @@ export interface Language {
 }
 
 // – – – – – – – – – –
-export interface BibleResponse {
+export interface Bible {
 	readonly abbreviation: string;
 	readonly abbreviationLocal: string;
 	readonly dblId: string;
@@ -186,7 +186,7 @@ export interface PassageOptions {
 }
 
 // – – – – – – – – – –
-export interface PassageResponse {
+export interface Passage {
 	readonly content: string;
 	readonly copyright: string;
 	readonly id: string;
@@ -197,26 +197,26 @@ export interface PassageResponse {
 }
 
 // – – – – – – – – – –
-export interface FumsResponse {
+export interface Fums {
 	readonly fums: string;
 
 	readonly [key: string]: unknown;
 }
 
 // – – – – – – – – – –
-export interface PassageAndFumsResponse {
-	readonly data: PassageResponse;
-	readonly meta: FumsResponse;
+export interface PassageAndFums {
+	readonly data: Passage;
+	readonly meta: Fums;
 
 	readonly [key: string]: unknown;
 }
 
 // – – – – – – – – – –
 export interface PassageWithDetails {
-	readonly bible: BibleResponse;
+	readonly bible: Bible;
 	readonly book: Book;
-	readonly fums: FumsResponse;
-	readonly passage: PassageResponse;
+	readonly fums: Fums;
+	readonly passage: Passage;
 }
 
 type BookName = string;
@@ -335,15 +335,12 @@ const handleGetBiblesFromApiError = (
 // fetchBibles
 const getBiblesFromApi = async (
 	normalizedLanguageId: string,
-): Promise<BibleResponse[]> => {
+): Promise<Bible[]> => {
 	const config = getBiblesFromApiConfig(normalizedLanguageId);
 
-	let bibles: BibleResponse[] = [];
+	let bibles: Bible[] = [];
 	try {
-		const response = await axios.get<{ data: BibleResponse[] }>(
-			"/v1/bibles",
-			config,
-		);
+		const response = await axios.get<{ data: Bible[] }>("/v1/bibles", config);
 
 		bibles = response.data.data;
 	} catch (error) {
@@ -360,7 +357,7 @@ const getBiblesFromApi = async (
 // – – – – – – – – – –
 const getBiblesInLanguages = async (
 	languageIds: string[],
-): Promise<BibleResponse[]> => {
+): Promise<Bible[]> => {
 	const normalizedLanguageIds = languageIds.map((languageId) =>
 		removePunctuation(languageId).trim().toLowerCase(),
 	);
@@ -377,7 +374,7 @@ const getBiblesInLanguages = async (
 };
 
 // – – – – – – – – – –
-const writeBiblesMap = async (bibles: BibleResponse[]) => {
+const writeBiblesMap = async (bibles: Bible[]) => {
 	const biblesMap = bibles.reduce<BiblesMap>((acc, bible) => {
 		acc[bible.abbreviation] = bible.id;
 		acc[bible.abbreviationLocal] = bible.id;
@@ -391,14 +388,11 @@ const writeBiblesMap = async (bibles: BibleResponse[]) => {
 };
 
 // – – – – – – – – – –
-const writeBiblesData = async (bibles: BibleResponse[]) => {
-	const biblesData = bibles.reduce<Record<BibleId, BibleResponse>>(
-		(acc, bible) => {
-			acc[bible.id] = bible;
-			return acc;
-		},
-		{},
-	);
+const writeBiblesData = async (bibles: Bible[]) => {
+	const biblesData = bibles.reduce<Record<BibleId, Bible>>((acc, bible) => {
+		acc[bible.id] = bible;
+		return acc;
+	}, {});
 
 	await fs.promises.writeFile(
 		BIBLES_DATA_PATH,
@@ -527,7 +521,7 @@ const setupBooks = async (): Promise<string> => {
 	// parse BIBLES_DATA_PATH to get bible IDs
 	const biblesData = JSON.parse(
 		await fs.promises.readFile(BIBLES_DATA_PATH, "utf-8"),
-	) as Record<BibleId, BibleResponse>;
+	) as Record<BibleId, Bible>;
 
 	const bibleIds = Object.keys(biblesData);
 
@@ -619,11 +613,11 @@ export const getPassageFromApi = async (
 	passageId: string,
 	bibleId: string,
 	passageOptions: PassageOptions,
-): Promise<PassageAndFumsResponse> => {
+): Promise<PassageAndFums> => {
 	const config = getPassageFromApiConfig(passageOptions);
 
 	try {
-		const response = await axios.get<PassageAndFumsResponse>(
+		const response = await axios.get<PassageAndFums>(
 			`/v1/bibles/${bibleId}/passages/${passageId}`,
 			config,
 		);

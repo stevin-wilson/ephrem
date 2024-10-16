@@ -8,6 +8,31 @@ export {
 	PassageFetchError,
 	setupEphrem,
 } from "./api-bible.js";
+import type {
+	Bible,
+	Book,
+	Fums,
+	Language,
+	Passage,
+	PassageAndFums,
+	PassageOptions,
+	PassageWithDetails,
+	ScriptDirection,
+} from "./api-bible.js";
+import type { Reference, ReferenceWithoutBible } from "./reference.js";
+
+export type {
+	Bible,
+	Book,
+	Fums,
+	Language,
+	Passage,
+	PassageAndFums,
+	PassageOptions,
+	PassageWithDetails,
+	ScriptDirection,
+};
+
 export { BOOK_IDs } from "./book-ids.js";
 export {
 	BibleNotAvailableError,
@@ -26,4 +51,6 @@ export {
 	parseReference,
 	UnknownBibleAbbreviationError,
 } from "./reference.js";
+
+export type { Reference, ReferenceWithoutBible };
 export { BaseEphremError } from "./utils.js";
