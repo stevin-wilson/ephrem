@@ -1,3 +1,13 @@
+# [0.9.0](https://github.com/stevin-wilson/ephrem/compare/0.8.1...0.9.0) (2024-10-16)
+
+### Bug Fixes
+
+- correct method to export types ([b31f458](https://github.com/stevin-wilson/ephrem/commit/b31f458008d9168342bf7284c6469c5d14742c27))
+
+### Features
+
+- export interfaces and types ([777c864](https://github.com/stevin-wilson/ephrem/commit/777c864d63ed913ac335bc73e6cba1218927eb7d))
+
 ## [0.8.1](https://github.com/stevin-wilson/ephrem/compare/0.8.0...0.8.1) (2024-10-15)
 
 ### Bug Fixes
