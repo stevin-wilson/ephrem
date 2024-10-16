@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="feat: export USFM Book IDs">
+    <list default="true" id="e8c3094f-a652-4b58-a7c8-7e78cbac9044" name="Changes" comment="feat: export interfaces and types">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api-bible.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api-bible.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reference.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reference.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,6 +153,7 @@
     "npm.test.executor": "Run",
     "npm.tsc.executor": "Run",
     "prettierjs.PrettierConfiguration.Package": "/Users/stevin/PycharmProjects/ephrem/node_modules/prettier",
+    "run.code.analysis.last.selected.profile": "pProject Default",
     "settings.editor.selected.configurable": "preferences.lookFeel",
     "ts.external.directory.path": "/Users/stevin/PycharmProjects/ephrem/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
@@ -163,52 +165,52 @@
       <recent name="$PROJECT_DIR$/tests" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.lint:md">
-    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="npm.tsc">
+    <configuration name="lint:packages" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
-        <script value="build" />
+        <script value="lint:packages" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="format" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+    <configuration name="lint:spelling" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
-        <script value="format" />
+        <script value="lint:spelling" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="lint" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+    <configuration name="prepare" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
-        <script value="lint" />
+        <script value="prepare" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="lint:knip" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+    <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
-        <script value="lint:knip" />
+        <script value="test" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="lint:md" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+    <configuration name="tsc" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
-        <script value="lint:md" />
+        <script value="tsc" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -216,11 +218,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.lint:md" />
-        <item itemvalue="npm.lint:knip" />
-        <item itemvalue="npm.lint" />
-        <item itemvalue="npm.format" />
-        <item itemvalue="npm.build" />
+        <item itemvalue="npm.tsc" />
+        <item itemvalue="npm.test" />
+        <item itemvalue="npm.prepare" />
+        <item itemvalue="npm.lint:spelling" />
+        <item itemvalue="npm.lint:packages" />
       </list>
     </recent_temporary>
   </component>
@@ -430,7 +432,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728912943145</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="feat: export interfaces and types">
+      <option name="closed" value="true" />
+      <created>1729076315800</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1729076315800</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -469,7 +479,8 @@
     <MESSAGE value="docs: add docstrings" />
     <MESSAGE value="feat: export error classes for use in ephrem-ai" />
     <MESSAGE value="feat: export USFM Book IDs" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: export USFM Book IDs" />
+    <MESSAGE value="feat: export interfaces and types" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: export interfaces and types" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -2,8 +2,8 @@ import fs from "node:fs";
 
 import {
 	ABB_TO_ID_MAPPING_PATH,
+	Bible,
 	BibleId,
-	BibleResponse,
 	BIBLES_DATA_PATH,
 	BiblesMap,
 	Book,
@@ -11,7 +11,7 @@ import {
 	BooksAndBibles,
 	getPassageFromApi,
 	NAMES_TO_BIBLES_PATH,
-	PassageAndFumsResponse,
+	PassageAndFums,
 	PassageOptions,
 	PassageWithDetails,
 } from "./api-bible.js";
@@ -168,10 +168,10 @@ export const getBibleIdFromAbbreviation = async (
  */
 export const getBibleDetails = async (
 	bibleId: string,
-): Promise<BibleResponse | undefined> => {
+): Promise<Bible | undefined> => {
 	const biblesData = JSON.parse(
 		await fs.promises.readFile(BIBLES_DATA_PATH, "utf-8"),
-	) as Record<BibleId, BibleResponse>;
+	) as Record<BibleId, Bible>;
 
 	return biblesData[bibleId];
 };
@@ -398,7 +398,7 @@ export const parseReference = async (
 
 	const biblesData = JSON.parse(
 		await fs.promises.readFile(BIBLES_DATA_PATH, "utf-8"),
-	) as Record<BibleId, BibleResponse>;
+	) as Record<BibleId, Bible>;
 
 	if (!bookIsInBible(bookId, bibleId, booksData)) {
 		throw new BookNotInBibleError(
@@ -488,7 +488,7 @@ export const getPassageId = (reference: ReferenceWithoutBible): string => {
 export const getPassageFromReference = async (
 	reference: Reference,
 	passageOptions: PassageOptions,
-): Promise<PassageAndFumsResponse> => {
+): Promise<PassageAndFums> => {
 	const passageId = getPassageId(reference);
 
 	return await getPassageFromApi(passageId, reference.bibleId, passageOptions);
@@ -507,7 +507,7 @@ export const getPassage = async (
 	input: string,
 	passageOptions: PassageOptions,
 	fallbackBibleAbbreviation?: string,
-): Promise<PassageAndFumsResponse> => {
+): Promise<PassageAndFums> => {
 	const reference = await parseReference(input, fallbackBibleAbbreviation);
 
 	if (!reference) {
@@ -519,7 +519,7 @@ export const getPassage = async (
 
 // – – – – – – – – – –
 export const _getPassageWithDetails = async (
-	passageAndFums: PassageAndFumsResponse,
+	passageAndFums: PassageAndFums,
 	reference: Reference,
 ): Promise<PassageWithDetails> => {
 	const bible = await getBibleDetails(reference.bibleId);
