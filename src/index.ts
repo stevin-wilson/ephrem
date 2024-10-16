@@ -1,22 +1,38 @@
 export {
 	ApiBibleKeyNotFoundError,
-	Bible,
 	BiblesFetchError,
 	BiblesNotAvailableError,
-	Book,
 	BooksFetchError,
-	Fums,
 	getBibleAbbreviationsFilepath,
 	InvalidLanguageIDError,
+	PassageFetchError,
+	setupEphrem,
+} from "./api-bible.js";
+import type {
+	Bible,
+	Book,
+	Fums,
 	Language,
 	Passage,
 	PassageAndFums,
-	PassageFetchError,
 	PassageOptions,
 	PassageWithDetails,
 	ScriptDirection,
-	setupEphrem,
 } from "./api-bible.js";
+import type { Reference, ReferenceWithoutBible } from "./reference.js";
+
+export type {
+	Bible,
+	Book,
+	Fums,
+	Language,
+	Passage,
+	PassageAndFums,
+	PassageOptions,
+	PassageWithDetails,
+	ScriptDirection,
+};
+
 export { BOOK_IDs } from "./book-ids.js";
 export {
 	BibleNotAvailableError,
@@ -33,8 +49,8 @@ export {
 	getPassageWithDetailsFromReference,
 	InvalidReferenceError,
 	parseReference,
-	Reference,
-	ReferenceWithoutBible,
 	UnknownBibleAbbreviationError,
 } from "./reference.js";
+
+export type { Reference, ReferenceWithoutBible };
 export { BaseEphremError } from "./utils.js";
