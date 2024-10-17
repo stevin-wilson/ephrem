@@ -8,7 +8,8 @@
 		"node_modules",
 		"pnpm-lock.yaml",
 		"src/test-resources",
-		"src/reference.test.ts"
+		"src/reference.test.ts",
+		"README.md"
 	],
 	"words": [
 		"ephrem",
