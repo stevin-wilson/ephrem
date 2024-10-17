@@ -138,20 +138,66 @@ This setup will download the necessary Bible data and store it for efficient fut
 ### Fetching a Bible Passage
 
 To retrieve a Bible passage with additional details about the Bible and the Book referenced, use the
-`getPassageWithDetails` function:
+`getPassageWithDetails` function.
+The second parameter allows you to pass in custom PassageOptions (such as `contentType`: `text`), giving you control
+over the format of the retrieved passage.
 
 ```ts
 import { getPassageWithDetails } from "ephrem";
 
-getPassageWithDetails("John 3:16 (KJV)", { contentType: "text" })
+getPassageWithDetails("John 3:16 (KJV)", {
+	contentType: "text",
+	includeTitles: false,
+})
 	.then((details) => {
-		console.log(`Passage Text: ${details.passage.content}`);
+		console.log(`- - ${details.passage.reference} - -`);
+		console.log(details.passage.content);
 	})
 	.catch((err) => console.error(`Error fetching passage: ${err.message}`));
 ```
 
-The second parameter allows you to pass in custom PassageOptions (such as contentType: 'text'), giving you control
-over the format of the retrieved passage.
+```plaintext
+- - John 3:16 - -
+     [16] ¶ For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.
+```
+
+```ts
+import { getPassageWithDetails } from "ephrem";
+
+getPassageWithDetails("Tobit 13:6 (engLXXup)", {
+	contentType: "text",
+	includeTitles: false,
+})
+	.then((details) => {
+		console.log(`- - ${details.passage.reference} - -`);
+		console.log(details.passage.content);
+	})
+	.catch((err) => console.error(`Error fetching passage: ${err.message}`));
+```
+
+```plaintext
+- - Tobit 13:6 - -
+     [6] If ye turn to him with your whole heart, and with your whole mind, and deal uprightly before him, then will he turn unto you, and will not hide his face from you. Therefore see what he will do with you, and confess him with your whole mouth, and praise the Lord of might, and extol the everlasting King. In the land of my captivity do I praise him, and declare his might and majesty to a sinful nation. O ye sinners, turn and do justice before him: who can tell if he will accept you, and have mercy on you?
+```
+
+```ts
+import { getPassageWithDetails } from "ephrem";
+
+getPassageWithDetails("Genesis 1:1-2 (MAL10RO)", {
+	contentType: "text",
+	includeTitles: false,
+})
+	.then((details) => {
+		console.log(`- - ${details.passage.reference} - -`);
+		console.log(details.passage.content);
+	})
+	.catch((err) => console.error(`Error fetching passage: ${err.message}`));
+```
+
+```plaintext
+- - ഉല്പത്തി 1:1-2 - -
+     [1] ആദിയിൽ ദൈവം ആകാശവും ഭൂമിയും സൃഷ്ടിച്ചു.  [2] ഭൂമി പാഴായും ശൂന്യമായും ഇരുന്നു; ആഴത്തിന്മീതെ ഇരുൾ ഉണ്ടായിരുന്നു. ദൈവത്തിന്റെ ആത്മാവു വെള്ളത്തിൻ മീതെ പരിവർത്തിച്ചുകൊണ്ടിരുന്നു.
+```
 
 ### Customizing Bible Abbreviations
 
