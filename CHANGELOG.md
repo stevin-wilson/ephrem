@@ -1,3 +1,9 @@
+# [0.10.0](https://github.com/stevin-wilson/ephrem/compare/0.9.1...0.10.0) (2024-10-17)
+
+### Features
+
+- update readme ([e60c527](https://github.com/stevin-wilson/ephrem/commit/e60c527dd3c2baf629e5841654822b52fd270cb0))
+
 ## [0.9.1](https://github.com/stevin-wilson/ephrem/compare/0.9.0...0.9.1) (2024-10-16)
 
 ### Bug Fixes
