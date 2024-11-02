@@ -1,3 +1,9 @@
+# [0.11.0](https://github.com/stevin-wilson/ephrem/compare/0.10.0...0.11.0) (2024-11-02)
+
+### Features
+
+- cli for setup ([3153a07](https://github.com/stevin-wilson/ephrem/commit/3153a071e3dcb8467b9827bdb1cf7a4a715e24bb))
+
 # [0.10.0](https://github.com/stevin-wilson/ephrem/compare/0.9.1...0.10.0) (2024-10-17)
 
 ### Features
