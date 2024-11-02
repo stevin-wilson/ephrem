@@ -121,17 +121,16 @@ export API_BIBLE_API_KEY="your-api-bible-key"
 
 #### Setting Up Ephrem
 
-Once the environment variable is set, use the `setupEphrem` function to fetch and store Bible data for the languages you need:
+Once the environment variable is set, run the `setup-ephrem` command to fetch and store Bible data for the languages you need:
 
-```ts
-import { setupEphrem } from "ephrem";
-
-setupEphrem(["eng", "ara"])
-	.then((path) => console.log(`Bible data stored at: ${path}`))
-	.catch((err) => console.error(`Setup failed: ${err.message}`));
+```shell
+setup-ephrem -l eng,mal,arb
 ```
 
-Here, `eng` and `ara` are the ISO-639-3 language codes for English and Arabic, respectively.
+`-l` or `--languages` must be used to specify a comma-separated list of language IDs (ISO-639-3; lower case).
+Default is `eng`.
+The above-mentioned command will set up Ephrem for English, Malayalam, and Arabic languages.
+
 The API key is securely picked up from the `API_BIBLE_API_KEY` environment variable.
 This setup will download the necessary Bible data and store it for efficient future use.
 

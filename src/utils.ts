@@ -10,7 +10,6 @@ export const createDataDir = async () => {
 	try {
 		// Try to create the directory
 		await fs.promises.mkdir(ephremPaths.data, { recursive: true });
-		console.log("Created Ephrem Data Directory successfully.");
 	} catch (error) {
 		// Handle the case where the directory already exists or any other error
 		if (error instanceof Error && "code" in error && error.code === "EEXIST") {
