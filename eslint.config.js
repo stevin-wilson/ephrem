@@ -136,4 +136,9 @@ export default tseslint.config(
 			],
 		},
 	},
+	{
+		rules: {
+			"n/hashbang": "off",
+		},
+	},
 );
