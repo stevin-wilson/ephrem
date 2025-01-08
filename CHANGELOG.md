@@ -1,3 +1,9 @@
+## [0.11.1](https://github.com/stevin-wilson/ephrem/compare/0.11.0...0.11.1) (2025-01-08)
+
+### Bug Fixes
+
+- **deps:** update dependency @commander-js/extra-typings to v13 ([#108](https://github.com/stevin-wilson/ephrem/issues/108)) ([014bf02](https://github.com/stevin-wilson/ephrem/commit/014bf02c8f25fe7a4e87f8edbbc92cf7c972373e))
+
 # [0.11.0](https://github.com/stevin-wilson/ephrem/compare/0.10.0...0.11.0) (2024-11-02)
 
 ### Features
