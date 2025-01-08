@@ -45,7 +45,7 @@
 		"*": "prettier --ignore-unknown --write"
 	},
 	"dependencies": {
-		"@commander-js/extra-typings": "^12.1.0",
+		"@commander-js/extra-typings": "^13.0.0",
 		"axios": "^1.7.7",
 		"axios-retry": "^4.5.0",
 		"env-paths": "^3.0.0"
