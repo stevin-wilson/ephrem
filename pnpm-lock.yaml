@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@commander-js/extra-typings':
-        specifier: ^12.1.0
-        version: 12.1.0(commander@12.1.0)
+        specifier: ^13.0.0
+        version: 13.0.0(commander@12.1.0)
       axios:
         specifier: ^1.7.7
         version: 1.7.7
@@ -176,10 +176,10 @@ packages:
   '@bcoe/v8-coverage@0.2.3':
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
 
-  '@commander-js/extra-typings@12.1.0':
-    resolution: {integrity: sha512-wf/lwQvWAA0goIghcb91dQYpkLBcyhOhQNqG/VgWhnKzgt+UOMvra7EX/2fv70arm5RW+PUHoQHHDa6/p77Eqg==}
+  '@commander-js/extra-typings@13.0.0':
+    resolution: {integrity: sha512-4or44L3saI49QRBvdSzfCtzqONlFg0/qy0Cfl+LRynDaxlGs7r2KRTLCELaAoKh4oQguICxRwQfm77/Up+0wTw==}
     peerDependencies:
-      commander: ~12.1.0
+      commander: ~13.0.0
 
   '@conventional-changelog/git-client@1.0.1':
     resolution: {integrity: sha512-PJEqBwAleffCMETaVm/fUgHldzBE35JFk3/9LL6NUA5EXa3qednu+UT6M7E5iBu3zIQZCULYIiZ90fBYHt6xUw==}
@@ -3705,7 +3705,7 @@ snapshots:
 
   '@bcoe/v8-coverage@0.2.3': {}
 
-  '@commander-js/extra-typings@12.1.0(commander@12.1.0)':
+  '@commander-js/extra-typings@13.0.0(commander@12.1.0)':
     dependencies:
       commander: 12.1.0
 
